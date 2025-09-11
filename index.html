@@ -1,0 +1,2964 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+<head>
+<title>Schafkopf</title>
+
+<style>
+textarea {
+  resize: none;
+}
+</style>
+
+
+<SCRIPT LANGUAGE="javascript">
+<!--
+
+ cd00=new Image(80,126)
+    cd00.src ="image2/card1SS.gif"
+
+
+
+
+playername = new Array (0,"North","East","South","West")
+
+
+function newnames()
+{
+/*
+playername[1]=prompt("Player 1 (Human):","North");
+if(playername[1]==null){playername[1]="North"}
+playername[2]=prompt("Player 2 (Computer):","East");
+if(playername[2]==null){playername[2]="East"}
+playername[3]=prompt("Player 3 (Computer):","South");
+if(playername[3]==null){playername[3]="South"}
+playername[4]=prompt("Player 4 (Computer):","West");
+if(playername[4]==null){playername[4]="West"}
+*/
+
+
+document.Nname.Nname.value = playername[1]
+document.Ename.Ename.value = playername[2]
+document.Sname.Sname.value = playername[3]
+document.Wname.Wname.value = playername[4]
+document.Nname2.Nname2.value = playername[1]
+document.Ename2.Ename2.value = playername[2]
+document.Sname2.Sname2.value = playername[3]
+document.Wname2.Wname2.value = playername[4]
+
+
+introdeck = new Array (
+"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
+"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
+"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
+"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
+"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
+"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
+"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
+"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
+"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
+"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
+"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1",
+"https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1",
+"https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1",
+"https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1",
+"https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
+"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1",
+"https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1",
+"https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1",
+"https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1",
+"https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1",
+"https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
+"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1",
+"https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1",
+"https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1",
+"https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1",
+"https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1",
+"https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
+"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1",
+"https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1",
+"https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1",
+"https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1",
+"https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1",
+"https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
+
+
+
+
+
+
+function intro(i){
+document.getElementById('messages').value = 'Loading the deck of cards. Please wait.'
+if(i<32){
+switch(1+i%8){
+
+case 1:
+document.card1.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 2:
+document.card2.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 3:
+document.card3.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 4:
+document.card4.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 5:
+document.card5.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 6:
+document.card6.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 7:
+document.card7.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+
+case 8:
+document.card8.src = introdeck[i+1]
+setTimeout(function() {intro(i+1)}, 500)
+break
+}
+}
+else{document.getElementById('messages').value = ''
+document.getElementById('deal').style.display = 'inherit'
+return}
+}
+
+
+setTimeout(function() {intro(0)}, 2000)
+
+
+
+
+
+
+
+
+
+
+dealer = Math.floor(Math.random() * 4+1)
+//dealer = 3
+
+reset()
+}
+
+
+
+
+function reset(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+hand= 0
+chips = new Array(0,0,0,0,0)
+document.Nscore.Nscore.value = chips[1]
+document.Escore.Escore.value = chips[2]
+document.Sscore.Sscore.value = chips[3]
+document.Wscore.Wscore.value = chips[4]	
+document.Partner.Partner.value = ""
+
+document.dealer.dealer.value = playername[dealer%4+1]
+document.player.player.value = ""
+document.getElementById('messages').value = ""
+gameover = 0
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+function getPosition(arrayItem,arrayName){
+  for(var i=0;i<arrayName.length;i++){ 
+   if(arrayName[i]==arrayItem)
+  return i;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function deal(){
+	if(hand!=0){
+		alert("This hand is not over yet!")
+		return}
+
+if(gameover==1){
+	reset()
+}
+
+
+bicycledeck = new Array ("image1/cardbk.jpg","image1/cardQCT.jpg","image1/cardQST.jpg","image1/cardQHT.jpg","image1/cardQDT.jpg",
+"image1/cardJCT.jpg","image1/cardJST.jpg","image1/cardJHT.jpg","image1/cardJDT.jpg",
+"image1/cardADT.jpg","image1/card1DT.jpg","image1/cardKDT.jpg","image1/card9DT.jpg","image1/card8DT.jpg","image1/card7DT.jpg",
+"image1/cardASS.jpg","image1/card1SS.jpg","image1/cardKSS.jpg","image1/card9SS.jpg","image1/card8SS.jpg","image1/card7SS.jpg",
+"image1/cardAHH.jpg","image1/card1HH.jpg","image1/cardKHH.jpg","image1/card9HH.jpg","image1/card8HH.jpg","image1/card7HH.jpg",
+"image1/cardACC.jpg","image1/card1CC.jpg","image1/cardKCC.jpg","image1/card9CC.jpg","image1/card8CC.jpg","image1/card7CC.jpg")
+
+sortedbicycledeck = new Array ("image1/cardbk.jpg","image1/cardQCT.jpg","image1/cardQST.jpg","image1/cardQHT.jpg","image1/cardQDT.jpg",
+"image1/cardJCT.jpg","image1/cardJST.jpg","image1/cardJHT.jpg","image1/cardJDT.jpg",
+"image1/cardADT.jpg","image1/card1DT.jpg","image1/cardKDT.jpg","image1/card9DT.jpg","image1/card8DT.jpg","image1/card7DT.jpg",
+"image1/cardASS.jpg","image1/card1SS.jpg","image1/cardKSS.jpg","image1/card9SS.jpg","image1/card8SS.jpg","image1/card7SS.jpg",
+"image1/cardAHH.jpg","image1/card1HH.jpg","image1/cardKHH.jpg","image1/card9HH.jpg","image1/card8HH.jpg","image1/card7HH.jpg",
+"image1/cardACC.jpg","image1/card1CC.jpg","image1/cardKCC.jpg","image1/card9CC.jpg","image1/card8CC.jpg","image1/card7CC.jpg")
+
+bicycletrick = new Array (0,"image1/cardTR1.gif","image1/cardTR2.gif","image1/cardTR3.gif","image1/cardTR4.gif")
+
+piatnikdeck = new Array (
+"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
+"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
+"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
+"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
+"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
+"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
+"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
+"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
+"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
+"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
+"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1","https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1","https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1","https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1","https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
+"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1","https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1","https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1","https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1","https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1","https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
+"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1","https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1","https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1","https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1","https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1","https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
+"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1","https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1","https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1","https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1","https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1","https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
+
+sortedpiatnikdeck = new Array (
+"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
+"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
+"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
+"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
+"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
+"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
+"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
+"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
+"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
+"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
+"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1","https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1","https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1","https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1","https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
+"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1","https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1","https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1","https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1","https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1","https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
+"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1","https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1","https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1","https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1","https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1","https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
+"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1","https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1","https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1","https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1","https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1","https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
+
+piatniktrick = new Array (0,"https://www.dropbox.com/s/b6j9h2v8dmwvf1t/CardTR1.gif?raw=1","https://www.dropbox.com/s/dql92wrbna65x3b/CardTR2.gif?raw=1","https://www.dropbox.com/s/omls5mpdl626t1z/CardTR3.gif?raw=1","https://www.dropbox.com/s/3980zpttmym6pdm/CardTR4.gif?raw=1")
+
+
+/*
+new Array (
+"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
+"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
+"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
+"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
+"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
+"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
+"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
+"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
+"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
+"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
+"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1",
+"https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1",
+"https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1",
+"https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1",
+"https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
+"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1",
+"https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1",
+"https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1",
+"https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1",
+"https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1",
+"https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
+"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1",
+"https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1",
+"https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1",
+"https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1",
+"https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1",
+"https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
+"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1",
+"https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1",
+"https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1",
+"https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1",
+"https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1",
+"https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
+*/
+
+deckvalue = new Array (0,"QCT","QST","QHT","QDT","JCT","JST","JHT","JDT","ADT","1DT","KDT","9DT","8DT","7DT",
+"ASS","AHH","ACC","1SS","1HH","1CC","KSS","KHH","KCC","9SS","9HH","9CC","8SS","8HH","8CC","7SS","7HH","7CC")
+
+
+sortingchoice()
+speedchoice()
+deckchoice()
+
+
+
+if(newdeck==0){
+deck = bicycledeck
+sorteddeck=sortedbicycledeck
+TR = bicycletrick}
+else{
+deck = piatnikdeck
+sorteddeck=sortedpiatnikdeck
+TR = piatniktrick}
+
+//RANDOMIZE AI SUIT VALUES
+tempdeckvalue = new Array ("0")
+for(i=1;i<=14;i++){
+	tempdeckvalue = tempdeckvalue.concat(deckvalue.splice(1,1))
+}	
+for(j=1;j<=6;j++){
+	for(i=1;i<=3;i++){
+		tempdeckvalue = tempdeckvalue.concat(deckvalue.splice(Math.floor(Math.random() * (4-i)+1),1))
+	}
+}
+deckvalue = tempdeckvalue
+//alert(deckvalue)
+
+
+
+
+
+
+
+
+
+
+document.getElementById('deal').style.display = 'none'
+document.getElementById('instructions').style.display = 'none'
+
+
+document.getElementById('transcript').style.display = 'none'
+//document.getElementById('transcript').style.display = 'inherit'
+
+
+//document.getElementById('callpartner').style.display = 'none'
+//document.solo1.style.display = 'none'
+//document.solo2.style.display = 'none'
+//document.solo3.style.display = 'none'
+
+
+
+
+
+//document.Nscore.Nscore.style.color = "red"
+
+transcript = ""
+trickcount = 1
+
+suits = new Array (0,"T","S","H","C")
+trick = new Array (0,0,0,0,0)
+pasttrick = new Array(0,0,0,0,0)
+partner = new Array(0,0,0,0,0)
+partnercount = 0
+visiblepartner = new Array(0,-1,-1,-1,-1)
+visiblesuit = new Array(0,0,0,0,0)
+solochoice = "000"
+soloplayer = 0
+solopartner = 0
+soloplay = 0
+scorer = 0
+
+Nplay= new Array (0,0,0,0,0,0,0,0,0)
+Nhand= new Array (0,0,0,0,0,0,0,0,0)
+Nhandimage = new Array (0,0,0,0,0,0,0,0,0)
+Nsuit = new Array (0,0,0,0,0)
+
+Eplay= new Array (0,0,0,0,0,0,0,0,0)
+Ehand= new Array (0,0,0,0,0,0,0,0,0)
+Ehandimage = new Array (0,0,0,0,0,0,0,0,0)
+Esuit = new Array (0,0,0,0,0)
+
+Splay= new Array (0,0,0,0,0,0,0,0,0)
+Shand= new Array (0,0,0,0,0,0,0,0,0)
+Shandimage = new Array (0,0,0,0,0,0,0,0,0)
+Ssuit = new Array (0,0,0,0,0)
+
+Wplay= new Array (0,0,0,0,0,0,0,0,0)
+Whand= new Array (0,0,0,0,0,0,0,0,0)
+Whandimage = new Array (0,0,0,0,0,0,0,0,0)
+Wsuit = new Array (0,0,0,0,0)
+
+dealer = dealer%4+1
+player = dealer
+partners = 0
+bonus = 1
+plural = ""
+Nturn = 0
+turn = 0
+
+handvalue=33
+trickleader = 0
+
+offense = 0
+defense = 0
+
+document.Nscore.Nscore.value = 0
+document.Escore.Escore.value = 0
+document.Sscore.Sscore.value = 0
+document.Wscore.Wscore.value = 0
+document.Partner.Partner.value = ""
+
+scores= new Array (0,0,0,0,0)
+score = 0
+
+
+
+document.card1.src = deck[0]
+document.card2.src = deck[0]
+document.card3.src = deck[0]
+document.card4.src = deck[0]
+document.card5.src = deck[0]
+document.card6.src = deck[0]
+document.card7.src = deck[0]
+document.card8.src = deck[0]
+
+document.card11.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card21.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card31.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card41.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+document.card12.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card22.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card32.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card42.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+document.card51.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card52.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card53.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card54.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+
+
+
+
+
+/*
+//SHUFFLE THE CARDS
+for(i=1;i<=7;i++){
+for (j = 1; j <= 32; j++) {
+	k = Math.floor(Math.random() * 32+1);
+	temp = deck[j];
+	deck[j] = deck[k];
+	deck[k] = temp;
+	}
+}
+*/
+
+
+
+
+
+
+
+//SHUFFLE THE CARDS
+for(j=1;j<=7;j++){
+	tempdeck = new Array ("0")
+	for(i=1;i<=32;i++){
+		tempdeck = tempdeck.concat(deck.splice(Math.floor(Math.random() * (deck.length-1)+1),1))
+
+	}
+	deck = tempdeck
+}
+//alert(deck)
+
+
+
+
+
+document.dealer.dealer.value = playername[dealer]
+document.player.player.value = ""
+document.getElementById('messages').value = "Dealing"
+
+
+//DEAL THE CARDS
+
+switch(dealer){
+
+case 1:
+
+for(i=1;i<=3;i++){
+Ehandimage[i] = deck[i]
+Shandimage[i] = deck[i+3]
+Whandimage[i] = deck[i+6]
+Nhandimage[i] = deck[i+9]
+}
+
+for(i=4;i<=5;i++){
+Ehandimage[i] = deck[i+9]
+Shandimage[i] = deck[i+11]
+Whandimage[i] = deck[i+13]
+Nhandimage[i] = deck[i+15]
+}
+
+for(i=6;i<=8;i++){
+Ehandimage[i] = deck[i+15]
+Shandimage[i] = deck[i+18]
+Whandimage[i] = deck[i+21]
+Nhandimage[i] = deck[i+24]
+}
+break
+
+case 2:
+
+for(i=1;i<=3;i++){
+Shandimage[i] = deck[i]
+Whandimage[i] = deck[i+3]
+Nhandimage[i] = deck[i+6]
+Ehandimage[i] = deck[i+9]
+}
+
+for(i=4;i<=5;i++){
+Shandimage[i] = deck[i+9]
+Whandimage[i] = deck[i+11]
+Nhandimage[i] = deck[i+13]
+Ehandimage[i] = deck[i+15]
+}
+
+for(i=6;i<=8;i++){
+Shandimage[i] = deck[i+15]
+Whandimage[i] = deck[i+18]
+Nhandimage[i] = deck[i+21]
+Ehandimage[i] = deck[i+24]
+}
+break
+
+case 3:
+
+for(i=1;i<=3;i++){
+Whandimage[i] = deck[i]
+Nhandimage[i] = deck[i+3]
+Ehandimage[i] = deck[i+6]
+Shandimage[i] = deck[i+9]
+}
+
+for(i=4;i<=5;i++){
+Whandimage[i] = deck[i+9]
+Nhandimage[i] = deck[i+11]
+Ehandimage[i] = deck[i+13]
+Shandimage[i] = deck[i+15]
+}
+
+for(i=6;i<=8;i++){
+Whandimage[i] = deck[i+15]
+Nhandimage[i] = deck[i+18]
+Ehandimage[i] = deck[i+21]
+Shandimage[i] = deck[i+24]
+}
+break
+
+case 4:
+
+for(i=1;i<=3;i++){
+Nhandimage[i] = deck[i]
+Ehandimage[i] = deck[i+3]
+Shandimage[i] = deck[i+6]
+Whandimage[i] = deck[i+9]
+}
+
+for(i=4;i<=5;i++){
+Nhandimage[i] = deck[i+9]
+Ehandimage[i] = deck[i+11]
+Shandimage[i] = deck[i+13]
+Whandimage[i] = deck[i+15]
+}
+
+for(i=6;i<=8;i++){
+Nhandimage[i] = deck[i+15]
+Ehandimage[i] = deck[i+18]
+Shandimage[i] = deck[i+21]
+Whandimage[i] = deck[i+24]
+}
+break
+
+}
+
+
+
+
+/*
+
+
+
+
+//TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
+
+Nhandimage = new Array(0,"image2/cardJDT.gif","image2/card7SS.gif","image2/card9SS.gif","image2/card8SS.gif","image2/card1DT.gif","image2/card1SS.gif","image2/card1HH.gif","image2/cardKSS.gif")
+Ehandimage = new Array(0,"image2/card9CC.gif","image2/cardAHH.gif","image2/cardASS.gif","image2/card8HH.gif","image2/card1CC.gif","image2/card9DT.gif","image2/cardADT.gif","image2/cardQHT.gif")
+Shandimage = new Array(0,"image2/cardJST.gif","image2/card7DT.gif","image2/cardKDT.gif","image2/cardJHT.gif","image2/cardKHH.gif","image2/card8CC.gif","image2/card7HH.gif","image2/cardKCC.gif")
+Whandimage = new Array(0,"image2/card9HH.gif","image2/cardJCT.gif","image2/card8DT.gif","image2/cardACC.gif","image2/cardQDT.gif","image2/cardQST.gif","image2/card7CC.gif","image2/cardQCT.gif")
+
+
+
+
+//deckvalue[15]="ACC"
+//deckvalue[16]="ASS"
+//deckvalue[17]="AHH"
+
+
+
+*/
+
+
+setTimeout(function() {reveal(1)}, delaytime)
+
+
+
+
+
+
+
+
+//sort the hands
+
+
+
+/*Nhandimage = sort(Nhandimage,sorder)
+Ehandimage = sort(Ehandimage,0)
+Shandimage = sort(Shandimage,0)
+Whandimage = sort(Whandimage,0)
+
+
+
+for(i=1;i<=8;i++){
+Nhand[i] = Nhandimage[i].charAt(46) +Nhandimage[i].charAt(47)+Nhandimage[i].charAt(48)
+Ehand[i] = Ehandimage[i].charAt(46) +Ehandimage[i].charAt(47)+Ehandimage[i].charAt(48)
+Shand[i] = Shandimage[i].charAt(46) +Shandimage[i].charAt(47)+Shandimage[i].charAt(48)
+Whand[i] = Whandimage[i].charAt(46) +Whandimage[i].charAt(47)+Whandimage[i].charAt(48)
+}*/
+
+
+
+
+
+/*alert(Nhand)
+alert(Ehand)
+alert(Shand)
+alert(Whand)*/
+
+
+
+//rotate()
+
+
+}
+
+
+
+
+function reveal(number){
+
+switch(number){
+case 1:
+document.card1.src = Nhandimage[1]
+document.card2.src = Nhandimage[2]
+document.card3.src = Nhandimage[3]
+setTimeout(function() {reveal(2)}, delaytime)
+break
+
+case 2:
+document.card4.src = Nhandimage[4]
+document.card5.src = Nhandimage[5]
+setTimeout(function() {reveal(3)}, delaytime)
+break
+
+case 3:
+document.card6.src = Nhandimage[6]
+document.card7.src = Nhandimage[7]
+document.card8.src = Nhandimage[8]
+setTimeout(function() {reveal(4)}, delaytime*2)
+break
+
+case 4:
+//SORT CARDS
+Nhandimage = sort(Nhandimage,sorder)
+Ehandimage = sort(Ehandimage,0)
+Shandimage = sort(Shandimage,0)
+Whandimage = sort(Whandimage,0)
+
+
+
+for(i=1;i<=8;i++){
+Nhand[i] = Nhandimage[i].charAt(46) +Nhandimage[i].charAt(47)+Nhandimage[i].charAt(48)
+Ehand[i] = Ehandimage[i].charAt(46) +Ehandimage[i].charAt(47)+Ehandimage[i].charAt(48)
+Shand[i] = Shandimage[i].charAt(46) +Shandimage[i].charAt(47)+Shandimage[i].charAt(48)
+Whand[i] = Whandimage[i].charAt(46) +Whandimage[i].charAt(47)+Whandimage[i].charAt(48)
+}
+
+
+
+
+transcript = transcript+playername[1]+": "+Nhand+"\n"
+transcript = transcript+playername[2]+": "+Ehand+"\n"
+transcript = transcript+playername[3]+": "+Shand+"\n"
+transcript = transcript+playername[4]+": "+Whand+"\n"
+
+document.card1.src = Nhandimage[1]
+document.card2.src = Nhandimage[2]
+document.card3.src = Nhandimage[3]
+document.card4.src = Nhandimage[4]
+document.card5.src = Nhandimage[5]
+document.card6.src = Nhandimage[6]
+document.card7.src = Nhandimage[7]
+document.card8.src = Nhandimage[8]
+hand = 1
+document.getElementById('continue').style.display = 'inherit'
+
+document.getElementById('messages').value = "Everyone happy?"
+
+
+break
+}
+}
+
+
+
+
+
+function sort(handimage,order){
+temphand= new Array (0,0,0,0,0,0,0,0,0)
+k=1
+for(i=1;i<=32;i++){
+	for(j=1;j<=8;j++){
+		if(handimage[j]==sorteddeck[i]){
+			if(order==0){
+			temphand[9-k]=handimage[j]}
+			else{temphand[k]=handimage[j]}
+			k++}
+	}
+}
+return temphand
+}
+
+
+
+
+function partnerchoice() {
+if(hand==0){
+	alert("Deal the cards first!")
+	document.getElementById('messages').value = "Deal the cards first!"
+	return}
+if(hand==2){
+	alert("Finish the hand first!")
+	document.getElementById('messages').value = "Finish the hand first!"	
+	return}
+if(partners==1){
+	alert("You already selected a partner!")
+	document.getElementById('messages').value = "You already selected a partner!"
+	return}
+
+
+for (index=0; index < document.solo.choice.length; index++) {
+	if (document.solo.choice[index].checked) {
+		solochoice = document.solo.choice[index].value
+	}
+}
+
+
+if(solochoice=="QQ"){
+	if(Nhand[8]!="QCT" && Nhand[8]!="QST" && Nhand[1]!="QCT" && Nhand[1]!="QST"){
+		alert("I call off both Old Ones!")
+		document.getElementById('messages').value = "I call off both Old Ones!"
+		partner = new Array(0,1,0,0,0)
+		visiblepartner = new Array(0,1,0,0,0)
+		document.Nscore.Nscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		return
+	}
+	else{
+	alert("You have a black queen!")
+	document.getElementById('messages').value = "You have a black queen!"
+	return
+	}
+}
+
+
+
+if(solochoice=="Q"){
+	if(Nhand[8]=="QST" || (Nhand[8]=="QCT" && Nhand[7]!="QST") || Nhand[1]=="QST" || (Nhand[1]=="QCT" && Nhand[2]!="QST")){
+		alert("I call off the Old One!")
+		document.getElementById('messages').value = "I call off the Old One!"
+		partner = new Array(0,1,0,0,0)
+		visiblepartner = new Array(0,1,0,0,0)
+		document.Nscore.Nscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		return
+	}	
+	else{
+		alert("You don't have one black queen!")
+		document.getElementById('messages').value = "You don't have one black queen!"
+		return
+	}
+}
+
+
+if(solochoice=="ACC"){
+	if( (Nhand[8]=="QCT" && Nhand[7]=="QST") || (Nhand[1]=="QCT" && Nhand[2]=="QST") ){
+		if(Nhand[1].charAt(2)=="C" || Nhand[2].charAt(2)=="C" || Nhand[3].charAt(2)=="C" || Nhand[4].charAt(2)=="C" ||
+		   Nhand[5].charAt(2)=="C" || Nhand[6].charAt(2)=="C" || Nhand[7].charAt(2)=="C" || Nhand[8].charAt(2)=="C"){
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="ACC"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)}
+				if(Shand[i]=="ACC"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)}
+				if(Whand[i]=="ACC"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)}
+				if(Nhand[i]=="ACC"){
+					alert("You have the Ace of Clubs!")
+					document.getElementById('messages').value = "You have the Ace of Clubs!"
+					return}
+			}
+			alert("I need a partner...Ace of Clubs...Known!")
+			document.getElementById('messages').value = "I need a partner...Ace of Clubs...Known!"
+			solochoicetext = "ACK"
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+		}
+		else{
+			alert("I need a partner...Ace of Clubs...Unknown!")
+			document.getElementById('messages').value = "I need a partner...Ace of Clubs...Unknown!"
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="ACC"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)}
+				if(Shand[i]=="ACC"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)}
+				if(Whand[i]=="ACC"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)}
+			solochoicetext = "ACU"
+			}
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+		}
+	}
+	else{
+		alert("You don't have both black queens!")
+		document.getElementById('messages').value = "You don't have both black queens!"
+	return
+	}
+}
+
+if(solochoice=="AHH"){
+	if(Nhand[8]=="QCT" && Nhand[7]=="QST" || Nhand[1]=="QCT" && Nhand[2]=="QST"){
+		if(Nhand[1].charAt(2)=="H" || Nhand[2].charAt(2)=="H" || Nhand[3].charAt(2)=="H" || Nhand[4].charAt(2)=="H" ||
+		   Nhand[5].charAt(2)=="H" || Nhand[6].charAt(2)=="H" || Nhand[7].charAt(2)=="H" || Nhand[8].charAt(2)=="H"){
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="AHH"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)}
+				if(Shand[i]=="AHH"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)}
+				if(Whand[i]=="AHH"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)}
+				if(Nhand[i]=="AHH"){
+					alert("You have the Ace of Hearts!")
+					return}
+			}
+			alert("I need a partner...Ace of Hearts!...Known")
+			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Known"
+			solochoicetext = "AHK"
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+		}
+		else{
+			alert("I need a partner...Ace of Hearts!...Unknown")
+			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Unknown"
+			solochoicetext = "AHU"
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="AHH"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)}
+				if(Shand[i]=="AHH"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)}
+				if(Whand[i]=="AHH"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)}
+			}
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+		}
+	}
+	else{
+	alert("You don't have both black queens!")
+	document.getElementById('messages').value = "You don't have both black queens!"
+	return
+	}
+}
+
+if(solochoice=="ASS"){
+	if(Nhand[8]=="QCT" && Nhand[7]=="QST" || Nhand[1]=="QCT" && Nhand[2]=="QST"){
+		if(Nhand[1].charAt(2)=="S" || Nhand[2].charAt(2)=="S" || Nhand[3].charAt(2)=="S" || Nhand[4].charAt(2)=="S" ||
+		   Nhand[5].charAt(2)=="S" || Nhand[6].charAt(2)=="S" || Nhand[7].charAt(2)=="S" || Nhand[8].charAt(2)=="S"){
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="ASS"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)
+					break}
+				if(Shand[i]=="ASS"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)
+					break}
+				if(Whand[i]=="ASS"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)
+					break}
+				if(Nhand[i]=="ASS"){
+					alert("You have the Ace of Spades!")
+					return}
+			}
+			alert("I need a partner...Ace of Spades...Known!")
+			document.getElementById('messages').value = "I need a partner...Ace of Spades...Known!"
+			solochoicetext = "ASK"
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+		}
+		else{
+			alert("I need a partner...Ace of Spades...Unknown!")
+			document.getElementById('messages').value = "I need a partner...Ace of Spades...Unknown!"
+			for(i=1;i<=8;i++){
+				if(Ehand[i]=="ASS"){
+					solopartner = 2
+					partner = new Array(0,1,1,0,0)
+					break}
+				if(Shand[i]=="ASS"){
+					solopartner = 3
+					partner = new Array(0,1,0,1,0)
+					break}
+				if(Whand[i]=="ASS"){
+					solopartner = 4
+					partner = new Array(0,1,0,0,1)
+					break}
+
+			solochoicetext = "ASU"
+			}
+			visiblepartner = new Array(0,1,-1,-1,-1)
+			document.Nscore.Nscore.style.color = "red"
+			document.Partner.Partner.value = solochoicetext
+			partnercount = 1
+			partners = 1
+			soloplayer = 1
+			return
+
+		}
+	}
+	else{
+	alert("You don't have both black queens!")
+	document.getElementById('messages').value = "You don't have both black queens!"
+	return
+	}
+}
+
+
+
+}
+
+
+
+
+
+
+function computerpartner(Chand,Csuit,number){
+
+if(partners==0){
+	if(Chand[8]=="QCT" && Chand[7]=="QST" && Csuit[1]<6){
+		for(i=15;i<=17;i++){
+			for(j=1;j<=8;j++){
+				if(Chand[j]==deckvalue[i]){
+					break
+
+				}
+				if(j==8){
+					
+						if(Csuit[getPosition(deckvalue[i].charAt(2),suits)]==0){
+							alert(playername[number]+" needs a partner..." + deckvalue[i] + "...Unknown!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + deckvalue[i] + "...Unknown!"
+							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"U"
+						}
+						else{
+							alert(playername[number]+" needs a partner..." + deckvalue[i] + "...Known!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + deckvalue[i] + "...Known!"
+							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"K"
+						}
+						
+							solochoice = deckvalue[i]
+							soloplayer = number
+
+							switch(number){
+
+							case 2:
+
+							search:
+							for(l=1;l<=8;l++){
+								if(Nhand[l]==solochoice){ 
+									solopartner = 1
+									partner = new Array(0,1,1,0,0)
+									break search}
+								if(Shand[l]==solochoice){ 
+									solopartner = 3
+									partner = new Array(0,0,1,1,0)
+									break search}
+								if(Whand[l]==solochoice){ 
+									solopartner = 4
+									partner = new Array(0,0,1,0,1)
+									break search}
+							}
+
+							visiblepartner = new Array(0,-1,1,-1,-1)
+							document.Escore.Escore.style.color = "red"
+							document.Partner.Partner.value = solochoicetext
+							partnercount = 1
+							partners = 1
+							break
+
+							case 3:
+
+							search:
+							for(l=1;l<=8;l++){
+								if(Nhand[l]==solochoice){ 
+									solopartner = 1
+									partner = new Array(0,1,0,1,0)
+									break search}
+								if(Ehand[l]==solochoice){ 
+									solopartner = 2
+									partner = new Array(0,0,1,1,0)
+									break search}
+								if(Whand[l]==solochoice){ 
+									solopartner = 4
+									partner = new Array(0,0,0,1,1)
+									break search}
+							}
+
+							visiblepartner = new Array(0,-1,-1,1,-1)
+							document.Sscore.Sscore.style.color = "red"
+							document.Partner.Partner.value = solochoicetext
+							partnercount = 1
+							partners = 1
+							break							
+
+							case 4:
+
+							search:
+							for(l=1;l<=8;l++){
+								if(Nhand[l]==solochoice){ 
+									solopartner = 1
+									partner = new Array(0,1,0,0,1)
+									break search}
+								if(Ehand[l]==solochoice){ 
+									solopartner = 2
+									partner = new Array(0,0,1,0,1)
+									break search}
+								if(Shand[l]==solochoice){ 
+									solopartner = 3
+									partner = new Array(0,0,0,1,1)
+									break search}
+							}
+
+							visiblepartner = new Array(0,-1,-1,-1,1)
+							document.Wscore.Wscore.style.color = "red"
+							document.Partner.Partner.value = solochoicetext
+							partnercount = 1
+							partners = 1
+							break							
+							
+							}
+
+
+
+					return
+
+							
+
+
+				}
+
+			}
+		}
+
+	}
+
+	if(Chand[8]!="QCT" && Chand[8]!="QST" && Csuit[1]==8){
+		alert(playername[number]+" calls off both Old Ones!")
+		document.getElementById('messages').value = playername[number]+" calls off both Old Ones!"
+		solochoice="QQ"
+		soloplayer = number
+
+		switch(number){
+
+		case 2:
+		partner = new Array(0,0,1,0,0)
+		visiblepartner = new Array(0,0,1,0,0)
+		document.Escore.Escore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+
+		case 3:
+		partner = new Array(0,0,0,1,0)
+		visiblepartner = new Array(0,0,0,1,0)
+		document.Sscore.Sscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+
+		case 4:
+		partner = new Array(0,0,0,0,1)
+		visiblepartner = new Array(0,0,0,0,1)
+		document.Wscore.Wscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+		
+		}
+	}
+
+	if((Chand[8]=="QCT" && Chand[7]!="QST" && Csuit[1]>6) || (Chand[8]=="QST" && Csuit[1]>7)){
+		alert(playername[number]+" calls off the Old One!")
+		document.getElementById('messages').value = playername[number]+" calls off the Old One!"
+		solochoice="Q"
+		soloplayer = number
+		
+		switch(number){
+
+		case 2:
+		partner = new Array(0,0,1,0,0)
+		visiblepartner = new Array(0,0,1,0,0)
+		document.Escore.Escore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+
+		case 3:
+		partner = new Array(0,0,0,1,0)
+		visiblepartner = new Array(0,0,0,1,0)
+		document.Sscore.Sscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+
+		case 4:
+		partner = new Array(0,0,0,0,1)
+		visiblepartner = new Array(0,0,0,0,1)
+		document.Wscore.Wscore.style.color = "red"
+		document.Partner.Partner.value = solochoice
+		partners = 1
+		break
+		
+		}
+	}
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function beginhand(){
+
+
+if(hand==0){
+	alert("Deal the cards first!")
+	return}
+if(hand==2){
+	alert("Finish the hand first!")
+	return}
+
+
+for(i=1;i<=8;i++){
+	for(j=1;j<=4;j++){
+		if(Nhand[i].charAt(2)==suits[j]){
+			Nsuit[j]=Nsuit[j]+1
+		}
+		if(Ehand[i].charAt(2)==suits[j]){
+			Esuit[j]=Esuit[j]+1
+		}
+		if(Shand[i].charAt(2)==suits[j]){
+			Ssuit[j]=Ssuit[j]+1
+		}
+		if(Whand[i].charAt(2)==suits[j]){
+			Wsuit[j]=Wsuit[j]+1
+		}
+	}
+}
+
+
+
+
+
+
+
+computerpartner(Ehand,Esuit,2)
+computerpartner(Shand,Ssuit,3)
+computerpartner(Whand,Wsuit,4)
+
+
+
+if(partners==0){	
+	for(i=1;i<=8;i++){
+		if(Nhand[i]=="QCT"||Nhand[i]=="QST"){
+			partner[1]=1}
+		if(Ehand[i]=="QCT"||Ehand[i]=="QST"){
+			partner[2]=1}
+		if(Shand[i]=="QCT"||Shand[i]=="QST"){
+			partner[3]=1}
+		if(Whand[i]=="QCT"||Whand[i]=="QST"){
+			partner[4]=1}
+	}
+}
+
+
+
+document.getElementById('continue').style.display = 'none'
+rotate()
+
+}
+
+
+
+
+
+
+
+function rotate(){
+hand=2
+
+
+//CONFIRM PARTNERS
+if(partners==0){
+
+	if(trick[player]=="QCT" || trick[player]=="QST"){
+		switch(player){
+		case 1:
+		document.Nscore.Nscore.style.color = "red"
+		break
+		case 2:
+		document.Escore.Escore.style.color = "red"
+		break
+		case 3:
+		document.Sscore.Sscore.style.color = "red"
+		break
+		case 4:
+		document.Wscore.Wscore.style.color = "red"
+		break
+		}
+		visiblepartner[player] = 1
+		partnercount++
+	}
+
+}
+else{
+
+	if(trick[player]==solochoice){
+		switch(player){
+		case 1:
+		document.Nscore.Nscore.style.color = "red"
+		break
+		case 2:
+		document.Escore.Escore.style.color = "red"
+		break
+		case 3:
+		document.Sscore.Sscore.style.color = "red"
+		break
+		case 4:
+		document.Wscore.Wscore.style.color = "red"
+		break
+		}
+		visiblepartner[player] = 1
+		partnercount++
+	}
+
+
+}
+
+
+
+if(partnercount==2){
+	for(i=1;i<=4;i++){
+		if(visiblepartner[i]==-1){
+			visiblepartner[i] = 0
+		}
+	}
+}
+//alert(visiblepartner)
+
+
+
+
+
+
+if(trick[player]!=0 && (trick[player].charAt(2)==trick[0] || trick[player].charAt(2)=="T")){
+	handvalue = Math.min(handvalue,getPosition(trick[player],deckvalue))
+}
+if(handvalue==getPosition(trick[player],deckvalue)){
+trickleader = player
+}
+
+
+	//alert(trickleader)
+
+
+player = player%4+1
+
+turn = turn+1
+if(turn==5){
+	setTimeout(function() {trickscore()}, delaytime*2)
+	return}
+
+switch(player){
+case 1:
+document.player.player.value = playername[1]
+document.getElementById('messages').value = ""
+Nturn=1
+
+break
+
+case 2:
+document.player.player.value = playername[2]
+document.getElementById('messages').value = ""
+setTimeout(function() {computerplay(Ehand,Eplay,Esuit,2)}, delaytime)
+
+
+break
+
+case 3:
+document.player.player.value = playername[3]
+document.getElementById('messages').value = ""
+setTimeout(function() {computerplay(Shand,Splay,Ssuit,3)}, delaytime)
+
+break
+
+case 4:
+document.player.player.value = playername[4]
+document.getElementById('messages').value = ""
+setTimeout(function() {computerplay(Whand,Wplay,Wsuit,4)}, delaytime)
+
+break
+
+
+
+}
+
+
+}
+
+
+
+
+
+//HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY HUMAN PLAY 
+function Card(number){
+
+
+
+if(Nplay[number] == 0){
+	if(Nturn==0){															//NOT YOUR TURN
+		alert("It is not your turn!")
+		return
+	}
+	if(trick[0]!=0){														//FOLLOWING
+		if(Nhand[number].charAt(2)!=trick[0]){
+			for(i=1;i<=8;i++){
+				if(Nhand[i].charAt(2)==trick[0] && Nplay[i]!=1){
+					alert("You must follow suit!")
+					document.getElementById('messages').value = "You must follow suit!"
+					return	
+				}	
+			}
+		}
+		if(Nhand[number]==solochoice && trick[0]!=solochoice.charAt(2) && trickcount<8 ){
+			alert("You cannot play " + solochoicetext + " yet!")
+			document.getElementById('messages').value = "You cannot play " + solochoicetext + " yet!"
+			return
+		}
+		if(Nhand[number]!=solochoice && trick[0]==solochoice.charAt(2) && solopartner==1 && soloplay==0){
+			alert("You must play " + solochoicetext + "!")
+			document.getElementById('messages').value = "You must play " + solochoicetext + "!"
+			return
+		}
+		if(soloplayer==1 && trick[0]!=solochoice.charAt(2) && Nhand[number].charAt(2)==solochoice.charAt(2) && soloplay==0 && 
+		   Nsuit[getPosition(solochoice.charAt(2),suits)]<9-trickcount){
+			alert("You can't play this card yet!")
+			document.getElementById('messages').value = "You can't play this card yet!"
+			return
+		}
+		if(soloplayer==1 && soloplay==0 && trick[0]==solochoice.charAt(2) && Nhand[number].charAt(2)=="T" && 
+		   Nsuit[getPosition("T",suits)]<9-trickcount){
+			alert("You can't trump " + solochoicetext + "!")
+			document.getElementById('messages').value = "You can't trump " + solochoicetext + "!"
+			return
+		}
+	}
+	else{																//LEADING
+		if(Nhand[number]!=solochoice && Nhand[number].charAt(2)==solochoice.charAt(2) && solopartner==1 && soloplay==0){
+			alert("You cannot play this card before you play " + solochoicetext + "!")
+			document.getElementById('messages').value = "You cannot play this card before you play " + solochoicetext + "!"
+			return
+		}
+		trick[0] = Nhand[number].charAt(2)
+	}
+
+	Nplay[number] = 1
+	trick[1] = Nhand[number]
+/*
+	if(Nhand[number]==solochoice){
+		soloplay = 1
+	}
+*/
+
+
+
+	switch(number){
+	case 1:	
+		document.card1.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 2:	
+		document.card2.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 3:	
+		document.card3.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 4:	
+		document.card4.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 5:	
+		document.card5.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 6:	
+		document.card6.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 7:	
+		document.card7.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	case 8:	
+		document.card8.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	break
+	}
+
+	document.card11.src = Nhandimage[number]
+	Nturn = 0
+	rotate()
+}	
+
+}
+
+
+
+
+
+
+
+
+//COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI 
+
+
+function computerplay(Chand,Cplay,Csuit,number){
+
+
+temphand = new Array ("0")
+tempplay = 0
+
+if(trick[0]==0){										//YOU ARE LEADING
+
+	validplays(Chand,Cplay,Csuit,number)							//FIND VALID PLAYS
+
+	if( partner[number] == 1){									//ON OFFENSE
+		if(Chand[temphand[1]].charAt(2) == "T"){							//TRUMP
+			if(soloplayer!=number && ((deckvalue[1]=="QCT"&& Chand[8]!="QCT" )||
+			   (deckvalue[1]=="QST"&& (Chand[8]!="QST" && Chand[7]!="QST") )||
+			   (deckvalue[2]=="QST"&& (Chand[8]!="QST" && Chand[7]!="QST") ))){				//PARTNER HAS NOT PLAYED QUEEN
+			trumpschmier(Chand,Cplay,number)									//LEAD TRUMP SCHMIER
+			if(tempplay==0){
+				trumplow(Chand,Cplay,number)									//LEAD LOWEST TRUMP
+			}
+			}
+			else{												//PARTNER HAS PLAYED QUEEN
+				besttrump(Chand,Cplay,number)									//LEAD BEST TRUMP
+				if(tempplay==0){
+					playace(Chand,Cplay,number)								//LEAD ACE
+				}
+				if(tempplay==0){
+					slough(Chand,Cplay,number)								//LEAD LOWEST CARD
+				}
+			}
+		}
+		else{												//NO TRUMP
+			playace(Chand,Cplay,number)									//LEAD ACE
+			if(tempplay==0){
+				slough(Chand,Cplay,number)								//LEAD LOWEST CARD
+			}
+		}
+
+	}
+	else{												//ON DEFENSE
+		playace(Chand,Cplay,number)									//LEAD ACE
+		if(tempplay==0){
+			besttrump(Chand,Cplay,number)								//LEAD HIGHEST TRUMP
+		}
+		if(tempplay==0){
+			slough(Chand,Cplay,number)								//LEAD LOWEST CARD
+		}
+	}
+
+	trick[0] = Chand[tempplay].charAt(2)							
+
+}
+else{												//YOU ARE FOLLOWING
+
+	validplays(Chand,Cplay,Csuit,number)							//FIND VALID PLAYS
+
+	if(follow==1){											//FOLLOWING A FAIL SUIT
+		playace(Chand,Cplay,number)									//PLAY ACE
+		if(tempplay==0){
+			schmier(Chand,Cplay,number)								//SCHMIER TO PARTNER
+		}
+		if(tempplay==0){
+			slough(Chand,Cplay,number)								//PLAY LOWEST CARD
+		}
+	}
+
+	if(follow==2){											//FOLLOWING A TRUMP SUIT
+		if(partner[number] == 1){									//OFFENSE
+			if( (handvalue==1 || handvalue==2) && visiblepartner[trickleader]==1){				//BLACK QUEEN PRESENT (OR EQUIVALENT)
+				trumpschmier(Chand,Cplay,number)								//TRUMP SCHMIER
+				if(tempplay==0){
+					trumplow(Chand,Cplay,number)								//PLAY LOWEST TRUMP
+				}
+			}	
+			else{												//BLACK QUEEN NOT PRESENT
+				besttrump(Chand,Cplay,number)									//PLAY HIGHEST TRUMP
+				if(tempplay==0){
+					trumplow(Chand,Cplay,number)								//PLAY LOWEST TRUMP
+				}
+			}
+		}
+		else{												//DEFENSE
+			besttrump(Chand,Cplay,number)									//PLAY HIGHEST TRUMP
+			if(tempplay==0){
+				bettertrump(Chand,Cplay,number)								//PLAY LOWEST WINNING TRUMP
+			}
+			if(tempplay==0 && handvalue==1 && visiblepartner[trickleader]==0){
+				trumpschmier(Chand,Cplay,number)							//TRUMP SCHMIER
+			}
+			if(tempplay == 0){
+				trumplow(Chand,Cplay,number)								//PLAY LOWEST TRUMP
+			}
+		}		
+	}
+
+	if(follow==0){											//CAN'T FOLLOW SUIT
+		schmier(Chand,Cplay,number)									//SCHMIER TO PARTNER
+		if(tempplay==0){
+			trump(Chand,Cplay,number)								//PLAY LOWEST WINNING TRUMP
+		}
+		if(tempplay == 0){
+			slough(Chand,Cplay,number)								//PLAY LOWEST CARD
+		}
+	}
+}
+
+/*
+if(Chand[tempplay]==solochoice){
+	soloplay = 1
+}
+*/
+
+switch(number){
+case 2:
+document.card21.src = Ehandimage[tempplay]
+Eplay[tempplay] = 2
+trick[2] = Ehand[tempplay]
+break
+
+case 3:
+document.card31.src = Shandimage[tempplay]
+Splay[tempplay] = 2
+trick[3] = Shand[tempplay]
+break
+
+case 4:
+document.card41.src = Whandimage[tempplay]
+Wplay[tempplay] = 2
+trick[4] = Whand[tempplay]
+break
+
+}
+
+
+rotate()
+
+
+}
+
+
+
+
+
+
+
+//VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS VALID PLAYS 
+function validplays(Chand,Cplay,Csuit,number){
+
+follow = 0
+if(trick[0]=="S"){														//FOLLOW SPADES
+	search:
+	for(i=15;i<=20;i++){
+		for(j=1;j<=8;j++){
+		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		temphand = temphand.concat(j)
+		follow = 1
+		//break search
+			}
+		}
+	}
+}
+if(trick[0]=="H"){														//FOLLOW HEARTS
+	search:
+	for(i=21;i<=26;i++){
+		for(j=1;j<=8;j++){
+		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		temphand = temphand.concat(j)
+		follow = 1
+		//break search
+			}
+		}
+	}
+}
+if(trick[0]=="C"){														//FOLLOW CLUBS
+	search:
+	for(i=27;i<=32;i++){
+		for(j=1;j<=8;j++){
+		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		temphand = temphand.concat(j)
+		follow= 1
+		//break search
+			}
+		}
+	}
+}
+if(trick[0]=="T"){														//FOLLOW TRUMP
+	search:
+	for(i=1;i<=14;i++){
+		for(j=1;j<=8;j++){
+		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		temphand = temphand.concat(j)
+		follow = 2
+		//break search
+			}
+		}
+	}
+}
+if(follow==0){															//LEADING OR CAN'T FOLLOW SUIT
+
+
+	if(trick[0]==0){														//LEADING
+		for(j=1;j<=8;j++){
+			if(Cplay[9-j] == 0){
+				temphand = temphand.concat(9-j)
+			}
+		}
+	}
+	else{																//CAN'T FOLLOW SUIT
+		for(j=1;j<=8;j++){
+			if( (soloplayer!=number && (Cplay[9-j] == 0 && (Chand[9-j]!=solochoice || trickcount==8 ) ) ) ||
+			    (soloplayer==number && Cplay[9-j]==0 && 
+				(soloplay==1 ||(trick[0]!=solochoice.charAt(2) && (Chand[9-j].charAt(2) != solochoice.charAt(2) || 
+						Csuit[getPosition(solochoice.charAt(2),suits)]==9-trickcount)  ||
+						(trick[0]==solochoice.charAt(2) && Chand[9-j].charAt(2) != "T" || Csuit[getPosition("T",suits)]==9-trickcount) )
+							   )  ) ){
+				temphand = temphand.concat(9-j)
+			}
+		}
+	}
+}
+//alert(temphand)
+}
+
+
+
+
+
+
+
+
+//PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE 
+function playace(Chand,Cplay,number){
+
+if(handvalue>14 || Chand[temphand[1]]==solochoice || partner[number]==visiblepartner[trickleader]){
+	for(j=1;j<=temphand.length-1;j++){
+		if(Chand[temphand[j]]=="ASS" || Chand[temphand[j]]=="AHH" || Chand[temphand[j]]=="ACC"){
+			tempplay = temphand[j]
+			break
+		}
+	}
+}
+
+
+}
+
+
+
+
+
+
+//SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH 
+function slough(Chand,Cplay,number){
+
+search:
+for(i=1;i<=32;i++){
+	for(j=1;j<=temphand.length-1;j++){
+		if(Chand[temphand[j]]==deckvalue[deckvalue.length-i]){
+			tempplay = temphand[j]
+			break search
+		}
+	}
+}
+
+}
+
+
+//SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER  
+function schmier(Chand,Cplay,number){
+
+if(partner[number]==visiblepartner[trickleader] && ( (turn == 4) || (trick[0]!="T" && handvalue<=17) || (trick[0]=="T" && handvalue==1 ) ) ){
+//alert("schmier!")
+	search:
+	for(i=18;i<=23;i++){
+		for(j=1;j<=temphand.length-1;j++){
+			if(Chand[temphand[j]]==deckvalue[i]){
+				tempplay = temphand[j]
+
+				break search
+			}
+		}
+	}
+	/*if(tempplay==0){
+		search:
+		for(i=15;i<=17;i++){
+			for(j=1;j<=temphand.length-1;j++){
+				if(Chand[temphand[j]]==deckvalue[i]){
+					tempplay = temphand[j]
+					break search
+				}
+			}
+		}
+	}*/
+	if(tempplay==0){
+		slough(Chand,Cplay,number)
+	}
+}
+
+
+
+}
+
+
+
+
+
+//TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP  
+function trump(Chand,Cplay,number){
+
+trumpschmier(Chand,Cplay,number)
+
+if(tempplay==0 || getPosition(Chand[tempplay],deckvalue)>handvalue){
+	tempplay = 0
+	bettertrump(Chand,Cplay,number)
+}
+
+
+}
+
+
+
+
+//LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP LOW TRUMP 
+function trumplow(Chand,Cplay,number){
+
+
+//alert("low trump")
+
+
+k = temphand.length-1
+for(i=1;i<=temphand.length-1;i++){
+	if(Chand[temphand[i]].charAt(2) != "T"){
+		k = i-1
+		//tempplay = temphand[i-1]
+		break
+	}
+
+}
+
+
+search:
+for(i=1;i<=10;i++){
+	for(j=1;j<=temphand.length-1;j++){
+		if(Chand[temphand[temphand.length-j]]==deckvalue[15-i] && 
+		  (Chand[temphand[temphand.length-j]].charAt(0)!="A" && Chand[temphand[temphand.length-j]].charAt(0)!="1" && Chand[temphand[temphand.length-j]].charAt(0)!="K")){
+			tempplay = temphand[temphand.length-j]
+			break search
+		}
+	}
+}
+
+if(tempplay==0){
+//alert("no luck")
+	tempplay = temphand[k]
+}
+
+
+
+
+
+}
+
+
+
+//SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP 
+function trumpschmier(Chand,Cplay,number){
+
+for(i=1;i<=temphand.length-1;i++){
+	if(Chand[temphand[i]].charAt(2)=="T" && (Chand[temphand[i]].charAt(0)=="A" || Chand[temphand[i]].charAt(0)=="1" || Chand[temphand[i]].charAt(0)=="K")){		
+		tempplay = temphand[i]
+		break
+	}
+}
+
+}
+
+
+
+//BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP BETTER TRUMP 
+function bettertrump(Chand,Cplay,number){
+
+for(i=1;1<=temphand.length-1;i++){
+	if(getPosition(Chand[temphand[temphand.length-i]],deckvalue)<=14 && 
+	   getPosition(Chand[temphand[temphand.length-i]],deckvalue)<handvalue &&
+	   Chand[temphand[temphand.length-i]]!="ADT" && Chand[temphand[temphand.length-i]]!="1DT" && Chand[temphand[temphand.length-i]]!="KDT"){
+		tempplay = temphand[temphand.length-i]							
+		break
+	}
+}
+
+
+}
+
+
+
+
+//BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP BEST TRUMP  
+function besttrump(Chand,Cplay,number){
+
+if(turn==4){
+	if(partner[number]==visiblepartner[trickleader]){
+		trumpschmier(Chand,Cplay,number)
+		if(tempplay==0){
+			trumplow(Chand,Cplay,number)
+		}
+	}
+	else{
+		bettertrump(Chand,Cplay,number)
+	}
+}
+else{
+	if(getPosition(Chand[temphand[1]],deckvalue)==1 || (Chand[temphand[1]].charAt(0)+Chand[temphand[1]].charAt(1)=="QS" && partner[number]==1) ){
+		tempplay = temphand[1]
+	}	
+}
+
+}
+
+
+
+
+//END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI END AI 
+
+
+
+
+
+
+
+//SCORE TRICK
+function trickscore(){
+if(trick[0]=="S"){
+	search:
+	for(i=15;i<=20;i++){
+		for(j=1;j<=4;j++){		
+			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+		scorer=j
+		break search}
+		}
+	}
+}
+if(trick[0]=="H"){
+	search:
+	for(i=21;i<=26;i++){
+		for(j=1;j<=4;j++){		
+			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+		scorer=j
+		break search}
+		}
+	}
+}
+if(trick[0]=="C"){
+	search:
+	for(i=27;i<=32;i++){
+		for(j=1;j<=4;j++){		
+			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+		scorer=j
+		break search}
+		}
+	}
+}
+search:
+for(i=1;i<=14;i++){
+	for(j=1;j<=4;j++){		
+			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+		scorer=j
+		break search}
+		}
+	}
+
+for(i=1;i<=4;i++){
+	if(trick[i].charAt(0)=="K"){
+		score = score+4}
+	if(trick[i].charAt(0)=="Q"){
+		score = score+3}
+	if(trick[i].charAt(0)=="J"){
+		score = score+2}
+	if(trick[i].charAt(0)=="A"){
+		score = score+11}
+	if(trick[i].charAt(0)=="1"){
+		score = score+10}
+}
+
+switch(scorer){
+case 1:
+	scores[1]=scores[1]+score
+	document.Nscore.Nscore.value = scores[1]	
+	document.card12.src = cardTR()
+break
+
+case 2:
+	scores[2]=scores[2]+score
+	document.Escore.Escore.value = scores[2]
+	document.card22.src = cardTR()
+break
+
+case 3:
+	scores[3]=scores[3]+score
+	document.Sscore.Sscore.value = scores[3]
+	document.card32.src = cardTR()
+break
+
+case 4:
+	scores[4]=scores[4]+score
+	document.Wscore.Wscore.value = scores[4]
+	document.card42.src = cardTR()
+break
+}
+
+
+
+
+//CHECK SOLOPLAY
+
+for(i=1;i<=4;i++){
+	if(trick[i]==solochoice){
+	soloplay = 1
+	}
+
+}
+
+
+
+//COUNT SUITS
+for(i=1;i<=4;i++){
+	if(trick[i].charAt(2)=="T"){
+	visiblesuit[1] = visiblesuit[1]+1
+	}
+	if(trick[i].charAt(2)=="S"){
+	visiblesuit[2] = visiblesuit[2]+1
+	}
+	if(trick[i].charAt(2)=="H"){
+	visiblesuit[3] = visiblesuit[3]+1
+	}
+	if(trick[i].charAt(2)=="C"){
+	visiblesuit[4] = visiblesuit[4]+1
+	}
+}
+
+for(i=1;i<=4;i++){
+	if(trick[1].charAt(2)==suits[i]){
+		Nsuit[i]=Nsuit[i]-1
+	}
+	if(trick[2].charAt(2)==suits[i]){
+		Esuit[i]=Esuit[i]-1
+	}
+	if(trick[3].charAt(2)==suits[i]){
+		Ssuit[i]=Ssuit[i]-1
+	}
+	if(trick[4].charAt(2)==suits[i]){
+		Wsuit[i]=Wsuit[i]-1
+	}
+}
+
+
+
+
+
+//alert(Nsuit)
+//alert(visiblesuit)
+
+//ELIMINATE PLAYED CARDS
+for(i=1;i<=4;i++){
+	if(getPosition(trick[i],deckvalue)<=14){
+		deckvalue.splice(getPosition(trick[i],deckvalue),1)
+		deckvalue.splice(14,0,"0")
+	}
+	else{
+		if(getPosition(trick[i],deckvalue)<=17){
+			deckvalue.splice(getPosition(trick[i],deckvalue),1)
+			deckvalue.splice(17,0,"0")			
+		}
+		else{
+			if(getPosition(trick[i],deckvalue)<=23){
+				deckvalue.splice(getPosition(trick[i],deckvalue),1)
+				deckvalue.splice(23,0,"0")			
+			}
+			else{
+				deckvalue.splice(getPosition(trick[i],deckvalue),1)
+				deckvalue.splice(32,0,"0")		
+			}
+		}
+	}
+}
+
+//alert(deckvalue)
+
+
+transcript = transcript+"Trick "+trickcount+": "+trick+" (winner: "+playername[scorer]+")\n"
+trickcount++
+
+
+
+pasttrick = trick
+trick = new Array(0,0,0,0,0)
+score = 0
+trick[0] = 0
+handvalue = 33
+trickleader = 0
+player = scorer-1
+
+document.card11.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card21.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card31.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card41.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+//ptrick=0
+document.card51.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card52.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card53.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card54.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+cleartrick()
+}
+
+
+
+
+
+function cardTR(){
+	return TR[Math.floor(Math.random() * 4+1)]
+}
+
+
+
+
+
+function cleartrick(){
+
+//CHECK FOR GAME WINNER
+for(i=1;i<=8;i++){
+	if(Nplay[i]!=1){
+		break}
+	
+
+	offensename = new Array("0")
+	defensename = new Array("0")
+
+	if(i==8){
+		hand = 0
+
+		for(i=1;i<=4;i++){
+			if(partner[i]==1){
+				offense = offense+scores[i]
+				offensename = offensename.concat(playername[i])
+			}
+			else{defense = defense +scores[i]
+				defensename = defensename.concat(playername[i])
+			}
+		}
+		//alert("Offense: "+offense + " Defense: "+defense)
+		//alert(defense)
+		if(partner[1]+partner[2]+partner[3]+partner[4]==1){									//PLAYING ALONE
+			
+			
+
+		if(offense==120){
+			alert("Offense: "+offense + " Defense: "+defense+"\n"+
+					"Schwartz!!! " + offensename[1]+" wins 9 chips! \n (" +
+					defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" take no points.)")
+			document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+					"Schwartz!!! " + offensename[1]+" wins 9 chips!"
+				for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+9}					
+					}
+				}
+			else{if(offense>90){
+				alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" wins 6 chips! \n(" +
+						 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" do not make Schneider.)")
+				document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" wins 6 chips!"
+					for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+6}					
+						}
+					}
+				else{if(offense>60){
+					alert("Offense: "+offense + " Defense: "+defense+"\n"+
+							offensename[1]+" wins 3 Chips! \n("+
+							 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+ " make Schneider.)" )
+					document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							offensename[1]+" wins 3 Chips!"
+						for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+3}					
+						}
+					}
+					else{if(offense>30){
+						alert("Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips! \n(" +
+							 offensename[1] + " makes Schneider.)")
+						document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips!"
+							for(i=1;i<=4;i++){
+					if(partner[i]==0){
+						chips[i]=chips[i]+2}					
+						}
+						}
+						else{alert("Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips! \n(" + 
+								offensename[1] +  " does not make Schneider.)")
+							document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips!"
+						for(i=1;i<=4;i++){
+					if(partner[i]==0){
+						chips[i]=chips[i]+3}					
+							}
+						}
+					}
+				}
+			}
+
+}
+
+	else{	if(offense==120){															//PLAYING IN PAIRS
+			alert("Offense: "+offense + " Defense: "+defense+"\n"+
+					"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips! \n (" +
+					defensename[1] + " and " +defensename[2]+ " take no points.)")
+			document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+					"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips!"
+				for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+3}					
+					}
+				}
+			else{if(offense>90){
+				alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" and "+offensename[2]+" win 2 chips! \n(" +
+						 defensename[1] + " and " +defensename[2]+ " do not make Schneider.)")
+				document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" and "+offensename[2]+" win 2 chips!"
+					for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+2}					
+						}
+					}
+				else{if(offense>60){
+					alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" and "+offensename[2]+" win 1 Chip! \n("+
+						 defensename[1] + " and " +defensename[2]+ " make Schneider.)" )
+					document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+						offensename[1]+" and "+offensename[2]+" win 1 Chip!"
+						for(i=1;i<=4;i++){
+					if(partner[i]==1){
+						chips[i]=chips[i]+1}					
+						}
+					}
+					else{if(offense>30){
+						alert("Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+" win 2 chips! \n(" + 
+							offensename[1] + " and " +offensename[2]+ " make Schneider.)")
+						document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+" win 2 chips!"
+							for(i=1;i<=4;i++){
+					if(partner[i]==0){
+						chips[i]=chips[i]+2}					
+						}
+						}
+						else{alert("Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+" win 3 chips! \n(" + 
+							offensename[1] + " and " +offensename[2]+ " do not make Schneider.)")
+							document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+" win 3 chips!"
+						for(i=1;i<=4;i++){
+					if(partner[i]==0){
+						chips[i]=chips[i]+3}					
+							}
+						}
+					}
+				}
+			}
+		}
+document.Nscore.Nscore.style.color = "black"
+document.Escore.Escore.style.color = "black"
+document.Sscore.Sscore.style.color = "black"
+document.Wscore.Wscore.style.color = "black"
+
+document.Nscore.Nscore.value = chips[1]
+document.Escore.Escore.value = chips[2]
+document.Sscore.Sscore.value = chips[3]
+document.Wscore.Wscore.value = chips[4]	
+
+
+
+transcript = transcript+"Offense: "+offense + " Defense: "+defense
+document.getElementById('transcript').style.display = 'inherit'
+
+
+//CHECK FOR MATCH WINNER
+
+	if(chips[1]>=12 && chips[1]>chips[2] && chips[1]>chips[3] && chips[1]>chips[4]){
+		alert("Game Over! " +playername[1] +" won with "+chips[1]+" chips!")
+		document.getElementById('messages').value = "Game Over! " +playername[1] +" won with "+chips[1]+" chips!"
+		gameover = 1
+		dealer = 4
+	}
+	if(chips[2]>=12 && chips[2]>chips[1] && chips[2]>chips[3] && chips[2]>chips[4]){
+		alert("Game Over! " +playername[2] +" won with "+chips[2]+" chips!")
+		document.getElementById('messages').value = "Game Over! " +playername[2] +" won with "+chips[2]+" chips!"
+		gameover = 1
+		dealer = 1
+	}
+	if(chips[3]>=12 && chips[3]>chips[2] && chips[3]>chips[1] && chips[3]>chips[4]){
+		alert("Game Over! " +playername[3] +" won with "+chips[3]+" chips!")
+		document.getElementById('messages').value = "Game Over! " +playername[3] +" won with "+chips[3]+" chips!"
+		gameover = 1
+		dealer = 2
+	}
+	if(chips[4]>=12 && chips[4]>chips[2] && chips[4]>chips[3] && chips[4]>chips[1]){
+		alert("Game Over! " +playername[4] +" won with "+chips[4]+" chips!")
+		document.getElementById('messages').value = "Game Over! " +playername[4] +" won with "+chips[4]+" chips!"
+		gameover = 1
+		dealer = 3
+	}
+
+//alert(transcript)
+
+
+document.getElementById('deal').style.display = 'inherit'
+
+
+
+
+
+
+
+document.dealer.dealer.value = playername[dealer%4+1]
+document.player.player.value = ""
+document.Partner.Partner.value = ""
+
+document.card12.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card22.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card32.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+document.card42.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+
+
+
+switch(dealer%4+1){
+case 1:
+document.card11.src = sorteddeck[0]
+break
+
+case 2:
+document.card21.src = sorteddeck[0]
+break
+
+case 3:
+document.card31.src = sorteddeck[0]
+break
+
+case 4:
+document.card41.src = sorteddeck[0]
+break
+}
+
+
+pasttrick = new Array (0,0,0,0,0)
+
+
+
+
+return}
+}
+
+
+turn=0
+rotate()
+}
+
+
+
+
+
+
+
+
+
+
+function opentrick(number){
+	if(scorer==number){
+		for(i=1;i<=32;i++){
+			if(pasttrick[1]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+				document.card51.src = sorteddeck[i]}
+			if(pasttrick[2]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+				document.card52.src = sorteddeck[i]}
+			if(pasttrick[3]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+				document.card53.src = sorteddeck[i]}
+			if(pasttrick[4]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+				document.card54.src = sorteddeck[i]}
+		}
+	}
+}
+
+
+function closetrick(number){
+	if(scorer==number){
+		document.card51.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+		document.card52.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+		document.card53.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+		document.card54.src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1"
+	}
+}
+
+
+
+
+
+
+function sortingchoice() {
+sorder = 0
+			/*for (index=0; index < document.sorting.choice.length; index++) {
+				if (document.sorting.choice[index].checked) {
+					sorder = document.sorting.choice[index].value;
+					//alert(sorder)	
+					break;
+				}
+			}*/
+}
+
+
+function speedchoice() {
+delaytime = 500
+			/*for (index=0; index < document.speed.choice.length; index++) {
+				if (document.speed.choice[index].checked) {
+					delaytime = document.speed.choice[index].value;
+					//alert(delaytime)
+					//sortingchoice()
+					break;
+				}
+			}*/
+}
+
+
+function deckchoice() {
+newdeck = 1
+			/*for (index=0; index < document.deck.choice.length; index++) {
+				if (document.deck.choice[index].checked) {
+					newdeck = document.deck.choice[index].value;
+					//sortingchoice()
+					break;
+				}
+			}*/
+}
+
+
+function showtranscript(){
+	alert(transcript)
+}
+
+function showinstructions(){
+	alert(  "Shafkopf 1.0\n"+
+		"kjsdkfhkjsdhfkjhskdjfhkjsdf \n"+
+		"fksd bfksdb fksbd fksbd fks bdfksb dkbsdkfbsdf asdasdads")
+}
+
+
+
+
+//-->
+</SCRIPT>
+
+
+</head>
+
+<body  leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload="newnames()"  bgcolor=green>
+
+
+
+
+<table width=800 background="" border=0 cellpadding=0 cellspacing=0 align=center>
+
+<td height=15>
+
+<tr>
+
+<td width=80 align=center>
+   <a href = "javascript:Card(1)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card1" border=0 width=80 height=126 > </a>
+</td>
+
+
+<td width=80 align=center>
+   <a href = "javascript:Card(2)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card2" border=0 width=80 height=126> </a>
+</td>
+
+<td width=80 align=center>
+   <a href = "javascript:Card(3)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card3" border=0 width=80 height=126> </a>
+</td>
+
+<td width=80 align=center>
+   <a href = "javascript:Card(4)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card4" border=0 width=80 height=126> </a>
+</td>
+
+<td width=80 align=center>
+   <a href = "javascript:Card(5)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card5" border=0 width=80 height=126> </a>
+
+</td>
+
+
+<td width=80 align=center>
+   <a href = "javascript:Card(6)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card6" border=0 width=80 height=126> </a>
+</td>
+
+
+<td width=80 align=center>
+   <a href = "javascript:Card(7)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card7" border=0 width=80 height=126> </a>
+</td>
+
+
+<td width=80 align=center>
+   <a href = "javascript:Card(8)">
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card8" border=0 width=80 height=126> </a>
+</td>
+
+</tr>
+
+<td height=15>
+
+</table>
+
+
+
+
+
+
+
+
+
+<!--MASTERTABLE-->
+<table width=800 border=0 cellpadding=0 cellspacing=0 align=center bgcolor="">
+
+<td width=200 valign="top">
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+
+
+
+	<td width=100 valign="center">
+	<form name=Nname action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Nname size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Ename action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Ename size=5 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+
+
+
+
+	<td width=100 valign="center">
+	<form name=Nscore action="#">
+	<!--<b> <script>document.write(playername[1])</script> <br>-->
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Nscore size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Escore action="#">
+	<!--<b> <script>document.write(playername[2])</script> <br>-->
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Escore size=5 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+	<td height=15>
+
+	<tr>
+
+	<td width=100 valign="center">
+	<form name=Wname action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Wname size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Sname action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Sname size=5 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+
+	<td width=100 valign="center">
+	<form name=Wscore action="#">
+	<!--<b> <script>document.write(playername[4])</script> <br>-->
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Wscore size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Sscore action="#">
+	<!--<b> <script>document.write(playername[3])</script> <br>-->
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Sscore size=5 READONLY />
+	</form>
+	</td>
+
+	</table>
+
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+	<td height=15>
+
+	<tr>
+
+	<td width=200 valign="top">
+
+
+	<table width=100 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+	<td width=100 valign="top">
+
+	<form name="solo" method="post">
+	<b>Call Off</b> <br>
+	<input name="choice" value="QQ" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />Both Qs <br>
+
+	<b>Call Off</b> <br>
+	<input name="choice" value="Q" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />One Q <br> <br>
+	</td>	
+	
+	</table>
+
+	</td>
+
+	<td width=200 valign="top">
+
+	<table width=100 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+	<td width=100 valign="top">
+
+	
+	<b>Call Partner</b> <br>
+	<input name="choice" value="ACC" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AC <br>
+	<input name="choice" value="ASS" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AS <br>
+	<input name="choice" value="AHH" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AH <br>
+	</form>
+	</td>
+
+	</table>
+
+	</td>
+
+	</table>
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+
+	<td width=100 align="center">
+	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()">&nbsp Call &nbsp</button>
+	</td>
+
+	<td width=100 align="center">
+	<form name=Partner action="#">
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Partner size=5 READONLY />
+	</form>
+	</td>
+
+
+	</table>
+
+
+
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
+
+
+	
+
+	<form action="/action_page.php">
+ 	 <p><label for="messages"><b> Message </b> </label>
+	  <textarea id="messages" name="Message" rows="4" cols="25" READONLY> Welcome to Shafkopf 2.0 </textarea>
+	</form>
+
+
+
+	
+
+	</table>
+
+
+
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+
+
+
+	<td width=200 align="center">
+	<button  id=deal type="button" name="deal" onclick="deal()" style="background-color:yellow;border-color:black;display:none" >
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Deal &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </button>
+
+  	<button id=continue
+               OnServerClick="Button2_OnClick" 
+               style="font: 8pt verdana;display:none;
+			
+			background-color:yellow;
+                      border-color:black;
+                      height=30;
+                      width:200"
+		onclick="beginhand()"
+               onmouseover="if(hand==1) this.style.backgroundColor='yellow'"
+               onmouseout="this.style.backgroundColor='lightgreen'"
+               runat="server"
+		>
+          &nbsp&nbsp Continue &nbsp&nbsp
+       </button>
+
+
+	</td>
+
+
+
+
+	</table>
+
+
+
+
+
+</td>
+
+<!--MIDDLETABLE-->
+<td>
+<table width=400 background="" border=0 cellpadding=0 cellspacing=0 align=center bgcolor=8b602b>
+
+
+
+<td width=133 align=center>
+<a href = "javascript:opentrick(1)">
+      <img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card12" border=0 width=133 height=133  > </a>    
+</td>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card11" border=0 width=80 height=126 > </a>
+</td>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card22" border=0 width=133 height=133 onmouseover=opentrick(2) onmouseout=closetrick(2)> </a>    
+</td>
+
+
+
+<tr>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card41" border=0 width=80 height=126 > </a>
+</td>
+
+<td width=133 align=center>
+
+    <img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card00" border=0 width=80 height=133 > </a>
+</td>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card21" border=0 width=80 height=126 > </a>
+</td>
+
+<tr>
+
+
+
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card42" border=0 width=133 height=133 onmouseover=opentrick(4) onmouseout=closetrick(4)> </a>    
+</td>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1" name="card31" border=0 width=80 height=126 > </a>
+</td>
+
+<td width=133 align=center>
+
+      <img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card32" border=0 width=133 height=133 onmouseover=opentrick(3) onmouseout=closetrick(3)> </a>    
+</td>
+
+
+
+</table>
+
+
+
+
+	
+	
+
+
+
+
+</td>
+<!--MIDDLETABLE ENDS-->
+
+
+<td width=200 valign=top>
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
+
+	<td width=200 valign="center">
+	<form name=dealer action="#">
+	<b>Dealer<br>
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:white" name=dealer size=6 READONLY />
+	</form>
+	</td>
+
+	
+
+	<td width=100 valign="center">
+	<form name=player action="#">
+	<b>Lead<br>
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:white" name=player size=6 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+	<td height=15>
+
+	</table>
+
+
+
+
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
+
+
+
+
+		<b>Previous Trick 
+
+
+	<td width=100 valign="center">
+	<form name=Nname2 action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Nname2 size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Ename2 action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Ename2 size=5 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+	<td width=100 align=center>
+		<img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card51" border=0 width=80 height=126 > </a>    
+	</td>
+
+	<td width=100 align=center>
+		<img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card52" border=0 width=80 height=126 > </a>    
+	</td>
+
+	<tr>
+
+	<td width=100 valign="center">
+	<form name=Wname2 action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Wname2 size=5 READONLY />
+	</form>
+	</td>
+
+	<td width=100 valign="center">
+	<form name=Sname2 action="#">
+	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Sname2 size=5 READONLY />
+	</form>
+	</td>
+
+	<tr>
+
+	<td width=100 align=center>
+		<img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card54" border=0 width=80 height=126 > </a>    
+	</td>
+
+	<td width=100 align=center>
+		<img src = "https://www.dropbox.com/s/bn22rzn7wng2qp4/Card01.gif?raw=1" name="card53" border=0 width=80 height=126 > </a>    
+	</td>
+
+	<tr>
+
+	</table>
+
+	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
+
+	<td height=5>
+
+	<tr>
+
+	<td width=200 align="center">
+	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:lightblue;border-color:black;display:none" >
+	&nbsp&nbsp&nbsp&nbsp Transcript &nbsp&nbsp&nbsp&nbsp </button>
+
+	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:lightblue;border-color:black;display:inherit" >
+	&nbsp&nbsp&nbsp&nbsp Instructions &nbsp&nbsp&nbsp&nbsp </button>
+
+	</table>
+	
+
+</td>
+
+
+
+</table>
+<!-- MASTERTABLE ENDS-->
+
+
+
+
+</body>
+
+</html>
