@@ -494,10 +494,10 @@ Whandimage = sort(Whandimage,0)
 
 
 for(i=1;i<=8;i++){
-Nhand[i] = Nhandimage[i].charAt(46) +Nhandimage[i].charAt(47)+Nhandimage[i].charAt(48)
-Ehand[i] = Ehandimage[i].charAt(46) +Ehandimage[i].charAt(47)+Ehandimage[i].charAt(48)
-Shand[i] = Shandimage[i].charAt(46) +Shandimage[i].charAt(47)+Shandimage[i].charAt(48)
-Whand[i] = Whandimage[i].charAt(46) +Whandimage[i].charAt(47)+Whandimage[i].charAt(48)
+Nhand[i] = Nhandimage[i].charAt(11) +Nhandimage[i].charAt(12)+Nhandimage[i].charAt(13)
+Ehand[i] = Ehandimage[i].charAt(11) +Ehandimage[i].charAt(12)+Ehandimage[i].charAt(13)
+Shand[i] = Shandimage[i].charAt(11) +Shandimage[i].charAt(12)+Shandimage[i].charAt(13)
+Whand[i] = Whandimage[i].charAt(11) +Whandimage[i].charAt(12)+Whandimage[i].charAt(13)
 }*/
 
 
@@ -1522,7 +1522,7 @@ if(trick[0]=="S"){														//FOLLOW SPADES
 	search:
 	for(i=15;i<=20;i++){
 		for(j=1;j<=8;j++){
-		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		if(Chand[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13) && Cplay[j] == 0){
 		temphand = temphand.concat(j)
 		follow = 1
 		//break search
@@ -1534,7 +1534,7 @@ if(trick[0]=="H"){														//FOLLOW HEARTS
 	search:
 	for(i=21;i<=26;i++){
 		for(j=1;j<=8;j++){
-		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		if(Chand[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13) && Cplay[j] == 0){
 		temphand = temphand.concat(j)
 		follow = 1
 		//break search
@@ -1546,7 +1546,7 @@ if(trick[0]=="C"){														//FOLLOW CLUBS
 	search:
 	for(i=27;i<=32;i++){
 		for(j=1;j<=8;j++){
-		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		if(Chand[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13) && Cplay[j] == 0){
 		temphand = temphand.concat(j)
 		follow= 1
 		//break search
@@ -1558,7 +1558,7 @@ if(trick[0]=="T"){														//FOLLOW TRUMP
 	search:
 	for(i=1;i<=14;i++){
 		for(j=1;j<=8;j++){
-		if(Chand[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48) && Cplay[j] == 0){
+		if(Chand[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13) && Cplay[j] == 0){
 		temphand = temphand.concat(j)
 		follow = 2
 		//break search
@@ -1803,7 +1803,7 @@ if(trick[0]=="S"){
 	search:
 	for(i=15;i<=20;i++){
 		for(j=1;j<=4;j++){		
-			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(trick[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 		scorer=j
 		break search}
 		}
@@ -1813,7 +1813,7 @@ if(trick[0]=="H"){
 	search:
 	for(i=21;i<=26;i++){
 		for(j=1;j<=4;j++){		
-			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(trick[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 		scorer=j
 		break search}
 		}
@@ -1823,7 +1823,7 @@ if(trick[0]=="C"){
 	search:
 	for(i=27;i<=32;i++){
 		for(j=1;j<=4;j++){		
-			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(trick[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 		scorer=j
 		break search}
 		}
@@ -1832,7 +1832,7 @@ if(trick[0]=="C"){
 search:
 for(i=1;i<=14;i++){
 	for(j=1;j<=4;j++){		
-			if(trick[j]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(trick[j]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 		scorer=j
 		break search}
 		}
@@ -2251,13 +2251,13 @@ rotate()
 function opentrick(number){
 	if(scorer==number){
 		for(i=1;i<=32;i++){
-			if(pasttrick[1]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(pasttrick[1]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 				document.card51.src = sorteddeck[i]}
-			if(pasttrick[2]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(pasttrick[2]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 				document.card52.src = sorteddeck[i]}
-			if(pasttrick[3]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(pasttrick[3]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 				document.card53.src = sorteddeck[i]}
-			if(pasttrick[4]==sorteddeck[i].charAt(46)+sorteddeck[i].charAt(47)+sorteddeck[i].charAt(48)){
+			if(pasttrick[4]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
 				document.card54.src = sorteddeck[i]}
 		}
 	}
