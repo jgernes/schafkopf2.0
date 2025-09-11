@@ -20,21 +20,13 @@
   <link rel="apple-touch-icon" href="icon.png">
 	
 <style>
-    /* Make page + canvas fill the screen */
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000; /* optional */
-    }
-    canvas {
-      display: block;
-      width: 100%;
-      height: 100%;
-      touch-action: none; /* disable touch scrolling/zooming */
-    }
+   @media (max-width: 430px) {       /* target iPhones and small phones */
+  table {
+    transform-origin: top left;   /* anchor scaling */
+    transform: scale(0.85);       /* shrink entire table */
+    width: 117.6%;                /* 1 / 0.85 to keep layout flow */
+  }
+}
   </style>
 
 
