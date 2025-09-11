@@ -47,99 +47,6 @@ document.Sname2.Sname2.value = playername[3]
 document.Wname2.Wname2.value = playername[4]
 
 
-introdeck = new Array (
-"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
-"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
-"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
-"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
-"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
-"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
-"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
-"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
-"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
-"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
-"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1",
-"https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1",
-"https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1",
-"https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1",
-"https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
-"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1",
-"https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1",
-"https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1",
-"https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1",
-"https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1",
-"https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
-"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1",
-"https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1",
-"https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1",
-"https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1",
-"https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1",
-"https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
-"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1",
-"https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1",
-"https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1",
-"https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1",
-"https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1",
-"https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
-
-
-
-
-
-
-function intro(i){
-document.getElementById('messages').value = 'Loading the deck of cards. Please wait.'
-if(i<32){
-switch(1+i%8){
-
-case 1:
-document.card1.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 2:
-document.card2.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 3:
-document.card3.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 4:
-document.card4.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 5:
-document.card5.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 6:
-document.card6.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 7:
-document.card7.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-
-case 8:
-document.card8.src = introdeck[i+1]
-setTimeout(function() {intro(i+1)}, 500)
-break
-}
-}
-else{document.getElementById('messages').value = ''
-document.getElementById('deal').style.display = 'inherit'
-return}
-}
-
-
-setTimeout(function() {intro(0)}, 2000)
 
 
 
@@ -231,93 +138,22 @@ if(gameover==1){
 }
 
 
-bicycledeck = new Array ("image1/cardbk.jpg","image1/cardQCT.jpg","image1/cardQST.jpg","image1/cardQHT.jpg","image1/cardQDT.jpg",
-"image1/cardJCT.jpg","image1/cardJST.jpg","image1/cardJHT.jpg","image1/cardJDT.jpg",
-"image1/cardADT.jpg","image1/card1DT.jpg","image1/cardKDT.jpg","image1/card9DT.jpg","image1/card8DT.jpg","image1/card7DT.jpg",
-"image1/cardASS.jpg","image1/card1SS.jpg","image1/cardKSS.jpg","image1/card9SS.jpg","image1/card8SS.jpg","image1/card7SS.jpg",
-"image1/cardAHH.jpg","image1/card1HH.jpg","image1/cardKHH.jpg","image1/card9HH.jpg","image1/card8HH.jpg","image1/card7HH.jpg",
-"image1/cardACC.jpg","image1/card1CC.jpg","image1/cardKCC.jpg","image1/card9CC.jpg","image1/card8CC.jpg","image1/card7CC.jpg")
+piatnikdeck = new Array ("image2/cardbk.gif","image2/cardQCT.gif","image2/cardQST.gif","image2/cardQHT.gif","image2/cardQDT.gif",
+"image2/cardJCT.gif","image2/cardJST.gif","image2/cardJHT.gif","image2/cardJDT.gif",
+"image2/cardADT.gif","image2/card1DT.gif","image2/cardKDT.gif","image2/card9DT.gif","image2/card8DT.gif","image2/card7DT.gif",
+"image2/cardASS.gif","image2/card1SS.gif","image2/cardKSS.gif","image2/card9SS.gif","image2/card8SS.gif","image2/card7SS.gif",
+"image2/cardAHH.gif","image2/card1HH.gif","image2/cardKHH.gif","image2/card9HH.gif","image2/card8HH.gif","image2/card7HH.gif",
+"image2/cardACC.gif","image2/card1CC.gif","image2/cardKCC.gif","image2/card9CC.gif","image2/card8CC.gif","image2/card7CC.gif")
 
-sortedbicycledeck = new Array ("image1/cardbk.jpg","image1/cardQCT.jpg","image1/cardQST.jpg","image1/cardQHT.jpg","image1/cardQDT.jpg",
-"image1/cardJCT.jpg","image1/cardJST.jpg","image1/cardJHT.jpg","image1/cardJDT.jpg",
-"image1/cardADT.jpg","image1/card1DT.jpg","image1/cardKDT.jpg","image1/card9DT.jpg","image1/card8DT.jpg","image1/card7DT.jpg",
-"image1/cardASS.jpg","image1/card1SS.jpg","image1/cardKSS.jpg","image1/card9SS.jpg","image1/card8SS.jpg","image1/card7SS.jpg",
-"image1/cardAHH.jpg","image1/card1HH.jpg","image1/cardKHH.jpg","image1/card9HH.jpg","image1/card8HH.jpg","image1/card7HH.jpg",
-"image1/cardACC.jpg","image1/card1CC.jpg","image1/cardKCC.jpg","image1/card9CC.jpg","image1/card8CC.jpg","image1/card7CC.jpg")
+sortedpiatnikdeck = new Array ("image2/cardbk.gif","image2/cardQCT.gif","image2/cardQST.gif","image2/cardQHT.gif","image2/cardQDT.gif",
+"image2/cardJCT.gif","image2/cardJST.gif","image2/cardJHT.gif","image2/cardJDT.gif",
+"image2/cardADT.gif","image2/card1DT.gif","image2/cardKDT.gif","image2/card9DT.gif","image2/card8DT.gif","image2/card7DT.gif",
+"image2/cardASS.gif","image2/card1SS.gif","image2/cardKSS.gif","image2/card9SS.gif","image2/card8SS.gif","image2/card7SS.gif",
+"image2/cardAHH.gif","image2/card1HH.gif","image2/cardKHH.gif","image2/card9HH.gif","image2/card8HH.gif","image2/card7HH.gif",
+"image2/cardACC.gif","image2/card1CC.gif","image2/cardKCC.gif","image2/card9CC.gif","image2/card8CC.gif","image2/card7CC.gif")
 
-bicycletrick = new Array (0,"image1/cardTR1.gif","image1/cardTR2.gif","image1/cardTR3.gif","image1/cardTR4.gif")
+piatniktrick = new Array (0,"image2/cardTR5.gif","image2/cardTR6.gif","image2/cardTR7.gif","image2/cardTR8.gif")
 
-piatnikdeck = new Array (
-"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
-"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
-"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
-"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
-"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
-"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
-"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
-"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
-"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
-"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
-"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1","https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1","https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1","https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1","https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
-"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1","https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1","https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1","https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1","https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1","https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
-"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1","https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1","https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1","https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1","https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1","https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
-"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1","https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1","https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1","https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1","https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1","https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
-
-sortedpiatnikdeck = new Array (
-"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
-"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
-"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
-"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
-"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
-"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
-"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
-"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
-"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
-"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
-"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1","https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1","https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1","https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1","https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
-"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1","https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1","https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1","https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1","https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1","https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
-"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1","https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1","https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1","https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1","https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1","https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
-"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1","https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1","https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1","https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1","https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1","https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
-
-piatniktrick = new Array (0,"https://www.dropbox.com/s/b6j9h2v8dmwvf1t/CardTR1.gif?raw=1","https://www.dropbox.com/s/dql92wrbna65x3b/CardTR2.gif?raw=1","https://www.dropbox.com/s/omls5mpdl626t1z/CardTR3.gif?raw=1","https://www.dropbox.com/s/3980zpttmym6pdm/CardTR4.gif?raw=1")
-
-
-/*
-new Array (
-"https://www.dropbox.com/s/ljluhcb5u9odc7u/CardBK.JPG?raw=1",
-"https://www.dropbox.com/s/kseab477bddxe4f/cardQCT.JPG?raw=1",
-"https://www.dropbox.com/s/gnfoa65knx2ewe0/cardQST.JPG?raw=1",
-"https://www.dropbox.com/s/ytwps7yntnjoz5l/cardQHT.JPG?raw=1",
-"https://www.dropbox.com/s/z5bswjco2xl4kv5/cardQDT.JPG?raw=1",
-"https://www.dropbox.com/s/elcz983wcnru5zi/cardJCT.JPG?raw=1",
-"https://www.dropbox.com/s/5klp8xcb4g1zknf/cardJST.JPG?raw=1",
-"https://www.dropbox.com/s/t41gr9zk9aw0kh8/cardJHT.JPG?raw=1",
-"https://www.dropbox.com/s/1lw2d2n373y4s5l/cardJDT.JPG?raw=1",
-"https://www.dropbox.com/s/9tus92hjih0mq9h/cardADT.JPG?raw=1",
-"https://www.dropbox.com/s/3b51x8ui2hwiu0h/card1DT.jpg?raw=1",
-"https://www.dropbox.com/s/zuq1y36hc37eg0a/cardKDT.JPG?raw=1",
-"https://www.dropbox.com/s/08ykt67c71bquqo/card9DT.jpg?raw=1",
-"https://www.dropbox.com/s/iq9oc2e512se3ld/card8DT.jpg?raw=1",
-"https://www.dropbox.com/s/02yul15b680ktzz/card7DT.jpg?raw=1",
-"https://www.dropbox.com/s/dui7l3iwcroagt4/cardASS.JPG?raw=1",
-"https://www.dropbox.com/s/yifhghgevorpojs/card1SS.jpg?raw=1",
-"https://www.dropbox.com/s/apzgl3nalnu0kaz/cardKSS.JPG?raw=1",
-"https://www.dropbox.com/s/f8oxrlqyy1o91wp/card9SS.jpg?raw=1",
-"https://www.dropbox.com/s/2mksih6bpsuw2sb/card8SS.jpg?raw=1",
-"https://www.dropbox.com/s/jqudewze0rjdx8c/card7SS.jpg?raw=1",
-"https://www.dropbox.com/s/13xz043vpycug7v/cardAHH.JPG?raw=1",
-"https://www.dropbox.com/s/sizkxl9dnjxgz9e/card1HH.jpg?raw=1",
-"https://www.dropbox.com/s/2ntgqq5iqxagyoo/cardKHH.JPG?raw=1",
-"https://www.dropbox.com/s/s15qti9bua7by2r/card9HH.jpg?raw=1",
-"https://www.dropbox.com/s/qv98e4jts9vs8fh/card8HH.jpg?raw=1",
-"https://www.dropbox.com/s/dvrhtjssczows8m/card7HH.jpg?raw=1",
-"https://www.dropbox.com/s/o0hzih0ky31g5ep/cardACC.JPG?raw=1",
-"https://www.dropbox.com/s/t9iq112k5roq0kx/Card1CC.JPG?raw=1",
-"https://www.dropbox.com/s/dme8o4ygmo43mer/cardKCC.JPG?raw=1",
-"https://www.dropbox.com/s/lsqtvcwcli96yo1/Card9CC.JPG?raw=1",
-"https://www.dropbox.com/s/69f3l8wk6lup5f6/Card8CC.JPG?raw=1",
-"https://www.dropbox.com/s/a0mt98im36cqvuf/Card7CC.JPG?raw=1")
-*/
 
 deckvalue = new Array (0,"QCT","QST","QHT","QDT","JCT","JST","JHT","JDT","ADT","1DT","KDT","9DT","8DT","7DT",
 "ASS","AHH","ACC","1SS","1HH","1CC","KSS","KHH","KCC","9SS","9HH","9CC","8SS","8HH","8CC","7SS","7HH","7CC")
