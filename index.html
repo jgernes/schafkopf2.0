@@ -65,7 +65,7 @@ document.Wname2.Wname2.value = playername[4]
 
 
 
-document.getElementById('messages').value = ''
+//document.getElementById('messages').value = ''
 document.getElementById('deal').style.display = 'inherit'
 
 
@@ -108,7 +108,7 @@ document.Partner.Partner.value = ""
 
 document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
-document.getElementById('messages').value = ""
+document.getElementById('messages').value = " Welcome to Shafkopf 2.0"
 gameover = 0
 
 
@@ -176,8 +176,22 @@ deckvalue = new Array (0,"QCT","QST","QHT","QDT","JCT","JST","JHT","JDT","ADT","
 
 
 sortingchoice()
-speedchoice()
+//speedchoice()
 deckchoice()
+
+  // grab the slider and the <span> that shows the number
+  const slider = document.getElementById("speedSlider");
+
+  // initialize speed (global, no let/const, so old code can see it)
+  delaytime = 2100 - parseInt(slider.value, 10);
+
+  // update whenever the slider moves
+  slider.addEventListener("input", function() {
+    delaytime = 2100 - parseInt(this.value, 10);
+    console.log("Speed is now:", delaytime);
+  });
+
+
 
 
 
@@ -554,7 +568,7 @@ case 3:
 document.card6.src = Nhandimage[6]
 document.card7.src = Nhandimage[7]
 document.card8.src = Nhandimage[8]
-setTimeout(function() {reveal(4)}, delaytime*2)
+setTimeout(function() {reveal(4)}, delaytime)
 break
 
 case 4:
@@ -2306,15 +2320,7 @@ sorder = 0
 
 
 function speedchoice() {
-delaytime = 1000
-			/*for (index=0; index < document.speed.choice.length; index++) {
-				if (document.speed.choice[index].checked) {
-					delaytime = document.speed.choice[index].value;
-					//alert(delaytime)
-					//sortingchoice()
-					break;
-				}
-			}*/
+			delaytime = 1000
 }
 
 
@@ -2560,12 +2566,31 @@ function showinstructions(){
 	</table>
 
 
+<table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
+
+
+<td width=200 valign="top">
+	<label for="speedSlider"><b>Speed</b></label><br>
+	<input 
+	  type="range" 
+	  id="speedSlider" 
+	  min=“100” 
+	  max="2000" 
+	  step="100" 
+	  value=“1000"
+	  style="width: 200px;">
+	</td>
+	</table>
+
+
+
 
 
 	<table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
 
 
 	
+
 
 	<form action="/action_page.php">
  	 <p><label for="messages"><b> Message </b> </label>
@@ -2581,38 +2606,7 @@ function showinstructions(){
 
 
 
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
 
-
-
-
-	<td width=200 align="center">
-	<button  id=deal type="button" name="deal" onclick="deal()" style="background-color:yellow;border-color:black" >
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Deal &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </button>
-
-  	<button id=continue
-               OnServerClick="Button2_OnClick" 
-               style="font: 8pt verdana;display:none;
-			
-			background-color:yellow;
-                      border-color:black;
-                      height=30;
-                      width:200"
-		onclick="beginhand()"
-               onmouseover="if(hand==1) this.style.backgroundColor='yellow'"
-               onmouseout="this.style.backgroundColor='lightgreen'"
-               runat="server"
-		>
-          &nbsp&nbsp Continue &nbsp&nbsp
-       </button>
-
-
-	</td>
-
-
-
-
-	</table>
 
 
 
@@ -2652,7 +2646,53 @@ function showinstructions(){
 
 <td width=133 align=center>
 
-    <img src = "image2/Card01.gif" name="card00" border=0 width=80 height=133 > </a>
+  	<table width=133 border=0 cellpadding=0 cellspacing=0 align=center  >
+
+
+
+
+	<td width=133 align="center">
+
+	
+
+	<button 
+	  id="deal" 
+	  type="button" 
+	  name="deal" 
+	  onclick="deal()" 
+	  style="background-color: yellow;
+         border: 2px solid black;
+         width: 133px;
+         height: 80px;
+         font-size: 24px;
+         border-radius: 50px;">
+	  Deal
+	</button>
+
+	<button 
+	  id=continue 
+	  type="button" 
+	  name="deal" 
+	  onclick="beginhand()"
+	  style="background-color: yellow; display:none;
+         border: 2px solid black;
+         width: 133px;
+         height: 80px;
+         font-size: 24px;
+         border-radius: 50px;">
+	  Continue
+	</button>
+
+
+  
+
+
+	</td>
+
+
+
+
+	</table>
 </td>
 
 <td width=133 align=center>
