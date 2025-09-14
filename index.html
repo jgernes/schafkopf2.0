@@ -2780,10 +2780,10 @@ function showinstructions(){
 
 	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
 
-	<td width=200 valign="center">
+	<td width=100 valign="center">
 	<form name=dealer action="#">
 	<b>Dealer<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=dealer size=6 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=dealer size=5 READONLY />
 	</form>
 	</td>
 
@@ -2792,7 +2792,7 @@ function showinstructions(){
 	<td width=100 valign="center">
 	<form name=player action="#">
 	<b>Lead<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=6 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=5 READONLY />
 	</form>
 	</td>
 
@@ -2920,24 +2920,35 @@ function showinstructions(){
   </div>
 
 <script>
-function setScaleFitWidth() {
+function setScaleAuto() {
   const baseW = 800, baseH = 600;
-  const factor = 0.9;  // shrink to 90% of full width
-  const scale = (window.innerWidth / baseW) * factor;
-
   const el = document.getElementById("game-inner");
+
+  const sx = window.innerWidth  / baseW;
+  const sy = window.innerHeight / baseH;
+
+  // Pick the smaller scale so it always fits
+  let scale = Math.min(sx, sy);
+
+  // Apply extra shrink factor (90%)
+  scale = scale * 0.98;
+
   el.style.transform = `scale(${scale})`;
 
-  // center horizontally + vertically
+  // Center horizontally + vertically
   const x = (window.innerWidth  - baseW * scale) / 2;
   const y = (window.innerHeight - baseH * scale) / 2;
-
   el.style.left = `${x}px`;
   el.style.top  = `${y}px`;
 }
-window.addEventListener("resize", setScaleFitWidth);
-window.addEventListener("orientationchange", setScaleFitWidth);
-document.addEventListener("DOMContentLoaded", setScaleFitWidth);
+
+window.addEventListener("resize", setScaleAuto);
+window.addEventListener("orientationchange", setScaleAuto);
+document.addEventListener("DOMContentLoaded", setScaleAuto);
 </script>
+
+
+
+
 </body>
 </html>
