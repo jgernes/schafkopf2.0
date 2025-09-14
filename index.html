@@ -4,6 +4,36 @@
 <head>
 	<meta charset="utf-8">
 <title>Schafkopf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+    }
+    #stage {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #game-inner {
+      width: 800px;   /* your base game width */
+      height: 600px;  /* your base game height */
+      transform-origin: top left;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="game-inner">
+
+
+
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,6 +50,10 @@
   <link rel="apple-touch-icon" href="icon.png">
 	
 <style>
+
+
+
+
 textarea {
   resize: none;
 }
@@ -28,6 +62,10 @@ textarea {
 
 <SCRIPT LANGUAGE="javascript">
 <!--
+
+
+
+
 
  cd00=new Image(80,126)
     cd00.src ="image2/card1SS.gif"
@@ -82,6 +120,10 @@ reset()
 
 
 
+
+
+
+
 function reset(){
 
 
@@ -108,7 +150,7 @@ document.Partner.Partner.value = ""
 
 document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
-document.getElementById('messages').value = " Welcome to Shafkopf 2.0"
+document.getElementById('messages').value = " Welcome to Schafkopf 2.0"
 gameover = 0
 
 
@@ -190,6 +232,11 @@ deckchoice()
     delaytime = 2100 - parseInt(this.value, 10);
     console.log("Speed is now:", delaytime);
   });
+
+
+
+
+
 
 
 
@@ -2320,7 +2367,7 @@ sorder = 0
 
 
 function speedchoice() {
-			delaytime = 1000
+			delaytime = 1500
 }
 
 
@@ -2341,7 +2388,7 @@ function showtranscript(){
 }
 
 function showinstructions(){
-	alert(  "Shafkopf 1.0\n"+
+	alert(  "Schafkopf 1.0\n"+
 		"kjsdkfhkjsdhfkjhskdjfhkjsdf \n"+
 		"fksd bfksdb fksbd fksbd fks bdfksb dkbsdkfbsdf asdasdads")
 }
@@ -2436,13 +2483,13 @@ function showinstructions(){
 
 	<td width=100 valign="center">
 	<form name=Nname action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Nname size=5 READONLY />
+	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Nname size=5 READONLY />
 	</form>
 	</td>
 
 	<td width=100 valign="center">
 	<form name=Ename action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Ename size=5 READONLY />
+	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Ename size=5 READONLY />
 	</form>
 	</td>
 
@@ -2455,14 +2502,14 @@ function showinstructions(){
 	<td width=100 valign="center">
 	<form name=Nscore action="#">
 	<!--<b> <script>document.write(playername[1])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Nscore size=5 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Nscore size=5 READONLY />
 	</form>
 	</td>
 
 	<td width=100 valign="center">
 	<form name=Escore action="#">
 	<!--<b> <script>document.write(playername[2])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Escore size=5 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Escore size=5 READONLY />
 	</form>
 	</td>
 
@@ -2474,13 +2521,13 @@ function showinstructions(){
 
 	<td width=100 valign="center">
 	<form name=Wname action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Wname size=5 READONLY />
+	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Wname size=5 READONLY />
 	</form>
 	</td>
 
 	<td width=100 valign="center">
 	<form name=Sname action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Sname size=5 READONLY />
+	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Sname size=5 READONLY />
 	</form>
 	</td>
 
@@ -2490,14 +2537,14 @@ function showinstructions(){
 	<td width=100 valign="center">
 	<form name=Wscore action="#">
 	<!--<b> <script>document.write(playername[4])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Wscore size=5 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Wscore size=5 READONLY />
 	</form>
 	</td>
 
 	<td width=100 valign="center">
 	<form name=Sscore action="#">
 	<!--<b> <script>document.write(playername[3])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Sscore size=5 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Sscore size=5 READONLY />
 	</form>
 	</td>
 
@@ -2517,7 +2564,7 @@ function showinstructions(){
 
 	<td width=100 valign="top">
 
-	<form name="solo" method="post">
+	<form name="solo" method="post" style="font: bold 12pt Arial;color:black;\">
 	<b>Call Off</b> <br>
 	<input name="choice" value="QQ" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />Both Qs <br>
 
@@ -2525,6 +2572,7 @@ function showinstructions(){
 	<input name="choice" value="Q" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />One Q <br> <br>
 	</td>	
 	
+
 	</table>
 
 	</td>
@@ -2537,9 +2585,9 @@ function showinstructions(){
 
 	
 	<b>Call Partner</b> <br>
-	<input name="choice" value="ACC" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AC <br>
-	<input name="choice" value="ASS" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AS <br>
-	<input name="choice" value="AHH" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />AH <br>
+	<input name="choice" value="ACC" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&clubs;</span> <br>
+	<input name="choice" value="ASS" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&spades;</span> <br>
+	<input name="choice" value="AHH" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&hearts;</span> <br>
 	</form>
 	</td>
 
@@ -2553,12 +2601,16 @@ function showinstructions(){
 
 
 	<td width=100 align="center">
-	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()">&nbsp Call &nbsp</button>
+	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;font-size: 18px;
+">&nbsp Call &nbsp</button>
 	</td>
+
+
+
 
 	<td width=100 align="center">
 	<form name=Partner action="#">
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:lightblue;border:transparent" name=Partner size=5 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Partner size=5 READONLY />
 	</form>
 	</td>
 
@@ -2574,10 +2626,10 @@ function showinstructions(){
 	<input 
 	  type="range" 
 	  id="speedSlider" 
-	  min=“100” 
+	  min="0" 
 	  max="2000" 
 	  step="100" 
-	  value=“1000"
+	  value="1500"
 	  style="width: 200px;">
 	</td>
 	</table>
@@ -2621,8 +2673,7 @@ function showinstructions(){
 
 
 <td width=133 align=center>
-<a href = "javascript:opentrick(1)">
-      <img src = "image2/Card01.gif" name="card12" border=0 width=133 height=133  > </a>    
+      <img src = "image2/Card01.gif" name="card12" border=0 width=133 height=133  	onmouseover=opentrick(1) onmouseout=closetrick(1)> </a>    
 </td>
 
 <td width=133 align=center>
@@ -2646,12 +2697,6 @@ function showinstructions(){
 
 <td width=133 align=center>
 
-  	<table width=133 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-
-
-
-	<td width=133 align="center">
 
 	
 
@@ -2660,10 +2705,10 @@ function showinstructions(){
 	  type="button" 
 	  name="deal" 
 	  onclick="deal()" 
-	  style="background-color: yellow;
+	  style="background-color: #84B5E1;
          border: 2px solid black;
          width: 133px;
-         height: 80px;
+         height: 60px;
          font-size: 24px;
          border-radius: 50px;">
 	  Deal
@@ -2674,10 +2719,10 @@ function showinstructions(){
 	  type="button" 
 	  name="deal" 
 	  onclick="beginhand()"
-	  style="background-color: yellow; display:none;
+	  style="background-color: #84B5E1; display:none;
          border: 2px solid black;
          width: 133px;
-         height: 80px;
+         height: 60px;
          font-size: 24px;
          border-radius: 50px;">
 	  Continue
@@ -2687,12 +2732,6 @@ function showinstructions(){
   
 
 
-	</td>
-
-
-
-
-	</table>
 </td>
 
 <td width=133 align=center>
@@ -2744,7 +2783,7 @@ function showinstructions(){
 	<td width=200 valign="center">
 	<form name=dealer action="#">
 	<b>Dealer<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:white" name=dealer size=6 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=dealer size=6 READONLY />
 	</form>
 	</td>
 
@@ -2753,7 +2792,7 @@ function showinstructions(){
 	<td width=100 valign="center">
 	<form name=player action="#">
 	<b>Lead<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:white" name=player size=6 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=6 READONLY />
 	</form>
 	</td>
 
@@ -2832,11 +2871,16 @@ function showinstructions(){
 	<tr>
 
 	<td width=200 align="center">
-	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:lightblue;border-color:black;display:none" >
+	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none" >
 	&nbsp&nbsp&nbsp&nbsp Transcript &nbsp&nbsp&nbsp&nbsp </button>
 
-	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:lightblue;border-color:black;display:inherit" >
+	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit" >
 	&nbsp&nbsp&nbsp&nbsp Instructions &nbsp&nbsp&nbsp&nbsp </button>
+
+
+
+
+
 
 	</table>
 	
@@ -2849,8 +2893,49 @@ function showinstructions(){
 <!-- MASTERTABLE ENDS-->
 
 
+<script>
+    function setScale() {
+      const baseWidth = 1200; // the width your layout was designed for
+      const scale = window.innerWidth / baseWidth;
+      const game = document.getElementById("game-area");
+      game.style.transform = "scale(" + scale + ")";
+      game.style.transformOrigin = "top left";
+    }
 
+    window.addEventListener("resize", setScale);
+    setScale(); // run once when page loads
+  </script>
 
 </body>
 
+</html>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    function setScaleFitWidth() {
+      const baseW = 800, baseH = 600;
+      const scale = window.innerWidth / baseW;
+      const el = document.getElementById("game-inner");
+
+      el.style.transform = `scale(${scale})`;
+
+      // center vertically so it’s not stuck at the top
+      const y = (window.innerHeight - baseH * scale) / 2;
+      el.style.left = "0";
+      el.style.top = `${y}px`;
+    }
+
+    window.addEventListener("resize", setScaleFitWidth);
+    window.addEventListener("orientationchange", setScaleFitWidth);
+    document.addEventListener("DOMContentLoaded", setScaleFitWidth);
+  </script>
+</body>
 </html>
