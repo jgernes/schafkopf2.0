@@ -2919,23 +2919,25 @@ function showinstructions(){
     </div>
   </div>
 
-  <script>
-    function setScaleFitWidth() {
-      const baseW = 800, baseH = 600;
-      const scale = window.innerWidth / baseW;
-      const el = document.getElementById("game-inner");
+<script>
+function setScaleFitWidth() {
+  const baseW = 800, baseH = 600;
+  const factor = 0.9;  // shrink to 90% of full width
+  const scale = (window.innerWidth / baseW) * factor;
 
-      el.style.transform = `scale(${scale})`;
+  const el = document.getElementById("game-inner");
+  el.style.transform = `scale(${scale})`;
 
-      // center vertically so it’s not stuck at the top
-      const y = (window.innerHeight - baseH * scale) / 2;
-      el.style.left = "0";
-      el.style.top = `${y}px`;
-    }
+  // center horizontally + vertically
+  const x = (window.innerWidth  - baseW * scale) / 2;
+  const y = (window.innerHeight - baseH * scale) / 2;
 
-    window.addEventListener("resize", setScaleFitWidth);
-    window.addEventListener("orientationchange", setScaleFitWidth);
-    document.addEventListener("DOMContentLoaded", setScaleFitWidth);
-  </script>
+  el.style.left = `${x}px`;
+  el.style.top  = `${y}px`;
+}
+window.addEventListener("resize", setScaleFitWidth);
+window.addEventListener("orientationchange", setScaleFitWidth);
+document.addEventListener("DOMContentLoaded", setScaleFitWidth);
+</script>
 </body>
 </html>
