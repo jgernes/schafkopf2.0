@@ -25,7 +25,30 @@
       transform-origin: top left;
       position: absolute;
     }
-  </style>
+#myModal{
+  display: none;
+  position: absolute;     /* relative to #game-inner */
+  left: 89.5%;              /* center horizontally */
+  top: 214px;             /* fixed Y in your 800×600 design space */
+  transform: translateX(-50%); /* center on X only */
+  z-index: 1000;
+
+  /* Prevent “stretching”: use base pixels so it only scales via parent */
+  width: 184px;           /* pick what looks good at 800×600 */
+  box-sizing: border-box; /* borders/padding don’t change outer size */
+}
+
+#myModal .modal-content{
+  background:#fff; color:#000;
+  border:2px solid #000; border-radius:8px;
+  padding:12px;           /* px, not % */
+  font-size:13.5px;         /* px/em, not vw/% */
+  text-align:center;
+}
+
+</style>
+
+
 </head>
 <body>
   <div id="stage">
@@ -60,10 +83,43 @@ textarea {
 </style>
 
 
+
+
+
+
+
+
+
+
+
 <SCRIPT LANGUAGE="javascript">
 <!--
 
 
+
+
+
+function setScaleAuto() {
+  const baseW = 800, baseH = 600;
+  const el = document.getElementById("game-inner");
+
+  const sx = window.innerWidth  / baseW;
+  const sy = window.innerHeight / baseH;
+  let scale = Math.min(sx, sy) * 0.9;   // keep your 0.9 buffer
+  // Optional: cap so it never grows larger than designed
+  // scale = Math.min(scale, 1);
+
+  el.style.transform = `scale(${scale})`;
+
+  // center horizontally only; pin to TOP
+  const x = (window.innerWidth - baseW * scale) / 2;
+  el.style.position = "absolute";
+  el.style.left = `${x}px`;
+  el.style.top  = `0px`;                 // <-- important
+}
+document.addEventListener("DOMContentLoaded", setScaleAuto);
+window.addEventListener("resize", setScaleAuto);
+window.addEventListener("orientationchange", setScaleAuto);
 
 
 
@@ -148,7 +204,7 @@ document.Sscore.Sscore.value = chips[3]
 document.Wscore.Wscore.value = chips[4]	
 document.Partner.Partner.value = ""
 
-document.dealer.dealer.value = playername[dealer%4+1]
+//document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
 document.getElementById('messages').value = " Welcome to Schafkopf 2.0"
 gameover = 0
@@ -275,9 +331,11 @@ deckvalue = tempdeckvalue
 
 document.getElementById('deal').style.display = 'none'
 document.getElementById('instructions').style.display = 'none'
+document.getElementById('cheatsheet').style.display = 'inherit'
 
 
 document.getElementById('transcript').style.display = 'none'
+document.getElementById('cheatsheet').style.display = 'inherit'
 //document.getElementById('transcript').style.display = 'inherit'
 
 
@@ -415,7 +473,7 @@ for(j=1;j<=7;j++){
 
 
 
-document.dealer.dealer.value = playername[dealer]
+//document.dealer.dealer.value = playername[dealer]
 document.player.player.value = ""
 document.getElementById('messages').value = "Dealing"
 
@@ -2232,6 +2290,7 @@ document.Wscore.Wscore.value = chips[4]
 
 transcript = transcript+"Offense: "+offense + " Defense: "+defense
 document.getElementById('transcript').style.display = 'inherit'
+document.getElementById('cheatsheet').style.display = 'none'
 
 
 //CHECK FOR MATCH WINNER
@@ -2272,7 +2331,7 @@ document.getElementById('deal').style.display = 'inherit'
 
 
 
-document.dealer.dealer.value = playername[dealer%4+1]
+//document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
 document.Partner.Partner.value = ""
 
@@ -2388,12 +2447,40 @@ function showtranscript(){
 }
 
 function showinstructions(){
-	alert(  "Schafkopf 1.0\n"+
-		"kjsdkfhkjsdhfkjhskdjfhkjsdf \n"+
-		"fksd bfksdb fksbd fksbd fks bdfksb dkbsdkfbsdf asdasdads")
+  
+
+
+
+
+
+
+
+	alert(  "Schafkopf 2.0\n"+
+		"Trump \n"+
+		"Q \u2663 \n"+
+		"Q \u2660 \n"+
+		"Q \u2665 \n"+
+		"Q \u2666 \n"+
+		"J \u2663 \n"+
+		"J \u2660 \n"+
+		"J \u2665 \n"+
+		"J \u2666 \n"+
+		"A \u2666 \n"+
+		"10 \u2666 \n"+
+		"K \u2666 \n"+
+		"9 \u2666 \n"+
+		"8 \u2666 \n"+
+		"7 \u2666 \n"
+)
 }
 
 
+function cheatsheet(){
+  document.getElementById("myModal").style.display = "block";
+}
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
 
 
 //-->
@@ -2783,19 +2870,14 @@ function showinstructions(){
 
 
 
-	<td width=100 valign="center">
-	<form name=dealer action="#">
-	<b>Dealer<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=dealer size=6 READONLY />
-	</form>
-	</td>
+
 
 	
 
 	<td width=100 valign="center">
 	<form name=player action="#">
 	<b>Player<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=6 READONLY />
+	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=8 READONLY />
 	</form>
 	</td>
 
@@ -2880,6 +2962,9 @@ function showinstructions(){
 	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit" >
 	&nbsp&nbsp&nbsp&nbsp Instructions &nbsp&nbsp&nbsp&nbsp </button>
 
+	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none" >
+	&nbsp&nbsp&nbsp&nbsp Cheat Sheet &nbsp&nbsp&nbsp&nbsp </button>
+
 
 
 
@@ -2917,6 +3002,45 @@ function showinstructions(){
 
 
 
+<div id="myModal">
+  <div class="modal-content">
+  <table border="0" style="border-collapse:collapse; text-align:center; width:100%;">
+    <tr><th>Trump</th><th colspan="3">Non-Trump</th><th>Value</th></tr>
+    <tr><td>Q&clubs;</td><td></td><td></td><td></td><td>3</td></tr>
+    <tr><td>Q&spades;</td><td></td><td></td><td></td><td>3</td></tr>
+    <tr><td style="color:red;">Q&hearts;</td><td></td><td></td><td></td><td>3</td></tr>
+    <tr><td style="color:red;">Q&diams;</td><td></td><td></td><td></td><td>3</td></tr>
+    <tr><td>J&clubs;</td><td></td><td></td><td></td><td>2</td></tr>
+    <tr><td>J&spades;</td><td></td><td></td><td></td><td>2</td></tr>
+    <tr><td style="color:red;">J&hearts;</td><td></td><td></td><td></td><td>2</td></tr>
+    <tr><td style="color:red;">J&diams;</td><td></td><td></td><td></td><td>2</td></tr>
+   <tr><td style="color:red;">A&diams;</td><td>A&clubs;</td><td style="color:red;">A&hearts;</td><td>A&spades;</td><td>11</td></tr>
+   <tr><td style="color:red;">10&diams;</td><td>10&clubs;</td><td style="color:red;">10&hearts;</td><td>10&spades;</td><td>10</td></tr>
+   <tr><td style="color:red;">K&diams;</td><td>K&clubs;</td><td style="color:red;">K&hearts;</td><td>K&spades;</td><td>4</td></tr>
+   <tr><td style="color:red;">9&diams;</td><td>9&clubs;</td><td style="color:red;">9&hearts;</td><td>9&spades;</td><td>0</td></tr>
+   <tr><td style="color:red;">8&diams;</td><td>8&clubs;</td><td style="color:red;">8&hearts;</td><td>8&spades;</td><td>0</td></tr>
+   <tr><td style="color:red;">7&diams;</td><td>7&clubs;</td><td style="color:red;">7&hearts;</td><td>7&spades;</td><td>0</td></tr>
+  </table>
+
+<table border="0" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr>
+    <td>
+      <button 
+        style="
+          border: 1px solid black;
+          font-size: 14px;
+          border-radius: 35px;
+          cursor: pointer;
+        " onclick="document.getElementById('myModal').style.display='none'">
+        Close
+      </button>
+    </td>
+  </tr>
+</table>
+</div>
+
+
+
 
 
     </div>
@@ -2949,6 +3073,24 @@ window.addEventListener("resize", setScaleAuto);
 window.addEventListener("orientationchange", setScaleAuto);
 document.addEventListener("DOMContentLoaded", setScaleAuto);
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
