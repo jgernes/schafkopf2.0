@@ -29,7 +29,7 @@
   display: none;
   position: absolute;     /* relative to #game-inner */
   left: 89.5%;              /* center horizontally */
-  top: 214px;             /* fixed Y in your 800×600 design space */
+  top: 220px;             /* fixed Y in your 800×600 design space */
   transform: translateX(-50%); /* center on X only */
   z-index: 1000;
 
@@ -2476,11 +2476,14 @@ function showinstructions(){
 
 
 function cheatsheet(){
-  document.getElementById("myModal").style.display = "block";
-}
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
+const modal = document.getElementById("myModal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";   // hide
+  } else {
+    modal.style.display = "block";  // show
   }
+}
+
 
 
 //-->
@@ -3021,22 +3024,6 @@ function closeModal() {
    <tr><td style="color:red;">8&diams;</td><td>8&clubs;</td><td style="color:red;">8&hearts;</td><td>8&spades;</td><td>0</td></tr>
    <tr><td style="color:red;">7&diams;</td><td>7&clubs;</td><td style="color:red;">7&hearts;</td><td>7&spades;</td><td>0</td></tr>
   </table>
-
-<table border="0" style="border-collapse: collapse; width: 100%; text-align: center;">
-  <tr>
-    <td>
-      <button 
-        style="
-          border: 1px solid black;
-          font-size: 14px;
-          border-radius: 35px;
-          cursor: pointer;
-        " onclick="document.getElementById('myModal').style.display='none'">
-        Close
-      </button>
-    </td>
-  </tr>
-</table>
 </div>
 
 
