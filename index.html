@@ -2691,7 +2691,7 @@ const modal = document.getElementById("myModal");
 
 
 	<td width=100 align="center">
-	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;font-size: 18px;
+	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;font-size: 18px;color: black;
 ">&nbsp Call &nbsp</button>
 	</td>
 
@@ -2800,24 +2800,32 @@ const modal = document.getElementById("myModal");
          width: 133px;
          height: 60px;
          font-size: 24px;
-         border-radius: 50px;">
+         border-radius: 50px;
+	color: black;">
 	  Deal
 	</button>
 
-	<button 
-	  id=continue 
-	  type="button" 
-	  name="deal" 
-	  onclick="beginhand()"
-	  style="background-color: #84B5E1; display:none;
-         border: 2px solid black;
-         width: 133px;
-         height: 60px;
-         font-size: 24px;
-         border-radius: 50px;">
-	  Continue
-	</button>
 
+
+<button
+  id="continue"
+  type="button"
+  name="deal"
+  onclick="beginhand()"
+  style="background-color:#84B5E1;
+         border:2px solid black;
+         width:133px;
+         height:60px;
+         font-size:24px;
+         border-radius:50px;
+         padding:0;
+         display:flex;
+         align-items:center;
+         justify-content:center;
+		color: black;
+	display:none;">
+  Continue
+</button>
 
   
 
@@ -2965,7 +2973,7 @@ const modal = document.getElementById("myModal");
 	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit" >
 	&nbsp&nbsp&nbsp&nbsp Instructions &nbsp&nbsp&nbsp&nbsp </button>
 
-	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none" >
+	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none;color: black;" >
 	&nbsp&nbsp&nbsp&nbsp Cheat Sheet &nbsp&nbsp&nbsp&nbsp </button>
 
 
@@ -3008,7 +3016,7 @@ const modal = document.getElementById("myModal");
 <div id="myModal">
   <div class="modal-content">
   <table border="0" style="border-collapse:collapse; text-align:center; width:100%;">
-    <tr><th>Trump</th><th colspan="3">Non-Trump</th><th>Value</th></tr>
+    <tr><th>Trump</th><th colspan="3"> Non-Trump </th><th>Value</th></tr>
     <tr><td>Q&clubs;</td><td></td><td></td><td></td><td>3</td></tr>
     <tr><td>Q&spades;</td><td></td><td></td><td></td><td>3</td></tr>
     <tr><td style="color:red;">Q&hearts;</td><td></td><td></td><td></td><td>3</td></tr>
