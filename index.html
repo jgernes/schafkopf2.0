@@ -25,7 +25,11 @@
       transform-origin: top left;
       position: absolute;
     }
-#myModal{
+
+
+
+
+#cheatmodal{
   display: none;
   position: absolute;     /* relative to #game-inner */
   left: 89.5%;              /* center horizontally */
@@ -37,14 +41,37 @@
   width: 184px;           /* pick what looks good at 800×600 */
   box-sizing: border-box; /* borders/padding don’t change outer size */
 }
-
-#myModal .modal-content{
+#cheatmodal .modal-content{
   background:#fff; color:#000;
   border:2px solid #000; border-radius:8px;
   padding:12px;           /* px, not % */
   font-size:13.5px;         /* px/em, not vw/% */
   text-align:center;
 }
+
+
+#instructionmodal{
+  display: none;
+  position: absolute;     /* relative to #game-inner */
+  left: 50%;              /* center horizontally */
+  top: 15px;             /* fixed Y in your 800×600 design space */
+  transform: translateX(-50%); /* center on X only */
+  z-index: 1000;
+
+  /* Prevent “stretching”: use base pixels so it only scales via parent */
+  width: 700px;           /* pick what looks good at 800×600 */
+  box-sizing: border-box; /* borders/padding don’t change outer size */
+}
+#instructionmodal .modal-content{
+  background:#fff; color:#000;
+  border:2px solid #000; border-radius:8px;
+  padding:6px;           /* px, not % */
+  font-size:13.5px;         /* px/em, not vw/% */
+  text-align:justify;
+}
+
+
+
 
 </style>
 
@@ -70,7 +97,10 @@
   <meta name="apple-mobile-web-app-title" content="Schafkopf">
 
   <!-- (Optional) Home screen icon -->
-  <link rel="apple-touch-icon" href="icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=2">
+<link rel="apple-touch-icon" sizes="167x167" href="icon-167.png?v=2">
+<link rel="apple-touch-icon" sizes="152x152" href="icon-152.png?v=2">
+<link rel="apple-touch-icon" sizes="120x120" href="icon-120.png?v=2">
 	
 <style>
 
@@ -2447,36 +2477,24 @@ function showtranscript(){
 }
 
 function showinstructions(){
-  
-
-
-
-
-
-
-
-	alert(  "Schafkopf 2.0\n"+
-		"Trump \n"+
-		"Q \u2663 \n"+
-		"Q \u2660 \n"+
-		"Q \u2665 \n"+
-		"Q \u2666 \n"+
-		"J \u2663 \n"+
-		"J \u2660 \n"+
-		"J \u2665 \n"+
-		"J \u2666 \n"+
-		"A \u2666 \n"+
-		"10 \u2666 \n"+
-		"K \u2666 \n"+
-		"9 \u2666 \n"+
-		"8 \u2666 \n"+
-		"7 \u2666 \n"
-)
+const modal = document.getElementById("instructionmodal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";   // hide
+  } else {
+    modal.style.display = "block";  // show
+  }
 }
 
 
+
+
+
+
+
+
+
 function cheatsheet(){
-const modal = document.getElementById("myModal");
+const modal = document.getElementById("cheatmodal");
   if (modal.style.display === "block") {
     modal.style.display = "none";   // hide
   } else {
@@ -3013,7 +3031,7 @@ const modal = document.getElementById("myModal");
 
 
 
-<div id="myModal">
+<div id="cheatmodal">
   <div class="modal-content">
   <table border="0" style="border-collapse:collapse; text-align:center; width:100%;">
     <tr><th>Trump</th><th colspan="3"> Non-Trump </th><th>Value</th></tr>
@@ -3033,12 +3051,42 @@ const modal = document.getElementById("myModal");
    <tr><td style="color:red;">7&diams;</td><td>7&clubs;</td><td style="color:red;">7&hearts;</td><td>7&spades;</td><td>0</td></tr>
   </table>
 </div>
+</div>
 
 
 
 
 
-    </div>
+<div id="instructionmodal">
+  <div class="modal-content">
+  <div style="padding:6px; font-size:12px; line-height:1;">
+<h3 style="text-align:center;">Schafkopf 2.0</h3>
+
+<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit). The cards are arranged into three fail suits: clubs (A&clubs; 10&clubs; K&clubs; 9&clubs; 8&clubs; 7&clubs;); hearts (A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts; 7&hearts;); spades (A&spades; 10&spades; K&spades; 9&spades; 8&spades; 7&spades;);  and one trump suit (Q&clubs; Q&spades; Q&hearts; Q&diams; J&clubs; J&spades; J&hearts; J&diams; A&diams; 10&diams; K&diams; 9&diams; 8&diams; 7&diams;). Remember that queens and jacks are always trump; they are never considered clubs, spades, or hearts. In a given suit (fail or trump), a stronger card (as ordered above) will beat any weaker card. Every trump card is stronger than any fail card. Additionally, each card has a numerical value irrespective of their strength. The values are as follows: Ace-11 points, 10-10 points, King-4 points, Queen-3 points, Jack-2 points, 9,8,7-0 points. </p>
+
+<p> Every player is dealt 8 cards (usually in the pattern of 3-2-3). For each hand, the players who have the Q&clubs; and Q&spades; (the Old Ones) are partners, called the Offense; the other two players are also partners, called the Defense. Therefore,  partners can change every hand. Your partner is not known or announced ahead of time; you must discern who your partner is through the game play. In the instance that one person has both black queens, they will have the option to play alone against the other three players; this complication is explained in more detail later. </p>
+
+<p>The player to the left of the dealer is on lead. The player on lead may play any card they like (fail or trump), and all other players are required to play a card of the same suit. If they do not have a card of the same suit, they are free to play any card in their hand: they can choose to Trump (play a trump card in an attempt to win the trick); Slough (play a low value fail card, assuming that their partner will not take the trick), or Schmear (play a high value fail card in hopes that their partner will take the trick). The strongest card played (of the suit which was lead, or trump) takes the trick and that player makes the next lead. The goal of each hand is to take the most points (not the most tricks). If the Offense takes 61 points, they each win one chip (the Defense is said to have made Schneider); if the Offense takes 91 points, they each win two chips (the Defense is said to have not made Schneider); if the Offense takes all 120 points; they win three chips (considered Schwartz). If the Defense takes 60 points, they each win two chips (the Offense is said to make Schneider);  if the Defense takes 90 points, they each win three chips (the Offense is said to have not made Schneider).</p>
+
+<p>If one player has both black queens, they may choose to play on Offense alone, with the other three players forming the Defense. This is not announced (and is generally a surprise to the other players. If the player with both black queens does not wish to play alone, they may call for a partner, by asking for A&clubs;, A&hearts;, or A&spades;. If the caller has cards of the same suit they call for, the Ace is Known, if they do not, the Ace is Unknown. This must be announced before the hand begins. However, the holder of the Ace does not reveal this information; as usual, it is discovered through the course of play. When the suit of the ace is led, the player with the Ace must play it (even if they will lose the trick) and the Ace cannot be played earlier (unless there is no other legal play); similarly, the player with two black queens may not prematurely play any cards of that suit (if it is Known) or trump that trick (if it is Unknown), unless there is no other legal play. A player without both black queens may also choose to play alone by Calling Off one or both Black Queens. This must be announced before the hand begins. In either case, the person playing alone will earn  triple teh regular number of chips (3,6, or 9). All members of the Defense win the regular number of chips (2 or 3).</p>
+
+<p>Even though the each hand is played with partners, the game is won by a single player. The game ends when one player has at least 12 chips. If more than one player have the same number of chips (at least 12) then the game continues until a single player has the most chips (at least 12). This need not be one of the original players who was tied. If another rounds is played, the winning player traditionally is the dealer.</p>
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
   </div>
 
 <script>
