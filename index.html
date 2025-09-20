@@ -1,116 +1,74 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-<title>Schafkopf</title>
+  <meta charset="utf-8" />
+  <title>Schafkopf</title>
+
+  <!-- One viewport meta, in HEAD -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- iOS standalone + title -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Schafkopf" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Apple touch icons (files next to index.html) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3" />
+  <link rel="apple-touch-icon" sizes="167x167" href="icon-167.png?v=3" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png?v=3" />
+  <link rel="apple-touch-icon" sizes="120x120" href="icon-120.png?v=3" />
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="icon-180.png?v=3" />
+
+  <!-- Manifest (next to index.html; ensure start_url/scope are correct in the file) -->
+  <link rel="manifest" href="site.webmanifest?v=3" />
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    html, body { margin:0; padding:0; height:100%; }
+    #stage { width:100vw; height:100vh; overflow:hidden; position:relative; }
 
-    }
-    #stage {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
+    /* Make #game-inner the positioning context for your absolute popups */
     #game-inner {
-      width: 800px;   /* your base game width */
-      height: 600px;  /* your base game height */
+      width:800px; height:600px;
+      position: relative;           /* <- changed from absolute */
       transform-origin: top left;
-      position: absolute;
     }
 
+    /* Your modals */
+    #cheatmodal{
+      display:none;
+      position:absolute;
+      right:20px; top:220px;        /* more stable than left:89.5% + translate */
+      z-index:1000;
+      width:184px; box-sizing:border-box;
+    }
+    #cheatmodal .modal-content{
+      background:#fff; color:#000;
+      border:2px solid #000; border-radius:8px;
+      padding:12px; font-size:13.5px; text-align:center;
+    }
 
-
-
-#cheatmodal{
-  display: none;
-  position: absolute;     /* relative to #game-inner */
-  left: 89.5%;              /* center horizontally */
-  top: 220px;             /* fixed Y in your 800×600 design space */
-  transform: translateX(-50%); /* center on X only */
-  z-index: 1000;
-
-  /* Prevent “stretching”: use base pixels so it only scales via parent */
-  width: 184px;           /* pick what looks good at 800×600 */
-  box-sizing: border-box; /* borders/padding don’t change outer size */
-}
-#cheatmodal .modal-content{
-  background:#fff; color:#000;
-  border:2px solid #000; border-radius:8px;
-  padding:12px;           /* px, not % */
-  font-size:13.5px;         /* px/em, not vw/% */
-  text-align:center;
-}
-
-
-#instructionmodal{
-  display: none;
-  position: absolute;     /* relative to #game-inner */
-  left: 50%;              /* center horizontally */
-  top: 15px;             /* fixed Y in your 800×600 design space */
-  transform: translateX(-50%); /* center on X only */
-  z-index: 1000;
-
-  /* Prevent “stretching”: use base pixels so it only scales via parent */
-  width: 700px;           /* pick what looks good at 800×600 */
-  box-sizing: border-box; /* borders/padding don’t change outer size */
-}
-#instructionmodal .modal-content{
-  background:#fff; color:#000;
-  border:2px solid #000; border-radius:8px;
-  padding:6px;           /* px, not % */
-  font-size:13.5px;         /* px/em, not vw/% */
-  text-align:justify;
-}
-
-
-
-
-</style>
-
-
+    #instructionmodal{
+      display:none;
+      position:absolute;
+      left:50%; top:15px; transform:translateX(-50%);
+      z-index:1000;
+      width:700px; box-sizing:border-box;
+    }
+    #instructionmodal .modal-content{
+      background:#fff; color:#000;
+      border:2px solid #000; border-radius:8px;
+      padding:6px; font-size:13.5px; text-align:justify;
+    }
+  </style>
 </head>
+
 <body>
   <div id="stage">
+    <!-- keep this absolutely centered/ scaled by your JS (left/top set by script) -->
     <div id="game-inner">
+      <!-- ALL your game markup goes here (tables, buttons, popups) -->
 
-
-
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Enable fullscreen web app mode on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <!-- (Optional but recommended) Status bar style -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <!-- (Optional but recommended) Home screen title -->
-  <meta name="apple-mobile-web-app-title" content="Schafkopf">
-
-  <!-- (Optional) Home screen icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=2">
-<link rel="apple-touch-icon" sizes="167x167" href="icon-167.png?v=2">
-<link rel="apple-touch-icon" sizes="152x152" href="icon-152.png?v=2">
-<link rel="apple-touch-icon" sizes="120x120" href="icon-120.png?v=2">
-	
-<style>
-
-
-
-
-textarea {
-  resize: none;
-}
-</style>
 
 
 
