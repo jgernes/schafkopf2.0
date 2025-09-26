@@ -40,9 +40,9 @@
     #optionsmodal{
       display:none;
       position:absolute;
-      right:0px; bottom:0px; \\transform:translateX(-50%);
+      right:0px; top:160px; \\transform:translateX(-50%);
       z-index:1000;
-      width:180px; box-sizing:border-box;
+      width:200px; box-sizing:border-box;
     }
     #optionsmodal .modal-content{
       background:beige; color:#000;
@@ -53,9 +53,9 @@
     #cheatmodal{
       display:none;
       position:absolute;
-      right:0px; bottom:0px;        /* more stable than left:89.5% + translate */
+      right:0px; top:160px;        /* more stable than left:89.5% + translate */
       z-index:1000;
-      width:180px; box-sizing:border-box;
+      width:200px; box-sizing:border-box;
     }
     #cheatmodal .modal-content{
       background:beige; color:#000;
@@ -68,20 +68,20 @@
       position:absolute;
       left:0px; top:0px; 
       z-index:1000;
-      width:622px; box-sizing:border-box;
+      width:600px; box-sizing:border-box;
     }
     #instructionmodal .modal-content{
       background:beige; color:#000;
       border:2px solid #000; border-radius:8px;
       padding:6px; font-size:13.5px; text-align:justify;
-  max-height: 600px;     /* pick the height you want */
+  max-height: 550px;     /* pick the height you want */
   overflow-y: auto;      /* adds vertical scrollbar when needed */
     }
 
     #previoustrickmodal{
       display:none;
       position:absolute;
-      left:324px; top:215px; 
+      left:300px; top:200px; 
       z-index:1000;
       width:200px; box-sizing:border-box;
     }
@@ -96,7 +96,12 @@
 
 
 
+/*
+ 
+  table { outline: 2px dashed red; }
+  td { outline: 1px dotted blue; }
 
+*/
 
 
   </style>
@@ -1579,6 +1584,7 @@ if(Nplay[number] == 0){
 
 	document.card11.src = Nhandimage[number]
 	Nturn = 0
+closetrick()
 	rotate()
 }	
 
@@ -2200,6 +2206,7 @@ document.card21.src = "image2/Card01.gif"
 document.card31.src = "image2/Card01.gif"
 document.card41.src = "image2/Card01.gif"
 
+closetrick()
 //ptrick=0
 /*
 document.card51.src = "image2/Card01.gif"
@@ -2490,8 +2497,6 @@ rotate()
 
 function opentrick(number){
 
-
-
 	if(scorer==number){
 const modal = document.getElementById("previoustrickmodal");
   if (modal.style.display === "block") {
@@ -2515,23 +2520,17 @@ const modal = document.getElementById("previoustrickmodal");
 }
 
 
-/*
 
-function closetrick(number){
+
+function closetrick(){
 const modal = document.getElementById("previoustrickmodal");
     modal.style.display = "none";   // hide
 
-	if(scorer==number){
-		document.getElementById("card51").src = "image2/Card01.gif"
-		document.getElementById("card52").src = "image2/Card01.gif"
-		document.getElementById("card53").src = "image2/Card01.gif"
-		document.getElementById("card54").src = "image2/Card01.gif"
-	}
 }
 
 
 
-*/
+
 
 
 function sortingchoice() {
@@ -2645,62 +2644,61 @@ sortingchoice()
 
 
 
-<table width=800 background="" border=0 cellpadding=0 cellspacing=0 align=center>
+<table width="800" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; table-layout:fixed;">
+  <tr>
+    <td colspan="8" style="height:15px;"></td>
+  </tr>
 
-<td height=15>
+  <tr>
+    <td width="100" align="center">
+      <a href="javascript:Card(1)">
+        <img src="image2/cardBK.gif" name="card1" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(2)">
+        <img src="image2/cardBK.gif" name="card2" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(3)">
+        <img src="image2/cardBK.gif" name="card3" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(4)">
+        <img src="image2/cardBK.gif" name="card4" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(5)">
+        <img src="image2/cardBK.gif" name="card5" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(6)">
+        <img src="image2/cardBK.gif" name="card6" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(7)">
+        <img src="image2/cardBK.gif" name="card7" border="0" width="80" height="126">
+      </a>
+    </td>
+    <td width="100" align="center">
+      <a href="javascript:Card(8)">
+        <img src="image2/cardBK.gif" name="card8" border="0" width="80" height="126">
+      </a>
+    </td>
+  </tr>
 
-<tr>
-
-<td width=100 align=center>
-   <a href = "javascript:Card(1)">
-      <img src = "image2/cardBK.gif" name="card1" border=0 width=80 height=126 > </a>
-</td>
-
-
-<td width=100 align=center>
-   <a href = "javascript:Card(2)">
-      <img src = "image2/cardBK.gif" name="card2" border=0 width=80 height=126> </a>
-</td>
-
-<td width=100 align=center>
-   <a href = "javascript:Card(3)">
-      <img src = "image2/cardBK.gif" name="card3" border=0 width=80 height=126> </a>
-</td>
-
-<td width=100 align=center>
-   <a href = "javascript:Card(4)">
-      <img src = "image2/cardBK.gif" name="card4" border=0 width=80 height=126> </a>
-</td>
-
-<td width=100 align=center>
-   <a href = "javascript:Card(5)">
-      <img src = "image2/cardBK.gif" name="card5" border=0 width=80 height=126> </a>
-
-</td>
-
-
-<td width=100 align=center>
-   <a href = "javascript:Card(6)">
-      <img src = "image2/cardBK.gif" name="card6" border=0 width=80 height=126> </a>
-</td>
-
-
-<td width=100 align=center>
-   <a href = "javascript:Card(7)">
-      <img src = "image2/cardBK.gif" name="card7" border=0 width=80 height=126> </a>
-</td>
-
-
-<td width=100 align=center>
-   <a href = "javascript:Card(8)">
-      <img src = "image2/cardBK.gif" name="card8" border=0 width=80 height=126> </a>
-</td>
-
-</tr>
-
-<td height=15>
-
+  <tr>
+    <td colspan="8" style="height:15px;"></td>
+  </tr>
 </table>
+
+
+
 
 
 
@@ -2711,448 +2709,270 @@ sortingchoice()
 
 
 <!--MASTERTABLE-->
-<table width=800 border=0 cellpadding=0 cellspacing=0 align=center bgcolor="">
 
-<td width=200 valign="top">
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-
-
-	<td width=66 valign="center">
-	</td>
-
-	<td width="66" align="center" valign="middle">
-  <!-- Name field -->
-  <form name="Nname" action="#">
-    <input type="text"
-           name="Nname"
-           size="7"
-           readonly
-           style="font: bold 12pt Arial; color:black;
-                  background-color:green;
-                  border:transparent;
-                  text-align:center;">
-  </form>
-
-  <!-- Score field -->
-  <form name="Nscore" action="#">
-    <input type="text"
-           name="Nscore"
-           readonly
-           style="font: bold 18pt Arial;
-            color:black;
-            background-color:#84B5E1;
-            border:2px solid transparent;
-            width:60px;        /* fixed width */
-            height:30px;       /* fixed height */
-            text-align:center;
-            line-height:30px;"> <!-- vertically centers text -->
-  </form>
-</td>
-
-
-	<td width=66 valign="center">
-	</td>
-
-
-
-	</td>
-
-
-
-<tr>
-
-
-	<td width="66" align="center" valign="middle">
-  <!-- Name field -->
-  <form name="Wname" action="#">
-    <input type="text"
-           name="Wname"
-           size="7"
-           readonly
-           style="font: bold 12pt Arial; color:black;
-                  background-color:green;
-                  border:transparent;
-                  text-align:center;">
-  </form>
-
-  <!-- Score field -->
-  <form name="Wscore" action="#">
-    <input type="text"
-           name="Wscore"
-           readonly
-           style="font: bold 18pt Arial;
-            color:black;
-            background-color:#84B5E1;
-            border:2px solid transparent;
-            width:60px;        /* fixed width */
-            height:30px;       /* fixed height */
-            text-align:center;
-            line-height:30px;"> <!-- vertically centers text -->
-  </form>
-</td>
-
-
-
-<td width=66 valign="center">
-	</td>
-
-
-
-
-	<td width="66" align="center" valign="middle">
-  <!-- Name field -->
-  <form name="Ename" action="#">
-    <input type="text"
-           name="Ename"
-           size="7"
-           readonly
-           style="font: bold 12pt Arial; color:black;
-                  background-color:green;
-                  border:transparent;
-                  text-align:center;">
-  </form>
-
-  <!-- Score field -->
-  <form name="Escore" action="#">
-    <input type="text"
-           name="Escore"
-           readonly
-style="font: bold 18pt Arial;
-            color:black;
-            background-color:#84B5E1;
-            border:2px solid transparent;
-            width:60px;        /* fixed width */
-            height:30px;       /* fixed height */
-            text-align:center;
-            line-height:30px;"> <!-- vertically centers text -->
-  </form>
-</td>
-
-	<tr>
-
-
-
-
-
-
-	<td width=66 valign="center">
-	</td>
-
-
-
-	<td width="66" align="center" valign="middle">
-  <!-- Name field -->
-  <form name="Sname" action="#">
-    <input type="text"
-           name="Sname"
-           size="7"
-           readonly
-           style="font: bold 12pt Arial; color:black;
-                  background-color:green;
-                  border:transparent;
-                  text-align:center;">
-  </form>
-
-  <!-- Score field -->
-  <form name="Sscore" action="#">
-    <input type="text"
-           name="Sscore"
-           readonly
-style="font: bold 18pt Arial;
-            color:black;
-            background-color:#84B5E1;
-            border:2px solid transparent;
-            width:60px;        /* fixed width */
-            height:30px;       /* fixed height */
-            text-align:center;
-            line-height:30px;"> <!-- vertically centers text -->
-  </form>
-</td>
-
-
-
-
-
-
-
-	<td width=66 valign="center">
-	</td>
-
-
-
-	</table>
-
-
-
-
-
-
-
-<form name="solo" method="post" style="font-family:Arial,sans-serif; font-size:12pt; color:black; margin:0;">
-  <table border="0" cellpadding="6" cellspacing="0" align="center" style="margin:0;">
-    <tr>
-      <td valign="top" width="200">
-        <b>Call Partner</b><br>
-        <input name="choice" value="ACC" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">A&clubs;</span><br>
-        <input name="choice" value="AHH" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
-        <input name="choice" value="ASS" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">A&spades;</span>
-      </td>
-      <td valign="top" width="200">
-        <b>Call Off</b><br>
-        <input name="choice" value="QQ" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&clubs; Q&spades; </span> <br>
-        <input name="choice" value="Q"  type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&clubs; </span><br>
-        <input name="choice" value="Q"  type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&spades; </span>
-      </td>
-    </tr>
-    <tr>
-  <td colspan="2" align="center" style="padding-top:6px;">
-    <button type="button" id="callpartner" name="callpartner"
-            onclick="partnerchoice()"
-            style="background-color:#84B5E1;border-color:black;border-radius:50px;
-                   font-size:18px;color:black; display:inline-block; vertical-align:middle;">
-      &nbsp;Call&nbsp;
-    </button>
-
-    <div id="calledAceSlot"
-         style="font:bold 14pt Arial; color:black; background-color:#84B5E1;
-                border:2px solid transparent; width:130px; height:30px;
-                text-align:center; line-height:30px;
-                display:inline-block; vertical-align:middle; margin-left:10px;">
-    </div>
-  </td>
-</tr>
-  </table>
-</form>
-
-
-
-
-
-<table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
-
-
-<td width=200 valign="top">
-	<label for="speedSlider"><b>Speed</b></label><br>
-	<input 
-	  type="range" 
-	  id="speedSlider" 
-	  min="0" 
-	  max="2000" 
-	  step="100" 
-	  value="1500"
-	  style="width: 180px;">
-	</td>
-	</table>
-
-
-	
-
-
-<form action="/action_page.php">
-  <p>
-    <textarea id="messages" name="Message" rows="4" cols="25" readonly
-      style="resize: none;background-color="beige"">
+<!-- MASTER: exactly 800px wide -->
+<table id="master" width="800" border="0" cellpadding="0" cellspacing="0" align="center"
+       style="border-collapse:collapse; table-layout:fixed; margin:0 auto;">
+  <tr>
+
+    <!-- ========== LEFT COLUMN (200px) ========== -->
+    <td style="width:200px; vertical-align:top;">
+
+      <!-- Names & scores grid -->
+      <table width="100%" border="0" cellpadding="0" cellspacing="0"
+       style="border-collapse:collapse; table-layout:fixed;">
+  <tr>
+    <td width="66"></td>
+    <td width="66" align="center" valign="middle" style="padding:2px 0;">
+      <form name="Nname" style="margin:0;">
+        <input type="text" name="Nname" size="7" readonly
+               style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+                      text-align:center; width:60px; margin:0;">
+      </form>
+      <form name="Nscore" style="margin:2px 0 0;">
+        <input type="text" name="Nscore" readonly
+               style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+                      width:60px; height:30px; text-align:center; line-height:30px; margin:0;">
+      </form>
+    </td>
+    <td width="66"></td>
+  </tr>
+
+  <tr>
+    <td width="66" align="center" valign="middle" style="padding:2px 0;">
+      <form name="Wname" style="margin:0;">
+        <input type="text" name="Wname" size="7" readonly
+               style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+                      text-align:center; width:60px; margin:0;">
+      </form>
+      <form name="Wscore" style="margin:2px 0 0;">
+        <input type="text" name="Wscore" readonly
+               style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+                      width:60px; height:30px; text-align:center; line-height:30px; margin:0;">
+      </form>
+    </td>
+
+    <td width="66"></td>
+
+    <td width="66" align="center" valign="middle" style="padding:2px 0;">
+      <form name="Ename" style="margin:0;">
+        <input type="text" name="Ename" size="7" readonly
+               style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+                      text-align:center; width:60px; margin:0;">
+      </form>
+      <form name="Escore" style="margin:2px 0 0;">
+        <input type="text" name="Escore" readonly
+               style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+                      width:60px; height:30px; text-align:center; line-height:30px; margin:0;">
+      </form>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="66"></td>
+    <td width="66" align="center" valign="middle" style="padding:2px 0;">
+      <form name="Sname" style="margin:0;">
+        <input type="text" name="Sname" size="7" readonly
+               style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+                      text-align:center; width:60px; margin:0;">
+      </form>
+      <form name="Sscore" style="margin:2px 0 0;">
+        <input type="text" name="Sscore" readonly
+               style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+                      width:60px; height:30px; text-align:center; line-height:30px; margin:0;">
+      </form>
+    </td>
+    <td width="66"></td>
+  </tr>
+</table>
+
+
+      <!-- Solo/Call form -->
+      <form name="solo" method="post" style="font-family:Arial,sans-serif; font-size:12pt; color:black; margin:0;">
+        <table border="0" cellpadding="6" cellspacing="0" align="center" style="margin:0; border-collapse:collapse;">
+          <tr>
+            <td valign="top" width="100">
+              <b>Call Partner</b><br>
+              <input name="choice" value="ACC" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px;">A&clubs;</span><br>
+              <input name="choice" value="AHH" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
+              <input name="choice" value="ASS" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px;">A&spades;</span>
+            </td>
+            <td valign="top" width="100">
+              <b>Call Off</b><br>
+              <input name="choice" value="QQ" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px;">Q&clubs; Q&spades;</span><br>
+              <input name="choice" value="Q" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px;">Q&clubs;</span><br>
+              <input name="choice" value="Q" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false">
+              <span style="font-size:18px;">Q&spades;</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" align="center" style="padding-top:6px;">
+              <button type="button" id="callpartner" name="callpartner"
+                      onclick="partnerchoice()"
+                      style="background-color:#84B5E1; border-color:black; border-radius:50px;
+                             font-size:18px; color:black; display:inline-block; vertical-align:middle;">
+                &nbsp;Call&nbsp;
+              </button>
+
+              <div id="calledAceSlot"
+                   style="font:bold 14pt Arial; color:black; background-color:#84B5E1;
+                          border:2px solid transparent; width:112px; height:30px;
+                          text-align:center; line-height:30px;
+                          display:inline-block; vertical-align:middle; margin-left:10px;">
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+
+
+      <!-- Message box -->
+      <form action="#">
+        <p style="margin:8px 0 0 0;">
+          <textarea id="messages" name="Message" rows="4" cols="22" readonly
+                    style="resize:none; background-color:beige;"> 
 Welcome to Schafkopf 2.0
-    </textarea>
-  </p>
-</form>
+          </textarea>
+        </p>
+      </form>
+    </td>
 
+    <!-- ========== MIDDLE COLUMN (400px) ========== -->
+    <td style="width:400px; vertical-align:top;">
+      <table width="400" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; background-color:#8b602b;">
+        <tr>
+          <td width="133" align="center">
+            <img src="image2/Card01.gif" name="card12" width="133" height="133" onclick="opentrick(1)">
+          </td>
+          <td width="133" align="center">
+            <img src="image2/cardBK.gif" name="card11" width="80" height="126">
+          </td>
+          <td width="133" align="center">
+            <img src="image2/Card01.gif" name="card22" width="133" height="133" onclick="opentrick(2)">
+          </td>
+        </tr>
 
+        <tr>
+          <td width="133" align="center">
+            <img src="image2/cardBK.gif" name="card41" width="80" height="126">
+          </td>
 
-	
+          <td width="133" align="center">
+            <button id="deal" type="button" name="deal" onclick="deal()"
+                    style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+                           font-size:24px; border-radius:50px; color:black;">
+              Deal
+            </button>
 
+            <button id="continue" type="button" name="deal" onclick="beginhand()"
+                    style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+                           font-size:24px; border-radius:50px; padding:0; display:none;
+                           align-items:center; justify-content:center; color:black;">
+              Continue
+            </button>
+          </td>
 
+          <td width="133" align="center">
+            <img src="image2/cardBK.gif" name="card21" width="80" height="126">
+          </td>
+        </tr>
 
+        <tr>
+          <td width="133" align="center">
+            <img src="image2/Card01.gif" name="card42" width="133" height="133" onclick="opentrick(4)">
+          </td>
+          <td width="133" align="center">
+            <img src="image2/cardBK.gif" name="card31" width="80" height="126">
+          </td>
+          <td width="133" align="center">
+            <img src="image2/Card01.gif" name="card32" width="133" height="133" onclick="opentrick(3)">
+          </td>
+        </tr>
+      </table>
+    </td>
 
+<!-- ========== RIGHT COLUMN (200px) ========== -->
+<td style="width:200px; vertical-align:top;">
 
+  <!-- Make this column a vertical flex stack -->
+  <div style="display:flex; flex-direction:column; height:400px;"> <!-- match your game height -->
 
+    <!-- Top: Lead box -->
+    <div>
+      <table width="200" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+        <tr>
+          <td width="100" valign="middle">
+            <form name="player" action="#" style="margin:0;">
+              <b>Lead</b><br>
+              <input type="text" name="player" size="8" readonly
+                     style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;">
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
 
+    <!-- Middle: open space grows -->
+    <div style="flex:1;"></div>
 
+    <!-- Bottom: controls -->
+    <div>
+<!-- Button area (shared space) -->
+<table width="200" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; margin-top:8px;">
+  <tr>
+    <td width="200" align="center">
+      <!-- Transcript button -->
+      <button id="transcript" type="button" onclick="showtranscript()"
+              style="background-color:#84B5E1; border-color:black; border-radius:50px;
+                     width:120px; color:black; display:none;">
+        Transcript
+      </button>
 
+      <!-- Cheat Sheet button -->
+      <button id="cheatsheet" type="button" onclick="cheatsheet()"
+              style="background-color:#84B5E1; border-color:black; border-radius:50px;
+                     width:120px; color:black; display:inline-block;">
+        Cheat Sheet
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td width="200" align="center" style="padding-top:6px;">
+      <!-- Options stays below -->
+      <button id="options" type="button" onclick="options()"
+              style="background-color:#84B5E1; border-color:black; border-radius:50px;
+                     width:120px; color:black;">
+        Options
+      </button>
+    </td>
+  </tr>
+ <!-- Speed Slider -->
+        <tr>
+          <td width="200" valign="top" align="center">
+            <label for="speedSlider"><b>Speed</b></label><br>
+            <input type="range" id="speedSlider" min="0" max="2000" step="100" value="1500" style="width:190px;">
+          </td>
+        </tr>
+      </table>
+    </div>
 
-
-
+  </div>
 </td>
 
-<!--MIDDLETABLE-->
-<td>
-<table width=400 background="" border=0 cellpadding=0 cellspacing=0 align=center bgcolor=8b602b>
 
 
 
-<td width=133 align=center>
-      <img src = "image2/Card01.gif" name="card12" border=0 width=133 height=133  	onclick="opentrick(1)" </a>    
-</td>
-
-<td width=133 align=center>
-
-      <img src = "image2/cardBK.gif" name="card11" border=0 width=80 height=126 > </a>
-</td>
-
-<td width=133 align=center>
-
-      <img src = "image2/Card01.gif" name="card22" border=0 width=133 height=133 onclick="opentrick(2)"</a>    
-</td>
-
-
-
-<tr>
-
-<td width=133 align=center>
-
-      <img src = "image2/cardBK.gif" name="card41" border=0 width=80 height=126 > </a>
-</td>
-
-<td width=133 align=center>
-
-
-	
-
-	<button 
-	  id="deal" 
-	  type="button" 
-	  name="deal" 
-	  onclick="deal()" 
-	  style="background-color: #84B5E1;
-         border: 2px solid black;
-         width: 133px;
-         height: 60px;
-         font-size: 24px;
-         border-radius: 50px;
-	color: black;">
-	  Deal
-	</button>
-
-
-
-<button
-  id="continue"
-  type="button"
-  name="deal"
-  onclick="beginhand()"
-  style="background-color:#84B5E1;
-         border:2px solid black;
-         width:133px;
-         height:60px;
-         font-size:24px;
-         border-radius:50px;
-         padding:0;
-         display:flex;
-         align-items:center;
-         justify-content:center;
-		color: black;
-	display:none;">
-  Continue
-</button>
-
-  
-
-
-</td>
-
-<td width=133 align=center>
-
-      <img src = "image2/cardBK.gif" name="card21" border=0 width=80 height=126 > </a>
-</td>
-
-<tr>
-
-
-
-
-<td width=133 align=center>
-
-      <img src = "image2/Card01.gif" name="card42" border=0 width=133 height=133 onclick="opentrick(4)"  </a>    
-</td>
-
-<td width=133 align=center>
-
-      <img src = "image2/cardBK.gif" name="card31" border=0 width=80 height=126 > </a>
-</td>
-
-<td width=133 align=center>
-
-      <img src = "image2/Card01.gif" name="card32" border=0 width=133 height=133 onclick="opentrick(3)"  </a>    
-</td>
-
-
-
+    </td>
+  </tr>
 </table>
 
-
-
-
-	
-	
-
-
-
-
-</td>
-<!--MIDDLETABLE ENDS-->
-
-
-<td width=200 valign=top>
-
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
-
-
-	<td width=100 valign="center">
-	<form name=player action="#">
-	<b>Lead<br>
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=8 READONLY />
-	</form>
-	</td>
-
-	<tr>
-
-	<td height=15>
-
-	</table>
-
-
-
-
-
-	
-
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
-
-	<td height=5>
-
-	<tr>
-
-	<td width=200 align="center">
-	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none;width:120px;" >
-	 Transcript  
-</button>
-
-
-
-	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit;color: black;width:120px;" >
-	Cheat Sheet
-</button>
-
-	<button  id=options type="button" name="options" onclick="options()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit;color: black;width:120px;" >
-	 Options
-</button>
-
-
-
-
-	</table>
-	
-
-
-
-
-
-</td>
-
-
-
-</table>
 <!-- MASTERTABLE ENDS-->
 
 
@@ -3228,12 +3048,6 @@ Welcome to Schafkopf 2.0
       </tr>
 <tr>
   <td align="center" style="padding-top:0px;">
-    <button id="saveBtn" type="button" name="options" onclick="options()"
-            style="background-color:#fff; border:1px solid #000; border-radius:50px;
-                   color:#000; font-size:14px; padding:0px 12px; display:block; margin:4px 0;">
-      Save
-    </button>
-
     <button id="instructionsBtn" type="button" name="instructions" onclick="showinstructions()"
             style="background-color:#fff; border:1px solid #000; border-radius:50px;
                    color:#000; font-size:14px; padding:0px 12px; display:block; margin:4px 0;">
