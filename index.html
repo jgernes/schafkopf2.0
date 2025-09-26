@@ -104,6 +104,48 @@
 */
 
 
+
+<!-- add this in <head> or before </body> -->
+
+  /* make widths exact and remove default paddings/margins */
+  #col-left, #col-left * { box-sizing: border-box; }
+  #col-left form { margin: 0; }
+
+  /* name inputs (Nname/Wname/Ename/Sname) */
+  #col-left input[type="text"] {
+    width: 60px;           /* fits inside 66px cells */
+    height: 24px;
+    padding: 0; margin: 0; border: 0;
+    text-align: center;
+    font: bold 14px Arial, sans-serif;  /* use px on iPad */
+    line-height: 24px;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  /* score boxes get a taller style via a class */
+  #col-left input.score {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    background-color: #84B5E1;
+    border: 2px solid transparent;
+  }
+
+  /* keep the little 66px grid tight */
+  #col-left .pair { padding: 4px 0; }
+
+  /* keep the message box inside 200px on iPad */
+  #col-left textarea { width: 180px; max-width: 100%; }
+
+
+
+
+
+
+
+
   </style>
 </head>
 
@@ -2716,7 +2758,8 @@ sortingchoice()
   <tr>
 
     <!-- ========== LEFT COLUMN (200px) ========== -->
-    <td style="width:200px; vertical-align:top;">
+    <td id="col-left" style="width:200px; vertical-align:top;">
+
 
       <!-- Names & scores grid -->
       <table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -2729,7 +2772,7 @@ sortingchoice()
                style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       text-align:center; width:60px; margin:0;">
       </form>
-      <form name="Nscore" style="margin:2px 0 0;">
+      <form name="Nscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Nscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
@@ -2745,7 +2788,7 @@ sortingchoice()
                style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       text-align:center; width:60px; margin:0;">
       </form>
-      <form name="Wscore" style="margin:2px 0 0;">
+      <form name="Wscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Wscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
@@ -2760,7 +2803,7 @@ sortingchoice()
                style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       text-align:center; width:60px; margin:0;">
       </form>
-      <form name="Escore" style="margin:2px 0 0;">
+      <form name="Escore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Escore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
@@ -2776,7 +2819,7 @@ sortingchoice()
                style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       text-align:center; width:60px; margin:0;">
       </form>
-      <form name="Sscore" style="margin:2px 0 0;">
+      <form name="Sscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Sscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
