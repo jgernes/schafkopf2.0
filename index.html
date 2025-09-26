@@ -35,15 +35,30 @@
     }
 
     /* Your modals */
+
+
+    #optionsmodal{
+      display:none;
+      position:absolute;
+      right:0px; bottom:0px; \\transform:translateX(-50%);
+      z-index:1000;
+      width:180px; box-sizing:border-box;
+    }
+    #optionsmodal .modal-content{
+      background:beige; color:#000;
+      border:2px solid #000; border-radius:8px;
+      padding:6px; font-size:13.5px;
+    }
+
     #cheatmodal{
       display:none;
       position:absolute;
-      right:20px; top:220px;        /* more stable than left:89.5% + translate */
+      right:0px; bottom:0px;        /* more stable than left:89.5% + translate */
       z-index:1000;
-      width:184px; box-sizing:border-box;
+      width:180px; box-sizing:border-box;
     }
     #cheatmodal .modal-content{
-      background:#fff; color:#000;
+      background:beige; color:#000;
       border:2px solid #000; border-radius:8px;
       padding:12px; font-size:13.5px; text-align:center;
     }
@@ -51,15 +66,39 @@
     #instructionmodal{
       display:none;
       position:absolute;
-      left:50%; top:15px; transform:translateX(-50%);
+      left:0px; top:0px; 
       z-index:1000;
-      width:700px; box-sizing:border-box;
+      width:622px; box-sizing:border-box;
     }
     #instructionmodal .modal-content{
-      background:#fff; color:#000;
+      background:beige; color:#000;
       border:2px solid #000; border-radius:8px;
       padding:6px; font-size:13.5px; text-align:justify;
+  max-height: 600px;     /* pick the height you want */
+  overflow-y: auto;      /* adds vertical scrollbar when needed */
     }
+
+    #previoustrickmodal{
+      display:none;
+      position:absolute;
+      left:324px; top:215px; 
+      z-index:1000;
+      width:200px; box-sizing:border-box;
+    }
+    #previoustrickmodal .modal-content{
+      background:beige; color:#000;
+      border:2px solid #000; border-radius:8px;
+      padding:6px; font-size:13.5px; text-align:justify;
+  max-height: 600px;     /* pick the height you want */
+  overflow-y: auto;      /* adds vertical scrollbar when needed */
+    }
+
+
+
+
+
+
+
   </style>
 </head>
 
@@ -79,11 +118,13 @@
 
 
 
-
 <SCRIPT LANGUAGE="javascript">
 <!--
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("optionsmodal").style.display = "block";
+});
 
 
 
@@ -120,6 +161,8 @@ window.addEventListener("orientationchange", setScaleAuto);
 playername = new Array (0,"North","East","South","West")
 
 
+
+
 function newnames()
 {
 /*
@@ -134,14 +177,16 @@ if(playername[4]==null){playername[4]="West"}
 */
 
 
+
+
+
+
+
 document.Nname.Nname.value = playername[1]
 document.Ename.Ename.value = playername[2]
 document.Sname.Sname.value = playername[3]
 document.Wname.Wname.value = playername[4]
-document.Nname2.Nname2.value = playername[1]
-document.Ename2.Ename2.value = playername[2]
-document.Sname2.Sname2.value = playername[3]
-document.Wname2.Wname2.value = playername[4]
+
 
 
 
@@ -190,7 +235,7 @@ document.Nscore.Nscore.value = chips[1]
 document.Escore.Escore.value = chips[2]
 document.Sscore.Sscore.value = chips[3]
 document.Wscore.Wscore.value = chips[4]	
-document.Partner.Partner.value = ""
+document.getElementById("calledAceSlot").innerHTML= ""
 
 //document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
@@ -231,6 +276,7 @@ function getPosition(arrayItem,arrayName){
 
 
 function deal(){
+  document.getElementById("optionsmodal").style.display = "none"
 	if(hand!=0){
 		alert("This hand is not over yet!")
 		return}
@@ -238,6 +284,11 @@ function deal(){
 if(gameover==1){
 	reset()
 }
+
+
+
+
+
 
 
 piatnikdeck = new Array ("image2/cardBK.gif","image2/cardQCT.gif","image2/cardQST.gif","image2/cardQHT.gif","image2/cardQDT.gif",
@@ -318,7 +369,7 @@ deckvalue = tempdeckvalue
 
 
 document.getElementById('deal').style.display = 'none'
-document.getElementById('instructions').style.display = 'none'
+
 document.getElementById('cheatsheet').style.display = 'inherit'
 
 
@@ -338,6 +389,8 @@ document.getElementById('cheatsheet').style.display = 'inherit'
 
 //document.Nscore.Nscore.style.color = "red"
 
+partnerdelay = 0
+calledace = "000"
 transcript = ""
 trickcount = 1
 
@@ -392,7 +445,7 @@ document.Nscore.Nscore.value = 0
 document.Escore.Escore.value = 0
 document.Sscore.Sscore.value = 0
 document.Wscore.Wscore.value = 0
-document.Partner.Partner.value = ""
+document.getElementById("calledAceSlot").innerHTML = ""
 
 scores= new Array (0,0,0,0,0)
 score = 0
@@ -418,11 +471,13 @@ document.card22.src = "image2/Card01.gif"
 document.card32.src = "image2/Card01.gif"
 document.card42.src = "image2/Card01.gif"
 
+
+/*
 document.card51.src = "image2/Card01.gif"
 document.card52.src = "image2/Card01.gif"
 document.card53.src = "image2/Card01.gif"
 document.card54.src = "image2/Card01.gif"
-
+*/
 
 
 
@@ -464,6 +519,8 @@ for(j=1;j<=7;j++){
 //document.dealer.dealer.value = playername[dealer]
 document.player.player.value = ""
 document.getElementById('messages').value = "Dealing"
+
+document.player.player.value = playername[dealer%4+1]
 
 
 //DEAL THE CARDS
@@ -571,9 +628,13 @@ break
 
 
 
+
+
+
+
+
+
 /*
-
-
 
 
 //TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
@@ -593,6 +654,9 @@ Whandimage = new Array(0,"image2/card9HH.gif","image2/cardJCT.gif","image2/card8
 
 
 */
+
+
+
 
 
 setTimeout(function() {reveal(1)}, delaytime)
@@ -702,6 +766,7 @@ document.getElementById('continue').style.display = 'inherit'
 document.getElementById('messages').value = "Everyone happy?"
 
 
+
 break
 }
 }
@@ -757,8 +822,9 @@ if(solochoice=="QQ"){
 		partner = new Array(0,1,0,0,0)
 		visiblepartner = new Array(0,1,0,0,0)
 		document.Nscore.Nscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
+		partnerdelay = 1
 		return
 	}
 	else{
@@ -777,8 +843,9 @@ if(solochoice=="Q"){
 		partner = new Array(0,1,0,0,0)
 		visiblepartner = new Array(0,1,0,0,0)
 		document.Nscore.Nscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
+		partnerdelay = 1
 		return
 	}	
 	else{
@@ -810,12 +877,13 @@ if(solochoice=="ACC"){
 			}
 			alert("I need a partner...Ace of Clubs...Known!")
 			document.getElementById('messages').value = "I need a partner...Ace of Clubs...Known!"
-			solochoicetext = "ACK"
+			solochoicetext = '<span style="color:black;">A&clubs; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 		}
@@ -832,13 +900,14 @@ if(solochoice=="ACC"){
 				if(Whand[i]=="ACC"){
 					solopartner = 4
 					partner = new Array(0,1,0,0,1)}
-			solochoicetext = "ACU"
+			solochoicetext = '<span style="color:black;">A&clubs; Unknown</span>'
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 		}
@@ -870,19 +939,20 @@ if(solochoice=="AHH"){
 			}
 			alert("I need a partner...Ace of Hearts!...Known")
 			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Known"
-			solochoicetext = "AHK"
+			solochoicetext = '<span style="color:black;">A&hearts; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 		}
 		else{
 			alert("I need a partner...Ace of Hearts!...Unknown")
 			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Unknown"
-			solochoicetext = "AHU"
+			solochoicetext = '<span style="color:black;">A&hearts; Unknown</span>'
 			for(i=1;i<=8;i++){
 				if(Ehand[i]=="AHH"){
 					solopartner = 2
@@ -896,9 +966,10 @@ if(solochoice=="AHH"){
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 		}
@@ -933,12 +1004,13 @@ if(solochoice=="ASS"){
 			}
 			alert("I need a partner...Ace of Spades...Known!")
 			document.getElementById('messages').value = "I need a partner...Ace of Spades...Known!"
-			solochoicetext = "ASK"
+			solochoicetext = '<span style="color:black;">A&spades; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 		}
@@ -959,13 +1031,14 @@ if(solochoice=="ASS"){
 					partner = new Array(0,1,0,0,1)
 					break}
 
-			solochoicetext = "ASU"
+			solochoicetext = '<span style="color:black;">A&spades; Unknown</span>'
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.Partner.Partner.value = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML = solochoicetext
 			partnercount = 1
 			partners = 1
+		partnerdelay = 1
 			soloplayer = 1
 			return
 
@@ -998,16 +1071,31 @@ if(partners==0){
 
 				}
 				if(j==8){
+if(deckvalue[i]=="ASS"){calledacetext="Ace of Spades"
+acecode="AS"
+calledace = '<span style="color:black;">A&spades;</span>';
+}
+if(deckvalue[i]=="ACC"){calledacetext="Ace of Clubs"
+acecode="AC"
+  calledace = '<span style="color:black;">A&clubs;</span>';
+}
+if(deckvalue[i]=="AHH"){calledacetext="Ace of Hearts"
+acecode="AH"
+  calledace = '<span style="color:black;">A&hearts;</span>';
+}
 					
 						if(Csuit[getPosition(deckvalue[i].charAt(2),suits)]==0){
-							alert(playername[number]+" needs a partner..." + deckvalue[i] + "...Unknown!")
-							document.getElementById('messages').value = playername[number]+" needs a partner..." + deckvalue[i] + "...Unknown!"
+
+							alert(playername[number]+" needs a partner..." + calledacetext + "...Unknown!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + calledacetext + "...Unknown!"
 							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"U"
+calledace = calledace + " Unknown"
 						}
 						else{
-							alert(playername[number]+" needs a partner..." + deckvalue[i] + "...Known!")
-							document.getElementById('messages').value = playername[number]+" needs a partner..." + deckvalue[i] + "...Known!"
+							alert(playername[number]+" needs a partner..." + calledacetext + "...Known!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + calledacetext + "...Known!"
 							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"K"
+calledace = calledace + " Known"
 						}
 						
 							solochoice = deckvalue[i]
@@ -1035,7 +1123,8 @@ if(partners==0){
 
 							visiblepartner = new Array(0,-1,1,-1,-1)
 							document.Escore.Escore.style.color = "red"
-							document.Partner.Partner.value = solochoicetext
+
+document.getElementById("calledAceSlot").innerHTML = calledace;
 							partnercount = 1
 							partners = 1
 							break
@@ -1060,7 +1149,8 @@ if(partners==0){
 
 							visiblepartner = new Array(0,-1,-1,1,-1)
 							document.Sscore.Sscore.style.color = "red"
-							document.Partner.Partner.value = solochoicetext
+
+document.getElementById("calledAceSlot").innerHTML = calledace;
 							partnercount = 1
 							partners = 1
 							break							
@@ -1085,7 +1175,8 @@ if(partners==0){
 
 							visiblepartner = new Array(0,-1,-1,-1,1)
 							document.Wscore.Wscore.style.color = "red"
-							document.Partner.Partner.value = solochoicetext
+
+document.getElementById("calledAceSlot").innerHTML = calledace;
 							partnercount = 1
 							partners = 1
 							break							
@@ -1118,7 +1209,7 @@ if(partners==0){
 		partner = new Array(0,0,1,0,0)
 		visiblepartner = new Array(0,0,1,0,0)
 		document.Escore.Escore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 
@@ -1126,7 +1217,7 @@ if(partners==0){
 		partner = new Array(0,0,0,1,0)
 		visiblepartner = new Array(0,0,0,1,0)
 		document.Sscore.Sscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 
@@ -1134,7 +1225,7 @@ if(partners==0){
 		partner = new Array(0,0,0,0,1)
 		visiblepartner = new Array(0,0,0,0,1)
 		document.Wscore.Wscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 		
@@ -1153,7 +1244,7 @@ if(partners==0){
 		partner = new Array(0,0,1,0,0)
 		visiblepartner = new Array(0,0,1,0,0)
 		document.Escore.Escore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 
@@ -1161,7 +1252,7 @@ if(partners==0){
 		partner = new Array(0,0,0,1,0)
 		visiblepartner = new Array(0,0,0,1,0)
 		document.Sscore.Sscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 
@@ -1169,7 +1260,7 @@ if(partners==0){
 		partner = new Array(0,0,0,0,1)
 		visiblepartner = new Array(0,0,0,0,1)
 		document.Wscore.Wscore.style.color = "red"
-		document.Partner.Partner.value = solochoice
+		document.getElementById("calledAceSlot").innerHTML= solochoice
 		partners = 1
 		break
 		
@@ -1195,6 +1286,8 @@ if(partners==0){
 
 
 function beginhand(){
+
+
 
 
 if(hand==0){
@@ -1224,8 +1317,12 @@ for(i=1;i<=8;i++){
 
 
 
+const radios = document.forms["solo"].elements["choice"];
+  for (let i = 0; i < radios.length; i++) {
+    radios[i].checked = false;
+  }
 
-
+document.getElementById('continue').style.display = 'none'
 
 
 computerpartner(Ehand,Esuit,2)
@@ -1245,13 +1342,18 @@ if(partners==0){
 		if(Whand[i]=="QCT"||Whand[i]=="QST"){
 			partner[4]=1}
 	}
-}
-
-
-
-document.getElementById('continue').style.display = 'none'
 rotate()
-
+}
+else{
+if(partners==1 && partnerdelay==0){
+partnerdelay = 1
+document.getElementById('continue').style.display = 'inherit'
+}
+else{
+partnerdelay = 0
+rotate()
+}
+}
 }
 
 
@@ -1347,14 +1449,14 @@ if(turn==5){
 
 switch(player){
 case 1:
-document.player.player.value = playername[1]
+//document.player.player.value = playername[1]
 document.getElementById('messages').value = ""
 Nturn=1
 
 break
 
 case 2:
-document.player.player.value = playername[2]
+//document.player.player.value = playername[2]
 document.getElementById('messages').value = ""
 setTimeout(function() {computerplay(Ehand,Eplay,Esuit,2)}, delaytime)
 
@@ -1362,14 +1464,14 @@ setTimeout(function() {computerplay(Ehand,Eplay,Esuit,2)}, delaytime)
 break
 
 case 3:
-document.player.player.value = playername[3]
+//document.player.player.value = playername[3]
 document.getElementById('messages').value = ""
 setTimeout(function() {computerplay(Shand,Splay,Ssuit,3)}, delaytime)
 
 break
 
 case 4:
-document.player.player.value = playername[4]
+//document.player.player.value = playername[4]
 document.getElementById('messages').value = ""
 setTimeout(function() {computerplay(Whand,Wplay,Wsuit,4)}, delaytime)
 
@@ -2091,16 +2193,22 @@ handvalue = 33
 trickleader = 0
 player = scorer-1
 
+document.player.player.value = playername[scorer]
+
 document.card11.src = "image2/Card01.gif"
 document.card21.src = "image2/Card01.gif"
 document.card31.src = "image2/Card01.gif"
 document.card41.src = "image2/Card01.gif"
 
 //ptrick=0
+/*
 document.card51.src = "image2/Card01.gif"
 document.card52.src = "image2/Card01.gif"
 document.card53.src = "image2/Card01.gif"
 document.card54.src = "image2/Card01.gif"
+*/
+
+
 
 cleartrick()
 }
@@ -2276,6 +2384,7 @@ document.Wscore.Wscore.value = chips[4]
 
 
 
+
 transcript = transcript+"Offense: "+offense + " Defense: "+defense
 document.getElementById('transcript').style.display = 'inherit'
 document.getElementById('cheatsheet').style.display = 'none'
@@ -2311,6 +2420,11 @@ document.getElementById('cheatsheet').style.display = 'none'
 //alert(transcript)
 
 
+
+
+
+
+
 document.getElementById('deal').style.display = 'inherit'
 
 
@@ -2321,8 +2435,11 @@ document.getElementById('deal').style.display = 'inherit'
 
 //document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
-document.Partner.Partner.value = ""
+document.getElementById("calledAceSlot").innerHTML= ""
 
+
+
+scorer = 0
 document.card12.src = "image2/Card01.gif"
 document.card22.src = "image2/Card01.gif"
 document.card32.src = "image2/Card01.gif"
@@ -2372,44 +2489,59 @@ rotate()
 
 
 function opentrick(number){
+
+
+
 	if(scorer==number){
+const modal = document.getElementById("previoustrickmodal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";   // hide
+  } else {
+    modal.style.display = "block";  // show
+  }
+
+
 		for(i=1;i<=32;i++){
 			if(pasttrick[1]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
-				document.card51.src = sorteddeck[i]}
+				document.getElementById("card51").src = sorteddeck[i]}
 			if(pasttrick[2]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
-				document.card52.src = sorteddeck[i]}
+				document.getElementById("card52").src = sorteddeck[i]}
 			if(pasttrick[3]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
-				document.card53.src = sorteddeck[i]}
+				document.getElementById("card53").src = sorteddeck[i]}
 			if(pasttrick[4]==sorteddeck[i].charAt(11)+sorteddeck[i].charAt(12)+sorteddeck[i].charAt(13)){
-				document.card54.src = sorteddeck[i]}
+				document.getElementById("card54").src = sorteddeck[i]}
 		}
 	}
 }
 
 
+/*
+
 function closetrick(number){
+const modal = document.getElementById("previoustrickmodal");
+    modal.style.display = "none";   // hide
+
 	if(scorer==number){
-		document.card51.src = "image2/Card01.gif"
-		document.card52.src = "image2/Card01.gif"
-		document.card53.src = "image2/Card01.gif"
-		document.card54.src = "image2/Card01.gif"
+		document.getElementById("card51").src = "image2/Card01.gif"
+		document.getElementById("card52").src = "image2/Card01.gif"
+		document.getElementById("card53").src = "image2/Card01.gif"
+		document.getElementById("card54").src = "image2/Card01.gif"
 	}
 }
 
 
 
-
+*/
 
 
 function sortingchoice() {
-sorder = 0
-			/*for (index=0; index < document.sorting.choice.length; index++) {
+for (index=0; index < document.sorting.choice.length; index++) {
 				if (document.sorting.choice[index].checked) {
 					sorder = document.sorting.choice[index].value;
 					//alert(sorder)	
 					break;
 				}
-			}*/
+			}
 }
 
 
@@ -2428,6 +2560,22 @@ newdeck = 1
 				}
 			}*/
 }
+
+
+function savename() {
+ playername[1] = document.getElementById("Ninput").value;
+    playername[2] = document.getElementById("Einput").value;
+    playername[3] = document.getElementById("Sinput").value;
+    playername[4] = document.getElementById("Winput").value;
+document.Nname.Nname.value = playername[1]
+document.Ename.Ename.value = playername[2]
+document.Sname.Sname.value = playername[3]
+document.Wname.Wname.value = playername[4]
+
+
+  }
+
+
 
 
 function showtranscript(){
@@ -2462,6 +2610,30 @@ const modal = document.getElementById("cheatmodal");
 
 
 
+
+function options(){
+const modal = document.getElementById("optionsmodal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";   // hide
+  } else {
+    modal.style.display = "block";  // show
+  }
+
+savename()
+sortingchoice()
+
+
+}
+
+
+
+
+
+
+
+
+
+
 //-->
 </SCRIPT>
 
@@ -2479,47 +2651,47 @@ const modal = document.getElementById("cheatmodal");
 
 <tr>
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(1)">
       <img src = "image2/cardBK.gif" name="card1" border=0 width=80 height=126 > </a>
 </td>
 
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(2)">
       <img src = "image2/cardBK.gif" name="card2" border=0 width=80 height=126> </a>
 </td>
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(3)">
       <img src = "image2/cardBK.gif" name="card3" border=0 width=80 height=126> </a>
 </td>
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(4)">
       <img src = "image2/cardBK.gif" name="card4" border=0 width=80 height=126> </a>
 </td>
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(5)">
       <img src = "image2/cardBK.gif" name="card5" border=0 width=80 height=126> </a>
 
 </td>
 
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(6)">
       <img src = "image2/cardBK.gif" name="card6" border=0 width=80 height=126> </a>
 </td>
 
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(7)">
       <img src = "image2/cardBK.gif" name="card7" border=0 width=80 height=126> </a>
 </td>
 
 
-<td width=80 align=center>
+<td width=100 align=center>
    <a href = "javascript:Card(8)">
       <img src = "image2/cardBK.gif" name="card8" border=0 width=80 height=126> </a>
 </td>
@@ -2546,18 +2718,116 @@ const modal = document.getElementById("cheatmodal");
 
 
 
-
-	<td width=100 valign="center">
-	<form name=Nname action="#">
-	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Nname size=6 READONLY />
-	</form>
+	<td width=66 valign="center">
 	</td>
 
-	<td width=100 valign="center">
-	<form name=Ename action="#">
-	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Ename size=6 READONLY />
-	</form>
+	<td width="66" align="center" valign="middle">
+  <!-- Name field -->
+  <form name="Nname" action="#">
+    <input type="text"
+           name="Nname"
+           size="7"
+           readonly
+           style="font: bold 12pt Arial; color:black;
+                  background-color:green;
+                  border:transparent;
+                  text-align:center;">
+  </form>
+
+  <!-- Score field -->
+  <form name="Nscore" action="#">
+    <input type="text"
+           name="Nscore"
+           readonly
+           style="font: bold 18pt Arial;
+            color:black;
+            background-color:#84B5E1;
+            border:2px solid transparent;
+            width:60px;        /* fixed width */
+            height:30px;       /* fixed height */
+            text-align:center;
+            line-height:30px;"> <!-- vertically centers text -->
+  </form>
+</td>
+
+
+	<td width=66 valign="center">
 	</td>
+
+
+
+	</td>
+
+
+
+<tr>
+
+
+	<td width="66" align="center" valign="middle">
+  <!-- Name field -->
+  <form name="Wname" action="#">
+    <input type="text"
+           name="Wname"
+           size="7"
+           readonly
+           style="font: bold 12pt Arial; color:black;
+                  background-color:green;
+                  border:transparent;
+                  text-align:center;">
+  </form>
+
+  <!-- Score field -->
+  <form name="Wscore" action="#">
+    <input type="text"
+           name="Wscore"
+           readonly
+           style="font: bold 18pt Arial;
+            color:black;
+            background-color:#84B5E1;
+            border:2px solid transparent;
+            width:60px;        /* fixed width */
+            height:30px;       /* fixed height */
+            text-align:center;
+            line-height:30px;"> <!-- vertically centers text -->
+  </form>
+</td>
+
+
+
+<td width=66 valign="center">
+	</td>
+
+
+
+
+	<td width="66" align="center" valign="middle">
+  <!-- Name field -->
+  <form name="Ename" action="#">
+    <input type="text"
+           name="Ename"
+           size="7"
+           readonly
+           style="font: bold 12pt Arial; color:black;
+                  background-color:green;
+                  border:transparent;
+                  text-align:center;">
+  </form>
+
+  <!-- Score field -->
+  <form name="Escore" action="#">
+    <input type="text"
+           name="Escore"
+           readonly
+style="font: bold 18pt Arial;
+            color:black;
+            background-color:#84B5E1;
+            border:2px solid transparent;
+            width:60px;        /* fixed width */
+            height:30px;       /* fixed height */
+            text-align:center;
+            line-height:30px;"> <!-- vertically centers text -->
+  </form>
+</td>
 
 	<tr>
 
@@ -2565,123 +2835,98 @@ const modal = document.getElementById("cheatmodal");
 
 
 
-	<td width=100 valign="center">
-	<form name=Nscore action="#">
-	<!--<b> <script>document.write(playername[1])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Nscore size=5 READONLY />
-	</form>
+
+	<td width=66 valign="center">
 	</td>
 
-	<td width=100 valign="center">
-	<form name=Escore action="#">
-	<!--<b> <script>document.write(playername[2])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Escore size=5 READONLY />
-	</form>
+
+
+	<td width="66" align="center" valign="middle">
+  <!-- Name field -->
+  <form name="Sname" action="#">
+    <input type="text"
+           name="Sname"
+           size="7"
+           readonly
+           style="font: bold 12pt Arial; color:black;
+                  background-color:green;
+                  border:transparent;
+                  text-align:center;">
+  </form>
+
+  <!-- Score field -->
+  <form name="Sscore" action="#">
+    <input type="text"
+           name="Sscore"
+           readonly
+style="font: bold 18pt Arial;
+            color:black;
+            background-color:#84B5E1;
+            border:2px solid transparent;
+            width:60px;        /* fixed width */
+            height:30px;       /* fixed height */
+            text-align:center;
+            line-height:30px;"> <!-- vertically centers text -->
+  </form>
+</td>
+
+
+
+
+
+
+
+	<td width=66 valign="center">
 	</td>
 
-	<tr>
 
-	<td height=15>
-
-	<tr>
-
-	<td width=100 valign="center">
-	<form name=Wname action="#">
-	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Wname size=6 READONLY />
-	</form>
-	</td>
-
-	<td width=100 valign="center">
-	<form name=Sname action="#">
-	<input type="text" style="font: bold 12pt Arial;color:black;background-color:green;border:transparent" name=Sname size=6 READONLY />
-	</form>
-	</td>
-
-	<tr>
-
-
-	<td width=100 valign="center">
-	<form name=Wscore action="#">
-	<!--<b> <script>document.write(playername[4])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Wscore size=5 READONLY />
-	</form>
-	</td>
-
-	<td width=100 valign="center">
-	<form name=Sscore action="#">
-	<!--<b> <script>document.write(playername[3])</script> <br>-->
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Sscore size=5 READONLY />
-	</form>
-	</td>
 
 	</table>
 
 
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-	<td height=15>
-
-	<tr>
-
-	<td width=200 valign="top">
-
-
-	<table width=100 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-	<td width=100 valign="top">
-
-	<form name="solo" method="post" style="font: bold 12pt Arial;color:black;\">
-	<b>Call Off</b> <br>
-	<input name="choice" value="QQ" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />Both Qs <br>
-
-	<b>Call Off</b> <br>
-	<input name="choice" value="Q" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />One Q <br> <br>
-	</td>	
-	
-
-	</table>
-
-	</td>
-
-	<td width=200 valign="top">
-
-	<table width=100 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-	<td width=100 valign="top">
-
-	
-	<b>Call Partner</b> <br>
-	<input name="choice" value="ACC" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&clubs;</span> <br>
-	<input name="choice" value="ASS" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&spades;</span> <br>
-	<input name="choice" value="AHH" type="radio" onmousedown="this.__chk = this.checked" onclick="if (this.__chk) this.checked = false" />A<span style="font-size:18px; color:black;">&hearts;</span> <br>
-	</form>
-	</td>
-
-	</table>
-
-	</td>
-
-	</table>
-
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center  >
-
-
-	<td width=100 align="center">
-	<button type="button" id=callpartner name="callpartner" onclick="partnerchoice()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;font-size: 18px;color: black;
-">&nbsp Call &nbsp</button>
-	</td>
 
 
 
 
-	<td width=100 align="center">
-	<form name=Partner action="#">
-	<input type="text" style="font: bold 18pt Arial;color:black;background-color:#84B5E1;border:transparent" name=Partner size=5 READONLY />
-	</form>
-	</td>
+
+<form name="solo" method="post" style="font-family:Arial,sans-serif; font-size:12pt; color:black; margin:0;">
+  <table border="0" cellpadding="6" cellspacing="0" align="center" style="margin:0;">
+    <tr>
+      <td valign="top" width="200">
+        <b>Call Partner</b><br>
+        <input name="choice" value="ACC" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">A&clubs;</span><br>
+        <input name="choice" value="AHH" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
+        <input name="choice" value="ASS" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">A&spades;</span>
+      </td>
+      <td valign="top" width="200">
+        <b>Call Off</b><br>
+        <input name="choice" value="QQ" type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&clubs; Q&spades; </span> <br>
+        <input name="choice" value="Q"  type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&clubs; </span><br>
+        <input name="choice" value="Q"  type="radio" onmousedown="this.__chk=this.checked" onclick="if(this.__chk)this.checked=false"> <span style="font-size:18px;">Q&spades; </span>
+      </td>
+    </tr>
+    <tr>
+  <td colspan="2" align="center" style="padding-top:6px;">
+    <button type="button" id="callpartner" name="callpartner"
+            onclick="partnerchoice()"
+            style="background-color:#84B5E1;border-color:black;border-radius:50px;
+                   font-size:18px;color:black; display:inline-block; vertical-align:middle;">
+      &nbsp;Call&nbsp;
+    </button>
+
+    <div id="calledAceSlot"
+         style="font:bold 14pt Arial; color:black; background-color:#84B5E1;
+                border:2px solid transparent; width:130px; height:30px;
+                text-align:center; line-height:30px;
+                display:inline-block; vertical-align:middle; margin-left:10px;">
+    </div>
+  </td>
+</tr>
+  </table>
+</form>
 
 
-	</table>
+
 
 
 <table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
@@ -2696,30 +2941,28 @@ const modal = document.getElementById("cheatmodal");
 	  max="2000" 
 	  step="100" 
 	  value="1500"
-	  style="width: 200px;">
+	  style="width: 180px;">
 	</td>
 	</table>
 
 
+	
 
 
+<form action="/action_page.php">
+  <p>
+    <textarea id="messages" name="Message" rows="4" cols="25" readonly
+      style="resize: none;background-color="beige"">
+Welcome to Schafkopf 2.0
+    </textarea>
+  </p>
+</form>
 
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=left >
 
 
 	
 
 
-	<form action="/action_page.php">
- 	 <p><label for="messages"><b> Message </b> </label>
-	  <textarea id="messages" name="Message" rows="4" cols="25" READONLY> Welcome to Shafkopf 2.0 </textarea>
-	</form>
-
-
-
-	
-
-	</table>
 
 
 
@@ -2739,7 +2982,7 @@ const modal = document.getElementById("cheatmodal");
 
 
 <td width=133 align=center>
-      <img src = "image2/Card01.gif" name="card12" border=0 width=133 height=133  	onmouseover=opentrick(1) onmouseout=closetrick(1)> </a>    
+      <img src = "image2/Card01.gif" name="card12" border=0 width=133 height=133  	onclick="opentrick(1)" </a>    
 </td>
 
 <td width=133 align=center>
@@ -2749,7 +2992,7 @@ const modal = document.getElementById("cheatmodal");
 
 <td width=133 align=center>
 
-      <img src = "image2/Card01.gif" name="card22" border=0 width=133 height=133 onmouseover=opentrick(2) onmouseout=closetrick(2)> </a>    
+      <img src = "image2/Card01.gif" name="card22" border=0 width=133 height=133 onclick="opentrick(2)"</a>    
 </td>
 
 
@@ -2820,7 +3063,7 @@ const modal = document.getElementById("cheatmodal");
 
 <td width=133 align=center>
 
-      <img src = "image2/Card01.gif" name="card42" border=0 width=133 height=133 onmouseover=opentrick(4) onmouseout=closetrick(4)> </a>    
+      <img src = "image2/Card01.gif" name="card42" border=0 width=133 height=133 onclick="opentrick(4)"  </a>    
 </td>
 
 <td width=133 align=center>
@@ -2830,7 +3073,7 @@ const modal = document.getElementById("cheatmodal");
 
 <td width=133 align=center>
 
-      <img src = "image2/Card01.gif" name="card32" border=0 width=133 height=133 onmouseover=opentrick(3) onmouseout=closetrick(3)> </a>    
+      <img src = "image2/Card01.gif" name="card32" border=0 width=133 height=133 onclick="opentrick(3)"  </a>    
 </td>
 
 
@@ -2855,15 +3098,9 @@ const modal = document.getElementById("cheatmodal");
 	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
 
 
-
-
-
-
-	
-
 	<td width=100 valign="center">
 	<form name=player action="#">
-	<b>Player<br>
+	<b>Lead<br>
 	<input type="text" style="font: bold 18pt Arial;color:black;background-color: #84B5E1;border:transparent;" name=player size=8 READONLY />
 	</form>
 	</td>
@@ -2878,63 +3115,7 @@ const modal = document.getElementById("cheatmodal");
 
 
 
-	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
-
-
-
-
-		<b>Previous Trick 
-
-
-	<td width=100 valign="center">
-	<form name=Nname2 action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Nname2 size=5 READONLY />
-	</form>
-	</td>
-
-	<td width=100 valign="center">
-	<form name=Ename2 action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Ename2 size=5 READONLY />
-	</form>
-	</td>
-
-	<tr>
-
-	<td width=100 align=center>
-		<img src = "image2/Card01.gif" name="card51" border=0 width=80 height=126 > </a>    
-	</td>
-
-	<td width=100 align=center>
-		<img src = "image2/Card01.gif" name="card52" border=0 width=80 height=126 > </a>    
-	</td>
-
-	<tr>
-
-	<td width=100 valign="center">
-	<form name=Wname2 action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Wname2 size=5 READONLY />
-	</form>
-	</td>
-
-	<td width=100 valign="center">
-	<form name=Sname2 action="#">
-	<input type="text" style="font: bold 12pt Times;color:black;background-color:green;border:transparent" name=Sname2 size=5 READONLY />
-	</form>
-	</td>
-
-	<tr>
-
-	<td width=100 align=center>
-		<img src = "image2/Card01.gif" name="card54" border=0 width=80 height=126 > </a>    
-	</td>
-
-	<td width=100 align=center>
-		<img src = "image2/Card01.gif" name="card53" border=0 width=80 height=126 > </a>    
-	</td>
-
-	<tr>
-
-	</table>
+	
 
 	<table width=200 border=0 cellpadding=0 cellspacing=0 align=center >
 
@@ -2943,22 +3124,29 @@ const modal = document.getElementById("cheatmodal");
 	<tr>
 
 	<td width=200 align="center">
-	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none" >
-	&nbsp&nbsp&nbsp&nbsp Transcript &nbsp&nbsp&nbsp&nbsp </button>
-
-	<button  id=instructions type="button" name="instructions" onclick="showinstructions()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit" >
-	&nbsp&nbsp&nbsp&nbsp Instructions &nbsp&nbsp&nbsp&nbsp </button>
-
-	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none;color: black;" >
-	&nbsp&nbsp&nbsp&nbsp Cheat Sheet &nbsp&nbsp&nbsp&nbsp </button>
+	<button  id=transcript type="button" name="transcript" onclick="showtranscript()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:none;width:120px;" >
+	 Transcript  
+</button>
 
 
+
+	<button  id=cheatsheet type="button" name="cheatsheet" onclick="cheatsheet()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit;color: black;width:120px;" >
+	Cheat Sheet
+</button>
+
+	<button  id=options type="button" name="options" onclick="options()" style="background-color:#84B5E1;border-color:black;border-radius: 50px;display:inherit;color: black;width:120px;" >
+	 Options
+</button>
 
 
 
 
 	</table>
 	
+
+
+
+
 
 </td>
 
@@ -2991,61 +3179,137 @@ const modal = document.getElementById("cheatmodal");
 
 <div id="cheatmodal">
   <div class="modal-content">
-  <table border="0" style="border-collapse:collapse; text-align:center; width:100%;">
-    <tr><th>Trump</th><th colspan="3"> Non-Trump </th><th>Value</th></tr>
-    <tr><td>Q&clubs;</td><td></td><td></td><td></td><td>3</td></tr>
-    <tr><td>Q&spades;</td><td></td><td></td><td></td><td>3</td></tr>
-    <tr><td style="color:red;">Q&hearts;</td><td></td><td></td><td></td><td>3</td></tr>
-    <tr><td style="color:red;">Q&diams;</td><td></td><td></td><td></td><td>3</td></tr>
-    <tr><td>J&clubs;</td><td></td><td></td><td></td><td>2</td></tr>
-    <tr><td>J&spades;</td><td></td><td></td><td></td><td>2</td></tr>
-    <tr><td style="color:red;">J&hearts;</td><td></td><td></td><td></td><td>2</td></tr>
-    <tr><td style="color:red;">J&diams;</td><td></td><td></td><td></td><td>2</td></tr>
-   <tr><td style="color:red;">A&diams;</td><td>A&clubs;</td><td style="color:red;">A&hearts;</td><td>A&spades;</td><td>11</td></tr>
-   <tr><td style="color:red;">10&diams;</td><td>10&clubs;</td><td style="color:red;">10&hearts;</td><td>10&spades;</td><td>10</td></tr>
-   <tr><td style="color:red;">K&diams;</td><td>K&clubs;</td><td style="color:red;">K&hearts;</td><td>K&spades;</td><td>4</td></tr>
-   <tr><td style="color:red;">9&diams;</td><td>9&clubs;</td><td style="color:red;">9&hearts;</td><td>9&spades;</td><td>0</td></tr>
-   <tr><td style="color:red;">8&diams;</td><td>8&clubs;</td><td style="color:red;">8&hearts;</td><td>8&spades;</td><td>0</td></tr>
-   <tr><td style="color:red;">7&diams;</td><td>7&clubs;</td><td style="color:red;">7&hearts;</td><td>7&spades;</td><td>0</td></tr>
-  </table>
-</div>
+<table border="0" style="border-collapse:collapse; text-align:center; width:100%;">
+      <tr><th>Trump</th><th colspan="3">Non-Trump</th><th>Value</th></tr>
+      <tr><td>Q&clubs;</td><td></td><td></td><td></td><td>3</td></tr>
+      <tr><td>Q&spades;</td><td></td><td></td><td></td><td>3</td></tr>
+      <tr><td style="color:red;">Q&hearts;</td><td></td><td></td><td></td><td>3</td></tr>
+      <tr><td style="color:red;">Q&diams;</td><td></td><td></td><td></td><td>3</td></tr>
+      <tr><td>J&clubs;</td><td></td><td></td><td></td><td>2</td></tr>
+      <tr><td>J&spades;</td><td></td><td></td><td></td><td>2</td></tr>
+      <tr><td style="color:red;">J&hearts;</td><td></td><td></td><td></td><td>2</td></tr>
+      <tr><td style="color:red;">J&diams;</td><td></td><td></td><td></td><td>2</td></tr>
+      <tr><td style="color:red;">A&diams;</td><td>A&clubs;</td><td style="color:red;">A&hearts;</td><td>A&spades;</td><td>11</td></tr>
+      <tr><td style="color:red;">10&diams;</td><td>10&clubs;</td><td style="color:red;">10&hearts;</td><td>10&spades;</td><td>10</td></tr>
+      <tr><td style="color:red;">K&diams;</td><td>K&clubs;</td><td style="color:red;">K&hearts;</td><td>K&spades;</td><td>4</td></tr>
+      <tr><td style="color:red;">9&diams;</td><td>9&clubs;</td><td style="color:red;">9&hearts;</td><td>9&spades;</td><td>0</td></tr>
+      <tr><td style="color:red;">8&diams;</td><td>8&clubs;</td><td style="color:red;">8&hearts;</td><td>8&spades;</td><td>0</td></tr>
+      <tr><td style="color:red;">7&diams;</td><td>7&clubs;</td><td style="color:red;">7&hearts;</td><td>7&spades;</td><td>0</td></tr>
+    </table>
+  </div>
 </div>
 
 
+<div id="optionsmodal">
+  <div class="modal-content">
+    <table width="100%" border="0" cellpadding="4" cellspacing="0" align="center" style="border-collapse:collapse;">
+      <tr>
+        <td valign="top">
+          <form name="sorting" method="post">
+            <b>Sort Hand</b><br>
+            <label><input type="radio" name="choice" value="1"> Left</label>&nbsp;&nbsp;
+            <label><input type="radio" name="choice" value="0" checked> Right</label>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">
+          <form id="playerForm">
+            <b>Player 1 (Human):</b><br>
+            <input type="text" id="Ninput" name="Ninput" value="North" size="8" maxlength="8"><br><br>
+            <b>Player 2 (Computer):</b><br>
+            <input type="text" id="Einput" name="Einput" value="East" size="8" maxlength="8"><br><br>
+            <b>Player 3 (Computer):</b><br>
+            <input type="text" id="Sinput" name="Sinput" value="South" size="8" maxlength="8"><br><br>
+            <b>Player 4 (Computer):</b><br>
+            <input type="text" id="Winput" name="Winput" value="West" size="8" maxlength="8"><br>
+          </form>
+        </td>
+      </tr>
+<tr>
+  <td align="center" style="padding-top:0px;">
+    <button id="saveBtn" type="button" name="options" onclick="options()"
+            style="background-color:#fff; border:1px solid #000; border-radius:50px;
+                   color:#000; font-size:14px; padding:0px 12px; display:block; margin:4px 0;">
+      Save
+    </button>
+
+    <button id="instructionsBtn" type="button" name="instructions" onclick="showinstructions()"
+            style="background-color:#fff; border:1px solid #000; border-radius:50px;
+                   color:#000; font-size:14px; padding:0px 12px; display:block; margin:4px 0;">
+      Instructions
+    </button>
+  </td>
+</tr>
+    </table>
+  </div>
+</div>
 
 
 
 <div id="instructionmodal">
   <div class="modal-content">
-  <div style="padding:6px; font-size:12px; line-height:1;">
+  <div style="padding:6px; font-size:14px; line-height:1;">
 <h3 style="text-align:center;">Schafkopf 2.0</h3>
 
-<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit). The cards are arranged into three fail suits: clubs (A&clubs; 10&clubs; K&clubs; 9&clubs; 8&clubs; 7&clubs;); hearts (A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts; 7&hearts;); spades (A&spades; 10&spades; K&spades; 9&spades; 8&spades; 7&spades;);  and one trump suit (Q&clubs; Q&spades; Q&hearts; Q&diams; J&clubs; J&spades; J&hearts; J&diams; A&diams; 10&diams; K&diams; 9&diams; 8&diams; 7&diams;). Remember that queens and jacks are always trump; they are never considered clubs, spades, or hearts. In a given suit (fail or trump), a stronger card (as ordered above) will beat any weaker card. Every trump card is stronger than any fail card. Additionally, each card has a numerical value irrespective of their strength. The values are as follows: Ace-11 points, 10-10 points, King-4 points, Queen-3 points, Jack-2 points, 9,8,7-0 points. </p>
+<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit). The cards are arranged into three fail suits: clubs (A&clubs; 10&clubs; K&clubs; 9&clubs; 8&clubs; 7&clubs;); hearts (A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts; 7&hearts;); spades (A&spades; 10&spades; K&spades; 9&spades; 8&spades; 7&spades;);  and one trump suit (Q&clubs; Q&spades; Q&hearts; Q&diams; J&clubs; J&spades; J&hearts; J&diams; A&diams; 10&diams; K&diams; 9&diams; 8&diams; 7&diams;). Remember that queens and jacks are always trump; they are never considered clubs, spades, or hearts. In a given suit (fail or trump), a stronger card (as ordered above) will beat any weaker card. Every trump card is stronger than any fail card. Additionally, each card has a numerical value irrespective of their strength. Aces are worth 11 points; Tens are worth 10 points; Kings are worth 4 points; Queens are worth 3 points; Jacks are worth 2 points; Nines, Eights, and Sevens are worth 0 points. </p>
 
 <p> Every player is dealt 8 cards (usually in the pattern of 3-2-3). For each hand, the players who have the Q&clubs; and Q&spades; (the Old Ones) are partners, called the Offense; the other two players are also partners, called the Defense. Therefore,  partners can change every hand. Your partner is not known or announced ahead of time; you must discern who your partner is through the game play. In the instance that one person has both black queens, they will have the option to play alone against the other three players; this complication is explained in more detail later. </p>
 
-<p>The player to the left of the dealer is on lead. The player on lead may play any card they like (fail or trump), and all other players are required to play a card of the same suit. If they do not have a card of the same suit, they are free to play any card in their hand: they can choose to Trump (play a trump card in an attempt to win the trick); Slough (play a low value fail card, assuming that their partner will not take the trick), or Schmear (play a high value fail card in hopes that their partner will take the trick). The strongest card played (of the suit which was lead, or trump) takes the trick and that player makes the next lead. The goal of each hand is to take the most points (not the most tricks). If the Offense takes 61 points, they each win one chip (the Defense is said to have made Schneider); if the Offense takes 91 points, they each win two chips (the Defense is said to have not made Schneider); if the Offense takes all 120 points; they win three chips (considered Schwartz). If the Defense takes 60 points, they each win two chips (the Offense is said to make Schneider);  if the Defense takes 90 points, they each win three chips (the Offense is said to have not made Schneider).</p>
+<p>The player to the left of the dealer is on lead. The player on lead may play any card they like (fail or trump), and all other players are required to play a card of the same suit. If they do not have a card of the same suit, they are free to play any card in their hand: they can choose to Trump (play a trump card in an attempt to win the trick); Slough (play a low value fail card, assuming that their partner will not take the trick), or Schmear (play a high value fail card in hopes that their partner will take the trick). The strongest card played (of the suit which was lead, or trump) takes the trick and that player makes the next lead. The goal of each hand is to take the most points (not the most tricks). If the Offense takes 61 points, they each win one chip (the Defense is said to have made Schneider); if the Offense takes 91 points, they each win two chips (the Defense is said to have not made Schneider); if the Offense takes all 120 points; they win three chips (considered Schwartz). If the Defense takes 60 points, they each win two chips (the Offense is said to have made Schneider);  if the Defense takes 90 points, they each win three chips (the Offense is said to have not made Schneider).</p>
 
-<p>If one player has both black queens, they may choose to play on Offense alone, with the other three players forming the Defense. This is not announced (and is generally a surprise to the other players. If the player with both black queens does not wish to play alone, they may call for a partner, by asking for A&clubs;, A&hearts;, or A&spades;. If the caller has cards of the same suit they call for, the Ace is Known, if they do not, the Ace is Unknown. This must be announced before the hand begins. However, the holder of the Ace does not reveal this information; as usual, it is discovered through the course of play. When the suit of the ace is led, the player with the Ace must play it (even if they will lose the trick) and the Ace cannot be played earlier (unless there is no other legal play); similarly, the player with two black queens may not prematurely play any cards of that suit (if it is Known) or trump that trick (if it is Unknown), unless there is no other legal play. A player without both black queens may also choose to play alone by Calling Off one or both Black Queens. This must be announced before the hand begins. In either case, the person playing alone will earn  triple teh regular number of chips (3,6, or 9). All members of the Defense win the regular number of chips (2 or 3).</p>
+<p>If one player has both black queens, they may choose to play on Offense alone, with the other three players forming the Defense. This is not announced ahead of time. A player without both black queens may also choose to play alone by Calling Off one or both Old Ones. This must be announced before the hand begins. In either case, the person playing alone will earn  triple the regular number of chips (3,6, or 9). All members of the Defense win the regular number of chips (2 or 3). </p>
 
-<p>Even though the each hand is played with partners, the game is won by a single player. The game ends when one player has at least 12 chips. If more than one player have the same number of chips (at least 12) then the game continues until a single player has the most chips (at least 12). This need not be one of the original players who was tied. If another rounds is played, the winning player traditionally is the dealer.</p>
+<p>If the player with both black queens does not wish to play alone, they may call for a partner, by asking for A&clubs;, A&hearts;, or A&spades;. If the player with both black queens has cards of the same suit they call for, the Ace is Known; if they do not, the Ace is Unknown. This must be announced before the hand begins. However, the holder of the Ace does not reveal this information; as usual, it is discovered through the course of play. When the suit of the ace is led, the player with the Ace must play it (even if they will lose the trick) and the Ace cannot be played earlier (unless there is no other legal play); similarly, the player with two black queens may not prematurely play any cards of that suit (if it is Known) or trump that trick (if it is Unknown), unless there is no other legal play. </p>
 
-
-
+<p>Even though each hand is played with partners, the game is won by a single player. The game ends when one player has at least 12 chips. If two or more players are tied with at least 12 chips, then the game continues until a single player has the most chips. This need not be one of the original players who was tied. If another game is played, the winning player is traditionally the dealer.</p>
 
 
 </div>
 </div>
+</div>
 
 
 
 
-
-
-
-
-
+<div id="previoustrickmodal">
+  <div class="modal-content" style="text-align:center; padding:8px;">
+    <h3 style="margin:0 0 8px 0; font-family:Arial, sans-serif; font-size:16pt; color:black;">
+      Previous Trick
+    </h3>
+    <table width="100%" border="0" cellpadding="4" cellspacing="0" align="center" style="border-collapse:collapse;">
+      <tr>
+        <td width="100" align="center">
+          <img id="card51" src="image2/Card01.gif" width="80" height="126">
+        </td>
+        <td width="100" align="center">
+          <img id="card52" src="image2/Card01.gif" width="80" height="126">
+        </td>
+      </tr>
+      <tr>
+        <td width="100" align="center">
+          <img id="card54" src="image2/Card01.gif" width="80" height="126">
+        </td>
+        <td width="100" align="center">
+          <img id="card53" src="image2/Card01.gif" width="80" height="126">
+        </td>
+      </tr>
+    </table>
   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 function setScaleAuto() {
