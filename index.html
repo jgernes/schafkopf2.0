@@ -24,15 +24,19 @@
   <link rel="manifest" href="site.webmanifest?v=3" />
 
   <style>
-    html, body { margin:0; padding:0; height:100%; }
-    #stage { width:100vw; height:100vh; overflow:hidden; position:relative; }
-
-    /* Make #game-inner the positioning context for your absolute popups */
-    #game-inner {
-      width:800px; height:600px;
-      position: relative;           /* <- changed from absolute */
-      transform-origin: top left;
-    }
+  html, body { margin:0; height:100%; }
+  #stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #game-inner {
+    width: 800px;   /* base */
+    height: 564px;  /* base */
+    position: absolute;       /* left/top set in JS */
+    transform-origin: top left;
+  }
 
     /* Your modals */
 
@@ -95,13 +99,13 @@
 
 
 
-/*
+
 
  
   table { outline: 2px dashed red; }
   td { outline: 1px dotted blue; }
 
-*/
+
 
 
 
@@ -175,27 +179,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-function setScaleAuto() {
-  const baseW = 800, baseH = 600;
-  const el = document.getElementById("game-inner");
+  function setScaleAuto() {
+    const baseW = 800, baseH = 564;
+    const el = document.getElementById('game-inner');
+    if (!el) return; // guard
 
-  const sx = window.innerWidth  / baseW;
-  const sy = window.innerHeight / baseH;
-  let scale = Math.min(sx, sy) * 0.9;   // keep your 0.9 buffer
-  // Optional: cap so it never grows larger than designed
-  // scale = Math.min(scale, 1);
+    const sx = window.innerWidth  / baseW;
+    const sy = window.innerHeight / baseH;
+    const scale = Math.min(sx, sy) * 0.98;  // your preferred buffer
 
-  el.style.transform = `scale(${scale})`;
+    el.style.transform = `scale(${scale})`;
 
-  // center horizontally only; pin to TOP
-  const x = (window.innerWidth - baseW * scale) / 2;
-  el.style.position = "absolute";
-  el.style.left = `${x}px`;
-  el.style.top  = `0px`;                 // <-- important
-}
-document.addEventListener("DOMContentLoaded", setScaleAuto);
-window.addEventListener("resize", setScaleAuto);
-window.addEventListener("orientationchange", setScaleAuto);
+    // center horizontally, pin to top
+const x = (window.innerWidth  - baseW * scale) / 2;
+const y = (window.innerHeight - baseH * scale) / 2;
+el.style.left = `${Math.max(0, x)}px`;
+el.style.top  = `${Math.max(0, y)}px`;
+  }
+
+  // If something calls setScaleAuto() early, this makes it a no-op instead of throwing.
+  document.addEventListener('DOMContentLoaded', setScaleAuto);
+  window.addEventListener('resize', setScaleAuto);
+  window.addEventListener('orientationchange', setScaleAuto);
+
 
 
 
@@ -246,7 +252,6 @@ document.getElementById('deal').style.display = 'inherit'
 
 
 
-
 dealer = Math.floor(Math.random() * 4+1)
 //dealer = 3
 
@@ -286,7 +291,7 @@ document.getElementById("calledAceSlot").innerHTML= ""
 
 //document.dealer.dealer.value = playername[dealer%4+1]
 document.player.player.value = ""
-document.getElementById('messages').value = " Welcome to Schafkopf 2.0"
+document.getElementById('messages').value = "Welcome to Schafkopf 2.0"
 gameover = 0
 
 
@@ -436,6 +441,8 @@ document.getElementById('cheatsheet').style.display = 'inherit'
 
 //document.Nscore.Nscore.style.color = "red"
 
+
+handover = 0
 partnerdelay = 0
 calledace = "000"
 transcript = ""
@@ -679,25 +686,22 @@ break
 
 
 
-
-
 /*
 
 
 //TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
 
-Nhandimage = new Array(0,"image2/cardJDT.gif","image2/card7SS.gif","image2/card9SS.gif","image2/card8SS.gif","image2/card1DT.gif","image2/card1SS.gif","image2/card1HH.gif","image2/cardKSS.gif")
-Ehandimage = new Array(0,"image2/card9CC.gif","image2/cardAHH.gif","image2/cardASS.gif","image2/card8HH.gif","image2/card1CC.gif","image2/card9DT.gif","image2/cardADT.gif","image2/cardQHT.gif")
-Shandimage = new Array(0,"image2/cardJST.gif","image2/card7DT.gif","image2/cardKDT.gif","image2/cardJHT.gif","image2/cardKHH.gif","image2/card8CC.gif","image2/card7HH.gif","image2/cardKCC.gif")
-Whandimage = new Array(0,"image2/card9HH.gif","image2/cardJCT.gif","image2/card8DT.gif","image2/cardACC.gif","image2/cardQDT.gif","image2/cardQST.gif","image2/card7CC.gif","image2/cardQCT.gif")
+Nhandimage = new Array(0,"image2/cardACC.gif","image2/cardASS.gif","image2/cardAHH.gif","image2/cardJDT.gif","image2/card7SS.gif","image2/card9SS.gif","image2/card8SS.gif","image2/card1DT.gif")
+Ehandimage = new Array(0,"image2/card9CC.gif","image2/card8HH.gif","image2/card1CC.gif","image2/card9DT.gif","image2/cardADT.gif","image2/card7CC.gif","image2/card1SS.gif","image2/card1HH.gif")
+Shandimage = new Array(0,"image2/card7DT.gif","image2/card9HH.gif","image2/cardKDT.gif","image2/cardJHT.gif","image2/cardKHH.gif","image2/cardJST.gif","image2/cardJCT.gif","image2/card8DT.gif")
+Whandimage = new Array(0,"image2/cardQDT.gif","image2/cardQST.gif","image2/cardQHT.gif","image2/cardQCT.gif","image2/cardKSS.gif","image2/card8CC.gif","image2/card7HH.gif","image2/cardKCC.gif")
 
 
 
 
-//deckvalue[15]="ACC"
-//deckvalue[16]="ASS"
-//deckvalue[17]="AHH"
-
+deckvalue[15]="ASS"
+deckvalue[16]="ACC"
+deckvalue[17]="AHH"
 
 
 */
@@ -791,7 +795,22 @@ Shand[i] = Shandimage[i].charAt(11) +Shandimage[i].charAt(12)+Shandimage[i].char
 Whand[i] = Whandimage[i].charAt(11) +Whandimage[i].charAt(12)+Whandimage[i].charAt(13)
 }
 
-
+for(i=1;i<=8;i++){
+	for(j=1;j<=4;j++){
+		if(Nhand[i].charAt(2)==suits[j]){
+			Nsuit[j]=Nsuit[j]+1
+		}
+		if(Ehand[i].charAt(2)==suits[j]){
+			Esuit[j]=Esuit[j]+1
+		}
+		if(Shand[i].charAt(2)==suits[j]){
+			Ssuit[j]=Ssuit[j]+1
+		}
+		if(Whand[i].charAt(2)==suits[j]){
+			Wsuit[j]=Wsuit[j]+1
+		}
+	}
+}
 
 
 transcript = transcript+playername[1]+": "+Nhand+"\n"
@@ -842,15 +861,15 @@ return temphand
 
 function partnerchoice() {
 if(hand==0){
-	alert("Deal the cards first!")
+	//alert("Deal the cards first!")
 	document.getElementById('messages').value = "Deal the cards first!"
 	return}
 if(hand==2){
-	alert("Finish the hand first!")
+	//alert("Finish the hand first!")
 	document.getElementById('messages').value = "Finish the hand first!"	
 	return}
 if(partners==1){
-	alert("You already selected a partner!")
+	//alert("You already selected a partner!")
 	document.getElementById('messages').value = "You already selected a partner!"
 	return}
 
@@ -864,18 +883,19 @@ for (index=0; index < document.solo.choice.length; index++) {
 
 if(solochoice=="QQ"){
 	if(Nhand[8]!="QCT" && Nhand[8]!="QST" && Nhand[1]!="QCT" && Nhand[1]!="QST"){
-		alert("I call off both Old Ones!")
+		//alert("I call off both Old Ones!")
 		document.getElementById('messages').value = "I call off both Old Ones!"
+		calledace = "Both Old Ones"
 		partner = new Array(0,1,0,0,0)
 		visiblepartner = new Array(0,1,0,0,0)
 		document.Nscore.Nscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML = calledace
 		partners = 1
 		partnerdelay = 1
 		return
 	}
 	else{
-	alert("You have a black queen!")
+	//alert("You have a black queen!")
 	document.getElementById('messages').value = "You have a black queen!"
 	return
 	}
@@ -885,18 +905,19 @@ if(solochoice=="QQ"){
 
 if(solochoice=="Q"){
 	if(Nhand[8]=="QST" || (Nhand[8]=="QCT" && Nhand[7]!="QST") || Nhand[1]=="QST" || (Nhand[1]=="QCT" && Nhand[2]!="QST")){
-		alert("I call off the Old One!")
+		//alert("I call off the Old One!")
 		document.getElementById('messages').value = "I call off the Old One!"
 		partner = new Array(0,1,0,0,0)
 		visiblepartner = new Array(0,1,0,0,0)
+		calledace = "Old One"
 		document.Nscore.Nscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		partnerdelay = 1
 		return
 	}	
 	else{
-		alert("You don't have one black queen!")
+		//alert("You don't have one black queen!")
 		document.getElementById('messages').value = "You don't have one black queen!"
 		return
 	}
@@ -918,16 +939,17 @@ if(solochoice=="ACC"){
 					solopartner = 4
 					partner = new Array(0,1,0,0,1)}
 				if(Nhand[i]=="ACC"){
-					alert("You have the Ace of Clubs!")
+					//alert("You have the Ace of Clubs!")
 					document.getElementById('messages').value = "You have the Ace of Clubs!"
 					return}
 			}
-			alert("I need a partner...Ace of Clubs...Known!")
+			//alert("I need a partner...Ace of Clubs...Known!")
 			document.getElementById('messages').value = "I need a partner...Ace of Clubs...Known!"
-			solochoicetext = '<span style="color:black;">A&clubs; Known</span>'
+			solochoicetext = "Ace of Clubs"
+			calledace = '<span style="color:black;">A&clubs; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML= solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -935,7 +957,7 @@ if(solochoice=="ACC"){
 			return
 		}
 		else{
-			alert("I need a partner...Ace of Clubs...Unknown!")
+			//alert("I need a partner...Ace of Clubs...Unknown!")
 			document.getElementById('messages').value = "I need a partner...Ace of Clubs...Unknown!"
 			for(i=1;i<=8;i++){
 				if(Ehand[i]=="ACC"){
@@ -947,11 +969,12 @@ if(solochoice=="ACC"){
 				if(Whand[i]=="ACC"){
 					solopartner = 4
 					partner = new Array(0,1,0,0,1)}
-			solochoicetext = '<span style="color:black;">A&clubs; Unknown</span>'
+			solochoicetext = "Ace of Clubs"
+					calledace = '<span style="color:black;">A&clubs; Unknown</span>'
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML= solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -960,7 +983,7 @@ if(solochoice=="ACC"){
 		}
 	}
 	else{
-		alert("You don't have both black queens!")
+		//alert("You don't have both black queens!")
 		document.getElementById('messages').value = "You don't have both black queens!"
 	return
 	}
@@ -981,15 +1004,16 @@ if(solochoice=="AHH"){
 					solopartner = 4
 					partner = new Array(0,1,0,0,1)}
 				if(Nhand[i]=="AHH"){
-					alert("You have the Ace of Hearts!")
+					//alert("You have the Ace of Hearts!")
 					return}
 			}
-			alert("I need a partner...Ace of Hearts!...Known")
+			//alert("I need a partner...Ace of Hearts!...Known")
 			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Known"
-			solochoicetext = '<span style="color:black;">A&hearts; Known</span>'
+			solochoicetext = "Ace of Hearts"
+			calledace = '<span style="color:black;">A&hearts; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML= solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -997,9 +1021,10 @@ if(solochoice=="AHH"){
 			return
 		}
 		else{
-			alert("I need a partner...Ace of Hearts!...Unknown")
+			//alert("I need a partner...Ace of Hearts!...Unknown")
 			document.getElementById('messages').value = "I need a partner...Ace of Hearts!...Unknown"
-			solochoicetext = '<span style="color:black;">A&hearts; Unknown</span>'
+			solochoicetext = "Ace of Hearts"
+			calledace = '<span style="color:black;">A&hearts; Unknown</span>'
 			for(i=1;i<=8;i++){
 				if(Ehand[i]=="AHH"){
 					solopartner = 2
@@ -1013,7 +1038,7 @@ if(solochoice=="AHH"){
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML= solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -1022,7 +1047,7 @@ if(solochoice=="AHH"){
 		}
 	}
 	else{
-	alert("You don't have both black queens!")
+	//alert("You don't have both black queens!")
 	document.getElementById('messages').value = "You don't have both black queens!"
 	return
 	}
@@ -1046,15 +1071,16 @@ if(solochoice=="ASS"){
 					partner = new Array(0,1,0,0,1)
 					break}
 				if(Nhand[i]=="ASS"){
-					alert("You have the Ace of Spades!")
+					//alert("You have the Ace of Spades!")
 					return}
 			}
-			alert("I need a partner...Ace of Spades...Known!")
+			//alert("I need a partner...Ace of Spades...Known!")
 			document.getElementById('messages').value = "I need a partner...Ace of Spades...Known!"
-			solochoicetext = '<span style="color:black;">A&spades; Known</span>'
+			solochoicetext = "Ace of Spades"
+			calledace = '<span style="color:black;">A&spades; Known</span>'
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML= solochoicetext
+			document.getElementById("calledAceSlot").innerHTML= calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -1062,7 +1088,7 @@ if(solochoice=="ASS"){
 			return
 		}
 		else{
-			alert("I need a partner...Ace of Spades...Unknown!")
+			//alert("I need a partner...Ace of Spades...Unknown!")
 			document.getElementById('messages').value = "I need a partner...Ace of Spades...Unknown!"
 			for(i=1;i<=8;i++){
 				if(Ehand[i]=="ASS"){
@@ -1077,12 +1103,12 @@ if(solochoice=="ASS"){
 					solopartner = 4
 					partner = new Array(0,1,0,0,1)
 					break}
-
-			solochoicetext = '<span style="color:black;">A&spades; Unknown</span>'
+			solochoicetext = "Ace of Spades"
+			calledace = '<span style="color:black;">A&spades; Unknown</span>'
 			}
 			visiblepartner = new Array(0,1,-1,-1,-1)
 			document.Nscore.Nscore.style.color = "red"
-			document.getElementById("calledAceSlot").innerHTML = solochoicetext
+			document.getElementById("calledAceSlot").innerHTML = calledace
 			partnercount = 1
 			partners = 1
 		partnerdelay = 1
@@ -1092,7 +1118,7 @@ if(solochoice=="ASS"){
 		}
 	}
 	else{
-	alert("You don't have both black queens!")
+	//alert("You don't have both black queens!")
 	document.getElementById('messages').value = "You don't have both black queens!"
 	return
 	}
@@ -1118,30 +1144,30 @@ if(partners==0){
 
 				}
 				if(j==8){
-if(deckvalue[i]=="ASS"){calledacetext="Ace of Spades"
+if(deckvalue[i]=="ASS"){solochoicetext="Ace of Spades"
 acecode="AS"
 calledace = '<span style="color:black;">A&spades;</span>';
 }
-if(deckvalue[i]=="ACC"){calledacetext="Ace of Clubs"
+if(deckvalue[i]=="ACC"){solochoicetext="Ace of Clubs"
 acecode="AC"
   calledace = '<span style="color:black;">A&clubs;</span>';
 }
-if(deckvalue[i]=="AHH"){calledacetext="Ace of Hearts"
+if(deckvalue[i]=="AHH"){solochoicetext="Ace of Hearts"
 acecode="AH"
   calledace = '<span style="color:black;">A&hearts;</span>';
 }
 					
 						if(Csuit[getPosition(deckvalue[i].charAt(2),suits)]==0){
 
-							alert(playername[number]+" needs a partner..." + calledacetext + "...Unknown!")
-							document.getElementById('messages').value = playername[number]+" needs a partner..." + calledacetext + "...Unknown!"
-							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"U"
+							//alert(playername[number]+" needs a partner..." + calledacetext + "...Unknown!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + solochoicetext + "...Unknown!"
+							//solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"U"
 calledace = calledace + " Unknown"
 						}
 						else{
-							alert(playername[number]+" needs a partner..." + calledacetext + "...Known!")
-							document.getElementById('messages').value = playername[number]+" needs a partner..." + calledacetext + "...Known!"
-							solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"K"
+							//alert(playername[number]+" needs a partner..." + calledacetext + "...Known!")
+							document.getElementById('messages').value = playername[number]+" needs a partner..." + solochoicetext + "...Known!"
+							//solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"K"
 calledace = calledace + " Known"
 						}
 						
@@ -1245,9 +1271,10 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 	}
 
 	if(Chand[8]!="QCT" && Chand[8]!="QST" && Csuit[1]==8){
-		alert(playername[number]+" calls off both Old Ones!")
+		//alert(playername[number]+" calls off both Old Ones!")
 		document.getElementById('messages').value = playername[number]+" calls off both Old Ones!"
 		solochoice="QQ"
+		calledace = "Both Old Ones"
 		soloplayer = number
 
 		switch(number){
@@ -1256,7 +1283,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,1,0,0)
 		visiblepartner = new Array(0,0,1,0,0)
 		document.Escore.Escore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 
@@ -1264,7 +1291,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,0,1,0)
 		visiblepartner = new Array(0,0,0,1,0)
 		document.Sscore.Sscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 
@@ -1272,7 +1299,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,0,0,1)
 		visiblepartner = new Array(0,0,0,0,1)
 		document.Wscore.Wscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 		
@@ -1280,9 +1307,11 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 	}
 
 	if((Chand[8]=="QCT" && Chand[7]!="QST" && Csuit[1]>6) || (Chand[8]=="QST" && Csuit[1]>7)){
-		alert(playername[number]+" calls off the Old One!")
+		//alert(playername[number]+" calls off the Old One!")
 		document.getElementById('messages').value = playername[number]+" calls off the Old One!"
+		calledace = "One Old One"
 		solochoice="Q"
+	
 		soloplayer = number
 		
 		switch(number){
@@ -1291,7 +1320,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,1,0,0)
 		visiblepartner = new Array(0,0,1,0,0)
 		document.Escore.Escore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 
@@ -1299,7 +1328,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,0,1,0)
 		visiblepartner = new Array(0,0,0,1,0)
 		document.Sscore.Sscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 
@@ -1307,7 +1336,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 		partner = new Array(0,0,0,0,1)
 		visiblepartner = new Array(0,0,0,0,1)
 		document.Wscore.Wscore.style.color = "red"
-		document.getElementById("calledAceSlot").innerHTML= solochoice
+		document.getElementById("calledAceSlot").innerHTML= calledace
 		partners = 1
 		break
 		
@@ -1334,7 +1363,7 @@ document.getElementById("calledAceSlot").innerHTML = calledace;
 
 function beginhand(){
 
-
+if(handover==0){
 
 
 if(hand==0){
@@ -1345,22 +1374,7 @@ if(hand==2){
 	return}
 
 
-for(i=1;i<=8;i++){
-	for(j=1;j<=4;j++){
-		if(Nhand[i].charAt(2)==suits[j]){
-			Nsuit[j]=Nsuit[j]+1
-		}
-		if(Ehand[i].charAt(2)==suits[j]){
-			Esuit[j]=Esuit[j]+1
-		}
-		if(Shand[i].charAt(2)==suits[j]){
-			Ssuit[j]=Ssuit[j]+1
-		}
-		if(Whand[i].charAt(2)==suits[j]){
-			Wsuit[j]=Wsuit[j]+1
-		}
-	}
-}
+
 
 
 
@@ -1401,6 +1415,13 @@ partnerdelay = 0
 rotate()
 }
 }
+}
+else{
+endhand()	
+}
+
+
+
 }
 
 
@@ -1549,38 +1570,38 @@ if(Nplay[number] == 0){
 		if(Nhand[number].charAt(2)!=trick[0]){
 			for(i=1;i<=8;i++){
 				if(Nhand[i].charAt(2)==trick[0] && Nplay[i]!=1){
-					alert("You must follow suit!")
+					//alert("You must follow suit!")
 					document.getElementById('messages').value = "You must follow suit!"
 					return	
 				}	
 			}
 		}
 		if(Nhand[number]==solochoice && trick[0]!=solochoice.charAt(2) && trickcount<8 ){
-			alert("You cannot play " + solochoicetext + " yet!")
+			//alert("You cannot play " + solochoicetext + " yet!")
 			document.getElementById('messages').value = "You cannot play " + solochoicetext + " yet!"
 			return
 		}
 		if(Nhand[number]!=solochoice && trick[0]==solochoice.charAt(2) && solopartner==1 && soloplay==0){
-			alert("You must play " + solochoicetext + "!")
+			//alert("You must play " + solochoicetext + "!")
 			document.getElementById('messages').value = "You must play " + solochoicetext + "!"
 			return
 		}
 		if(soloplayer==1 && trick[0]!=solochoice.charAt(2) && Nhand[number].charAt(2)==solochoice.charAt(2) && soloplay==0 && 
 		   Nsuit[getPosition(solochoice.charAt(2),suits)]<9-trickcount){
-			alert("You can't play this card yet!")
+			//alert("You can't play this card yet!")
 			document.getElementById('messages').value = "You can't play this card yet!"
 			return
 		}
 		if(soloplayer==1 && soloplay==0 && trick[0]==solochoice.charAt(2) && Nhand[number].charAt(2)=="T" && 
 		   Nsuit[getPosition("T",suits)]<9-trickcount){
-			alert("You can't trump " + solochoicetext + "!")
+			//alert("You can't trump " + solochoicetext + "!")
 			document.getElementById('messages').value = "You can't trump " + solochoicetext + "!"
 			return
 		}
 	}
 	else{																//LEADING
 		if(Nhand[number]!=solochoice && Nhand[number].charAt(2)==solochoice.charAt(2) && solopartner==1 && soloplay==0){
-			alert("You cannot play this card before you play " + solochoicetext + "!")
+			//alert("You cannot play this card before you play " + solochoicetext + "!")
 			document.getElementById('messages').value = "You cannot play this card before you play " + solochoicetext + "!"
 			return
 		}
@@ -1651,7 +1672,6 @@ tempplay = 0
 if(trick[0]==0){										//YOU ARE LEADING
 
 	validplays(Chand,Cplay,Csuit,number)							//FIND VALID PLAYS
-
 	if( partner[number] == 1){									//ON OFFENSE
 		if(Chand[temphand[1]].charAt(2) == "T"){							//TRUMP
 			if(soloplayer!=number && ((deckvalue[1]=="QCT"&& Chand[8]!="QCT" )||
@@ -2304,56 +2324,61 @@ for(i=1;i<=8;i++){
 			
 
 		if(offense==120){
-			alert("Offense: "+offense + " Defense: "+defense+"\n"+
+			/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 					"Schwartz!!! " + offensename[1]+" wins 9 chips! \n (" +
-					defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" take no points.)")
+					defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" take no points.)")*/
 			document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 					"Schwartz!!! " + offensename[1]+" wins 9 chips!"
 				for(i=1;i<=4;i++){
 					if(partner[i]==1){
+						//awardchips(9,"blue",i)
 						chips[i]=chips[i]+9}					
 					}
 				}
 			else{if(offense>90){
-				alert("Offense: "+offense + " Defense: "+defense+"\n"+
+				/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" wins 6 chips! \n(" +
-						 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" do not make Schneider.)")
+						 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" do not make Schneider.)")*/
 				document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" wins 6 chips!"
 					for(i=1;i<=4;i++){
 					if(partner[i]==1){
+						//awardchips(6,"blue",i)
 						chips[i]=chips[i]+6}					
 						}
 					}
 				else{if(offense>60){
-					alert("Offense: "+offense + " Defense: "+defense+"\n"+
+					/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							offensename[1]+" wins 3 Chips! \n("+
-							 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+ " make Schneider.)" )
+							 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+ " make Schneider.)" )*/
 					document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 							offensename[1]+" wins 3 Chips!"
 						for(i=1;i<=4;i++){
 					if(partner[i]==1){
+						//awardchips(3,"blue",i)
 						chips[i]=chips[i]+3}					
 						}
 					}
 					else{if(offense>30){
-						alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips! \n(" +
-							 offensename[1] + " makes Schneider.)")
+							 offensename[1] + " makes Schneider.)")*/
 						document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips!"
 							for(i=1;i<=4;i++){
 					if(partner[i]==0){
+						//awardchips(2,"red",i)
 						chips[i]=chips[i]+2}					
 						}
 						}
-						else{alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						else{/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips! \n(" + 
-								offensename[1] +  " does not make Schneider.)")
+								offensename[1] +  " does not make Schneider.)")*/
 							document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips!"
 						for(i=1;i<=4;i++){
 					if(partner[i]==0){
+						//awardchips(3,"red",i)
 						chips[i]=chips[i]+3}					
 							}
 						}
@@ -2364,56 +2389,61 @@ for(i=1;i<=8;i++){
 }
 
 	else{	if(offense==120){															//PLAYING IN PAIRS
-			alert("Offense: "+offense + " Defense: "+defense+"\n"+
+			/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 					"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips! \n (" +
-					defensename[1] + " and " +defensename[2]+ " take no points.)")
+					defensename[1] + " and " +defensename[2]+ " take no points.)")*/
 			document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 					"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips!"
 				for(i=1;i<=4;i++){
 					if(partner[i]==1){
+							//awardchips(3,"white",i)
 						chips[i]=chips[i]+3}					
 					}
 				}
 			else{if(offense>90){
-				alert("Offense: "+offense + " Defense: "+defense+"\n"+
+				/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" and "+offensename[2]+" win 2 chips! \n(" +
-						 defensename[1] + " and " +defensename[2]+ " do not make Schneider.)")
+						 defensename[1] + " and " +defensename[2]+ " do not make Schneider.)")*/
 				document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" and "+offensename[2]+" win 2 chips!"
 					for(i=1;i<=4;i++){
 					if(partner[i]==1){
+								//awardchips(2,"white",i)
 						chips[i]=chips[i]+2}					
 						}
 					}
 				else{if(offense>60){
-					alert("Offense: "+offense + " Defense: "+defense+"\n"+
+					/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" and "+offensename[2]+" win 1 Chip! \n("+
-						 defensename[1] + " and " +defensename[2]+ " make Schneider.)" )
+						 defensename[1] + " and " +defensename[2]+ " make Schneider.)" )*/
 					document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 						offensename[1]+" and "+offensename[2]+" win 1 Chip!"
 						for(i=1;i<=4;i++){
 					if(partner[i]==1){
+							//awardchips(1,"white",i)
 						chips[i]=chips[i]+1}					
 						}
 					}
 					else{if(offense>30){
-						alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+" win 2 chips! \n(" + 
-							offensename[1] + " and " +offensename[2]+ " make Schneider.)")
+							offensename[1] + " and " +offensename[2]+ " make Schneider.)")*/
 						document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+" win 2 chips!"
 							for(i=1;i<=4;i++){
 					if(partner[i]==0){
+						//awardchips(2,"red",i)
 						chips[i]=chips[i]+2}					
 						}
 						}
-						else{alert("Offense: "+offense + " Defense: "+defense+"\n"+
+						else{/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+" win 3 chips! \n(" + 
-							offensename[1] + " and " +offensename[2]+ " do not make Schneider.)")
+							offensename[1] + " and " +offensename[2]+ " do not make Schneider.)")*/
 							document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+" win 3 chips!"
 						for(i=1;i<=4;i++){
 					if(partner[i]==0){
+						//awardchips(3,"red",i)
 						chips[i]=chips[i]+3}					
 							}
 						}
@@ -2421,6 +2451,25 @@ for(i=1;i<=8;i++){
 				}
 			}
 		}
+
+
+handover = 1
+document.getElementById('continue').style.display = 'inherit'
+document.getElementById('transcript').style.display = 'inherit'
+document.getElementById('cheatsheet').style.display = 'none'
+return
+	}
+	}
+turn=0
+rotate()
+}
+
+
+
+
+
+function endhand(){
+
 document.Nscore.Nscore.style.color = "black"
 document.Escore.Escore.style.color = "black"
 document.Sscore.Sscore.style.color = "black"
@@ -2431,36 +2480,32 @@ document.Escore.Escore.value = chips[2]
 document.Sscore.Sscore.value = chips[3]
 document.Wscore.Wscore.value = chips[4]	
 
-
-
-
 transcript = transcript+"Offense: "+offense + " Defense: "+defense
-document.getElementById('transcript').style.display = 'inherit'
-document.getElementById('cheatsheet').style.display = 'none'
+
 
 
 //CHECK FOR MATCH WINNER
 
 	if(chips[1]>=12 && chips[1]>chips[2] && chips[1]>chips[3] && chips[1]>chips[4]){
-		alert("Game Over! " +playername[1] +" won with "+chips[1]+" chips!")
+		//alert("Game Over! " +playername[1] +" won with "+chips[1]+" chips!")
 		document.getElementById('messages').value = "Game Over! " +playername[1] +" won with "+chips[1]+" chips!"
 		gameover = 1
 		dealer = 4
 	}
 	if(chips[2]>=12 && chips[2]>chips[1] && chips[2]>chips[3] && chips[2]>chips[4]){
-		alert("Game Over! " +playername[2] +" won with "+chips[2]+" chips!")
+		//alert("Game Over! " +playername[2] +" won with "+chips[2]+" chips!")
 		document.getElementById('messages').value = "Game Over! " +playername[2] +" won with "+chips[2]+" chips!"
 		gameover = 1
 		dealer = 1
 	}
 	if(chips[3]>=12 && chips[3]>chips[2] && chips[3]>chips[1] && chips[3]>chips[4]){
-		alert("Game Over! " +playername[3] +" won with "+chips[3]+" chips!")
+		//alert("Game Over! " +playername[3] +" won with "+chips[3]+" chips!")
 		document.getElementById('messages').value = "Game Over! " +playername[3] +" won with "+chips[3]+" chips!"
 		gameover = 1
 		dealer = 2
 	}
 	if(chips[4]>=12 && chips[4]>chips[2] && chips[4]>chips[3] && chips[4]>chips[1]){
-		alert("Game Over! " +playername[4] +" won with "+chips[4]+" chips!")
+		//alert("Game Over! " +playername[4] +" won with "+chips[4]+" chips!")
 		document.getElementById('messages').value = "Game Over! " +playername[4] +" won with "+chips[4]+" chips!"
 		gameover = 1
 		dealer = 3
@@ -2473,9 +2518,9 @@ document.getElementById('cheatsheet').style.display = 'none'
 
 
 
-
+document.getElementById('continue').style.display = 'none'
 document.getElementById('deal').style.display = 'inherit'
-
+document.getElementById('messages').value = ""
 
 
 
@@ -2489,6 +2534,11 @@ document.getElementById("calledAceSlot").innerHTML= ""
 
 
 scorer = 0
+document.card11.src = "image2/Card01.gif"
+document.card21.src = "image2/Card01.gif"
+document.card31.src = "image2/Card01.gif"
+document.card41.src = "image2/Card01.gif"
+
 document.card12.src = "image2/Card01.gif"
 document.card22.src = "image2/Card01.gif"
 document.card32.src = "image2/Card01.gif"
@@ -2520,15 +2570,51 @@ pasttrick = new Array (0,0,0,0,0)
 
 
 
-return}
 }
 
 
-turn=0
-rotate()
+
+
+
+function awardchips(number,color,player){
+switch(player){
+case 1:
+	if(color=="white" && number==1){document.card11.src = "image2/chipW2.png"}
+	else{ if(color=="white" && number==2){document.card11.src = "image2/chipW2.png"}
+		else{ if(color=="white" && number==3){document.card11.src = "image2/chipW2.png"}
+			else{ if(color=="red" && number==2){document.card11.src = "image2/chipW2.png"}
+					else{ if(color=="red" && number==3){document.card11.src = "image2/chipW2.png"}
+							else{ if(color=="blue" && number==3){document.card11.src = "image2/chipW2.png"}
+									else{ if(color=="blue" && number==6){document.card11.src = "image2/chipW2.png"}
+										else{ if(color=="blue" && number==9){document.card11.src = "image2/chipW2.png"}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				
+break
+
+case 2:
+	
+	document.card21.src = "image2/chipW2.png"
+break
+
+case 3:
+	
+	document.card31.src = "image2/chipW2.png"
+break
+
+case 4:
+	
+	document.card41.src = "image2/chipW2.png"
+break
 }
 
 
+}
 
 
 
@@ -2569,7 +2655,6 @@ const modal = document.getElementById("previoustrickmodal");
     modal.style.display = "none";   // hide
 
 }
-
 
 
 
@@ -2775,7 +2860,7 @@ sortingchoice()
       <form name="Nscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Nscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
       </form>
     </td>
     <td width="66"></td>
@@ -2791,11 +2876,17 @@ sortingchoice()
       <form name="Wscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Wscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
       </form>
     </td>
 
-    <td width="66"></td>
+    <td width="66" align="center" valign="middle" >
+		<button id="backdoor" type="button" onclick="showtranscript()"
+              style="background-color:green; border:0px; 
+                     width:40px; height:40px; display:block;">
+        
+      </button>
+	</td>
 
     <td width="66" align="center" valign="middle" style="padding:2px 0;">
       <form name="Ename" style="margin:0;">
@@ -2806,7 +2897,7 @@ sortingchoice()
       <form name="Escore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Escore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
       </form>
     </td>
   </tr>
@@ -2822,7 +2913,7 @@ sortingchoice()
       <form name="Sscore" class="score" style="margin:2px 0 0;">
         <input type="text" name="Sscore" readonly
                style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:40px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
       </form>
     </td>
     <td width="66"></td>
@@ -2864,8 +2955,8 @@ sortingchoice()
               </button>
 
               <div id="calledAceSlot"
-                   style="font:bold 14pt Arial; color:black; background-color:#84B5E1;
-                          border:2px solid transparent; width:90px; height:30px;
+                   style="font:bold 12pt Arial; color:black; background-color:#84B5E1;
+                          border:2px solid transparent; width:110px; height:30px;
                           text-align:center; line-height:30px;
                           display:inline-block; vertical-align:middle; margin-left:10px;">
               </div>
@@ -2878,11 +2969,10 @@ sortingchoice()
 
       <!-- Message box -->
       <form action="#">
-        <p style="margin:8px 0 0 0;">
-          <textarea id="messages" name="Message" rows="4" cols="22" readonly
-                    style="resize:none; background-color:beige;"> 
-Welcome to Schafkopf 2.0
-          </textarea>
+        <p style="margin:0px 0 0 0;">
+<textarea id="messages" name="Message" rows="4"  readonly
+          style="resize:none; background-color:beige; width:195px">
+</textarea>
         </p>
       </form>
     </td>
@@ -2895,8 +2985,11 @@ Welcome to Schafkopf 2.0
             <img src="image2/Card01.gif" name="card12" width="133" height="133" onclick="opentrick(1)">
           </td>
           <td width="133" align="center">
-            <img src="image2/cardBK.gif" name="card11" width="80" height="126">
-          </td>
+  			<div style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+    		<img src="image2/cardBK.gif" name="card11" 
+         	style="max-width:100%; max-height:100%; object-fit:contain;">
+  			</div>
+		  </td>
           <td width="133" align="center">
             <img src="image2/Card01.gif" name="card22" width="133" height="133" onclick="opentrick(2)">
           </td>
@@ -2904,8 +2997,11 @@ Welcome to Schafkopf 2.0
 
         <tr>
           <td width="133" align="center">
-            <img src="image2/cardBK.gif" name="card41" width="80" height="126">
-          </td>
+  			<div style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+    		<img src="image2/cardBK.gif" name="card41" 
+         	style="max-width:100%; max-height:100%; object-fit:contain;">
+  			</div>
+		  </td>
 
           <td width="133" align="center">
             <button id="deal" type="button" name="deal" onclick="deal()"
@@ -2923,8 +3019,11 @@ Welcome to Schafkopf 2.0
           </td>
 
           <td width="133" align="center">
-            <img src="image2/cardBK.gif" name="card21" width="80" height="126">
-          </td>
+  			<div style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+    		<img src="image2/cardBK.gif" name="card21" 
+         	style="max-width:100%; max-height:100%; object-fit:contain;">
+  			</div>
+		  </td>
         </tr>
 
         <tr>
@@ -2932,8 +3031,11 @@ Welcome to Schafkopf 2.0
             <img src="image2/Card01.gif" name="card42" width="133" height="133" onclick="opentrick(4)">
           </td>
           <td width="133" align="center">
-            <img src="image2/cardBK.gif" name="card31" width="80" height="126">
-          </td>
+  			<div style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+    		<img src="image2/cardBK.gif" name="card31" 
+         	style="max-width:100%; max-height:100%; object-fit:contain;">
+  			</div>
+		  </td>
           <td width="133" align="center">
             <img src="image2/Card01.gif" name="card32" width="133" height="133" onclick="opentrick(3)">
           </td>
@@ -2945,7 +3047,7 @@ Welcome to Schafkopf 2.0
 <td style="width:200px; vertical-align:top;">
 
   <!-- Make this column a vertical flex stack -->
-  <div style="display:flex; flex-direction:column; height:400px;"> <!-- match your game height -->
+  <div style="display:flex; flex-direction:column; height:404px;"> <!-- match your game height -->
 
     <!-- Top: Lead box -->
     <div>
@@ -3019,18 +3121,7 @@ Welcome to Schafkopf 2.0
 <!-- MASTERTABLE ENDS-->
 
 
-<script>
-    function setScale() {
-      const baseWidth = 1200; // the width your layout was designed for
-      const scale = window.innerWidth / baseWidth;
-      const game = document.getElementById("game-area");
-      game.style.transform = "scale(" + scale + ")";
-      game.style.transformOrigin = "top left";
-    }
 
-    window.addEventListener("resize", setScale);
-    setScale(); // run once when page loads
-  </script>
 
 </body>
 
@@ -3168,33 +3259,7 @@ Welcome to Schafkopf 2.0
 
 
 
-<script>
-function setScaleAuto() {
-  const baseW = 800, baseH = 600;
-  const el = document.getElementById("game-inner");
 
-  const sx = window.innerWidth  / baseW;
-  const sy = window.innerHeight / baseH;
-
-  // Pick the smaller scale so it always fits
-  let scale = Math.min(sx, sy);
-
-  // Apply extra shrink factor (90%)
-  scale = scale * 0.98;
-
-  el.style.transform = `scale(${scale})`;
-
-  // Center horizontally + vertically
-  const x = (window.innerWidth  - baseW * scale) / 2;
-  const y = (window.innerHeight - baseH * scale) / 2;
-  el.style.left = `${x}px`;
-  el.style.top  = `${y}px`;
-}
-
-window.addEventListener("resize", setScaleAuto);
-window.addEventListener("orientationchange", setScaleAuto);
-document.addEventListener("DOMContentLoaded", setScaleAuto);
-</script>
 
 
 
