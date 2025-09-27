@@ -101,19 +101,19 @@
 
 
 
- /*
+ 
   table { outline: 2px dashed red; }
   td { outline: 1px dotted blue; }
-*/
+
 
 
 
 
 <!-- add this in <head> or before </body> -->
 
-  /* make widths exact and remove default paddings/margins */
+  /* make widths exact and remove default paddings/margins 
   #col-left, #col-left * { box-sizing: border-box; }
-  #col-left form { margin: 0; }
+  #col-left form { margin: 0; } */
 
   /* name inputs (Nname/Wname/Ename/Sname) */
   #col-left input[type="text"] {
@@ -134,15 +134,58 @@
     line-height: 30px;
     font-size: 18px;
     background-color: #84B5E1;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
   }
 
   /* keep the little 66px grid tight */
   #col-left .pair { padding: 4px 0; }
 
-  /* keep the message box inside 200px on iPad */
-  #col-left textarea { width: 180px; max-width: 100%; }
 
+
+
+/* iOS sanity reset for your left column UI */
+#col-left, #col-left * { box-sizing: border-box; }
+#col-left form { margin: 0; }
+
+
+/* Shared pill button style (use on Call/Cheat Sheet/Options, etc.) */
+.btn-pill {
+  display: inline-flex;           /* consistent vertical centering */
+  align-items: center;
+  justify-content: center;
+  width: 50px;                   /* fixed; adjust as needed */
+  height: 30px;                   /* fixed; adjust as needed */
+  padding: 0;                     /* kill iOS default padding */
+  font-family: Arial, sans-serif;
+
+  font-size: 14px;                /* >=16px avoids zoom */
+  line-height: 1;                 /* no extra vertical space */
+  color: black;
+  background: #84B5E1;
+  border: 2px solid black;
+  border-radius: 50px;            /* oval shape */
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+
+/* Message box (textarea) */
+#messages {
+  width: 200px;            /* fixed width; ignore cols=* */
+  height: 90px;            /* pick a fixed height you like */
+  resize: none;
+  background: beige;
+  color: black;
+  
+  font-size: 13px;         /* >=16px prevents iOS zoom/resizing */
+  line-height: 1.2;
+  padding: 4px 4px;        /* explicit padding avoids iOS defaults */
+  border: 1px solid #000;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+}
 
 
 
@@ -2948,11 +2991,10 @@ sortingchoice()
           <tr>
             <td colspan="2" align="center" style="padding-top:6px;">
               <button type="button" id="callpartner" name="callpartner"
-                      onclick="partnerchoice()"
-                      style="background-color:#84B5E1; border-color:black; border-radius:50px;
-                             font-size:18px; color:black; display:inline-block; vertical-align:middle;">
-                Call
-              </button>
+        class="btn-pill"
+        onclick="partnerchoice()">
+  Call
+</button>
 
               <div id="calledAceSlot"
                    style="font:bold 12pt Arial; color:black; background-color:#84B5E1;
@@ -2969,12 +3011,10 @@ sortingchoice()
 
       <!-- Message box -->
       <form action="#">
-        <p style="margin:0px 0 0 0;">
-<textarea id="messages" name="Message" rows="4"  readonly
-          style="resize:none; background-color:beige; width:195px">
-</textarea>
-        </p>
-      </form>
+  <p style="margin:8px 0 0 0;">
+    <textarea id="messages" name="Message" readonly>Welcome to Schafkopf 2.0</textarea>
+  </p>
+</form>
     </td>
 
     <!-- ========== MIDDLE COLUMN (400px) ========== -->
@@ -3102,7 +3142,7 @@ sortingchoice()
         <tr>
           <td width="200" valign="top" align="center">
             <label for="speedSlider"><b>Speed</b></label><br>
-            <input type="range" id="speedSlider" min="0" max="2000" step="100" value="1500" style="width:190px;">
+            <input type="range" id="speedSlider" min="0" max="2000" step="100" value="1000" style="width:190px;">
           </td>
         </tr>
       </table>
