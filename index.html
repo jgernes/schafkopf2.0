@@ -597,6 +597,7 @@ document.getElementById("gameovermodal").style.display = "none";
 
 //DEAL DEAL DEAL DEAL DEAL DEAL
 				function deal() {
+					options()
 					document.getElementById("optionsmodal").style.display = "none"
 					document.getElementById('deal').style.display = 'none'
 					document.getElementById('transcript').style.display = 'none'
@@ -1929,6 +1930,7 @@ document.getElementById("gameovermodal").style.display = "none";
 				function assistant() {
 					const box1 = document.getElementById("ShowPlays");
 					if (box1.checked && Nturn == 1) {
+
 						temphand = new Array("0")
 						tempplay = 0
 						validplays(Nhand, Nplay, Nsuit, 1)
@@ -2033,6 +2035,16 @@ document.getElementById("gameovermodal").style.display = "none";
 						document.images["card7"].classList.remove("highlight");
 						document.images["card8"].classList.remove("highlight");
 					}
+
+
+						document.getElementById("RemovePlays").addEventListener("change", () => {
+  updateCheatSheet(deckvalue);
+});
+
+
+
+
+
 
 
 
@@ -3438,7 +3450,7 @@ document.getElementById("gameovermodal").style.display = "none";
 				}
 
 
-
+/*
 				function updateCheatSheet(deckvalue) {
 					const remaining = new Set(deckvalue);
 
@@ -3452,6 +3464,25 @@ document.getElementById("gameovermodal").style.display = "none";
 					});
 				}
 
+*/
+function updateCheatSheet(deckvalue) {
+  // check if the toggle is active
+  const showGrey = document.getElementById("RemovePlays").checked;
+
+  document.querySelectorAll(".card-symbol").forEach(el => {
+    const code = el.dataset.code; // e.g. "QCT"
+
+    if (!deckvalue.includes(code) && showGrey) {
+      el.classList.add("card-greyed");
+    } else {
+      el.classList.remove("card-greyed");
+    }
+  });
+}
+
+// run whenever checkbox changes
+
+				
 
 
 
@@ -4153,14 +4184,18 @@ document.getElementById("gameovermodal").style.display = "none";
 			<tr>
 				<td style="padding-top:0;">
 					<form name="Plays">
-						<b>Show Plays</b><br>
+						
 						<label>
 							<input type="checkbox" id="ShowPlays" onchange=assistant()>
 							Allowed
 						</label>
 						<label>
 							<input type="checkbox" id="TellPlays" onchange=assistant()>
-							Suggested
+							Suggested 
+						</label>
+						<label>
+							<input type="checkbox" id="RemovePlays" onchange=assistant()>
+							Remaining Cards
 						</label>
 					</form>
 				</td>
@@ -4219,8 +4254,8 @@ document.getElementById("gameovermodal").style.display = "none";
 <div id="instructionmodal">
 	<div class="modal-content">
 		<div style="padding:6px; font-size:14px; line-height:1;">
-			<h3 style="text-align:center;">Schafkopf 2.0</h3>
-
+			<h1 style="text-align:center;">Schafkopf 2.0</h1>
+<h2>Rules of Play</h2>
 			<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit).
 				The cards are arranged into three fail suits: clubs (A&clubs; 10&clubs; K&clubs; 9&clubs; 8&clubs;
 				7&clubs;); hearts (A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts; 7&hearts;); spades (A&spades;
@@ -4267,17 +4302,40 @@ document.getElementById("gameovermodal").style.display = "none";
 				similarly, the player with two black queens may not prematurely play any cards of that suit (if it is
 				Known) or trump that trick (if it is Unknown), unless there is no other legal play. </p>
 			<p>Even though each hand is played with partners, the game is won by a single player. Because of this,
-				winning a hand may cause your partner to Go Out.
-				However, it is considered unsportsmanlike to intentioanlly lose a hand to keep your partner from Going
+				winning a hand may cause your partner to win the game, called Going Out.
+				However, it is considered unsportsmanlike to intentionally lose a hand to keep your partner from Going
 				Out;
 				you must attempt to win every hand, no matter the overall score.
 				The first player to earn at
-				least 12 chips wins the game, and is said to Go Out.
+				least 12 chips wins the game.
 				If two or more players are tied with at least 12 chips, then the game
 				continues until a single player has the most chips. This need not be one of the original players who was
 				tied. If another game is played, the winning player is traditionally the dealer.</p>
+<h2>Game Features</h2>
+<h4>Deck of Cards</h4>
+<p>This game uses a classic German deck of Skat cards made by Piatnik. The Queens are marked with a D (for Dame), the Jacks are marked with a B (for Bauer), and the Kings are marked with a K (for König).</p>
+<h4>Score Box</h4>
+<p>Before the cards are dealt each hand, this will display each player's chip total for the game. During the hand, this will display each player's point total for the hand. It will also highlight in red each member of the Offense, once they have been revealed (by playing a black queen, calling for a partner, playing the called Ace, or calling off the Old Ones).</p>
+<h4>Call Button</h4>
+<p>If you need to call for a partner or Call Off an Old One, you must do so after the cards are dealt, but before you press continue, when the message displayed is "Everyone happy?". Select the option you want and press the call button. The option you selected will appear in the box to the right of the button. If you do not use this option, but a computer player does, this will appear in the box when you press continue.</p>
+<h4>Message Box</h4>
+<p>This will contain important messages throughout the game, including: when someone calls for a partner; if you attempt to make an invalid play; the point and chip total for each hand; the game winner. Also be on the lookout for some table talk.</p>
+<h4>Options</h4>
+<p>At the beginning of the game, and before each deal, you may select new names for the players. You may also select the order in which to sort your hand, either higher cards on the Left, or higher cards on the Right. These options may not be changed mid-hand.</p>
+<h4>Cheat Sheet</h4>
+<p>Once the cards have been dealt, the cheat sheet provides the human player with several forms of assistance. The sheet itself shows all 32 cards organized by suit and in ranked order. It also displays the point value for each card. The option to show Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will highlight a single suggested play (please note, the suggested play may not be the best play). Th option to show remaining cards will grey out all cards that have been played. These features may be toggled on or off at any time during the hand, and they may be used together or separately. These features are only avaiable during the hand, but your selections will be saved between hands.</p>
+<h4>Transcript</h4>
+<p>At the end of each hand, you may view a transcript of the hand, which shows every player's hand and each trick.
+</p>
+<h4>Speed Slider</h4>
+<p>This controls the speed at which the cards are dealt and the computer players play. It may be adjusted at any time during the game.</p>
+<h4>Previous Trick</h4>
+<p>After a player takes a trick, the trick will appear to their right face down. Clicking on the trick will reveal the cards in the trick. You may only view the last trick which was taken. </p>
 
-
+<h2>General Strategies</h2>
+<p>If a player from the Offense is leading, they generally lead a low, high-value trump card (A&diams;, 10&diams;, K&diams;). Their partner is expected to play the Old One (Q&clubs; or Q&spades;) to take the trick. If a player on Defense is leading, they generally lead a non-trump ace (A&clubs;, A&hearts;, A&spades;) or a low fail card.</p>
+<p>Since there are only 6 cards in each fail suit, the suit will go around at most once.</p>
+<p>Since the strongest cards are not gerneally the highest value cards, you should always consider which attribute is more important at the moment.</p>
 		</div>
 	</div>
 </div>
