@@ -110,7 +110,7 @@
 			padding: 6px;
 			font-size: 13.5px;
 			text-align: justify;
-			max-height: 550px;
+			max-height: 560px;
 			/* pick the height you want */
 			overflow-y: auto;
 			/* adds vertical scrollbar when needed */
@@ -447,6 +447,14 @@
   margin: 0 !important;
   box-sizing: border-box;
 }
+
+
+#optionsmodal, #optionsmodal * {
+    font-family: Arial, Helvetica, sans-serif;   /* force same font */
+    line-height: 1.2;                            /* lock line height */
+    -webkit-text-size-adjust: 100%;              /* prevent iOS auto-zoom/resizing */
+    box-sizing: border-box;                      /* predictable sizing */
+  }
 
 
  #cheatmodal, #cheatmodal * {
@@ -1041,11 +1049,11 @@ document.getElementById("gameovermodal").style.display = "none";
 
 
 
-
-				/*
+/*
 				
 				
-									//TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
+				
+//TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
 				
 									Nhandimage = new Array(0, "image2/card9SS.gif", "image2/cardASS.gif", "image2/cardJST.gif", "image2/cardJCT.gif", "image2/card8DT.gif", "image2/card7HH.gif", "image2/card9CC.gif", "image2/card8HH.gif")
 									Ehandimage = new Array(0, "image2/card1CC.gif", "image2/card9DT.gif", "image2/cardADT.gif", "image2/card7CC.gif", "image2/card1HH.gif", "image2/cardKCC.gif", "image2/cardJDT.gif", "image2/card1DT.gif")
@@ -1059,8 +1067,8 @@ document.getElementById("gameovermodal").style.display = "none";
 									deckvalue[16] = "ACC"
 									deckvalue[17] = "AHH"
 				
-				*/
 				
+				*/
 
 
 
@@ -1246,7 +1254,7 @@ document.getElementById("gameovermodal").style.display = "none";
 						if (Nhand[8] != "QCT" && Nhand[8] != "QST" && Nhand[1] != "QCT" && Nhand[1] != "QST") {
 							//alert("I call off both Old Ones!")
 							document.getElementById('messages').value = "I call off both Old Ones!"
-							calledace = "Both Old Ones"
+							calledace = '<span style="color:black;">Q&clubs; Q&spades;</span>'
 							partner = new Array(0, 1, 0, 0, 0)
 							visiblepartner = new Array(0, 1, 0, 0, 0)
 							document.Nscore.Nscore.style.color = "red"
@@ -1708,7 +1716,7 @@ document.getElementById("gameovermodal").style.display = "none";
 							//alert(playername[number]+" calls off both Old Ones!")
 							document.getElementById('messages').value = playername[number] + " calls off both Old Ones!"
 							solochoice = "QQ"
-							calledace = "Both Old Ones"
+							calledace = '<span style="color:black;">Q&clubs; Q$spades;</span>'
 							soloplayer = number
 
 							switch (number) {
@@ -1743,7 +1751,7 @@ document.getElementById("gameovermodal").style.display = "none";
 						if ((Chand[8] == "QCT" && Chand[7] != "QST" && Csuit[1] > 6) || (Chand[8] == "QST" && Csuit[1] > 7)) {
 							//alert(playername[number]+" calls off the Old One!")
 							document.getElementById('messages').value = playername[number] + " calls off the Old One!"
-							calledace = "One Old One"
+							calledace = "Old One"
 							solochoice = "Q"
 
 							soloplayer = number
@@ -2478,7 +2486,7 @@ document.getElementById("gameovermodal").style.display = "none";
 
 						if (trick[0] == 0) {														//LEADING
 							for (j = 1; j <= 8; j++) {
-								if (Cplay[9 - j] == 0) {
+								if (Cplay[9 - j] == 0 && (Chand[9-j] == solochoice || Chand[9-j].charAt(2) != solochoice.charAt(2) || solopartner != number || soloplay == 1)) {
 									temphand = temphand.concat(9 - j)
 								}
 							}
@@ -2953,8 +2961,9 @@ document.getElementById("gameovermodal").style.display = "none";
 									/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 											"Schwartz!!! " + offensename[1]+" wins 9 chips! \n (" +
 											defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" take no points.)")*/
-									document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-										"Schwartz!!! " + offensename[1] + " wins 9 chips!"
+									document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+											"Schwartz!!! " + offensename[1]+" wins 9 chips! \n (" +
+											defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" take no points.)"
 									for (i = 1; i <= 4; i++) {
 										if (partner[i] == 1) {
 											awardchips(9, "blue", i)
@@ -2968,8 +2977,9 @@ document.getElementById("gameovermodal").style.display = "none";
 										/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 												offensename[1]+" wins 6 chips! \n(" +
 												 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" do not make Schneider.)")*/
-										document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-											offensename[1] + " wins 6 chips!"
+										document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+												offensename[1]+" wins 6 chips! (" +
+												 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+" do not make Schneider.)"
 										for (i = 1; i <= 4; i++) {
 											if (partner[i] == 1) {
 												awardchips(6, "blue", i)
@@ -2983,8 +2993,9 @@ document.getElementById("gameovermodal").style.display = "none";
 											/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 													offensename[1]+" wins 3 Chips! \n("+
 													 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+ " make Schneider.)" )*/
-											document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-												offensename[1] + " wins 3 Chips!"
+											document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+													offensename[1]+" wins 3 Chips! ("+
+													 defensename[1] + " and " +defensename[2]+ " and " +defensename[3]+ " make Schneider.)"
 											for (i = 1; i <= 4; i++) {
 												if (partner[i] == 1) {
 													awardchips(3, "blue", i)
@@ -2998,8 +3009,9 @@ document.getElementById("gameovermodal").style.display = "none";
 												/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 													defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips! \n(" +
 													 offensename[1] + " makes Schneider.)")*/
-												document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-													defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " win 2 chips!"
+												document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+													defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 2 chips! (" +
+													 offensename[1] + " makes Schneider.)"
 												for (i = 1; i <= 4; i++) {
 													if (partner[i] == 0) {
 														awardchips(2, "red", i)
@@ -3011,8 +3023,9 @@ document.getElementById("gameovermodal").style.display = "none";
 											else {/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips! \n(" + 
 								offensename[1] +  " does not make Schneider.)")*/
-												document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-													defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " win 3 chips!"
+												document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+ " and " +defensename[3]+" win 3 chips! (" + 
+								offensename[1] +  " does not make Schneider.)"
 												for (i = 1; i <= 4; i++) {
 													if (partner[i] == 0) {
 														awardchips(3, "red", i)
@@ -3032,8 +3045,9 @@ document.getElementById("gameovermodal").style.display = "none";
 									/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 											"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips! \n (" +
 											defensename[1] + " and " +defensename[2]+ " take no points.)")*/
-									document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-										"Schwartz!!! " + offensename[1] + " and " + offensename[2] + " win 3 chips!"
+									document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+											"Schwartz!!! " + offensename[1]+" and "+offensename[2]+" win 3 chips! (" +
+											defensename[1] + " and " +defensename[2]+ " take no points.)"
 									for (i = 1; i <= 4; i++) {
 										if (partner[i] == 1) {
 											awardchips(3, "white", i)
@@ -3047,8 +3061,9 @@ document.getElementById("gameovermodal").style.display = "none";
 										/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 												offensename[1]+" and "+offensename[2]+" win 2 chips! \n(" +
 												 defensename[1] + " and " +defensename[2]+ " do not make Schneider.)")*/
-										document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-											offensename[1] + " and " + offensename[2] + " win 2 chips!"
+										document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+												offensename[1]+" and "+offensename[2]+" win 2 chips! (" +
+												 defensename[1] + " and " +defensename[2]+ " do not make Schneider.)"
 										for (i = 1; i <= 4; i++) {
 											if (partner[i] == 1) {
 												awardchips(2, "white", i)
@@ -3062,8 +3077,9 @@ document.getElementById("gameovermodal").style.display = "none";
 											/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 												offensename[1]+" and "+offensename[2]+" win 1 Chip! \n("+
 												 defensename[1] + " and " +defensename[2]+ " make Schneider.)" )*/
-											document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-												offensename[1] + " and " + offensename[2] + " win 1 Chip!"
+											document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+												offensename[1]+" and "+offensename[2]+" win 1 Chip! ("+
+												 defensename[1] + " and " +defensename[2]+ " make Schneider.)"
 											for (i = 1; i <= 4; i++) {
 												if (partner[i] == 1) {
 													awardchips(1, "white", i)
@@ -3078,8 +3094,9 @@ document.getElementById("gameovermodal").style.display = "none";
 												/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 													defensename[1]+" and "+defensename[2]+" win 2 chips! \n(" + 
 													offensename[1] + " and " +offensename[2]+ " make Schneider.)")*/
-												document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-													defensename[1] + " and " + defensename[2] + " win 2 chips!"
+												document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+													defensename[1]+" and "+defensename[2]+" win 2 chips! (" + 
+													offensename[1] + " and " +offensename[2]+ " make Schneider.)"
 												for (i = 1; i <= 4; i++) {
 													if (partner[i] == 0) {
 														awardchips(2, "red", i)
@@ -3091,8 +3108,9 @@ document.getElementById("gameovermodal").style.display = "none";
 											else {/*alert("Offense: "+offense + " Defense: "+defense+"\n"+
 							defensename[1]+" and "+defensename[2]+" win 3 chips! \n(" + 
 							offensename[1] + " and " +offensename[2]+ " do not make Schneider.)")*/
-												document.getElementById('messages').value = "Offense: " + offense + " Defense: " + defense + "\n" +
-													defensename[1] + " and " + defensename[2] + " win 3 chips!"
+												document.getElementById('messages').value = "Offense: "+offense + " Defense: "+defense+"\n"+
+							defensename[1]+" and "+defensename[2]+" win 3 chips! (" + 
+							offensename[1] + " and " +offensename[2]+ " do not make Schneider.)"
 												for (i = 1; i <= 4; i++) {
 													if (partner[i] == 0) {
 														awardchips(3, "red", i)
@@ -3808,7 +3826,10 @@ function updateCheatSheet(deckvalue) {
 							<!-- Message box -->
 							<form action="#">
 								<p style="margin:8px 0 0 0;">
-									<textarea id="messages" name="Message" readonly>Welcome to Schafkopf 2.0</textarea>
+									<textarea id="messages" name="Message" rows="4" cols="22" readonly
+          style="resize:none; background-color:beige; font-size:14px; font-family:Arial, sans-serif;">
+Welcome to Schafkopf 2.0
+</textarea>
 								</p>
 							</form>
 						</td>
@@ -4528,7 +4549,7 @@ function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
 <h4>Options</h4>
 <p>At the beginning of the game, and before each deal, you may select new names for the players. You may also select the order in which to sort your hand, either higher cards on the Left, or higher cards on the Right. These options may not be changed mid-hand.</p>
 <h4>Cheat Sheet</h4>
-<p>Once the cards have been dealt, the cheat sheet provides the human player with several forms of assistance. The sheet shows all 32 cards organized by suit, in ranked order, with the point value for each card. The option to show Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will highlight a single suggested play (please note, the suggested play may not be the best play). The option to show Remaining Cards will fade all cards that have been played. These features may be toggled on or off at any time during the hand, and they may be used together or separately. These features are only avaiable during the hand, but your selections will be saved between hands.</p>
+<p>Once the cards have been dealt, the cheat sheet provides several forms of assistance. The sheet shows all 32 cards organized by suit, in ranked order, with the point value for each card. The option to show Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will highlight a single suggested play based on the computer's programming (please note, the suggested play may not be the best play). The option to show Remaining Cards will fade all cards that have been played. These features may be toggled on or off at any time during the hand, and they may be used together or separately. These features are only available during the hand, but your selections will be saved between hands and games.</p>
 <h4>Transcript</h4>
 <p>At the end of each hand, you may view a transcript of the hand, which shows every player's hand and each trick.
 </p>
