@@ -270,12 +270,12 @@
 			opacity: 0.5;
 		}
 
-		/*
- 
+		
+ /*
   table { outline: 2px dashed red; }
   td { outline: 1px dotted blue; }
-
 */
+
 
 
 
@@ -563,7 +563,14 @@ document.getElementById("gameovermodal").style.display = "none";
 					document.getElementById('messages').value = "Welcome to Schafkopf 2.0"
 					gameover = 0
 
-
+  drawChipStack('NStackL', 'NStackM','NStackR', chipstack[1], {
+  });
+  drawChipStack('EStackL', 'EStackM','EStackR', chipstack[2], {
+  });
+  drawChipStack('SStackL', 'SStackM', 'SStackM', chipstack[3], {
+  });
+  drawChipStack('WStackL', 'WStackM','WStackR', chipstack[4], {
+  });
 
 
 
@@ -604,6 +611,10 @@ document.getElementById("gameovermodal").style.display = "none";
 					document.getElementById('cheatsheet').style.display = 'inherit'
 					document.getElementById('options').style.display = 'none'
 					document.getElementById("gameovermodal").style.display = "none";
+
+
+
+
 
 
 					if (hand != 0) {
@@ -978,10 +989,10 @@ document.getElementById("gameovermodal").style.display = "none";
 				
 									//TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND TEST HAND 
 				
-									Nhandimage = new Array(0, "image2/cardQDT.gif", "image2/cardQST.gif", "image2/cardQHT.gif", "image2/cardQCT.gif", "image2/cardACC.gif", "image2/cardAHH.gif", "image2/cardKSS.gif", "image2/card1SS.gif")
-									Ehandimage = new Array(0, "image2/card9CC.gif", "image2/card8HH.gif", "image2/card1CC.gif", "image2/card9DT.gif", "image2/cardADT.gif", "image2/card7CC.gif", "image2/card1HH.gif", "image2/cardKCC.gif")
-									Shandimage = new Array(0, "image2/card7DT.gif", "image2/card9HH.gif", "image2/cardKDT.gif", "image2/cardJHT.gif", "image2/cardKHH.gif", "image2/cardJST.gif", "image2/cardJCT.gif", "image2/card8DT.gif")
-									Whandimage = new Array(0, "image2/cardJDT.gif", "image2/card7SS.gif", "image2/card1DT.gif", "image2/card7HH.gif", "image2/card8CC.gif", "image2/card8SS.gif", "image2/card9SS.gif", "image2/cardASS.gif")
+									Nhandimage = new Array(0, "image2/card9SS.gif", "image2/cardASS.gif", "image2/cardJST.gif", "image2/cardJCT.gif", "image2/card8DT.gif", "image2/card7HH.gif", "image2/card9CC.gif", "image2/card8HH.gif")
+									Ehandimage = new Array(0, "image2/card1CC.gif", "image2/card9DT.gif", "image2/cardADT.gif", "image2/card7CC.gif", "image2/card1HH.gif", "image2/cardKCC.gif", "image2/cardJDT.gif", "image2/card1DT.gif")
+									Shandimage = new Array(0, "image2/card7DT.gif", "image2/card9HH.gif", "image2/cardKDT.gif", "image2/cardJHT.gif", "image2/cardKHH.gif", "image2/card8CC.gif", "image2/card8SS.gif","image2/cardAHH.gif")
+									Whandimage = new Array(0, "image2/cardQDT.gif", "image2/cardQST.gif", "image2/cardQHT.gif", "image2/cardQCT.gif", "image2/cardACC.gif",  "image2/cardKSS.gif", "image2/card1SS.gif", "image2/card7SS.gif")
 				
 				
 				
@@ -990,8 +1001,8 @@ document.getElementById("gameovermodal").style.display = "none";
 									deckvalue[16] = "ACC"
 									deckvalue[17] = "AHH"
 				
-				
 				*/
+				
 
 
 
@@ -2331,7 +2342,7 @@ document.getElementById("gameovermodal").style.display = "none";
 					if (trick[0] == "S") {														//FOLLOW SPADES
 						if (solochoice == "ASS") {
 							for (j = 1; j <= 8; j++) {
-								if (Chand[j] == "ASS" && Chand[j] == 0) {
+								if (Chand[j] == "ASS" && Cplay[j] == 0) {
 									temphand = temphand.concat(j)
 									follow = 1
 									return
@@ -2353,7 +2364,7 @@ document.getElementById("gameovermodal").style.display = "none";
 					if (trick[0] == "H") {														//FOLLOW HEARTS
 						if (solochoice == "AHH") {
 							for (j = 1; j <= 8; j++) {
-								if (Chand[j] == "AHH" && Chand[j] == 0) {
+								if (Chand[j] == "AHH" && Cplay[j] == 0) {
 									temphand = temphand.concat(j)
 									follow = 1
 									return
@@ -2374,7 +2385,7 @@ document.getElementById("gameovermodal").style.display = "none";
 					if (trick[0] == "C") {														//FOLLOW CLUBS
 						if (solochoice == "ACC") {
 							for (j = 1; j <= 8; j++) {
-								if (Chand[j] == "ACC" && Chand[j] == 0) {
+								if (Chand[j] == "ACC" && Cplay[j] == 0) {
 									temphand = temphand.concat(j)
 									follow = 1
 									return
@@ -3069,7 +3080,14 @@ document.getElementById("gameovermodal").style.display = "none";
 					document.Sscore.Sscore.value = chips[3]
 					document.Wscore.Wscore.value = chips[4]
 
-
+  drawChipStack('NStackL', 'NStackM','NStackR', chipstack[1], {
+  });
+  drawChipStack('EStackL', 'EStackM','EStackR', chipstack[2], {
+  });
+  drawChipStack('SStackL', 'SStackM', 'SStackR', chipstack[3], {
+  });
+  drawChipStack('WStackL', 'WStackM','WStackR', chipstack[4], {
+  });
 
 
 
@@ -3586,7 +3604,13 @@ function updateCheatSheet(deckvalue) {
 							<table width="100%" border="0" cellpadding="0" cellspacing="0"
 								style="border-collapse:collapse; table-layout:fixed;">
 								<tr>
-									<td width="66"></td>
+									<td width="66" style="vertical-align:top;">
+										  <div style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
+ 										 <div id="NStackL"></div>
+ 										 <div id="NStackM"></div>
+										 <div id="NStackR"></div>
+										</div>
+									</td>
 									<td width="66" align="center" valign="middle" style="padding:2px 0;">
 										<form name="Nname" style="margin:0;">
 											<input type="text" name="Nname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
@@ -3597,7 +3621,13 @@ function updateCheatSheet(deckvalue) {
                       width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
 										</form>
 									</td>
-									<td width="66"></td>
+									<td width="66" style="vertical-align:bottom;">
+										  <div style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
+  											<div id="EStackL"></div>
+ 										 <div id="EStackM"></div>
+										 <div id="EStackR"></div>
+											</div>
+									</td>
 								</tr>
 
 								<tr>
@@ -3632,7 +3662,13 @@ function updateCheatSheet(deckvalue) {
 								</tr>
 
 								<tr>
-									<td width="66"></td>
+									<td width="66" style="vertical-align:top;">
+										<div style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
+  											<div id="WStackL"></div>
+ 										 <div id="WStackM"></div>
+										 <div id="WStackR"></div>
+											</div>
+									</td>
 									<td width="66" align="center" valign="middle" style="padding:2px 0;">
 										<form name="Sname" style="margin:0;">
 											<input type="text" name="Sname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
@@ -3643,7 +3679,13 @@ function updateCheatSheet(deckvalue) {
                       width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
 										</form>
 									</td>
-									<td width="66"></td>
+									<td width="66" style="vertical-align:bottom;">
+										<div style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
+  											<div id="SStackL"></div>
+ 										 <div id="SStackM"></div>
+										 <div id="SStackR"></div>
+											</div>
+									</td>
 								</tr>
 							</table>
 
@@ -3858,6 +3900,107 @@ function updateCheatSheet(deckvalue) {
 				</table>
 
 				<!-- MASTERTABLE ENDS-->
+
+
+
+
+
+
+<script>
+// Map letters to colors
+const CHIP_COLOR = { w:'#ffffff', r:'#D11818', b:'#2B6CB0' };
+
+/**
+ * Draws a fixed-height chip stack table (bottom-aligned).
+ * Only chip rows get a border; empty rows are invisible.
+ */
+function drawChipStackTable(targetId, chipList, {
+  rows = 6,
+  width = '21px',
+  rowHeight = '6px'
+} = {}) {
+  const container = document.getElementById(targetId);
+  if (!container) return;
+
+  // If no chips → hide container and bail
+  if (!chipList || chipList.length === 0) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    return;
+  } else {
+    // ensure visible if it was hidden previously
+    container.style.display = 'block';
+  }
+
+  const table = document.createElement('table');
+  table.style.borderCollapse = 'collapse';
+  table.style.width = width;
+
+  const body = document.createElement('tbody');
+
+  // Build empty rows (invisible)
+  for (let i = 0; i < rows; i++) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.style.padding = '0';
+    td.style.height = rowHeight;
+    td.style.background = 'transparent'; // empty rows are invisible
+    td.style.border = '0';               // no outline on empties
+    tr.appendChild(td);
+    body.appendChild(tr);
+  }
+
+  // Fill chips from bottom up; chip rows get color + border
+  const tds = Array.from(body.querySelectorAll('td'));
+  let cursor = rows - 1; // bottom row index
+  for (let i = 0; i < chipList.length && cursor >= 0; i++, cursor--) {
+    const c = chipList[i];
+    const color = CHIP_COLOR[c];
+    if (color) {
+      const td = tds[cursor];
+      td.style.background = color;
+      td.style.border = '1px solid #000';
+      td.title = c === 'w' ? 'white' : c === 'r' ? 'red' : 'blue';
+    }
+  }
+
+  table.appendChild(body);
+  container.innerHTML = '';
+  container.appendChild(table);
+}
+
+/**
+ * Split a chip string into three stacks:
+ *  - first 6 → left
+ *  - next 6  → middle
+ *  - rest    → right
+ * Empty stacks are hidden (no space taken).
+ */
+function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
+  const chips = (chipStr || '')
+    .toLowerCase()
+    .split('')
+    .filter(c => c === 'w' || c === 'r' || c === 'b');
+
+  const left  = chips.slice(0, 6);
+  const mid   = chips.slice(6, 12);
+  const right = chips.slice(12);
+
+  drawChipStackTable(leftId,  left,  opts);
+  drawChipStackTable(midId,   mid,   opts);
+  drawChipStackTable(rightId, right, opts);
+}
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 				<div id="transcriptmodal">
@@ -4315,15 +4458,15 @@ function updateCheatSheet(deckvalue) {
 <h4>Deck of Cards</h4>
 <p>This game uses a classic German deck of Skat cards made by Piatnik. The Queens are marked with a D (for Dame), the Jacks are marked with a B (for Bauer), and the Kings are marked with a K (for König).</p>
 <h4>Score Box</h4>
-<p>Before the cards are dealt each hand, this will display each player's chip total for the game. During the hand, this will display each player's point total for the hand. It will also highlight in red each member of the Offense, once they have been revealed (by playing a black queen, calling for a partner, playing the called Ace, or calling off the Old Ones).</p>
+<p>Before the cards are dealt each hand, this will display each player's chip total for the game. During the hand, this will display each player's point total for the hand. It will also highlight in red each member of the Offense, once they have been revealed (by playing a black queen, calling for a partner, playing the called Ace, or calling off the Old One(s)). As chips are earned, these will be displayed in stacks of 6 near each player's score.</p>
 <h4>Call Button</h4>
 <p>If you need to call for a partner or Call Off an Old One, you must do so after the cards are dealt, but before you press continue, when the message displayed is "Everyone happy?". Select the option you want and press the call button. The option you selected will appear in the box to the right of the button. If you do not use this option, but a computer player does, this will appear in the box when you press continue.</p>
 <h4>Message Box</h4>
-<p>This will contain important messages throughout the game, including: when someone calls for a partner; if you attempt to make an invalid play; the point and chip total for each hand; the game winner. Also be on the lookout for some table talk.</p>
+<p>This will contain important messages throughout the game, including: when someone calls for a partner; if you attempt to make an invalid play; the point and chip total for each hand; the game winner.</p>
 <h4>Options</h4>
 <p>At the beginning of the game, and before each deal, you may select new names for the players. You may also select the order in which to sort your hand, either higher cards on the Left, or higher cards on the Right. These options may not be changed mid-hand.</p>
 <h4>Cheat Sheet</h4>
-<p>Once the cards have been dealt, the cheat sheet provides the human player with several forms of assistance. The sheet itself shows all 32 cards organized by suit and in ranked order. It also displays the point value for each card. The option to show Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will highlight a single suggested play (please note, the suggested play may not be the best play). Th option to show remaining cards will grey out all cards that have been played. These features may be toggled on or off at any time during the hand, and they may be used together or separately. These features are only avaiable during the hand, but your selections will be saved between hands.</p>
+<p>Once the cards have been dealt, the cheat sheet provides the human player with several forms of assistance. The sheet shows all 32 cards organized by suit, in ranked order, with the point value for each card. The option to show Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will highlight a single suggested play (please note, the suggested play may not be the best play). The option to show Remaining Cards will fade all cards that have been played. These features may be toggled on or off at any time during the hand, and they may be used together or separately. These features are only avaiable during the hand, but your selections will be saved between hands.</p>
 <h4>Transcript</h4>
 <p>At the end of each hand, you may view a transcript of the hand, which shows every player's hand and each trick.
 </p>
