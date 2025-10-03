@@ -448,6 +448,15 @@
   box-sizing: border-box;
 }
 
+
+ #cheatmodal, #cheatmodal * {
+    font-family: Arial, Helvetica, sans-serif;   /* force same font */
+    line-height: 1.2;                            /* lock line height */
+    -webkit-text-size-adjust: 100%;              /* prevent iOS auto-zoom/resizing */
+    box-sizing: border-box;                      /* predictable sizing */
+  }
+
+
 /* Remove Safari/iOS default spacing on tables */
 #cheatmodal table {
   margin: 0 !important;
@@ -461,8 +470,35 @@
   padding: 1px 1px;   /* tighter cell padding */
 }
 
+
+/* The second table (checkbox area) can be left-aligned & tight */
+  #cheatmodal table + table th,
+  #cheatmodal table + table td {
+    text-align: left;
+    padding: 2px 4px !important;
+  }
+
+  /* Remove incidental margins from forms/labels/paragraphs inside the modal */
+  #cheatmodal form,
+  #cheatmodal label,
+  #cheatmodal p {
+    margin: 0 !important;
+  }
+
+  /* Optional: keep checkbox labels readable without triggering iOS zoom */
+  #cheatmodal label {
+    font-size: 14px;  /* iOS zoom threshold */
+  }
+
+
+
+
 	</style>
 </head>
+
+
+
+
 
 <body>
 	<div id="stage">
@@ -3863,7 +3899,7 @@ function updateCheatSheet(deckvalue) {
 										style="border-collapse:collapse;">
 										<tr>
 											<td width="100" valign="middle">
-												<form name="player" action="#" style="margin:0;">
+												<form name="player" action="#" style="margin:0;font-family:'Arial'">
 													<b>Lead</b><br>
 													<input type="text" name="player" size="8" readonly
 														style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;">
@@ -3902,7 +3938,7 @@ function updateCheatSheet(deckvalue) {
 										</tr>
 										<!-- Speed Slider -->
 										<tr>
-											<td width="200" valign="top" align="center">
+											<td width="200" valign="top" align="center" style="font-family:'Arial'">
 												<label for="speedSlider"><b>Speed</b></label><br>
 												<input type="range" id="speedSlider" min="0" max="2000" step="100"
 													value="1000" style="width:190px;">
