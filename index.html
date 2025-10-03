@@ -87,7 +87,7 @@
 			color: #000;
 			border: 2px solid #000;
 			border-radius: 8px;
-			padding: 12px;
+			padding: 6px;
 			font-size: 13.5px;
 			text-align: center;
 		}
@@ -4354,13 +4354,17 @@ function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
 							<input type="checkbox" id="TellPlays" onchange=assistant()>
 							Suggested 
 						</label>
-						<label>
-							<input type="checkbox" id="RemovePlays" onchange=assistant()>
-							Remaining Cards
-						</label>
 					</form>
 				</td>
 				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>
+							<input type="checkbox" id="RemovePlays" onchange=assistant()>
+							Remaining Cards
+						</label>
+					</td>
 			</tr>
 		</table>
 	</div>
