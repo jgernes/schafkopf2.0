@@ -24,6 +24,13 @@
 	<!-- Manifest (next to index.html; ensure start_url/scope are correct in the file) -->
 	<link rel="manifest" href="site.webmanifest?v=3" />
 
+	<script>
+		if (location.protocol === 'file:') {
+			const m = document.querySelector('link[rel="manifest"]');
+			if (m) m.remove();
+		}
+	</script>
+
 	<style>
 		html,
 		body {
@@ -511,8 +518,8 @@
 			/* iOS zoom threshold */
 		}
 
+		/* TEST BORDERS 
 
-		/*
 		table {
 			outline: 2px dashed red;
 		}
@@ -520,7 +527,7 @@
 		td {
 			outline: 1px dotted blue;
 		}
-		*/
+			*/
 	</style>
 </head>
 
@@ -654,17 +661,17 @@
 								<td width="66" align="center" valign="middle" style="padding:2px 0;">
 									<form name="Wname" style="margin:0;">
 										<input type="text" name="Wname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
-                      text-align:center; width:60px; margin:0;">
+                      					text-align:center; width:60px; margin:0;">
 									</form>
 									<form name="Wscore" class="score" style="margin:2px 0 0;">
 										<input type="text" name="Wscore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      					width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
 									</form>
 								</td>
 
 								<td width="66" align="center" valign="middle">
 									<button id="backdoor" type="button" onclick="openbackdoor()" style="background-color:green; border:0px; 
-                     width:40px; height:40px; display:block;">
+                     				width:40px; height:40px; display:block;">
 
 									</button>
 								</td>
@@ -672,11 +679,11 @@
 								<td width="66" align="center" valign="middle" style="padding:2px 0;">
 									<form name="Ename" style="margin:0;">
 										<input type="text" name="Ename" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
-                      text-align:center; width:60px; margin:0;">
+                      					text-align:center; width:60px; margin:0;">
 									</form>
 									<form name="Escore" class="score" style="margin:2px 0 0;">
 										<input type="text" name="Escore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
-                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
+                      					width:50px; height:30px; text-align:center; line-height:30px; margin:0;">
 									</form>
 								</td>
 							</tr>
@@ -876,6 +883,23 @@
 								</table>
 							</div>
 
+							<!-- OPTIONAL LEAD BOX
+<div>
+  <table width="200" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+    <tr>
+      <td width="100" valign="middle">
+        <form name="player" action="#" style="margin:0; font-family:'Arial'; text-align:center;">
+          <b>Lead</b><br>
+          <input type="text" name="player" size="8" readonly
+                 style="display:block; margin:6px auto 0; font:bold 18pt Arial; color:black;
+                        background-color:#84B5E1; border:transparent; text-align:center;">
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+-->
+
 							<!-- Middle: open space grows -->
 							<div style="flex:1;"></div>
 
@@ -1032,6 +1056,12 @@
 			<div id="transcriptmodal">
 				<div class="modal-content">
 					<div id="transcriptBody"></div>
+					<div style="text-align:center; margin-top:10px;">
+						<button id="replayBtn" onclick="replayHand()" style="background-color:white; border-color:black; border-radius:50px;
+                     width:120px; color:black;">
+							Replay Hand
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -1244,6 +1274,31 @@
 				function closeTranscript() {
 					document.getElementById('transcriptmodal').style.display = 'none';
 				}
+
+				function replayHand() {
+					// Set the replay flag
+					replay = 1;
+					dealer = (dealer + 3) % 4
+					document.getElementById('continue').style.display = 'none'
+					document.Nscore.Nscore.style.color = "black"
+					document.Escore.Escore.style.color = "black"
+					document.Sscore.Sscore.style.color = "black"
+					document.Wscore.Wscore.style.color = "black"
+					document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
+					document.Escore.Escore.style.backgroundColor = "#84B5E1"
+					document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
+					document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
+
+					// Optional: close the transcript modal
+					document.getElementById('transcriptmodal').style.display = 'none';
+
+					// Start a new deal
+					if (typeof deal === 'function') {
+						deal();
+					} else {
+						console.warn("deal() function not found");
+					}
+				}
 			</script>
 
 
@@ -1429,10 +1484,10 @@
 			</tr>
 			<tr>
 				<td valign="top" style="padding-top:0;">
-					<form name="sorting" method="post">
+					<form id="sortingForm" method="post">
 						<b>Sort Hand</b><br>
-						<label><input type="radio" name="choice" value="1"> Left</label>&nbsp;&nbsp;
-						<label><input type="radio" name="choice" value="0" checked> Right</label>
+						<label><input type="radio" name="sortChoice" value="1"> Left</label>
+						<label><input type="radio" name="sortChoice" value="0" checked> Right</label>
 					</form>
 				</td>
 			</tr>
@@ -1548,7 +1603,8 @@
 				will be saved between hands and games.</p>
 			<h4>Transcript</h4>
 			<p>At the end of each hand, you may view a transcript of the hand, which shows every player's hand and each
-				trick.
+				trick. You may also replay the hand (as many times as you wish); however, the original outcome and chip
+				distribution will occur after you complete the replays.
 			</p>
 			<h4>Speed Slider</h4>
 			<p>This controls the speed at which the cards are dealt and the computer players play. It may be adjusted at
@@ -1831,7 +1887,12 @@
 
 
 
+
 	function newnames() {
+		playername[1] = document.getElementById("Ninput").value;
+		playername[2] = document.getElementById("Einput").value;
+		playername[3] = document.getElementById("Sinput").value;
+		playername[4] = document.getElementById("Winput").value;
 
 		document.Nname.Nname.value = playername[1]
 		document.Ename.Ename.value = playername[2]
@@ -1871,7 +1932,7 @@
 
 
 
-
+		replay = 0
 
 
 		hand = 0
@@ -2013,18 +2074,18 @@
 
 
 
-
-		if (newdeck == 0) {
-			deck = bicycledeck
-			sorteddeck = sortedbicycledeck
-			TR = bicycletrick
+		if (replay == 0) {
+			if (newdeck == 0) {
+				deck = bicycledeck
+				sorteddeck = sortedbicycledeck
+				TR = bicycletrick
+			}
+			else {
+				deck = piatnikdeck
+				sorteddeck = sortedpiatnikdeck
+				TR = piatniktrick
+			}
 		}
-		else {
-			deck = piatnikdeck
-			sorteddeck = sortedpiatnikdeck
-			TR = piatniktrick
-		}
-
 		//RANDOMIZE AI SUIT VALUES
 		tempdeckvalue = new Array("0")
 		for (i = 1; i <= 14; i++) {
@@ -2105,14 +2166,14 @@
 
 
 
-		document.card1.src = deck[0]
-		document.card2.src = deck[0]
-		document.card3.src = deck[0]
-		document.card4.src = deck[0]
-		document.card5.src = deck[0]
-		document.card6.src = deck[0]
-		document.card7.src = deck[0]
-		document.card8.src = deck[0]
+		document.card1.src = "image2/cardBK.gif"
+		document.card2.src = "image2/cardBK.gif"
+		document.card3.src = "image2/cardBK.gif"
+		document.card4.src = "image2/cardBK.gif"
+		document.card5.src = "image2/cardBK.gif"
+		document.card6.src = "image2/cardBK.gif"
+		document.card7.src = "image2/cardBK.gif"
+		document.card8.src = "image2/cardBK.gif"
 
 		document.card11.src = "image2/Card01.gif"
 		document.card21.src = "image2/Card01.gif"
@@ -2131,19 +2192,19 @@
 
 
 
+		if (replay == 0) {
 
+			//SHUFFLE THE CARDS
+			for (j = 1; j <= 7; j++) {
+				tempdeck = new Array("0")
+				for (i = 1; i <= 32; i++) {
+					tempdeck = tempdeck.concat(deck.splice(Math.floor(Math.random() * (deck.length - 1) + 1), 1))
 
-		//SHUFFLE THE CARDS
-		for (j = 1; j <= 7; j++) {
-			tempdeck = new Array("0")
-			for (i = 1; i <= 32; i++) {
-				tempdeck = tempdeck.concat(deck.splice(Math.floor(Math.random() * (deck.length - 1) + 1), 1))
-
+				}
+				deck = tempdeck
 			}
-			deck = tempdeck
+			//alert(deck)
 		}
-		//alert(deck)
-
 
 
 
@@ -2265,26 +2326,26 @@
 
 
 
-	/*			
-					
-	//TEST HAND 
-					
-	Nhandimage = new Array(0, "image2/card8SS.gif", "image2/cardASS.gif", "image2/cardACC.gif", "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/card9CC.gif", "image2/card1CC.gif")
-	Ehandimage = new Array(0, "image2/card9DT.gif", "image2/cardADT.gif",  "image2/card8CC.gif", "image2/card9SS.gif", "image2/cardJST.gif", "image2/card8HH.gif", "image2/card7SS.gif", "image2/cardKSS.gif")
-	Shandimage = new Array(0, "image2/card1HH.gif", "image2/cardKDT.gif", "image2/cardKCC.gif", "image2/card7DT.gif", "image2/card8DT.gif", "image2/card7CC.gif", "image2/cardAHH.gif", "image2/cardQHT.gif")
-	Whandimage = new Array(0, "image2/cardQCT.gif", "image2/card1DT.gif", "image2/cardJCT.gif", "image2/cardQST.gif", "image2/cardKHH.gif", "image2/card1SS.gif", "image2/card9HH.gif", "image2/card7HH.gif")
-					
-					
-					
-					
-	deckvalue[15] = "ASS"
-	deckvalue[17] = "ACC"
-	deckvalue[16] = "AHH"
-					
-					
-					
-	
-	*/
+
+		/*				
+		//TEST HAND 
+						
+		Nhandimage = new Array(0, "image2/card1DT.gif", "image2/cardJCT.gif", "image2/card1SS.gif", "image2/card9HH.gif", "image2/card7HH.gif", "image2/cardQHT.gif", "image2/card8SS.gif", "image2/cardQST.gif")
+		Ehandimage = new Array(0, "image2/card9DT.gif", "image2/cardADT.gif",  "image2/card8CC.gif", "image2/card9SS.gif", "image2/cardJST.gif", "image2/card8HH.gif", "image2/card7SS.gif", "image2/cardKSS.gif")
+		Shandimage = new Array(0, "image2/cardASS.gif", "image2/cardACC.gif", "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/card9CC.gif", "image2/card1CC.gif", "image2/cardQCT.gif")
+		Whandimage = new Array(0, "image2/card1HH.gif", "image2/cardKDT.gif", "image2/cardKCC.gif", "image2/card7DT.gif", "image2/card8DT.gif", "image2/card7CC.gif", "image2/cardAHH.gif", "image2/cardKHH.gif")
+						
+						
+						
+						
+		deckvalue[15] = "ASS"
+		deckvalue[17] = "ACC"
+		deckvalue[16] = "AHH"
+		*/
+
+
+
+
 
 
 		setTimeout(function () { reveal(1) }, delaytime)
@@ -2451,6 +2512,7 @@
 				partner = new Array(0, 1, 0, 0, 0)
 				visiblepartner = new Array(0, 1, 0, 0, 0)
 				document.Nscore.Nscore.style.color = "red"
+				document.Nscore.Nscore.style.backgroundColor = "yellow"
 				document.getElementById("calledAceSlot").innerHTML = calledace
 				partners = 1
 				partnerdelay = 1
@@ -2474,6 +2536,7 @@
 				visiblepartner = new Array(0, 1, 0, 0, 0)
 				calledace = "Old One"
 				document.Nscore.Nscore.style.color = "red"
+				document.Nscore.Nscore.style.backgroundColor = "yellow"
 				document.getElementById("calledAceSlot").innerHTML = calledace
 				partners = 1
 				partnerdelay = 1
@@ -2515,6 +2578,7 @@
 			calledace = '<span style="color:red;">A&diams; Known</span>'
 			visiblepartner = new Array(0, 1, .5, .5, .5)
 			document.Nscore.Nscore.style.color = "red"
+			document.Nscore.Nscore.style.backgroundColor = "yellow"
 			document.getElementById("calledAceSlot").innerHTML = calledace
 			partnercount = 1
 			partners = 1
@@ -2553,6 +2617,7 @@
 						calledace = '<span style="color:black;">A&clubs; Known</span>'
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2581,6 +2646,7 @@
 						}
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2626,6 +2692,7 @@
 						calledace = '<span style="color:black;">A&hearts; Known</span>'
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2654,6 +2721,7 @@
 						}
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2702,6 +2770,7 @@
 						calledace = '<span style="color:black;">A&spades; Known</span>'
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2733,6 +2802,7 @@
 						}
 						visiblepartner = new Array(0, 1, .5, .5, .5)
 						document.Nscore.Nscore.style.color = "red"
+						document.Nscore.Nscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partnercount = 1
 						partners = 1
@@ -2829,6 +2899,7 @@
 
 											visiblepartner = new Array(0, .5, 1, .5, .5)
 											document.Escore.Escore.style.color = "red"
+											document.Escore.Escore.style.backgroundColor = "yellow"
 
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
@@ -2858,6 +2929,7 @@
 
 											visiblepartner = new Array(0, .5, .5, 1, .5)
 											document.Sscore.Sscore.style.color = "red"
+											document.Sscore.Sscore.style.backgroundColor = "yellow"
 
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
@@ -2887,6 +2959,7 @@
 
 											visiblepartner = new Array(0, .5, .5, .5, 1)
 											document.Wscore.Wscore.style.color = "red"
+											document.Wscore.Wscore.style.backgroundColor = "yellow"
 
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
@@ -2923,6 +2996,7 @@
 						partner = new Array(0, 0, 1, 0, 0)
 						visiblepartner = new Array(0, 0, 1, 0, 0)
 						document.Escore.Escore.style.color = "red"
+						document.Escore.Escore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -2931,6 +3005,7 @@
 						partner = new Array(0, 0, 0, 1, 0)
 						visiblepartner = new Array(0, 0, 0, 1, 0)
 						document.Sscore.Sscore.style.color = "red"
+						document.Sscore.Sscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -2939,6 +3014,7 @@
 						partner = new Array(0, 0, 0, 0, 1)
 						visiblepartner = new Array(0, 0, 0, 0, 1)
 						document.Wscore.Wscore.style.color = "red"
+						document.Wscore.Wscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -2960,6 +3036,7 @@
 						partner = new Array(0, 0, 1, 0, 0)
 						visiblepartner = new Array(0, 0, 1, 0, 0)
 						document.Escore.Escore.style.color = "red"
+						document.Escore.Escore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -2968,6 +3045,7 @@
 						partner = new Array(0, 0, 0, 1, 0)
 						visiblepartner = new Array(0, 0, 0, 1, 0)
 						document.Sscore.Sscore.style.color = "red"
+						document.Sscore.Sscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -2976,6 +3054,7 @@
 						partner = new Array(0, 0, 0, 0, 1)
 						visiblepartner = new Array(0, 0, 0, 0, 1)
 						document.Wscore.Wscore.style.color = "red"
+						document.Wscore.Wscore.style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -3473,6 +3552,11 @@
 
 	//COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI 
 
+	//ADD PRESUMPTIVE SCHMIER IE you play third and the suit is not broken yet and the fourth person is your partner.
+
+	//ADJUST PARTNER TRUST IF QH TAKES TRUMP TRICK AND TURN 4 HAS NO TRUMP
+
+	//ADD SCHMIER TO BLACK QUEEN WHEN YOU'RE OUT OF TRUMP
 
 	function computerplay(Chand, Cplay, Csuit, number) {
 
@@ -3497,9 +3581,9 @@
 
 			if (partner[number] == 1) {									//ON OFFENSE
 				if (Chand[temphand[1]].charAt(2) == "T") {							//TRUMP
-					if (tempplay == 0 && soloplayer != number && ((deckvalue[1] == "QCT" && Chand[8] != "QCT") ||
-						(deckvalue[1] == "QST" && (Chand[8] != "QST" && Chand[7] != "QST")) ||
-						(deckvalue[2] == "QST" && (Chand[8] != "QST" && Chand[7] != "QST")))) {											//PARTNER HAS NOT PLAYED QUEEN
+					if (tempplay == 0 && soloplayer != number && ((deckvalue[1] == "QCT" && Chand[temphand[1]] != "QCT") ||
+						(deckvalue[1] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")) ||
+						(deckvalue[2] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")))) {											//PARTNER HAS NOT PLAYED QUEEN
 						trumpschmier(Chand, Cplay, Csuit, number)					//LEAD TRUMP SCHMIER
 						if (tempplay == 0) {
 							trumplow(Chand, Cplay, Csuit, number)						//LEAD LOWEST TRUMP
@@ -3585,11 +3669,11 @@
 					if ((deckvalue[1] == "QCT" || deckvalue[1] == "QST")) {		//QUEENS NOT PLAYED
 						besttrump(Chand, Cplay, Csuit, number)					//PLAY HIGHEST TRUMP (Q or QQ)
 
-						if (turn == 3) {
+						if (tempplay == 0 && turn == 3) {
 							forcequeen(Chand, Cplay, Csuit, number)				//FORCE QUEEN
 						}
 
-						if (turn == 2) {
+						if (tempplay == 0 && turn == 2) {
 							bettertrump(Chand, Cplay, Csuit, number)				//BETTER TRUMP
 						}
 
@@ -3623,8 +3707,9 @@
 			if (follow == 0) {											//CAN'T FOLLOW SUIT
 				//SCHMIER TO BLACK QUEEN
 
-
+				if (tempplay == 0) {
 				schmier(Chand, Cplay, Csuit, number)								//SCHMIER TO PARTNER
+				}
 				if (tempplay == 0) {
 					trump(Chand, Cplay, Csuit, number)							//PLAY LOWEST WINNING TRUMP
 				}
@@ -3757,23 +3842,46 @@
 		}
 		if (follow == 0) {															//LEADING OR CAN'T FOLLOW SUIT
 
-
-			if (trick[0] == 0) {														//LEADING
-				for (j = 1; j <= 8; j++) {
-					if (Cplay[9 - j] == 0 && (Chand[9 - j] == solochoice || Chand[9 - j].charAt(2) != solochoice.charAt(2) || solopartner != number || soloplay == 1)) {
-						temphand = temphand.concat(9 - j)
+			if (Chand == Nhand && sorder == 1) {								//CORRECTION FOR LEFT HANDED PLAY
+				if (trick[0] == 0) {														//LEADING
+					for (j = 1; j <= 8; j++) {
+						if (Cplay[j] == 0 && (Chand[j] == solochoice || Chand[j].charAt(2) != solochoice.charAt(2) || solopartner != number || soloplay == 1)) {
+							temphand = temphand.concat(j)
+						}
+					}
+				}
+				else {																//CAN'T FOLLOW SUIT
+					for (j = 1; j <= 8; j++) {
+						if ((soloplayer != number && (Cplay[j] == 0 && (Chand[j] != solochoice || trickcount == 8))) ||
+							(soloplayer == number && Cplay[9 - j] == 0 &&
+								(soloplay == 1 || (trick[0] != solochoice.charAt(2) && (Chand[j].charAt(2) != solochoice.charAt(2) ||
+									Csuit[getPosition(solochoice.charAt(2), suits)] == 9 - trickcount) ||
+									(trick[0] == solochoice.charAt(2) && Chand[j].charAt(2) != "T" || Csuit[getPosition("T", suits)] == 9 - trickcount))
+								))) {
+							temphand = temphand.concat(j)
+						}
 					}
 				}
 			}
-			else {																//CAN'T FOLLOW SUIT
-				for (j = 1; j <= 8; j++) {
-					if ((soloplayer != number && (Cplay[9 - j] == 0 && (Chand[9 - j] != solochoice || trickcount == 8))) ||
-						(soloplayer == number && Cplay[9 - j] == 0 &&
-							(soloplay == 1 || (trick[0] != solochoice.charAt(2) && (Chand[9 - j].charAt(2) != solochoice.charAt(2) ||
-								Csuit[getPosition(solochoice.charAt(2), suits)] == 9 - trickcount) ||
-								(trick[0] == solochoice.charAt(2) && Chand[9 - j].charAt(2) != "T" || Csuit[getPosition("T", suits)] == 9 - trickcount))
-							))) {
-						temphand = temphand.concat(9 - j)
+			else {															//FOR RIGHT HANDED PLAY
+
+				if (trick[0] == 0) {														//LEADING
+					for (j = 1; j <= 8; j++) {
+						if (Cplay[9 - j] == 0 && (Chand[9 - j] == solochoice || Chand[9 - j].charAt(2) != solochoice.charAt(2) || solopartner != number || soloplay == 1)) {
+							temphand = temphand.concat(9 - j)
+						}
+					}
+				}
+				else {																//CAN'T FOLLOW SUIT
+					for (j = 1; j <= 8; j++) {
+						if ((soloplayer != number && (Cplay[9 - j] == 0 && (Chand[9 - j] != solochoice || trickcount == 8))) ||
+							(soloplayer == number && Cplay[9 - j] == 0 &&
+								(soloplay == 1 || (trick[0] != solochoice.charAt(2) && (Chand[9 - j].charAt(2) != solochoice.charAt(2) ||
+									Csuit[getPosition(solochoice.charAt(2), suits)] == 9 - trickcount) ||
+									(trick[0] == solochoice.charAt(2) && Chand[9 - j].charAt(2) != "T" || Csuit[getPosition("T", suits)] == 9 - trickcount))
+								))) {
+							temphand = temphand.concat(9 - j)
+						}
 					}
 				}
 			}
@@ -3984,9 +4092,8 @@
 		else {
 			if ((getPosition(Chand[temphand[1]], deckvalue) == 1 || (Chand[temphand[1]].charAt(0) + Chand[temphand[1]].charAt(1) == "QS" && partner[number] == 1))) {
 				tempplay = temphand[1]
-				if (((Chand[tempplay] == "QCT" || Chand[tempplay] == "QST") && ((deckvalue[2] == "QST" && Chand[temphand[2]] == deckvalue[3]) || (deckvalue[2] != "QST" && Chand[temphand[2]] == deckvalue[2])))) {
+				if ((soloplayer == 0 && (Chand[tempplay] == "QCT" || Chand[tempplay] == "QST") && ((deckvalue[2] == "QST" && Chand[temphand[2]] == deckvalue[3]) || (deckvalue[2] != "QST" && Chand[temphand[2]] == deckvalue[2])))) {
 					tempplay = temphand[2]
-
 				}
 			}
 		}
@@ -4347,7 +4454,7 @@
 							"Schwartz!!! " + offensename[1] + " wins 9 chips! (" +
 							defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " take no points.)"
 						for (i = 1; i <= 4; i++) {
-							if (partner[i] == 1) {
+							if (partner[i] == 1 && replay == 0) {
 								awardchips(9, "blue", i)
 								chips[i] = chips[i] + 9
 								chipstack[i] = chipstack[i] + "bbbbbbbbb"
@@ -4363,7 +4470,7 @@
 								offensename[1] + " wins 6 chips! (" +
 								defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " do not make Schneider.)"
 							for (i = 1; i <= 4; i++) {
-								if (partner[i] == 1) {
+								if (partner[i] == 1 && replay == 0) {
 									awardchips(6, "blue", i)
 									chips[i] = chips[i] + 6
 									chipstack[i] = chipstack[i] + "bbbbbb"
@@ -4379,7 +4486,7 @@
 									offensename[1] + " wins 3 Chips! (" +
 									defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " make Schneider.)"
 								for (i = 1; i <= 4; i++) {
-									if (partner[i] == 1) {
+									if (partner[i] == 1 && replay == 0) {
 										awardchips(3, "blue", i)
 										chips[i] = chips[i] + 3
 										chipstack[i] = chipstack[i] + "bbb"
@@ -4395,7 +4502,7 @@
 										defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " win 2 chips! (" +
 										offensename[1] + " makes Schneider.)"
 									for (i = 1; i <= 4; i++) {
-										if (partner[i] == 0) {
+										if (partner[i] == 0 && replay == 0) {
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
@@ -4409,7 +4516,7 @@
 										defensename[1] + " and " + defensename[2] + " and " + defensename[3] + " win 3 chips! (" +
 										offensename[1] + " does not make Schneider.)"
 									for (i = 1; i <= 4; i++) {
-										if (partner[i] == 0) {
+										if (partner[i] == 0 && replay == 0) {
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
@@ -4431,7 +4538,7 @@
 							"Schwartz!!! " + offensename[1] + " and " + offensename[2] + " win 3 chips! (" +
 							defensename[1] + " and " + defensename[2] + " take no points.)"
 						for (i = 1; i <= 4; i++) {
-							if (partner[i] == 1) {
+							if (partner[i] == 1 && replay == 0) {
 								awardchips(3, "white", i)
 								chips[i] = chips[i] + 3
 								chipstack[i] = chipstack[i] + "www"
@@ -4447,7 +4554,7 @@
 								offensename[1] + " and " + offensename[2] + " win 2 chips! (" +
 								defensename[1] + " and " + defensename[2] + " do not make Schneider.)"
 							for (i = 1; i <= 4; i++) {
-								if (partner[i] == 1) {
+								if (partner[i] == 1 && replay == 0) {
 									awardchips(2, "white", i)
 									chips[i] = chips[i] + 2
 									chipstack[i] = chipstack[i] + "ww"
@@ -4463,9 +4570,8 @@
 									offensename[1] + " and " + offensename[2] + " win 1 Chip! (" +
 									defensename[1] + " and " + defensename[2] + " make Schneider.)"
 								for (i = 1; i <= 4; i++) {
-									if (partner[i] == 1) {
+									if (partner[i] == 1 && replay == 0) {
 										awardchips(1, "white", i)
-
 										chips[i] = chips[i] + 1
 										chipstack[i] = chipstack[i] + "w"
 									}
@@ -4480,7 +4586,7 @@
 										defensename[1] + " and " + defensename[2] + " win 2 chips! (" +
 										offensename[1] + " and " + offensename[2] + " make Schneider.)"
 									for (i = 1; i <= 4; i++) {
-										if (partner[i] == 0) {
+										if (partner[i] == 0 && replay == 0) {
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
@@ -4494,7 +4600,7 @@
 										defensename[1] + " and " + defensename[2] + " win 3 chips! (" +
 										offensename[1] + " and " + offensename[2] + " do not make Schneider.)"
 									for (i = 1; i <= 4; i++) {
-										if (partner[i] == 0) {
+										if (partner[i] == 0 && replay == 0) {
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
@@ -4506,7 +4612,7 @@
 					}
 				}
 
-
+				replay = 0
 				handover = 1
 				//transcript = transcript + "Offense: " + offense + " Defense: " + defense
 				document.getElementById('continue').style.display = 'inherit'
@@ -4532,6 +4638,10 @@
 		document.Escore.Escore.style.color = "black"
 		document.Sscore.Sscore.style.color = "black"
 		document.Wscore.Wscore.style.color = "black"
+		document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
+		document.Escore.Escore.style.backgroundColor = "#84B5E1"
+		document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
+		document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
 
 		document.Nscore.Nscore.value = chips[1]
 		document.Escore.Escore.value = chips[2]
@@ -4804,13 +4914,22 @@
 
 
 	function sortingchoice() {
-		for (index = 0; index < document.sorting.choice.length; index++) {
-			if (document.sorting.choice[index].checked) {
-				sorder = document.sorting.choice[index].value;
-				//alert(sorder)	
-				break;
+		(function () {
+			const form =
+				document.getElementById('sortingForm') ||
+				document.forms['sortingForm'] ||
+				document;
+
+			const radios = form.querySelectorAll(
+				'input[name="sortChoice"], input[name="choice"]'
+			);
+
+			let found = '0';
+			for (const r of radios) {
+				if (r.checked) { found = r.value; break; }
 			}
-		}
+			window.sorder = found;
+		})();
 	}
 
 
@@ -5009,6 +5128,142 @@
 
 	//-->
 </SCRIPT>
+
+
+
+
+<script>
+	const LS_KEYS = {
+		settings: 'schafkopf:settings',
+		game: 'schafkopf:gamestate'
+	};
+
+	function saveSettings() {
+		try {
+			const sortEl = document.querySelector('#sortingForm input[name="sortChoice"]:checked');
+
+			const data = {
+				names: {
+					N: document.getElementById('Ninput')?.value || 'North',
+					E: document.getElementById('Einput')?.value || 'East',
+					S: document.getElementById('Sinput')?.value || 'South',
+					W: document.getElementById('Winput')?.value || 'West',
+				},
+				speed: Number(document.getElementById('speedSlider')?.value || 1500),
+				trust: {
+					2: Number(document.getElementById('trustSlider2')?.value || 0),
+					3: Number(document.getElementById('trustSlider3')?.value || 0),
+					4: Number(document.getElementById('trustSlider4')?.value || 0),
+				},
+				flags: {
+					showPlays: !!document.getElementById('ShowPlays')?.checked,
+					tellPlays: !!document.getElementById('TellPlays')?.checked,
+					remaining: !!document.getElementById('RemovePlays')?.checked,
+				},
+				sortChoice: sortEl ? String(sortEl.value) : '0',
+			};
+
+			localStorage.setItem(LS_KEYS.settings, JSON.stringify(data));
+		} catch (e) {
+			console.warn('saveSettings failed:', e);
+		}
+	}
+
+
+	function loadSettings() {
+		const key = (window.LS_KEYS && LS_KEYS.settings) ? LS_KEYS.settings : 'settings-v1';
+		const raw = localStorage.getItem(key);
+		if (!raw) return;
+
+		let s;
+		try { s = JSON.parse(raw); } catch { return; }
+
+		const $ = id => document.getElementById(id);
+
+		// Names
+		if (s.names) {
+			['N', 'E', 'S', 'W'].forEach(ch => {
+				const el = $(`${ch}input`);
+				if (el && s.names[ch] != null) el.value = s.names[ch];
+			});
+		}
+
+		// Speed (value + trigger your existing listeners)
+		const sp = $('speedSlider');
+		if (sp && typeof s.speed === 'number') {
+			sp.value = s.speed;
+			sp.dispatchEvent(new Event('input', { bubbles: true }));
+		}
+
+		// Trust sliders (2,3,4) + trigger listeners
+		if (s.trust) {
+			[2, 3, 4].forEach(i => {
+				const el = $(`trustSlider${i}`);
+				if (el && s.trust[i] != null) {
+					el.value = s.trust[i];
+					el.dispatchEvent(new Event('input', { bubbles: true }));
+				}
+			});
+		}
+
+		// Flags (checkboxes) + trigger change
+		if (s.flags) {
+			const map = { ShowPlays: 'showPlays', TellPlays: 'tellPlays', RemovePlays: 'remaining' };
+			Object.entries(map).forEach(([id, key]) => {
+				const el = $(id);
+				if (el) {
+					el.checked = !!s.flags[key];
+					el.dispatchEvent(new Event('change', { bubbles: true }));
+				}
+			});
+		}
+
+		// Sort choice radios (supports name="sortChoice" or name="choice")
+		if (s.sortChoice != null) {
+			const sel = document.querySelector(
+				'#sortingForm input[name="sortChoice"][value="' + s.sortChoice + '"], ' +
+				'#sortingForm input[name="choice"][value="' + s.sortChoice + '"], ' +
+				'input[name="sortChoice"][value="' + s.sortChoice + '"], ' +
+				'input[name="choice"][value="' + s.sortChoice + '"]'
+			);
+			if (sel) {
+				sel.checked = true;
+				sel.dispatchEvent(new Event('change', { bubbles: true }));
+			}
+		}
+	}
+
+
+	function wireSettingsAutosave() {
+		const ids = [
+			'Ninput', 'Einput', 'Sinput', 'Winput',
+			'speedSlider',
+			'trustSlider2', 'trustSlider3', 'trustSlider4',
+			'ShowPlays', 'TellPlays', 'RemovePlays'
+		];
+
+		ids.forEach(id => {
+			const el = document.getElementById(id);
+			if (el) {
+				el.addEventListener('change', saveSettings);
+				// for sliders / text inputs you can also keep 'input' if you want live saving:
+				el.addEventListener('input', saveSettings);
+			}
+		});
+
+		// radios (scoped!)
+		document.querySelectorAll('#sortingForm input[name="sortChoice"]').forEach(r => {
+			r.addEventListener('change', saveSettings);
+		});
+	}
+
+
+	document.addEventListener('DOMContentLoaded', () => {
+		if (!window.LS_KEYS) window.LS_KEYS = { settings: 'settings-v1' };
+		loadSettings();            // restore first
+		wireSettingsAutosave();    // then start listening
+	});
+</script>
 
 
 
