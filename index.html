@@ -62,7 +62,7 @@
 			display: none;
 			position: absolute;
 			right: 0px;
-			top: 210px;
+			top: 160px;
 			\\transform: translateX(-50%);
 			z-index: 1000;
 			width: 200px;
@@ -82,7 +82,7 @@
 			display: none;
 			position: absolute;
 			right: 0px;
-			top: 180px;
+			top: 160px;
 			/* more stable than left:89.5% + translate */
 			z-index: 1000;
 			width: 200px;
@@ -126,10 +126,10 @@
 		#previoustrickmodal {
 			display: none;
 			position: absolute;
-			left: 300px;
-			top: 200px;
+			left: 265px;
+			top: 192px;
 			z-index: 1000;
-			width: 200px;
+			width: 270px;
 			box-sizing: border-box;
 		}
 
@@ -1428,24 +1428,27 @@
 				<td style="padding-top:0;">
 					<form name="Plays">
 
-						<label>
-							<input type="checkbox" id="ShowPlays" onchange=assistant()>
-							Allowed
+						<label style="display:block;">
+							<input type="checkbox" id="ShowPlays" onchange="assistant()">
+							Allowed Plays
 						</label>
-						<label>
-							<input type="checkbox" id="TellPlays" onchange=assistant()>
-							Suggested
+
+						<label style="display:block;">
+							<input type="checkbox" id="TellPlays" onchange="assistant()">
+							Hint
+
+							<input type="range" id="trustSlider1" min="0" max="2" step="1" value="1"
+								style="width:40px; vertical-align:middle; margin-left:8px;" onchange="assistant()">
+
+							<span id="trustDisplay1" style="margin-left:6px;">Medium</span><br>
 						</label>
+
+						<label style="display:block;">
+							<input type="checkbox" id="RemovePlays" onchange="assistant()">
+							Remaining Cards
+						</label>
+
 					</form>
-				</td>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>
-						<input type="checkbox" id="RemovePlays" onchange=assistant()>
-						Remaining Cards
-					</label>
 				</td>
 			</tr>
 		</table>
@@ -1514,9 +1517,12 @@
 			<h2>Rules of Play</h2>
 			<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit).
 				The cards are arranged into three fail suits: clubs (A&clubs; 10&clubs; K&clubs; 9&clubs; 8&clubs;
-				7&clubs;); hearts (A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts; 7&hearts;); spades (A&spades;
-				10&spades; K&spades; 9&spades; 8&spades; 7&spades;); and one trump suit (Q&clubs; Q&spades; Q&hearts;
-				Q&diams; J&clubs; J&spades; J&hearts; J&diams; A&diams; 10&diams; K&diams; 9&diams; 8&diams; 7&diams;).
+				7&clubs;); hearts (<span style="color: red;">A&hearts; 10&hearts; K&hearts; 9&hearts; 8&hearts;
+					7&hearts;</span>); spades (A&spades;
+				10&spades; K&spades; 9&spades; 8&spades; 7&spades;); and one trump suit (Q&clubs; Q&spades; <span
+					style="color: red;">Q&hearts;
+					Q&diams;</span> J&clubs; J&spades; <span style="color: red;">J&hearts; J&diams; A&diams; 10&diams;
+					K&diams; 9&diams; 8&diams; 7&diams;</span>).
 				Remember that queens and jacks are always trump; they are never considered clubs, spades, or hearts. In
 				a given suit (fail or trump), a stronger card (as ordered above) will beat any weaker card. Every trump
 				card is stronger than any fail card. Additionally, each card has a numerical value irrespective of their
@@ -1546,11 +1552,13 @@
 			<p>If one player has both black queens, they may choose to play on Offense alone, with the other three
 				players forming the Defense. This is not announced ahead of time. A player without both black queens may
 				also choose to play alone by Calling Off one or both Old Ones. This must be announced before the hand
-				begins. In either case, the person playing alone will earn triple the regular number of chips (3,6, or
-				9). All members of the Defense win the regular number of chips (2 or 3). </p>
+				begins. In either case, the person playing alone is considered the Offense and will earn triple the
+				regular number of chips (3, 6, or
+				9). All three members of the Defense will earn the regular number of chips (2 or 3). </p>
 
 			<p>If the player with both black queens does not wish to play alone, they may call for a partner, by asking
-				for A&clubs;, A&hearts;, or A&spades;. If the player with both black queens has cards of the same suit
+				for A&clubs;, <span style="color: red;">A&hearts;</span>, or A&spades;. If the player with both black
+				queens has cards of the same suit
 				they call for, the Ace is Known; if they do not, the Ace is Unknown. This must be announced before the
 				hand begins. However, the holder of the Ace does not reveal this information; as usual, it is discovered
 				through the course of play. When the suit of the ace is led, the player with the Ace must play it (even
@@ -1589,16 +1597,19 @@
 			<h4>Options</h4>
 			<p>At the beginning of the game, and before each deal, you may select new names and personalities for the
 				players. On Low, the computer will play conservatively (only schmier to a confirmed partner, play
-				predictably); on High, the computer will play more aggressively (schmier to a likely partner, sometimes
-				make unusual plays). The default is Med, between those extremes. You may also select the order in which
+				predictably, less likely to play alone); on High, the computer will play more aggressively (schmier to a
+				likely partner, sometimes
+				make unusual plays, more likely to play alone). The default is Med, between those extremes. You may also
+				select the order in which
 				to sort your hand, either higher cards on the Left, or higher cards on the Right. These options may not
 				be changed mid-hand.</p>
 			<h4>Cheat Sheet</h4>
 			<p>Once the cards have been dealt, the cheat sheet provides several forms of assistance. The sheet shows all
 				32 cards organized by suit, in ranked order, with the point value for each card. The option to show
-				Allowed plays will fade all illegal plays in your hand. The option to show Suggested plays will
-				highlight a single suggested play based on a Med computer personality (please note, the suggested play
-				will not be the best play in every situation). The option to show Remaining Cards will fade all cards
+				Allowed Plays will fade all illegal plays in your hand. The option to show a Hint will
+				highlight and explain a single suggested play based on the chosen computer personality. You may adjust
+				the personality at any time (which may or may not change the suggested play). The option to show
+				Remaining Cards will fade all cards
 				that have been played. These features may be toggled on or off at any time during the hand, and they may
 				be used together or separately. These features are only available during the hand, but your selections
 				will be saved between hands and games.</p>
@@ -1621,10 +1632,9 @@
 				generally lead a non-trump ace (A&clubs;, A&hearts;, A&spades;) or a low fail card.</p>
 			<p>Since there are only 6 cards in each fail suit, the suit will go around (not be trumped) at most once. If
 				you hold a singleton ace, it will go around ~60% of the time; if you have a doubleton ace, it will go
-				around ~45% of the time; if you have 3 in a suit, it will go around ~20% of the time. However, once all
-				the trump have been played, even a low fail cards can take tricks.</p>
-			<p>Since the strongest cards are not generally the highest value cards, you should always consider which
-				attribute is more important at the moment.</p>
+				around ~45% of the time; if you have 3 in a suit, it will go around ~20% of the time. However, remember
+				that once all
+				the trump have been played, even a low fail card can take tricks.</p>
 		</div>
 	</div>
 </div>
@@ -1637,24 +1647,31 @@
 		<h3 style="margin:0 0 8px 0; font-family:Arial, sans-serif; font-size:16pt; color:black;">
 			Previous Trick
 		</h3>
-		<table width="100%" border="0" cellpadding="4" cellspacing="0" align="center" style="border-collapse:collapse;">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+
 			<tr>
-				<td width="100" align="center">
-					<img id="card51" src="image2/Card01.gif" width="80" height="126">
+				<!-- Left column -->
+				<td width="33%" align="center" valign="middle">
+					<img id="card54" src="image2/Card01.gif" width="80" height="126">
 				</td>
-				<td width="100" align="center">
+
+				<!-- Center column -->
+				<td width="34%" align="center" valign="middle">
+					<img id="card51" src="image2/Card01.gif" width="80" height="126"><br>
+					<img id="card53" src="image2/Card01.gif" width="80" height="126">
+				</td>
+
+				<!-- Right column -->
+				<td width="33%" align="center" valign="middle">
 					<img id="card52" src="image2/Card01.gif" width="80" height="126">
 				</td>
 			</tr>
-			<tr>
-				<td width="100" align="center">
-					<img id="card54" src="image2/Card01.gif" width="80" height="126">
-				</td>
-				<td width="100" align="center">
-					<img id="card53" src="image2/Card01.gif" width="80" height="126">
-				</td>
-			</tr>
+
 		</table>
+
+
+
+
 	</div>
 </div>
 
@@ -1908,7 +1925,7 @@
 		dealer = Math.floor(Math.random() * 4 + 1)
 
 		//TEST DEALER
-		//dealer = 3
+		dealer = 3
 
 		reset()
 	}
@@ -2108,6 +2125,7 @@
 		trickcount = 1
 
 		suits = new Array(0, "T", "S", "H", "C")
+		suitnames = new Array(0, "trump", "spade", "heart", "club")
 		trick = new Array(0, 0, 0, 0, 0)
 		pasttrick = new Array(0, 0, 0, 0, 0)
 		partner = new Array(0, 0, 0, 0, 0)
@@ -2149,6 +2167,9 @@
 		plural = ""
 		Nturn = 0
 		turn = 0
+
+		hint = ""
+		temphint = ""
 
 		handvalue = 33
 		trickleader = 0
@@ -2212,7 +2233,7 @@
 
 
 		document.player.player.value = ""
-		document.getElementById('messages').value = "Dealing"
+		document.getElementById('messages').value = "Dealing..."
 
 		document.player.player.value = playername[dealer % 4 + 1]
 
@@ -2323,28 +2344,26 @@
 
 
 
+		/*
+		
+				//TEST HAND 
+		
+				Nhandimage = new Array(0, "image2/cardASS.gif", "image2/cardADT.gif", "image2/cardJST.gif", "image2/card7HH.gif", "image2/cardQHT.gif", "image2/cardAHH.gif", "image2/cardQST.gif", "image2/cardQCT.gif")
+				Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif", "image2/card9HH.gif")
+				Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/card1DT.gif", "image2/cardJCT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/card9DT.gif")
+				Whandimage = new Array(0, "image2/card8HH.gif", "image2/card9CC.gif", "image2/card7SS.gif", "image2/cardKHH.gif", "image2/cardKCC.gif", "image2/card7CC.gif", "image2/card8DT.gif", "image2/card8SS.gif")
+		
+		
+		
+		
+		
+				deckvalue[15] = "ASS"
+				deckvalue[17] = "ACC"
+				deckvalue[16] = "AHH"
+		
+		
+		*/
 
-
-
-
-
-/*
-		//TEST HAND 
-
-		Nhandimage = new Array(0, "image2/cardQST.gif", "image2/card8DT.gif", "image2/cardASS.gif", "image2/cardKHH.gif", "image2/cardAHH.gif", "image2/card8SS.gif", "image2/cardKCC.gif", "image2/card7CC.gif")
-		Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/cardQCT.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif")
-		Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/card1DT.gif", "image2/cardJCT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/card9DT.gif")
-		Whandimage = new Array(0, "image2/cardADT.gif", "image2/cardJST.gif", "image2/card8HH.gif", "image2/card7HH.gif", "image2/cardQHT.gif", "image2/card9HH.gif", "image2/card9CC.gif", "image2/card7SS.gif")
-
-
-
-		deckvalue[15] = "ASS"
-		deckvalue[17] = "ACC"
-		deckvalue[16] = "AHH"
-
-
-
-*/
 
 
 
@@ -2831,7 +2850,7 @@
 	function computerpartner(Chand, Csuit, number) {
 
 		if (partners == 0) {
-			if (Chand[8] == "QCT" && Chand[7] == "QST" && Csuit[1] < 6 - (trust[number]-.25)*4) {
+			if (Chand[8] == "QCT" && Chand[7] == "QST" && Csuit[1] < 6 - (trust[number] - .25) * 4) {
 				for (k = 0; k <= 3; k++) {
 					for (i = 15; i <= 17; i++) {
 						if (Csuit[getPosition(deckvalue[i].charAt(2), suits)] == k) {
@@ -2983,7 +3002,7 @@
 				}
 			}
 
-			if (Chand[8] != "QCT" && Chand[8] != "QST" && (Csuit[1] > 7 - - (trust[number]-.25)*2 || (Csuit[1] > 7  - (trust[number]-.25)*2 && (Chand[1].charAt(0) == "A" || Chand[2].charAt(0) == "A" )))) {
+			if (Chand[8] != "QCT" && Chand[8] != "QST" && (Csuit[1] > 7 - (trust[number] - .25) * 2 || (Csuit[1] > 6 - (trust[number] - .25) * 2 && (Chand[1].charAt(0) == "A" || Chand[2].charAt(0) == "A")))) {
 				//alert(playername[number]+" calls off both Old Ones!")
 				document.getElementById('messages').value = playername[number] + " calls off both Old Ones!"
 				solochoice = "QQ"
@@ -3022,7 +3041,7 @@
 				}
 			}
 
-			if ((Chand[8] == "QCT" && Chand[7] != "QST" && Csuit[1] > 6 - (trust[number]-.25)*4) || (Chand[8] == "QST" && Csuit[1] > 7 - (trust[number]-.25)*2 )) {
+			if ((Chand[8] == "QCT" && Chand[7] != "QST" && Csuit[1] > 6 - (trust[number] - .25) * 4) || (Chand[8] == "QST" && Csuit[1] > 7 - (trust[number] - .25) * 2)) {
 				//alert(playername[number]+" calls off the Old One!")
 				document.getElementById('messages').value = playername[number] + " calls off the Old One!"
 				calledace = "Old One"
@@ -3220,19 +3239,24 @@
 		}
 		else {
 			//PARTNER GUESS
-			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) != "T" && trick[player].charAt(0) == "A") {
-				visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 1)
-			}
 			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) != "T" && trick[player].charAt(0) != "A") {
 				visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 2)
-			}
-			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+			} //LEAD FAIL
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) != "T" && trick[player].charAt(0) == "A") {
+				visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 1)
+			} //LEAD ACE
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (trick[player].charAt(0) != "A" && trick[player].charAt(0) != "1" && trick[player].charAt(0) != "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
 				visiblepartner[player] = (visiblepartner[player] + 1.5) / 2.5
-			}
+			} //LEAD TRUMP
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+				visiblepartner[player] = (visiblepartner[player] + 3) / 4
+			} //LEAD  TRUMP SCHMIER
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn > 1 && trick[0] == "T" && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+				visiblepartner[player] = (visiblepartner[player] + .15) / (1.15)
+			} //PLAY TRUMP SCHMIER
 			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && trick[0] == "T" && trick[player].charAt(2) != "T" && solopartner == 0) {
 				visiblepartner[player] = 0
-
-			}
+			} //OUT OF TRUMP
 
 		}
 		//alert(visiblepartner)
@@ -3299,9 +3323,137 @@
 
 	}
 
+	function normalize(a, b, c, selfIndex = 1) {
+		const round2 = x => Math.round((x + Number.EPSILON) * 100) / 100;
+		const toPercent = x => Math.round(x * 100) + "%";
+
+		const vals = [a, b, c];
+		const zeroCount = vals.filter(v => v === 0).length;
+		const strength = 0.75;
+
+		let result;
+
+		if (zeroCount === 2) {
+			result = vals.map(v => (v === 0 ? 0 : 1));
+
+		} else if (a === 1 || b === 1 || c === 1) {
+			result = [
+				a === 1 ? 1 : 0,
+				b === 1 ? 1 : 0,
+				c === 1 ? 1 : 0
+			];
+
+		} else if (zeroCount === 1) {
+			const nonZeroIndexes = vals
+				.map((v, i) => v !== 0 ? i : -1)
+				.filter(i => i !== -1);
+
+			const iA = nonZeroIndexes[0];
+			const iB = nonZeroIndexes[1];
+
+			const topIndex = vals[iA] >= vals[iB] ? iA : iB;
+			const otherIndex = vals[iA] >= vals[iB] ? iB : iA;
+
+			const top = vals[topIndex];
+			const other = vals[otherIndex];
+
+			// 🔥 NEW LOGIC (your idea)
+			const influence = (0.5 - other) / 0.5;
+
+			let adjustedTop = top + influence * (1 - top);
+
+			adjustedTop = Math.max(0, Math.min(1, adjustedTop));
+
+			result = [0, 0, 0];
+			result[topIndex] = round2(adjustedTop);
+			result[otherIndex] = round2(1 - adjustedTop);
+		} else {
+			const max = Math.max(...vals);
+			const maxCount = vals.filter(v => v === max).length;
+
+			if (maxCount > 1) {
+				const sum = a + b + c;
+				result = vals.map(v => round2(v / sum));
+			} else {
+				const topIndex = vals.indexOf(max);
+				const top = vals[topIndex];
+
+				const otherIndexes = vals
+					.map((v, i) => i !== topIndex ? i : -1)
+					.filter(i => i !== -1);
+
+				// same basic idea as the one-zero case
+				const averageInfluence = otherIndexes
+					.map(i => (0.5 - vals[i]) / 0.5)
+					.reduce((sum, influence) => sum + influence, 0) / otherIndexes.length;
+
+				let adjustedTop;
+
+				if (averageInfluence >= 0) {
+					// push top upward toward 1
+					adjustedTop = top + averageInfluence * (1 - top);
+				} else {
+					// push top downward toward 0.5
+					adjustedTop = top + averageInfluence * (top - 0.5);
+				}
+
+				adjustedTop = Math.max(0, Math.min(1, adjustedTop));
+
+				const othersSum = otherIndexes.reduce((sum, i) => sum + vals[i], 0);
+				const remaining = 1 - adjustedTop;
+
+				result = [0, 0, 0];
+				result[topIndex] = round2(adjustedTop);
+
+				otherIndexes.forEach(i => {
+					result[i] = round2((vals[i] / othersSum) * remaining);
+				});
+			}
+		}
+
+		return formatHighest(result);
+
+		function formatHighest(values) {
+			const others = [1, 2, 3, 4].filter(i => i !== selfIndex);
+
+			const entries = [
+				{ name: playername[others[0]], val: values[0] },
+				{ name: playername[others[1]], val: values[1] },
+				{ name: playername[others[2]], val: values[2] }
+			];
+
+			const highest = Math.max(...values);
+
+			return entries
+				.filter(e => e.val === highest)
+				.map(e => `${e.name}: ${toPercent(e.val)}`)
+				.join(", ");
+		}
+	}
+
 
 
 	function assistant() {
+		console.log(
+			visiblepartner[1], visiblepartner[2], visiblepartner[3], visiblepartner[4]
+
+		)
+
+		console.log("J: " +
+			normalize(1 - Math.abs(partner[1] - visiblepartner[2]), 1 - Math.abs(partner[1] - visiblepartner[3]), 1 - Math.abs(partner[1] - visiblepartner[4]), 1)
+		)
+		console.log("A: " +
+			normalize(1 - Math.abs(partner[2] - visiblepartner[1]), 1 - Math.abs(partner[2] - visiblepartner[3]), 1 - Math.abs(partner[2] - visiblepartner[4]), 2)
+		)
+		console.log("P: " +
+			normalize(1 - Math.abs(partner[3] - visiblepartner[1]), 1 - Math.abs(partner[3] - visiblepartner[2]), 1 - Math.abs(partner[3] - visiblepartner[4]), 3)
+		)
+		console.log("J: " +
+			normalize(1 - Math.abs(partner[4] - visiblepartner[1]), 1 - Math.abs(partner[4] - visiblepartner[2]), 1 - Math.abs(partner[4] - visiblepartner[3]), 4)
+		)
+
+
+
 		const box1 = document.getElementById("ShowPlays");
 		if (box1.checked && Nturn == 1) {
 
@@ -3366,8 +3518,25 @@
 		}
 		computerplay(Nhand, Nplay, Nsuit, 1)
 
+
+		document.getElementById('messages').value = ""
+		document.images["card1"].classList.remove("highlight");
+		document.images["card2"].classList.remove("highlight");
+		document.images["card3"].classList.remove("highlight");
+		document.images["card4"].classList.remove("highlight");
+		document.images["card5"].classList.remove("highlight");
+		document.images["card6"].classList.remove("highlight");
+		document.images["card7"].classList.remove("highlight");
+		document.images["card8"].classList.remove("highlight");
+
 		const box2 = document.getElementById("TellPlays");
 		if (box2.checked && Nturn == 1) {
+			if (((Nhand[7] == "QST" && Nhand[8] == "QCT") || (Nhand[2] == "QST" && Nhand[1] == "QCT")) && soloplayer == 0) {
+				document.getElementById('messages').value = hint + "\n" + "You are playing alone."
+			}
+			else {
+				document.getElementById('messages').value = hint + "\n" + normalize(1 - Math.abs(partner[1] - visiblepartner[2]), 1 - Math.abs(partner[1] - visiblepartner[3]), 1 - Math.abs(partner[1] - visiblepartner[4]))
+			}
 			switch (tempplay) {
 				case 1:
 					document.images["card1"].classList.add("highlight");
@@ -3400,6 +3569,7 @@
 
 		}
 		else {
+			document.getElementById('messages').value = ""
 			document.images["card1"].classList.remove("highlight");
 			document.images["card2"].classList.remove("highlight");
 			document.images["card3"].classList.remove("highlight");
@@ -3553,18 +3723,26 @@
 	//COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI 
 
 
-	// BASE SOLO PLAY CHOICES ON TRUST SETTING
+	//ADD VOID COUNTER (PROVIDE SAFER TRUMP)
 
-	//ADD PRESUMPTIVE SCHMIER IF you play third and the suit is not broken yet and the fourth person is your partner.
+	// CONSIDER PLAYING UNBROKEN SUIT RATHER THAN VOIDING BROKEN SUIT DEPENDING
 
-	//ADJUST PARTNER TRUST IF QH TAKES TRUMP TRICK AND TURN 4 HAS NO TRUMP
+	//ADJUST PARTNER TRUST IF QH IS PLAYED TO WIN TRUMP TRICK AND IT IS TURN 4 AND YOU DON'T HAVE QC
 
+	//IMPROVE OFFENSE/DEFENSE FOR SOLO PLAY
+
+	//LEAD UNBROKEN SUIT
+
+	//SOMETIMES BETTER TO TRUMP THAN SLOUGH BC ONLY SLOUGH IS POINTS
+
+	//FAIL SCHMIER AFFECTS PARTNER TRUST (DOESN'T TRUMP)
 
 	function computerplay(Chand, Cplay, Csuit, number) {
 
 
 		temphand = new Array("0")
 		tempplay = 0
+		temphint = ""
 
 		if (trick[0] == 0) {										//YOU ARE LEADING
 
@@ -3573,11 +3751,11 @@
 			//ABNORMAL LEADS
 			if (trickcount == 1 && Math.random() < trust[number] && partner[number] == 1) {//OFFENSE				
 				console.log(trickcount, "Abnormal Lead")
-				leadace(Chand, Cplay, Csuit, number, 1)							//LEAD ACE
+				leadace(Chand, Cplay, Csuit, number, 1)										//LEAD ACE
 			}
 			if (trickcount == 1 && Math.random() < trust[number] * .2 && partner[number] == 0) {	//DEFENSE 
 				console.log(trickcount, "Abnormal Lead")
-				trumplow(Chand, Cplay, Csuit, number)					//PLAY LOWEST TRUMP
+				trumplow(Chand, Cplay, Csuit, number)										//PLAY LOWEST TRUMP
 			}
 
 
@@ -3585,113 +3763,138 @@
 				if (Chand[temphand[1]].charAt(2) == "T") {							//TRUMP
 					if (tempplay == 0 && soloplayer != number && ((deckvalue[1] == "QCT" && Chand[temphand[1]] != "QCT") ||
 						(deckvalue[1] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")) ||
-						(deckvalue[2] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")))) {											//PARTNER HAS NOT PLAYED QUEEN
-						trumpschmier(Chand, Cplay, Csuit, number)					//LEAD TRUMP SCHMIER
+						(deckvalue[2] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")))) {																//PARTNER HAS NOT PLAYED QUEEN
+						trumpschmier(Chand, Cplay, Csuit, number)							//LEAD TRUMP SCHMIER
 						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)						//LEAD LOWEST TRUMP
+							trumplow(Chand, Cplay, Csuit, number)							//LEAD LOWEST TRUMP
 						}
 					}
-					else {												//PARTNER HAS PLAYED QUEEN
-						if (tempplay == 0 && visiblesuit[1] + Csuit[1] < 14) {
-							besttrump(Chand, Cplay, Csuit, number)
-						}							//LEAD BEST TRUMP
+					else {																//PARTNER HAS PLAYED QUEEN
+						if (tempplay == 0 && (visiblesuit[1] + Csuit[1] < 14 || Csuit[2] + Csuit[3] + Csuit[4] == 0) && (solopartner != player || soloplay == 1)) {
+							besttrump(Chand, Cplay, Csuit, number)							//LEAD BEST TRUMP
+						}
 						if (tempplay == 0) {
 							leadace(Chand, Cplay, Csuit, number)							//LEAD ACE
 						}
 						if (tempplay == 0 && soloplayer == number && soloplay == 0) {
-							leadtocalledace(Chand, Cplay, Csuit, number)				//LEAD TO CALLED ACE
+							leadtocalledace(Chand, Cplay, Csuit, number)					//LEAD TO CALLED ACE
 						}
-
 						if (tempplay == 0) {
-							slough(Chand, Cplay, Csuit, number)					//LEAD LOWEST CARD
+							highfail(Chand, Cplay, Csuit, number)							//PLAY HIGHEST OF THE SUIT
+						}
+						if (tempplay == 0) {
+							lowfail(Chand, Cplay, Csuit, number)							//PLAY LOWEST OF THE SUIT
+						}
+						if (tempplay == 0) {
+							trumplow(Chand, Cplay, Csuit, number)							//PLAY LOW TRUMP
+						}
+						if (tempplay == 0) {
+							slough(Chand, Cplay, Csuit, number)								//LEAD LOWEST CARD
 						}
 					}
 				}
 				else {
-					if (tempplay == 0) {													//NO TRUMP
+					if (tempplay == 0) {											//NO TRUMP
 						leadace(Chand, Cplay, Csuit, number)								//LEAD ACE
 					}
 					if (tempplay == 0 && soloplayer == number && soloplay == 0) {
-						leadtocalledace(Chand, Cplay, Csuit, number)				//LEAD TO CALLED ACE
+						leadtocalledace(Chand, Cplay, Csuit, number)						//LEAD TO CALLED ACE
 					}
 					if (tempplay == 0) {
-						highfail(Chand, Cplay, Csuit, number)							//PLAY HIGHEST OF THE SUIT
+						highfail(Chand, Cplay, Csuit, number)								//PLAY HIGHEST OF THE SUIT
 					}
 					if (tempplay == 0) {
-						slough(Chand, Cplay, Csuit, number)							//LEAD LOWEST CARD
+						lowfail(Chand, Cplay, Csuit, number)								//PLAY LOWEST OF THE SUIT
+					}
+					if (tempplay == 0) {
+						slough(Chand, Cplay, Csuit, number)									//LEAD LOWEST CARD
 					}
 				}
 
 			}
-			else {															//ON DEFENSE
+			else {														//ON DEFENSE
 				if (tempplay == 0) {
-					leadace(Chand, Cplay, Csuit, number)						//LEAD ACE
+					besttrump(Chand, Cplay, Csuit, number)									//LEAD HIGHEST TRUMP
 				}
 				if (tempplay == 0) {
-					besttrump(Chand, Cplay, Csuit, number)					//LEAD HIGHEST TRUMP
+					leadace(Chand, Cplay, Csuit, number)									//LEAD ACE
 				}
 				if (tempplay == 0) {
-					highfail(Chand, Cplay, Csuit, number)							//PLAY HIGHEST OF THE SUIT
+					highfail(Chand, Cplay, Csuit, number)									//PLAY HIGHEST OF THE SUIT
 				}
 				if (tempplay == 0) {
-					slough(Chand, Cplay, Csuit, number)							//LEAD LOWEST CARD
+					lowfail(Chand, Cplay, Csuit, number)									//PLAY LOWEST OF THE SUIT
+				}
+				if (tempplay == 0) {
+					trumplow(Chand, Cplay, Csuit, number)									//PLAY LOW TRUMP
+				}
+				if (tempplay == 0) {
+					slough(Chand, Cplay, Csuit, number)										//LEAD LOWEST CARD
 				}
 			}
 			if (number != 1) { trick[0] = Chand[tempplay].charAt(2) }
 
 
 		}
-		else {												//YOU ARE FOLLOWING
+		else {														//YOU ARE FOLLOWING
 
 			validplays(Chand, Cplay, Csuit, number)						//FIND VALID PLAYS
 
 			if (follow == 1) {											//FOLLOWING A FAIL SUIT
-				playace(Chand, Cplay, Csuit, number)								//PLAY ACE
+				playace(Chand, Cplay, Csuit, number)										//PLAY ACE
 				if (tempplay == 0) {
-					schmier(Chand, Cplay, Csuit, number)							//SCHMIER TO PARTNER
+					schmier(Chand, Cplay, Csuit, number)									//SCHMIER TO PARTNER
 				}
 				if (tempplay == 0) {
-					highfail(Chand, Cplay, Csuit, number)							//PLAY HIGHEST OF THE SUIT
+					highfail(Chand, Cplay, Csuit, number)									//PLAY HIGHEST OF THE SUIT
 				}
-
 				if (tempplay == 0) {
-					slough(Chand, Cplay, Csuit, number)							//PLAY LOWEST CARD
+					lowfail(Chand, Cplay, Csuit, number)									//PLAY LOWEST OF THE SUIT
 				}
 			}
 
 			if (follow == 2) {											//FOLLOWING A TRUMP SUIT
 				if (partner[number] == 1) {									//OFFENSE
-					if ((handvalue == 1 || (handvalue == 2 && deckvalue[2] == "QST") || (handvalue == 2 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))) && visiblepartner[trickleader] == 1) {													//BLACK QUEEN (OR HIGHEST TRUMP) PRESENT
-						trumpschmier(Chand, Cplay, Csuit, number)						//TRUMP SCHMIER
+					if ((handvalue == 1 || (handvalue == 2 && deckvalue[2] == "QST") || (handvalue == 2 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))) && visiblepartner[trickleader] == 1) {															//BLACK QUEEN (OR HIGHEST TRUMP) PRESENT
+						trumpschmier(Chand, Cplay, Csuit, number)							//TRUMP SCHMIER
 						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)						//PLAY LOWEST TRUMP
+							trumplow(Chand, Cplay, Csuit, number)							//PLAY LOWEST TRUMP
 						}
 					}
-					else {												//BLACK QUEEN NOT PRESENT
-						besttrump(Chand, Cplay, Csuit, number)						//PLAY HIGHEST TRUMP
+					else {														//BLACK QUEEN NOT PRESENT
+						besttrump(Chand, Cplay, Csuit, number)								//PLAY HIGHEST TRUMP
 						if (tempplay == 0) {
-							bettertrump(Chand, Cplay, Csuit, number)					//PLAY LOWEST WINNING TRUMP
+							bettertrump(Chand, Cplay, Csuit, number)						//PLAY LOWEST WINNING TRUMP
 						}
 						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)					//PLAY LOWEST TRUMP
+							trumplow(Chand, Cplay, Csuit, number)							//PLAY LOWEST TRUMP
 						}
 					}
 				}
 				else {													//DEFENSE								
 					if ((deckvalue[1] == "QCT" || deckvalue[1] == "QST")) {		//QUEENS NOT PLAYED
-						besttrump(Chand, Cplay, Csuit, number)					//PLAY HIGHEST TRUMP (Q or QQ)
+
+						besttrump(Chand, Cplay, Csuit, number)								//PLAY HIGHEST TRUMP (Q or QQ)
 
 						if (tempplay == 0 && turn == 3) {
-							forcequeen(Chand, Cplay, Csuit, number)				//FORCE QUEEN
+							forcequeen(Chand, Cplay, Csuit, number)							//FORCE QUEEN
 						}
 
 						if (tempplay == 0 && turn == 2) {
-							bettertrump(Chand, Cplay, Csuit, number)				//BETTER TRUMP
+							if (visiblepartner[player % 4 + 2] == 1) {
+								bettertrump(Chand, Cplay, Csuit, number)					//BETTER TRUMP
+							}
+							else {
+								trumplow(Chand, Cplay, Csuit, number)						//PLAY LOWEST TRUMP
+							}
 						}
 
+						if (tempplay == 0 && handvalue == 1 && visiblepartner[trickleader] == 0) {
+							trumpschmier(Chand, Cplay, Csuit, number)						//TRUMP SCHMIER
+						}
 
 						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)				//PLAY LOWEST TRUMP
+							trumplow(Chand, Cplay, Csuit, number)							//PLAY LOWEST TRUMP
 						}
 
 
@@ -3699,32 +3902,32 @@
 
 
 					}
-					else {													//QUEENS PLAYED
+					else {														//QUEENS PLAYED
 
-						besttrump(Chand, Cplay, Csuit, number)						//PLAY HIGHEST TRUMP
+						besttrump(Chand, Cplay, Csuit, number)								//PLAY HIGHEST TRUMP
 
 						if (tempplay == 0) {
-							bettertrump(Chand, Cplay, Csuit, number)					//PLAY LOWEST WINNING TRUMP
+							bettertrump(Chand, Cplay, Csuit, number)						//PLAY LOWEST WINNING TRUMP
 						}
 						if (tempplay == 0 && handvalue == 1 && visiblepartner[trickleader] == 0) {
-							trumpschmier(Chand, Cplay, Csuit, number)				//TRUMP SCHMIER
+							trumpschmier(Chand, Cplay, Csuit, number)						//TRUMP SCHMIER
 						}
 						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)					//PLAY LOWEST TRUMP
+							trumplow(Chand, Cplay, Csuit, number)							//PLAY LOWEST TRUMP
 						}
 					}
 				}
 			}
 
-			if (follow == 0) {											//CAN'T FOLLOW SUIT
+			if (follow == 0) {										//CAN'T FOLLOW SUIT
 				if (tempplay == 0) {
-					schmier(Chand, Cplay, Csuit, number)								//SCHMIER TO PARTNER
+					schmier(Chand, Cplay, Csuit, number)									//SCHMIER TO PARTNER
 				}
 				if (tempplay == 0) {
-					trump(Chand, Cplay, Csuit, number)							//PLAY LOWEST WINNING TRUMP
+					trump(Chand, Cplay, Csuit, number)										//TRUMP
 				}
 				if (tempplay == 0) {
-					slough(Chand, Cplay, Csuit, number)							//PLAY LOWEST CARD
+					slough(Chand, Cplay, Csuit, number)										//PLAY LOWEST CARD
 				}
 			}
 		}
@@ -3737,6 +3940,7 @@
 
 		switch (number) {
 			case 1:
+				hint = temphint
 				return
 			case 2:
 				document.card21.src = Ehandimage[tempplay]
@@ -3911,6 +4115,7 @@
 			for (j = 1; j <= temphand.length - 1; j++) {
 				if ((Chand[temphand[j]] == "ASS" && (Csuit[2] + visiblesuit[2] == i || visiblesuit[1] + Csuit[1] == 14)) || (Chand[temphand[j]] == "AHH" && (Csuit[3] + visiblesuit[3] == i || visiblesuit[1] + Csuit[1] == 14)) || (Chand[temphand[j]] == "ACC" && (Csuit[4] + visiblesuit[4] == i || visiblesuit[1] + Csuit[1] == 14))) {
 					tempplay = temphand[j]
+					temphint = "Lead an ace."
 					return
 				}
 			}
@@ -3929,6 +4134,7 @@
 			for (j = 1; j <= temphand.length - 1; j++) {
 				if (Chand[temphand[j]] == "ASS" || Chand[temphand[j]] == "AHH" || Chand[temphand[j]] == "ACC") {
 					tempplay = temphand[j]
+					temphint = "Follow suit. Play the ace of " + suitnames[getPosition(trick[0], suits)] + "s."
 					break
 				}
 			}
@@ -3946,39 +4152,91 @@
 	//SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH SLOUGH 
 	function slough(Chand, Cplay, Csuit, number) {
 
-		search:
-		for (i = 1; i <= 32; i++) {
+		for (i = 1; i <= 9; i++) { //singleton fail card (void suit)
 			for (j = 1; j <= temphand.length - 1; j++) {
-				if (Chand[temphand[j]] == deckvalue[deckvalue.length - i]) {
+				if (Chand[temphand[j]] == deckvalue[deckvalue.length - i] && Csuit[getPosition(deckvalue[deckvalue.length - i].charAt(2), suits)] == 1 && Csuit[1] != 0) {
 					tempplay = temphand[j]
-					break search
+					if (turn == 1) {
+						temphint = "Lead a fail card."
+					}
+					else {
+						temphint = "Slough (void suit)."
+					}
+					return
 				}
 			}
 		}
 
+
+		if (tempplay == 0) { //lowest card
+			for (i = 1; i <= 32; i++) {
+				for (j = 1; j <= temphand.length - 1; j++) {
+					if (Chand[temphand[j]] == deckvalue[deckvalue.length - i]) {
+						tempplay = temphand[j]
+						if (turn == 1) {
+							temphint = "Lead the lowest card."
+						}
+						else {
+							temphint = "Slough."
+						}
+						return
+					}
+				}
+			}
+		}
 	}
+
+
+
+	//LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL LOW FAIL 
+	function lowfail(Chand, Cplay, Csuit, number) {
+
+		if (tempplay == 0) { //lowest card
+			for (i = 1; i <= 18; i++) {
+				for (j = 1; j <= temphand.length - 1; j++) {
+					if (Chand[temphand[j]] == deckvalue[deckvalue.length - i]) {
+						tempplay = temphand[j]
+						if (turn == 1) {
+							temphint = "Lead a low fail card."
+						}
+						else {
+							temphint = "Follow suit. Play a low " + suitnames[getPosition(trick[0], suits)] + "."
+						}
+						return
+					}
+				}
+			}
+		}
+	}
+
+
 
 	//HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL 
 	function highfail(Chand, Cplay, Csuit, number) {
 		if (visiblesuit[1] + Csuit[1] == 14) {
-			search:
 			for (j = 1; j <= temphand.length - 1; j++) {
 				for (i = 15; i <= 32; i++) {
 					if (deckvalue[i].charAt(2) == Chand[temphand[j]].charAt(2)) {
 						if (Chand[temphand[j]] == deckvalue[i]) {
 							tempplay = temphand[j]
+							if (turn == 1) {
+								temphint = "Lead a high fail card."
+							}
+							else {
+								temphint = "Follow suit. Play a high " + suitnames[getPosition(trick[0], suits)] + "."
+							}
 							return
 						}
-						break search
+						break
 					}
-
 				}
 			}
 		}
 		if (turn == 4) {
 			for (j = 1; j <= temphand.length - 1; j++) {
-				if (getPosition(Chand[temphand[j]], deckvalue) < handvalue[i]) {
+				if (getPosition(Chand[temphand[j]], deckvalue) < handvalue) {
 					tempplay = temphand[j]
+					temphint = "Follow suit. Play a high " + suitnames[getPosition(trick[0], suits)] + "."
 					return
 				}
 
@@ -3992,25 +4250,29 @@
 
 	//SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER  
 	function schmier(Chand, Cplay, Csuit, number) {
-		if ((visiblepartnercheck(number, trickleader) <= trust[number] && ((turn == 4) || (trick[0] != "T" && handvalue <= 17) || (trick[0] == "T" && handvalue == 1) || partner[number] == 1 && (handvalue == 1 || (handvalue == 2 && deckvalue[2] == "QST") || (handvalue == 2 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))))) || (turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= trust[number] && handvalue > 17 )) {
-			console.log(trickcount, " Schmier: ", number)
-			search:
+		//normal schmier
+		if ((visiblepartnercheck(number, trickleader) <= trust[number] && ((turn == 4) ||
+			(trick[0] != "T" && handvalue <= 17) || (trick[0] == "T" && handvalue == 1) ||
+			(partner[number] == 1 && (handvalue == 1 || (handvalue == 2 && deckvalue[2] == "QST") || (handvalue == 2 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))))))) {
+			//console.log(trickcount, " Schmier: ", number)
+			search: //regular schmier
 			for (i = 18; i <= 23; i++) {
 				for (j = 1; j <= temphand.length - 1; j++) {
 					if (Chand[temphand[j]] == deckvalue[i]) {
 						tempplay = temphand[j]
-
+						temphint = "Schmier to " + playername[trickleader] + "."
 						break search
 					}
 				}
 			}
 
-			search:
+			search: //override with ace schmier
 			for (i = 15; i <= 17; i++) {
 				if (Csuit[getPosition(deckvalue[i].charAt(2), suits)] + visiblesuit[getPosition(deckvalue[i].charAt(2), suits)] > 3) {
 					for (j = 1; j <= temphand.length - 1; j++) {
 						if (Chand[temphand[j]] == deckvalue[i]) {
 							tempplay = temphand[j]
+							temphint = "Schmier to " + playername[trickleader] + "."
 							break search
 						}
 					}
@@ -4018,13 +4280,53 @@
 			}
 
 			if (tempplay == 0) {
-				slough(Chand, Cplay, Csuit, number)
+				if (follow == 1) {
+					lowfail(Chand, Cplay, Csuit, number)
+				}
+				else {
+					slough(Chand, Cplay, Csuit, number)
+				}
 			}
 		}
+		else {		//presumptive schmier
+			if ((turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= trust[number] && handvalue > 17 && visiblesuit[getPosition(trick[0], suits)] < 2)
+				|| (trick[0] == "T" && partner[number] == 1 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))) {
+				//console.log(trickcount, " Schmier: ", number)
+				search: //regular schmier
+				for (i = 18; i <= 23; i++) {
+					for (j = 1; j <= temphand.length - 1; j++) {
+						if (Chand[temphand[j]] == deckvalue[i]) {
+							tempplay = temphand[j]
+							temphint = "Schmier to " + playername[number % 4 + 1] + "."
+							break search
+						}
+					}
+				}
 
+				search: //override with ace schmier
+				for (i = 15; i <= 17; i++) {
+					if (Csuit[getPosition(deckvalue[i].charAt(2), suits)] + visiblesuit[getPosition(deckvalue[i].charAt(2), suits)] > 3) {
+						for (j = 1; j <= temphand.length - 1; j++) {
+							if (Chand[temphand[j]] == deckvalue[i]) {
+								tempplay = temphand[j]
+								temphint = "Schmier to " + playername[number % 4 + 1] + "."
+								break search
+							}
+						}
+					}
+				}
 
+				if (tempplay == 0) {
+					if (follow == 1) {
+						lowfail(Chand, Cplay, Csuit, number)
+					}
+					else {
+						slough(Chand, Cplay, Csuit, number)
+					}
+				}
+			}
 
-
+		}
 	}
 
 
@@ -4033,12 +4335,43 @@
 
 	//TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP  
 	function trump(Chand, Cplay, Csuit, number) {
+		//SAFER TRUMP
+		if (turn == 4 || visiblesuit[getPosition(trick[0], suits)] < 2) {
 
-		trumpschmier(Chand, Cplay, Csuit, number)
+			trumpschmier(Chand, Cplay, Csuit, number)
+			temphint = "Trump! (Get points.)"
 
-		if (tempplay == 0 || getPosition(Chand[tempplay], deckvalue) > handvalue) {
-			tempplay = 0
-			bettertrump(Chand, Cplay, Csuit, number)
+			if (tempplay == 0 || getPosition(Chand[tempplay], deckvalue) > handvalue) {
+				tempplay = 0
+				bettertrump(Chand, Cplay, Csuit, number)
+				temphint = "Trump! (Go low.)"
+			}
+		}
+		//RISKIER TRUMP
+		else {
+			if (tempplay == 0 && turn == 2) {
+				if (trick[(number + 2) % 4 + 1].charAt(0) == "1" || trick[(number + 2) % 4 + 1].charAt(0) == "A") {
+					forcequeen(Chand, Cplay, Csuit, number)
+					temphint = "Trump! (Go high.)"
+				}
+				else {
+					slough(Chand, Cplay, Csuit, number)
+				}
+			}
+			if (tempplay == 0 && turn == 3) {
+				if (trick[(number + 2) % 4 + 1].charAt(0) == "1" || trick[(number + 2) % 4 + 1].charAt(0) == "A" || trick[(number + 1) % 4 + 1].charAt(0) == "1" || trick[(number + 1) % 4 + 1].charAt(0) == "A") {
+					forcequeen(Chand, Cplay, Csuit, number)
+					temphint = "Trump! (Go high.)"
+				}
+				else {
+					//chooseBetween(bettertrump, slough, 1, Chand, Cplay, Csuit, number)
+					bettertrump(Chand, Cplay, Csuit, number)
+					temphint = "Trump! (Go low.)"
+					if (tempplay == 0) {
+						trumpschmier(Chand, Cplay, Csuit, number)
+					}
+				}
+			}
 		}
 
 
@@ -4066,11 +4399,17 @@
 
 
 		search:
-		for (i = 1; i <= 10; i++) {
+		for (i = 1; i <= 12; i++) {
 			for (j = 1; j <= temphand.length - 1; j++) {
-				if (Chand[temphand[temphand.length - j]] == deckvalue[15 - i] &&
+				if (Chand[temphand[temphand.length - j]] == deckvalue[13 - i + Csuit[1]] &&
 					(Chand[temphand[temphand.length - j]].charAt(0) != "A" && Chand[temphand[temphand.length - j]].charAt(0) != "1" && Chand[temphand[temphand.length - j]].charAt(0) != "K")) {
 					tempplay = temphand[temphand.length - j]
+					if (turn == 1) {
+						temphint = "Lead a low trump."
+					}
+					else {
+						temphint = "Follow suit. Play a low trump."
+					}
 					break search
 				}
 			}
@@ -4079,22 +4418,32 @@
 		if (tempplay == 0) {
 			//alert("no luck")
 			tempplay = temphand[k]
+			if (turn == 1) {
+				temphint = "Lead a low trump."
+			}
+			else {
+				temphint = "Follow suit. Play a low trump."
+			}
 		}
-
-
-
-
 
 	}
 
 
 
-	//SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP 
+
+
+	//TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP SCHMIER TRUMP 
 	function trumpschmier(Chand, Cplay, Csuit, number) {
 
 		for (i = 1; i <= temphand.length - 1; i++) {
 			if (Chand[temphand[i]].charAt(2) == "T" && (Chand[temphand[i]].charAt(0) == "A" || Chand[temphand[i]].charAt(0) == "1" || Chand[temphand[i]].charAt(0) == "K")) {
 				tempplay = temphand[i]
+				if (turn == 1) {
+					temphint = "Lead a low trump. Schmier to the Black Queen."
+				}
+				else {
+					temphint = "Follow suit. Schmier a trump to " + playername[trickleader] + "."
+				}
 				break
 			}
 		}
@@ -4111,12 +4460,17 @@
 				getPosition(Chand[temphand[temphand.length - i]], deckvalue) < handvalue &&
 				Chand[temphand[temphand.length - i]] != "ADT" && Chand[temphand[temphand.length - i]] != "1DT" && Chand[temphand[temphand.length - i]] != "KDT") {
 				tempplay = temphand[temphand.length - i]
+				temphint = "Follow suit. Play a higher trump."
 				break
 			}
 		}
 
 
 	}
+
+
+
+
 
 
 
@@ -4138,8 +4492,20 @@
 		else {
 			if ((getPosition(Chand[temphand[1]], deckvalue) == 1 || (Chand[temphand[1]].charAt(0) + Chand[temphand[1]].charAt(1) == "QS" && partner[number] == 1))) {
 				tempplay = temphand[1]
-				if ((soloplayer == 0 && (Chand[tempplay] == "QCT" || Chand[tempplay] == "QST") && ((deckvalue[2] == "QST" && Chand[temphand[2]] == deckvalue[3]) || (deckvalue[2] != "QST" && Chand[temphand[2]] == deckvalue[2])))) {
+				if (turn == 1) {
+					temphint = "Lead a winning trump."
+				}
+				else {
+					temphint = "Follow suit. Play a winning trump."
+				}
+				if ((soloplayer == 0 && visiblesuit[1] + Csuit[1] != 14 && (Chand[tempplay] == "QCT" || Chand[tempplay] == "QST") && ((deckvalue[2] == "QST" && Chand[temphand[2]] == deckvalue[3]) || (deckvalue[2] != "QST" && Chand[temphand[2]] == deckvalue[2])))) {
 					tempplay = temphand[2]
+					if (turn == 1) {
+						temphint = "Lead a winning trump."
+					}
+					else {
+						temphint = "Follow suit. Play a winning trump."
+					}
 				}
 			}
 		}
@@ -4152,7 +4518,7 @@
 		for (j = 1; j <= temphand.length - 1; j++) {
 			if (Chand[temphand[j]].charAt(2) == solochoice.charAt(2)) {
 				tempplay = temphand[j]
-
+				temphint = "Play called Ace."
 				break
 			}
 		}
@@ -4167,7 +4533,7 @@
 			((getPosition(Chand[temphand[1]], deckvalue) < handvalue - 1) || (getPosition(Chand[temphand[1]], deckvalue) < handvalue && visiblepartnercheck(number, trickleader) == 1)) &&
 			Chand[temphand[1]] != "ADT" && Chand[temphand[1]] != "1DT" && Chand[temphand[1]] != "KDT") {
 			tempplay = temphand[1]
-
+			temphint = "Follow suit. Play a high trump (force the black queen)."
 		}
 
 	}
@@ -4400,13 +4766,12 @@
 					if (visiblepartner[i] != 0 && visiblepartner[i] != 1 && trick[i] != "QST" && trick[i] != "QCT") {
 						visiblepartner[i] = (visiblepartner[i] + 2) / 3
 					}
-				}
+				} //WON A TRUMP TRICK (NON-QUEEN)
 				else {
 					if (visiblepartner[i] != 0 && visiblepartner[i] != 1 && leader != i && scorer != leader) {
 
 						visiblepartner[i] = (visiblepartner[i]) / 2
-
-					}
+					} //LOST A TRUMP TRICK (DIDN'T LEAD/LEADER DIDN'T WIN)
 
 
 				}
@@ -4427,6 +4792,8 @@
 		trickleader = 0
 		player = scorer - 1
 		leader = scorer
+		hint = ""
+		temphint = ""
 
 		document.player.player.value = playername[scorer]
 
@@ -5067,31 +5434,47 @@
 
 	}
 
+	function chooseBetween(fnA, fnB, trustIndex, ...args) {
+		const probability = trustIndex / 2; // 0, 0.5, 1
+
+		if (Math.random() < probability) {
+			return fnA(...args);
+		} else {
+			return fnB(...args);
+		}
+	}
 
 
 	function openbackdoor() {
 
-		playername[1] = "Jeffrey"
-		playername[2] = "Adriana"
-		playername[3] = "Phyllis"
-		playername[4] = "Jessica"
-		document.getElementById("Ninput").value = playername[1]
-		document.getElementById("Einput").value = playername[2]
-		document.getElementById("Sinput").value = playername[3]
-		document.getElementById("Winput").value = playername[4]
-		document.Nname.Nname.value = playername[1]
-		document.Ename.Ename.value = playername[2]
-		document.Sname.Sname.value = playername[3]
-		document.Wname.Wname.value = playername[4]
 
-		document.getElementById("speedSlider").value = 1600;
-		document.getElementById("speedSlider").dispatchEvent(new Event("input"));
 
 		/*setTrustPreset([1,2,1,0]);*/
 
 
 		showtranscript()
 
+		console.log(dumpHands());
+		navigator.clipboard.writeText(dumpHands());
+
+
+	}
+
+	//SAVE HAND
+	function dumpHands() {
+		function formatArray(name, arr) {
+			const items = arr
+				.map(v => typeof v === "string" ? `"${v}"` : v)
+				.join(", ");
+			return `${name} = new Array(${items})`;
+		}
+
+		return [
+			formatArray("Nhandimage", Nhandimage),
+			formatArray("Ehandimage", Ehandimage),
+			formatArray("Shandimage", Shandimage),
+			formatArray("Whandimage", Whandimage)
+		].join("\n");
 	}
 
 
@@ -5134,7 +5517,7 @@
 	// index 0 is unused; defaults to "Medium" for all players
 
 	const TRUST_VALUES = [0, 0.25, 0.5];
-	const TRUST_LABELS = ['Low', 'Med', 'High'];
+	const TRUST_LABELS = ['Safe', 'Steady', 'Bold'];
 
 	function wireTrustSlider(sliderId, displayId, trustIndex, defaultStop = 1) {
 		const slider = document.getElementById(sliderId);
@@ -5154,6 +5537,8 @@
 	}
 
 	// Connect the three sliders to trust[2–4]
+
+	wireTrustSlider('trustSlider1', 'trustDisplay1', 1);
 	wireTrustSlider('trustSlider2', 'trustDisplay2', 2);
 	wireTrustSlider('trustSlider3', 'trustDisplay3', 3);
 	wireTrustSlider('trustSlider4', 'trustDisplay4', 4);
