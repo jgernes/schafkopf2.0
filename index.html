@@ -5,6 +5,9 @@
 	<meta charset="utf-8" />
 	<title>Schafkopf</title>
 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<!-- One viewport meta, in HEAD -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -550,52 +553,51 @@
 
 				<tr>
 					<td width="100" align="center">
-						<a href="javascript:Card(1)">
-							<img src="image2/cardBK.gif" name="card1" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card1" class="gamecard" width="80" height="126"
+							onmousedown="startPress(1)" onmouseup="endPress(1)" onmouseleave="endPress()"
+							ontouchstart="startPress(1)" ontouchend="endPress(1)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(2)">
-							<img src="image2/cardBK.gif" name="card2" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card2" class="gamecard" width="80" height="126"
+							onmousedown="startPress(2)" onmouseup="endPress(2)" onmouseleave="endPress()"
+							ontouchstart="startPress(2)" ontouchend="endPress(2)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(3)">
-							<img src="image2/cardBK.gif" name="card3" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card3" class="gamecard" width="80" height="126"
+							onmousedown="startPress(3)" onmouseup="endPress(3)" onmouseleave="endPress()"
+							ontouchstart="startPress(3)" ontouchend="endPress(3)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(4)">
-							<img src="image2/cardBK.gif" name="card4" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card4" class="gamecard" width="80" height="126"
+							onmousedown="startPress(4)" onmouseup="endPress(4)" onmouseleave="endPress()"
+							ontouchstart="startPress(4)" ontouchend="endPress(4)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(5)">
-							<img src="image2/cardBK.gif" name="card5" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card5" class="gamecard" width="80" height="126"
+							onmousedown="startPress(5)" onmouseup="endPress(5)" onmouseleave="endPress()"
+							ontouchstart="startPress(5)" ontouchend="endPress(5)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(6)">
-							<img src="image2/cardBK.gif" name="card6" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card6" class="gamecard" width="80" height="126"
+							onmousedown="startPress(6)" onmouseup="endPress(6)" onmouseleave="endPress()"
+							ontouchstart="startPress(6)" ontouchend="endPress(6)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(7)">
-							<img src="image2/cardBK.gif" name="card7" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card7" class="gamecard" width="80" height="126"
+							onmousedown="startPress(7)" onmouseup="endPress(7)" onmouseleave="endPress()"
+							ontouchstart="startPress(7)" ontouchend="endPress(7)">
 					</td>
+
 					<td width="100" align="center">
-						<a href="javascript:Card(8)">
-							<img src="image2/cardBK.gif" name="card8" class="gamecard" border="0" width="80"
-								height="126">
-						</a>
+						<img src="image2/cardBK.gif" name="card8" class="gamecard" width="80" height="126"
+							onmousedown="startPress(8)" onmouseup="endPress(8)" onmouseleave="endPress()"
+							ontouchstart="startPress(8)" ontouchend="endPress(8)">
 					</td>
 				</tr>
 
@@ -1279,6 +1281,8 @@
 
 				function replayHand() {
 					// Set the replay flag
+					autoPlay = false;
+					delaytime = oldDelayTime
 					replay = 1;
 					dealer = (dealer + 3) % 4
 					document.getElementById('continue').style.display = 'none'
@@ -1513,7 +1517,7 @@
 
 <div id="instructionmodal">
 	<div class="modal-content">
-		<div style="padding:6px; font-size:14px; line-height:1;">
+		<div style="padding:6px; font-size:14px; line-height:1.35;">
 			<h1 style="text-align:center;">Schafkopf 2.0</h1>
 			<h2>Rules of Play</h2>
 			<p>Schafkopf (or Sheephead) is a trick taking game played with four players and 32 cards (A-7 in each suit).
@@ -1582,8 +1586,14 @@
 				tied. If another game is played, the winning player is traditionally the dealer.</p>
 			<h2>Game Features</h2>
 			<h4>Deck of Cards</h4>
-			<p>This game uses a classic German deck of Skat cards made by Piatnik. The Queens are marked with a D (for
-				Dame), the Jacks are marked with a B (for Bauer), and the Kings are marked with a K (for König).</p>
+			<p>This game uses a classic German deck of Skat cards made by Piatnik. The Queens are marked with a <b>D</b>
+				(for
+				Dame), the Jacks are marked with a <b>B</b> (for Bauer), and the Kings are marked with a <b>K</b> (for
+				König). When it is your turn, you can play a card by simply clicking on it (if it is not a valid play,
+				no card will be played). If you are leading and believe you can take all the remaining tricks, you can
+				claim them by holding down on the highest card in yor hand (rather than just clicking it). This will
+				rapidly autoplay the rest of the hand, from the highest card down. If you are not able to take all of
+				the tricks, the autoplay will stop and normal play will resume.</p>
 			<h4>Score Box</h4>
 			<p>Before the cards are dealt each hand, this will display each player's chip total for the game. During the
 				hand, this will display each player's point total for the hand. It will also highlight in red each
@@ -1847,12 +1857,14 @@
 	// initialize speed (global, no let/const, so old code can see it)
 	speed = parseInt(speedSlider.value, 10);
 	delaytime = 2100 - parseInt(slider.value, 10);
+	oldDelayTime = delaytime;
 	speedWord.textContent = speedWordFor(speed);
 
 	// update whenever the slider moves
 	slider.addEventListener("input", function () {
 		speed = parseInt(speedSlider.value, 10);
 		delaytime = 2100 - parseInt(this.value, 10);
+		oldDelayTime = delaytime;
 		speedWord.textContent = speedWordFor(speed);
 		console.log("Speed is now:", delaytime);
 	});
@@ -1939,7 +1951,7 @@
 		dealer = Math.floor(Math.random() * 4 + 1)
 
 		//TEST DEALER
-		//dealer = 2
+		dealer = 1
 
 		reset()
 	}
@@ -2131,7 +2143,7 @@
 		}
 		deckvalue = tempdeckvalue
 
-
+		autoPlay = false
 
 		//trust = new Array(0, .5, .5, .5, .5)
 		secretcall = new Array(0, 0, 0, 0)
@@ -2367,10 +2379,10 @@
 		
 				//TEST HAND 
 		
-				Nhandimage = new Array(0, "image2/cardASS.gif", "image2/cardADT.gif", "image2/cardJST.gif", "image2/card7HH.gif", "image2/cardQHT.gif", "image2/cardAHH.gif", "image2/cardQST.gif", "image2/card7CC.gif")
-				Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif", "image2/card9HH.gif", "image2/card8HH.gif", "image2/card9CC.gif", "image2/card7SS.gif")
-				Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/cardJCT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/cardKHH.gif", "image2/cardKCC.gif")
-				Whandimage = new Array(0, "image2/card8DT.gif", "image2/card8SS.gif", "image2/cardQCT.gif", "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/card9DT.gif", "image2/card1DT.gif")
+				Nhandimage = new Array(0, "image2/cardASS.gif", "image2/cardADT.gif", "image2/card7HH.gif", "image2/cardAHH.gif", "image2/card9CC.gif", "image2/cardJCT.gif", "image2/card7SS.gif", "image2/card8DT.gif")
+				Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif", "image2/card9HH.gif", "image2/card8HH.gif", "image2/cardJST.gif", "image2/card8SS.gif")
+				Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/cardKHH.gif", "image2/card1DT.gif", "image2/cardQCT.gif")
+				Whandimage = new Array(0, "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/card9DT.gif", "image2/card7CC.gif", "image2/cardKCC.gif", "image2/cardQHT.gif", "image2/cardQST.gif")
 		
 		
 		
@@ -2380,8 +2392,8 @@
 				deckvalue[17] = "ACC"
 				deckvalue[16] = "AHH"
 		
+		
 		*/
-
 
 
 
@@ -3269,20 +3281,31 @@
 		}
 		else {
 			//PARTNER GUESS
+
+			//CHOSE NOT TO TRUMP MEANS??
+
 			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) != "T" && trick[player].charAt(0) != "A") {
-				visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 2)
+				//visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 2)
+				visiblepartner[player] = move(visiblepartner[player], -1.1)
 			} //LEAD FAIL
 			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) != "T" && trick[player].charAt(0) == "A") {
-				visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 1)
+				//visiblepartner[player] = (trickcount * visiblepartner[player]) / (trickcount + 1)
+				visiblepartner[player] = move(visiblepartner[player], -.8)
 			} //LEAD ACE
-			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (trick[player].charAt(0) != "A" && trick[player].charAt(0) != "1" && trick[player].charAt(0) != "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
-				visiblepartner[player] = (visiblepartner[player] + 1.5) / 2.5
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T"
+				//&& (trick[player].charAt(0) != "A" && trick[player].charAt(0) != "1" && trick[player].charAt(0) != "K") 
+				&& (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+				//visiblepartner[player] = (visiblepartner[player] + 1) / 2
+				visiblepartner[player] = move(visiblepartner[player], 1.1)
 			} //LEAD TRUMP
-			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
-				visiblepartner[player] = (visiblepartner[player] + 3) / 4
-			} //LEAD  TRUMP SCHMIER
-			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn > 1 && trick[0] == "T" && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
-				visiblepartner[player] = (visiblepartner[player] + .15) / (1.15)
+			//if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && turn == 1 && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+			//	visiblepartner[player] = (visiblepartner[player] + 3) / 4
+			//} //LEAD  TRUMP SCHMIER
+			if (visiblepartner[player] != 0 && visiblepartner[player] != 1
+				//&& turn > 1 
+				&& trick[0] == "T" && trick[player].charAt(2) == "T" && (trick[player].charAt(0) == "A" || trick[player].charAt(0) == "1" || trick[player].charAt(0) == "K") && (deckvalue[1] == "QST" || deckvalue[1] == "QCT")) {
+				//visiblepartner[player] = (visiblepartner[player] + .15) / (1.15)
+				visiblepartner[player] = move(visiblepartner[player], .4)
 			} //PLAY TRUMP SCHMIER
 			if (visiblepartner[player] != 0 && visiblepartner[player] != 1 && trick[0] == "T" && trick[player].charAt(2) != "T" && solopartner == 0) {
 				visiblepartner[player] = 0
@@ -3329,9 +3352,15 @@
 
 
 		//PARTNER GUESS
-		if (partner[player] == 0 && turn == 4 && trick[0] == "T"  && (deckvalue[1] =="QCT" || deckvalue[1] == "QST") && visiblepartner[trickleader] != 1 && visiblepartner[trickleader] != 0) {
+		if (partner[player] == 0 && turn == 3 && trick[0] == "T" && (deckvalue[1] == "QCT" || deckvalue[1] == "QST") && visiblepartner[player % 4 + 1] != 1 && visiblepartner[player % 4 + 1] != 0 && handvalue > 3) {
+			tempbump = player % 4 + 1
+			//visiblepartner[trickleader] = (visiblepartner[trickleader] + 2) / 3
+			visiblepartner[tempbump] = move(visiblepartner[tempbump], 1.1)
+		}
+		if (partner[player] == 0 && turn == 4 && trick[0] == "T" && (deckvalue[1] == "QCT" || deckvalue[1] == "QST") && visiblepartner[trickleader] != 1 && visiblepartner[trickleader] != 0) {
 			tempbump = trickleader
-			visiblepartner[trickleader] = (visiblepartner[trickleader] + 2) / 3
+			//visiblepartner[trickleader] = (visiblepartner[trickleader] + 2) / 3
+			visiblepartner[tempbump] = move(visiblepartner[tempbump], 1.1)
 		}
 
 
@@ -3385,124 +3414,22 @@
 
 	}
 
-	function normalize(a, b, c, selfIndex = 1, returnValues = false) {
-		const round2 = x => Math.round((x + Number.EPSILON) * 100) / 100;
-
-		// Solo player case
-		if (alone === selfIndex) {
-			return "You are playing alone.";
-		}
-
-		const vals = [a, b, c];
-		let result;
-
-		const zeroCount = vals.filter(v => v === 0).length;
-
-		// --- CASE 1: two zeros → one must be 1
-		if (zeroCount === 2) {
-			result = vals.map(v => (v === 0 ? 0 : 1));
-
-			// --- CASE 2: any exact 1 → hard assignment
-		} else if (vals.some(v => v === 1)) {
-			result = vals.map(v => (v === 1 ? 1 : 0));
-
-			// --- CASE 3: one zero → 2-player logic
-		} else if (zeroCount === 1) {
-			const nonZeroIndexes = vals
-				.map((v, i) => v !== 0 ? i : -1)
-				.filter(i => i !== -1);
-
-			const iA = nonZeroIndexes[0];
-			const iB = nonZeroIndexes[1];
-
-			const topIndex = vals[iA] >= vals[iB] ? iA : iB;
-			const otherIndex = vals[iA] >= vals[iB] ? iB : iA;
-
-			const top = vals[topIndex];
-			const other = vals[otherIndex];
-
-			const influence = (0.5 - other) / 0.5;
-
-			let adjustedTop = top + influence * (1 - top);
-			adjustedTop = Math.max(0, Math.min(1, adjustedTop));
-
-			result = [0, 0, 0];
-			result[topIndex] = adjustedTop;
-			result[otherIndex] = 1 - adjustedTop;
-
-			// --- CASE 4: all nonzero → 3-player logic
-		} else {
-			const max = Math.max(...vals);
-			const maxCount = vals.filter(v => v === max).length;
-
-			// tie → proportional
-			if (maxCount > 1) {
-				const sum = vals.reduce((s, v) => s + v, 0);
-				result = vals.map(v => v / sum);
-
-			} else {
-				const topIndex = vals.indexOf(max);
-				const top = vals[topIndex];
-
-				const otherIndexes = vals
-					.map((v, i) => i !== topIndex ? i : -1)
-					.filter(i => i !== -1);
-
-				const avgInfluence = otherIndexes
-					.map(i => (0.5 - vals[i]) / 0.5)
-					.reduce((s, x) => s + x, 0) / otherIndexes.length;
-
-				let adjustedTop;
-
-				if (avgInfluence >= 0) {
-					adjustedTop = top + avgInfluence * (1 - top);
-				} else {
-					adjustedTop = top + avgInfluence * (top - 0.5);
-				}
-
-				adjustedTop = Math.max(0, Math.min(1, adjustedTop));
-
-				const othersSum = otherIndexes.reduce((s, i) => s + vals[i], 0);
-				const remaining = 1 - adjustedTop;
-
-				result = [0, 0, 0];
-				result[topIndex] = adjustedTop;
-
-				otherIndexes.forEach(i => {
-					result[i] = (vals[i] / othersSum) * remaining;
-				});
-			}
-		}
 
 
-		// 🔹 Rounded values
-		const roundedResult = result.map(v => Math.round((v + Number.EPSILON) * 100));
 
-		// 🔹 Map to player names
-		const others = [1, 2, 3, 4].filter(i => i !== selfIndex);
 
-		// 🔹 Full debug
-		const debugText = roundedResult
-			.map((v, i) => playername[others[i]] + ": " + v + "%")
-			.join(", ");
-
-		// 🔹 Highest-only debug
-		const highest = Math.max(...result);
-
-		const highestText = result
-			.map((v, i) => ({ val: v, name: playername[others[i]] }))
-			.filter(e => Math.abs(e.val - highest) < 0.0001)
-			.map(e => e.name + ": " + Math.round(e.val * 100) + "%")
-			.join(", ");
-
-		// 🔹 Toggle here
-		return partnerText(result, selfIndex);
-		//return debugText;
-		//return highestText;
+	function clamp(x, min, max) {
+		return Math.max(min, Math.min(max, x));
 	}
 
+	function joinNames(entries) {
+		const names = entries.map(e => e.name);
 
+		if (names.length === 1) return names[0];
+		if (names.length === 2) return names[0] + " or " + names[1];
 
+		return names.slice(0, -1).join(", ") + ", or " + names[names.length - 1];
+	}
 
 	function partnerText(values, selfIndex = 1) {
 		if (alone == selfIndex) {
@@ -3519,6 +3446,19 @@
 			{ name: playername[others[2]], val: values[2] }
 		];
 
+		let aloneWarning = "";
+
+		if (values.possibleAlone) {
+
+			const zeroIndex = values.actualZeroIndex;
+
+			if (zeroIndex !== -1) {
+				aloneWarning = " " + entries[zeroIndex].name + " may be playing alone.";
+			} else {
+				aloneWarning = " Someone may be playing alone.";
+			}
+		}
+
 		const highest = Math.max(...values);
 		const likelyPartners = entries.filter(e => isClose(e.val, highest));
 
@@ -3532,10 +3472,15 @@
 		}
 
 		if (likelyPartners.length === 3) {
-			return "Your partner is unknown.";
+			return "Your partner is unknown." + aloneWarning;
 		}
 
-		const combinedLikelihood = likelyPartners.reduce((sum, e) => sum + e.val, 0);
+		const zeroCount = values.filter(v => v === 0).length;
+
+		const combinedLikelihood =
+			(values.possibleAlone && !(zeroCount === 1 && likelyPartners.length === 2))
+				? highest
+				: likelyPartners.reduce((sum, e) => sum + e.val, 0);
 		const totalLikelihood = values.reduce((sum, v) => sum + v, 0);
 
 		let phrase;
@@ -3549,31 +3494,205 @@
 		} else if (combinedLikelihood >= 0.7) {
 			phrase = "Your partner is likely ";
 		} else if (combinedLikelihood >= 0.5) {
-			phrase = "Your partner may be ";
+			phrase = "Your partner is possibly ";
 		} else {
-			phrase = "Your partner is unclear, but could be ";
+			phrase = "Your partner is unclear, but could be " +
+				entries
+					.slice()
+					.sort((a, b) => b.val - a.val)
+					.slice(0, 2)
+					.map(e => e.name)
+					.join(" or ") +
+				".";
 		}
 
-		return phrase + joinNames(likelyPartners) + ".";
-	}
-
-	function joinNames(likelyPartners) {
-		const isOne = x => Math.abs(x - 1) < 0.0001;
-		const names = likelyPartners.map(e => e.name);
-
-		if (names.length === 1) return names[0];
-
-		const allAreOne = likelyPartners.every(e => isOne(e.val));
-
-		if (names.length === 2) {
-			return names[0] + (allAreOne ? " and " : " or ") + names[1];
+		if (phrase.includes("unclear")) {
+			return phrase + aloneWarning;
 		}
 
-		const conjunction = allAreOne ? " and " : ", or ";
-		return names.slice(0, -1).join(", ") + conjunction + names[names.length - 1];
+		return phrase + joinNames(likelyPartners) + "." + aloneWarning;
 	}
 
+	function normalize(a, b, c, selfIndex = 1, returnValues = false) {
 
+		function baseNormalize(vals) {
+			let result;
+
+			const zeroCount = vals.filter(v => v === 0).length;
+
+			if (zeroCount === 2) {
+				return vals.map(v => (v === 0 ? 0 : 1));
+			}
+
+			if (vals.some(v => v === 1)) {
+
+				const oneIndexes = vals
+					.map((v, i) => v === 1 ? i : -1)
+					.filter(i => i !== -1);
+
+				if (oneIndexes.length === 2) {
+					return vals.map(v => v === 1 ? 1 : 0);
+				}
+
+				const oneIndex = oneIndexes[0];
+
+				return vals.map((v, i) => i === oneIndex ? 1 : 0);
+			}
+
+			const max = Math.max(...vals);
+
+			const maxIndexes = vals
+				.map((v, i) => v === max ? i : -1)
+				.filter(i => i !== -1);
+
+			if (maxIndexes.length === 3) {
+				return [1 / 3, 1 / 3, 1 / 3];
+			}
+
+			if (maxIndexes.length === 2 && max <= 0.5) {
+				const lowIndex = vals.findIndex(v => v < max);
+
+				const influence = (0.5 - vals[lowIndex]) / 0.5;
+
+				let lowShare = (1 / 3) * (1 - influence);
+				lowShare = clamp(lowShare, 0, 1);
+
+				const topShare = (1 - lowShare) / 2;
+
+				result = [0, 0, 0];
+
+				maxIndexes.forEach(i => {
+					result[i] = topShare;
+				});
+
+				result[lowIndex] = lowShare;
+
+				return result;
+			}
+
+			const topIndex = vals.indexOf(max);
+			const top = vals[topIndex];
+
+			const otherIndexes = vals
+				.map((v, i) => i !== topIndex ? i : -1)
+				.filter(i => i !== -1);
+
+			const avgInfluence = otherIndexes
+				.map(i => (0.5 - vals[i]) / 0.5)
+				.reduce((s, x) => s + x, 0) / otherIndexes.length;
+
+			let adjustedTop;
+
+			if (avgInfluence >= 0) {
+				adjustedTop = top + avgInfluence * (1 - top);
+			} else {
+				adjustedTop = top + avgInfluence * (top - 0.5);
+			}
+
+			adjustedTop = clamp(adjustedTop, 0, 1);
+
+			const othersSum = otherIndexes.reduce((s, i) => s + vals[i], 0);
+			const remaining = 1 - adjustedTop;
+
+			result = [0, 0, 0];
+			result[topIndex] = adjustedTop;
+
+			otherIndexes.forEach(i => {
+				result[i] = othersSum === 0 ? 0 : (vals[i] / othersSum) * remaining;
+			});
+
+			return result;
+		}
+
+		if (alone === selfIndex) {
+			return "You are playing alone.";
+		}
+
+		const vals = [a, b, c];
+
+		let result = baseNormalize(vals);
+
+		const zeroCount = vals.filter(v => v === 0).length;
+
+		if (!(zeroCount === 2 || vals.some(v => v === 1))) {
+
+			const belowCount = vals.filter(v => v < 0.5).length;
+
+			if (belowCount === 3) {
+				const sum = vals.reduce((s, v) => s + v, 0);
+				result = vals.map(v => v / sum);
+			} else {
+
+				const aboveIndexes = vals
+					.map((v, i) => v > 0.5 ? i : -1)
+					.filter(i => i !== -1);
+
+				if (aboveIndexes.length === 2) {
+					const belowIndex = vals.findIndex(v => v <= 0.5);
+
+					const avgStrongDistance =
+						aboveIndexes.reduce((s, i) => s + (vals[i] - 0.5), 0) / aboveIndexes.length;
+
+					const aboveSum = aboveIndexes.reduce((s, i) => s + vals[i], 0);
+
+					result = [0, 0, 0];
+
+					result[belowIndex] =
+						baseNormalize(vals)[belowIndex] * (1 - (avgStrongDistance / 0.5));
+
+					result[belowIndex] = Math.max(0, result[belowIndex]);
+
+					const remaining = 1 - result[belowIndex];
+
+					aboveIndexes.forEach(i => {
+						result[i] = (vals[i] / aboveSum) * remaining;
+					});
+				}
+
+				else if (aboveIndexes.length === 3) {
+					const sum = vals.reduce((s, v) => s + v, 0);
+					result = vals.map(v => v / sum);
+				}
+			}
+		}
+
+		const possibleAloneIndexes = vals
+			.map((v, i) => v > 0.5 ? i : -1)
+			.filter(i => i !== -1);
+
+		if (possibleAloneIndexes.length >= 2) {
+			result.possibleAlone = true;
+			result.suspiciousIndexes = possibleAloneIndexes;
+		}
+
+		result.actualZeroIndex = vals.findIndex(v => v === 0);
+
+		if (returnValues) {
+			return result;
+		}
+
+		const roundedResult = result.map(v =>
+			Math.round((v + Number.EPSILON) * 100)
+		);
+
+		const others = [1, 2, 3, 4].filter(i => i !== selfIndex);
+
+		const debugText = roundedResult
+			.map((v, i) => playername[others[i]] + ": " + v + "%")
+			.join(", ");
+
+		const highest = Math.max(...result);
+
+		const highestText = result
+			.map((v, i) => ({ val: v, name: playername[others[i]] }))
+			.filter(e => Math.abs(e.val - highest) < 0.0001)
+			.map(e => e.name + ": " + Math.round(e.val * 100) + "%")
+			.join(", ");
+
+		return partnerText(result, selfIndex);
+		//return debugText;
+		// return highestText;
+	}
 
 
 	function assistant() {
@@ -3853,19 +3972,60 @@
 	}
 
 
+	function CardHold(number) {
+		temphand = new Array("0")
+		validplays(Nhand, Nplay, Nsuit, number)
+		if (Nturn == 1 && turn == 1 && temphand[1] == number) {
+			/*for (i = 1; i <= temphand.length - 1; i++) {
+				if (Nhand[temphand[i]] != deckvalue[i]) {
+					document.getElementById('messages').innerHTML = "You can't claim the remaining tricks!"
+					return
+				}
+			}*/
+			//alert("You held the button")
+			oldDelayTime = delaytime;
+			delaytime = 100;
+			autoPlay = true;
+			tryPlayCard()
+		}
+	}
 
 
 
+
+	function tryPlayCard() {
+
+		if (!autoPlay) return;
+
+		if (Nturn != 1) {
+			setTimeout(tryPlayCard, 100);
+			return;
+		}
+
+		for (let i = 8; i >= 1; i--) {
+
+			if (Nplay[i] == 0) {
+
+				Card(i);
+
+				setTimeout(tryPlayCard, 100);
+
+				return;
+			}
+		}
+	}
 
 
 
 	//COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI 
 
+	//2 Black Queens and 2 trump, save high cards to force
+
 	//DONT PLAY ACE IF ITS GOING TO GET AGGRESUIVELY TRUMPED
 
 	//ADD TRUST FACTOR TO SUIT COUNT SCHMIER DECISION
 
-	// CONSIDER PLAYING UNBROKEN SUIT RATHER THAN VOIDING BROKEN SUIT DEPENDING
+	//CONSIDER PLAYING UNBROKEN SUIT RATHER THAN VOIDING BROKEN SUIT DEPENDING
 
 	//IMPROVE OFFENSE/DEFENSE FOR SOLO PLAY
 
@@ -4334,6 +4494,7 @@
 		}
 		if (tempplay == 0) {
 			trumplow(Chand, Cplay, Csuit, number)
+			temphint = "Play lowest trump."
 		}
 	}
 
@@ -4372,7 +4533,9 @@
 
 	//HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL 
 	function highfail(Chand, Cplay, Csuit, number) {
-		if (visiblesuit[1] + Csuit[1] == 14) {
+		if (visiblesuit[1] + Csuit[1] == 14
+			|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= trust[number]))
+			|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= trust[number])) == 1)) {
 			for (j = 1; j <= temphand.length - 1; j++) {
 				for (i = 15; i <= 32; i++) {
 					if (deckvalue[i].charAt(2) == Chand[temphand[j]].charAt(2)) {
@@ -4532,25 +4695,19 @@
 					}
 					else {														//SLOUGH BUT DON'T SCHMIER
 						slough(Chand, Cplay, Csuit, number, 12)
-						if (tempplay == 0) {
-							trumplow(Chand, Cplay, Csuit, number)
-							temphint = "Trump! (Go low.)"
-						}
+
 					}
 				}
 			}
 			else {												//I DO NOT WANT TO TRUMP
 				console.log(number + ": I do not want to trump")
 				slough(Chand, Cplay, Csuit, number, 12)								//SLOUGH BUT DON'T SCHMIER
-				if (tempplay == 0) {
-					trumplow(Chand, Cplay, Csuit, number)
-					temphint = "Trump! (Go low.)"
-				}
+
 			}
 		}
 	}
 
-	//TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP TRUMP  
+	//OLD TRUMP 
 	function oldtrump(Chand, Cplay, Csuit, number) {
 		//SAFER TRUMP
 		if (turn == 4 || (turn == 3 && visiblevoid[number % 4 + 1] == 1) || (turn == 2 && visiblevoid[number % 4 + 1] == 1 && visiblevoid[(number + 1) % 4 + 1] == 1) || visiblesuit[getPosition(trick[0], suits)] < 2) {
@@ -4989,20 +5146,23 @@
 		//PARTNER GUESS
 
 		if (tempbump != 0) {
-			visiblepartner[tempbump] = (3 * visiblepartner[tempbump] - 2)
+			//visiblepartner[tempbump] = (3 * visiblepartner[tempbump] - 2)
+			visiblepartner[tempbump] = move(visiblepartner[tempbump], -1.1)
 		}
 
 		if (partnercount != 2 && trick[0] == "T" && soloplayer == 0) {
 			for (i = 1; i <= 4; i++) {
 				if (scorer == i) {
 					if (visiblepartner[i] != 0 && visiblepartner[i] != 1 && trick[i] != "QST" && trick[i] != "QCT") {
-						visiblepartner[i] = (visiblepartner[i] + 2) / 3
+						//visiblepartner[i] = (visiblepartner[i] + 2) / 3
+						visiblepartner[i] = move(visiblepartner[i], 1.1)
 					}
 				} //WON A TRUMP TRICK (NON-QUEEN)
 				else {
 					if (visiblepartner[i] != 0 && visiblepartner[i] != 1 && leader != i && scorer != leader) {
 
-						visiblepartner[i] = (visiblepartner[i]) / 2
+						//visiblepartner[i] = (visiblepartner[i]) / 2
+						visiblepartner[i] = move(visiblepartner[i], -1.1)
 					} //LOST A TRUMP TRICK (DIDN'T LEAD/LEADER DIDN'T WIN)
 
 
@@ -5036,6 +5196,9 @@
 		document.card31.src = "image2/Card01.gif"
 		document.card41.src = "image2/Card01.gif"
 
+
+
+
 		closetrick()
 		//ptrick=0
 		/*
@@ -5045,9 +5208,19 @@
 		document.card54.src = "image2/Card01.gif"
 		*/
 
+		if (autoPlay == true && scorer != 1 && trickcount < 8) {
+			delaytime = oldDelayTime
+			autoPlay = false;
+			document.getElementById('messages').innerHTML = "You were not able to claim all remaining tricks."
+			//alert("You were not able to claim all remaining tricks.")
+			setTimeout(function () {
+				cleartrick();
+			}, 2000);
+		}
+		else {
 
-
-		cleartrick()
+			cleartrick()
+		}
 	}
 
 
@@ -5278,6 +5451,10 @@
 
 
 	function endhand() {
+
+
+		delaytime = oldDelayTime
+		autoPlay = false;
 
 		document.getElementById('messages').innerHTML = ""
 
@@ -5582,6 +5759,7 @@
 
 	function speedchoice() {
 		delaytime = 1500
+		oldDelayTime = delaytime
 	}
 
 
@@ -5668,6 +5846,13 @@
 
 	}
 
+
+	function move(x, k) {
+		const s = Math.log(x / (1 - x));
+		return 1 / (1 + Math.exp(-(s + k)));
+	}
+
+
 	function chooseBetween(fnA, fnB, trustIndex, ...args) {
 		const probability = trustIndex / 2; // 0, 0.5, 1
 
@@ -5677,6 +5862,31 @@
 			return fnB(...args);
 		}
 	}
+
+	//CLICKING ACTION
+	let holdTimer = null;
+	let held = false;
+
+	function startPress(cardNum) {
+
+		held = false;
+
+		holdTimer = setTimeout(() => {
+			held = true;
+			CardHold(cardNum);   // long press action
+		}, 500);
+	}
+
+	function endPress(cardNum) {
+
+		clearTimeout(holdTimer);
+
+		if (!held) {
+			Card(cardNum);       // normal click/tap
+		}
+	}
+
+
 
 
 	function openbackdoor() {
@@ -5816,6 +6026,7 @@
 				},
 				speed: Number(document.getElementById('speedSlider')?.value || 1500),
 				trust: {
+					1: Number(document.getElementById('trustSlider1')?.value || 0),
 					2: Number(document.getElementById('trustSlider2')?.value || 0),
 					3: Number(document.getElementById('trustSlider3')?.value || 0),
 					4: Number(document.getElementById('trustSlider4')?.value || 0),
@@ -5862,7 +6073,7 @@
 
 		// Trust sliders (2,3,4) + trigger listeners
 		if (s.trust) {
-			[2, 3, 4].forEach(i => {
+			[1, 2, 3, 4].forEach(i => {
 				const el = $(`trustSlider${i}`);
 				if (el && s.trust[i] != null) {
 					el.value = s.trust[i];
@@ -5903,7 +6114,7 @@
 		const ids = [
 			'Ninput', 'Einput', 'Sinput', 'Winput',
 			'speedSlider',
-			'trustSlider2', 'trustSlider3', 'trustSlider4',
+			'trustSlider1', 'trustSlider2', 'trustSlider3', 'trustSlider4',
 			'ShowPlays', 'TellPlays', 'RemovePlays'
 		];
 
