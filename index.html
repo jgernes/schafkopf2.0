@@ -1447,7 +1447,7 @@
 							Hint
 
 							<input type="range" id="trustSlider1" min="0" max="4" step="1" value="1"
-								style="width:40px; vertical-align:middle; margin-left:8px;" onchange="assistant()">
+								style="width:55px; vertical-align:middle; margin-left:8px;" onchange="assistant()">
 
 							<span id="trustDisplay1" style="margin-left:6px;">Medium</span><br>
 						</label>
@@ -1477,19 +1477,19 @@
 						<b>Player 2 (Computer):</b><br>
 						<input type="text" id="Einput" name="Einput" value="East" size="8" maxlength="8"
 							onfocus="this.select()" style="margin-bottom:6px;">
-						<input type="range" id="trustSlider2" min="0" max="4" step="1" value="1"
+						<input type="range" id="trustSlider2" min="0" max="4" step="1" value="2"
 							style="width:40px; vertical-align:middle; margin-left:8px;">
 						<span id="trustDisplay2" style=" margin-left:6px;">Med</span><br>
 						<b>Player 3 (Computer):</b><br>
 						<input type="text" id="Sinput" name="Sinput" value="South" size="8" maxlength="8"
 							onfocus="this.select()" style="margin-bottom:6px;">
-						<input type="range" id="trustSlider3" min="0" max="4" step="1" value="1"
+						<input type="range" id="trustSlider3" min="0" max="4" step="1" value="2"
 							style="width:40px; vertical-align:middle; margin-left:8px;">
 						<span id="trustDisplay3" style=" margin-left:6px;">Medium</span><br>
 						<b>Player 4 (Computer):</b><br>
 						<input type="text" id="Winput" name="Winput" value="West" size="8" maxlength="8"
 							onfocus="this.select()" style="margin-bottom:6px;">
-						<input type="range" id="trustSlider4" min="0" max="4" step="1" value="1"
+						<input type="range" id="trustSlider4" min="0" max="4" step="1" value="2"
 							style="width:40px; vertical-align:middle; margin-left:8px;">
 						<span id="trustDisplay4" style=" margin-left:6px;">Medium</span><br>
 					</form>
@@ -1664,6 +1664,25 @@
 				the trump have been played, even a low fail card can take tricks.</p>
 			<p>The probability that one player will have both black queens is ~22%, so this will occur roughly 1 in 5
 				hands.</p>
+			<h2>Game Statistics</h2>
+			<div style="display:flex; gap:15px; align-items:flex-start;">
+				<table id="statLabelTable" border="0" cellpadding="4" cellspacing="0"></table>
+				<table id="playerStatsTable" border="0" cellpadding="4" cellspacing="0"></table>
+				<table id="trustStatsTable" border="0" cellpadding="4" cellspacing="0"></table>
+			</div>
+
+		</div>
+		<div style="text-align:center; margin-top:10px;">
+			<button id="resetStatsBtn" type="button" onclick="resetstats()" style="
+            background-color:#fff;
+            border:1px solid #000;
+            border-radius:50px;
+            color:#000;
+            font-size:14px;
+            padding:0px 12px;
+        ">
+				Reset All Statistics
+			</button>
 		</div>
 	</div>
 </div>
@@ -1824,6 +1843,7 @@
 
 	function closeGameOver() {
 		document.getElementById("gameovermodal").style.display = "none";
+		document.getElementById("optionsmodal").style.display = "block";
 		reset()
 	}
 	// DEMO CALL
@@ -1928,10 +1948,293 @@
 	cd00 = new Image(80, 126)
 	cd00.src = "image2/card1SS.gif"
 
+	let resetConfirm = false;
 
+	function resetstats() {
+		const btn = document.getElementById("resetStatsBtn");
 
+		if (!resetConfirm) {
+			resetConfirm = true;
+			btn.textContent = "Are you sure?";
+
+			setTimeout(() => {
+				resetConfirm = false;
+				btn.textContent = "Reset All Statistics";
+			}, 3000);
+
+			return;
+		}
+
+		stats = Array.from(
+			{ length: STAT_LABELS.length },
+			() => [0, 0, 0, 0, 0]
+		);
+
+		trustStats = Array.from(
+			{ length: STAT_LABELS.length },
+			() => [0, 0, 0, 0, 0]
+		);
+
+		saveSettings();
+		drawStatsTable();
+
+		resetConfirm = false;
+		btn.textContent = "Reset All Statistics";
+	}
 
 	playername = new Array(0, "North", "East", "South", "West")
+
+
+
+	const STAT_LABELS = [
+		{ key: "GAMES_PLAYED", label: "Games Played", groupStart: true },
+		{ key: "GAMES_WON", label: "Games Won" },
+		{ key: "GAMES_WON_PCT", label: "Win %", subRow: true },
+
+		{ key: "HANDS_PLAYED", label: "Hands Played", groupStart: true },
+		{ key: "HANDS_WON", label: "Hands Won" },
+		{ key: "HANDS_WON_PCT", label: "Win %", subRow: true },
+
+		{ key: "OFFENSE", label: "Offense", groupStart: true },
+		{ key: "ONE_WHITE", label: "Normal (1)", subRow: true },
+		{ key: "TWO_WHITE", label: "Schneider (2)", subRow: true },
+		{ key: "THREE_WHITE", label: "Schwartz (3)", subRow: true },
+		{ key: "OFFENSE_WIN_PCT", label: "Win %", subRow: true },
+
+		{ key: "DEFENSE", label: "Defense", groupStart: true },
+		{ key: "TWO_RED", label: "Normal (2)", subRow: true },
+		{ key: "THREE_RED", label: "Schneider (3)", subRow: true },
+		{ key: "DEFENSE_WIN_PCT", label: "Win %", subRow: true },
+
+		{ key: "ALONE", label: "Alone", groupStart: true },
+		{ key: "THREE_BLUE", label: "Normal (3)", subRow: true },
+		{ key: "SIX_BLUE", label: "Schnieder (6)", subRow: true },
+		{ key: "NINE_BLUE", label: "Schwartz (9)", subRow: true },
+		{ key: "ALONE_WIN_PCT", label: "Win %", subRow: true },
+
+		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true },
+		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true },
+		{ key: "CALLED_PARTNER_WON", label: "Called Partner Won", hidden: true },
+		{ key: "CALLED_PARTNER_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "PLAYED_ALONE", label: "Played Alone", subRow: true },
+		{ key: "PLAYED_ALONE_WON", label: "Played Alone Won", hidden: true },
+		{ key: "PLAYED_ALONE_WIN_PCT", label: "Win %", subRow: true },
+
+		{ key: "CALLED_OFF", label: "Called Off", groupStart: true },
+		{ key: "ONE_QUEEN", label: "One Queen", subRow: true },
+		{ key: "ONE_QUEEN_WON", label: "Played Alone Won", hidden: true },
+		{ key: "ONE_QUEEN_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "TWO_QUEEN", label: "Both Queens", subRow: true },
+		{ key: "TWO_QUEEN_WON", label: "Played Alone Won", hidden: true },
+		{ key: "TWO_QUEEN_WIN_PCT", label: "Win %", subRow: true },
+
+		{ key: "TRICKS_WON", label: "Tricks Won", groupStart: true },
+
+
+
+		{ key: "RESERVED_3", hidden: true },
+		{ key: "RESERVED_4", hidden: true },
+		{ key: "RESERVED_5", hidden: true }
+	];
+
+	const TRUST_STAT_LABELS = ['Safest', 'Safer', 'Steady', 'Bolder', 'Boldest'];
+
+
+	const STATS = {};
+	STAT_LABELS.forEach((row, index) => {
+		STATS[row.key] = index;
+	});
+
+
+	var stats = Array.from(
+		{ length: STAT_LABELS.length },
+		() => [0, 0, 0, 0, 0]
+	);
+
+
+
+	var trustStats = Array.from(
+		{ length: STAT_LABELS.length },
+		() => [0, 0, 0, 0, 0]
+	);
+
+
+	function addStat(stat, player) {
+		stats[stat][player]++;
+
+		if (player >= 2 && player <= 4) {
+			const trustLevel = Number(document.getElementById(`trustSlider${player}`).value);
+			trustStats[stat][trustLevel]++;
+		}
+	}
+
+
+
+
+	function drawStatsTable() {
+
+		const statTable = document.getElementById("statLabelTable");
+		const playerTable = document.getElementById("playerStatsTable");
+		const trustTable = document.getElementById("trustStatsTable");
+
+		if (!statTable || !playerTable || !trustTable) return;
+
+		let statHtml = `
+    <tr>
+        <th style="width:90px; min-width:90px;">
+            &nbsp;
+        </th>
+    </tr>
+`;
+
+		let playerHtml = `
+        <tr>
+            <th>${document.getElementById('Ninput').value}</th>
+            <th>${document.getElementById('Einput').value}</th>
+            <th>${document.getElementById('Sinput').value}</th>
+            <th>${document.getElementById('Winput').value}</th>
+        </tr>
+    `;
+
+		let trustHtml = `<tr>`;
+
+		for (let i = 0; i < TRUST_STAT_LABELS.length; i++) {
+			trustHtml += `<th>${TRUST_STAT_LABELS[i]}</th>`;
+		}
+
+		trustHtml += `</tr>`;
+
+		for (let stat = 0; stat < STAT_LABELS.length; stat++) {
+
+			const row = STAT_LABELS[stat];
+			if (row.hidden) continue;
+
+			if (row.groupStart && stat !== 0) {
+				statHtml += `<tr><td style="height:8px; border:none;"></td></tr>`;
+				playerHtml += `<tr><td colspan="4" style="height:8px; border:none;"></td></tr>`;
+				trustHtml += `<tr><td colspan="${TRUST_STAT_LABELS.length}" style="height:8px; border:none;"></td></tr>`;
+			}
+
+			const labelStyle = row.subRow
+				? "width:90px; min-width:90px; text-align:right; font-weight:bold; padding-right:10px;"
+				: "width:90px; min-width:90px; text-align:left; font-weight:bold;";
+
+			statHtml += `
+        <tr>
+            <td style="${labelStyle}">
+                ${row.label}
+            </td>
+        </tr>
+    `;
+
+			playerHtml += `
+        <tr>
+            <td>${statValue(stat, 1, stats)}</td>
+            <td>${statValue(stat, 2, stats)}</td>
+            <td>${statValue(stat, 3, stats)}</td>
+            <td>${statValue(stat, 4, stats)}</td>
+        </tr>
+    `;
+
+			trustHtml += `<tr>`;
+			for (let trust = 0; trust < TRUST_STAT_LABELS.length; trust++) {
+				trustHtml += `<td>${statValue(stat, trust, trustStats)}</td>`;
+			}
+			trustHtml += `</tr>`;
+		}
+
+		statTable.innerHTML = statHtml;
+		playerTable.innerHTML = playerHtml;
+		trustTable.innerHTML = trustHtml;
+	}
+
+
+	function statValue(stat, index, source) {
+
+		switch (STAT_LABELS[stat].key) {
+
+			case "GAMES_WON_PCT": {
+				const played = source[STATS.GAMES_PLAYED][index];
+				const won = source[STATS.GAMES_WON][index];
+				return played ? Math.round(100 * won / played) + "%" : "-";
+			}
+
+			case "HANDS_WON_PCT": {
+				const played = source[STATS.HANDS_PLAYED][index];
+				const won = source[STATS.HANDS_WON][index];
+				return played ? Math.round(100 * won / played) + "%" : "-";
+			}
+
+			case "OFFENSE_WIN_PCT": {
+				const offense = source[STATS.OFFENSE][index];
+
+				const wins =
+					source[STATS.ONE_WHITE][index] +
+					source[STATS.TWO_WHITE][index] +
+					source[STATS.THREE_WHITE][index];
+
+				return offense
+					? Math.round(100 * wins / offense) + "%"
+					: "-";
+			}
+
+			case "DEFENSE_WIN_PCT": {
+				const defense = source[STATS.DEFENSE][index];
+
+				const wins =
+					source[STATS.TWO_RED][index] +
+					source[STATS.THREE_RED][index];
+
+				return defense
+					? Math.round(100 * wins / defense) + "%"
+					: "-";
+			}
+
+			case "ALONE_WIN_PCT": {
+				const alone = source[STATS.ALONE][index];
+
+				const wins =
+					source[STATS.THREE_BLUE][index] +
+					source[STATS.SIX_BLUE][index] +
+					source[STATS.NINE_BLUE][index];
+
+				return alone
+					? Math.round(100 * wins / alone) + "%"
+					: "-";
+			}
+
+			case "CALLED_PARTNER_WIN_PCT": {
+				const total = source[STATS.CALLED_PARTNER][index];
+				const won = source[STATS.CALLED_PARTNER_WON][index];
+
+				return total ? Math.round(100 * won / total) + "%" : "-";
+			}
+
+			case "PLAYED_ALONE_WIN_PCT": {
+				const total = source[STATS.PLAYED_ALONE][index];
+				const won = source[STATS.PLAYED_ALONE_WON][index];
+
+				return total ? Math.round(100 * won / total) + "%" : "-";
+			}
+
+
+			case "ONE_QUEEN_WIN_PCT": {
+				const total = source[STATS.ONE_QUEEN][index];
+				const won = source[STATS.ONE_QUEEN_WON][index];
+
+				return total ? Math.round(100 * won / total) + "%" : "-";
+			}
+
+			case "TWO_QUEEN_WIN_PCT": {
+				const total = source[STATS.TWO_QUEEN][index];
+				const won = source[STATS.TWO_QUEEN_WON][index];
+
+				return total ? Math.round(100 * won / total) + "%" : "-";
+			}
+			default:
+				return source[stat][index];
+		}
+	}
 
 
 
@@ -1956,7 +2259,10 @@
 		dealer = Math.floor(Math.random() * 4 + 1)
 
 		//TEST DEALER
-		dealer = 1
+		//dealer = 4
+
+
+		drawStatsTable();
 
 		reset()
 	}
@@ -2172,6 +2478,7 @@
 		soloplay = 0
 		scorer = 0
 		alone = 0
+		alonerandom = undefined
 		visiblevoid = new Array(0, 0, 0, 0, 0)
 
 
@@ -2380,25 +2687,28 @@
 
 
 
+
 		/*
-		
-				//TEST HAND 
-		
-				Nhandimage = new Array(0, "image2/cardASS.gif", "image2/cardADT.gif", "image2/card7HH.gif", "image2/cardAHH.gif", "image2/card9CC.gif", "image2/cardJCT.gif", "image2/card7SS.gif", "image2/card8DT.gif")
-				Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif", "image2/card9HH.gif", "image2/card8HH.gif", "image2/cardJST.gif", "image2/card8SS.gif")
-				Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/cardKHH.gif", "image2/card1DT.gif", "image2/cardQCT.gif")
-				Whandimage = new Array(0, "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/cardJHT.gif", "image2/card9DT.gif", "image2/card7CC.gif", "image2/cardKCC.gif", "image2/cardQHT.gif", "image2/cardQST.gif")
-		
-		
-		
-		
-		
-				deckvalue[15] = "ASS"
-				deckvalue[17] = "ACC"
-				deckvalue[16] = "AHH"
-		
-		
-		*/
+				
+						
+						
+								//TEST HAND 
+						
+								Nhandimage = new Array(0, "image2/cardASS.gif", "image2/cardADT.gif", "image2/cardAHH.gif", "image2/cardJCT.gif", "image2/card8DT.gif", "image2/cardQCT.gif", "image2/cardJHT.gif", "image2/cardQHT.gif")
+								Ehandimage = new Array(0, "image2/cardACC.gif", "image2/cardKSS.gif", "image2/card1CC.gif", "image2/card1HH.gif", "image2/card9HH.gif", "image2/card8HH.gif", "image2/cardJST.gif", "image2/card8SS.gif")
+								Shandimage = new Array(0, "image2/cardKDT.gif", "image2/card7DT.gif", "image2/card9SS.gif", "image2/card1SS.gif", "image2/card8CC.gif", "image2/cardKHH.gif", "image2/card1DT.gif", "image2/card7HH.gif")
+								Whandimage = new Array(0, "image2/cardJDT.gif", "image2/cardQDT.gif", "image2/card9DT.gif", "image2/card7CC.gif", "image2/cardKCC.gif", "image2/card9CC.gif", "image2/cardQST.gif", "image2/card7SS.gif")
+						
+						
+						
+						
+						
+								deckvalue[15] = "ASS"
+								deckvalue[17] = "ACC"
+								deckvalue[16] = "AHH"
+						
+						*/
+
 
 
 
@@ -3244,6 +3554,7 @@
 				for (i = 1; i <= 4; i++) {
 					if (partner[i] == 1) {
 						alone = i
+						alonerandom ??= Math.random();
 					}
 				}
 			}
@@ -3453,7 +3764,7 @@
 
 		let aloneWarning = "";
 
-		if (values.possibleAlone && soloplayer == 0) {
+		if (values.possibleAlone && soloplayer == 0 && partner[selfIndex] == 0) {
 
 			const zeroIndex = values.actualZeroIndex;
 
@@ -3491,15 +3802,15 @@
 		let phrase;
 
 		if (isClose(combinedLikelihood, totalLikelihood)) {
-			phrase = "Your partner is ";
+			phrase = " is your partner";
 		} else if (combinedLikelihood >= 0.95) {
-			phrase = "Your partner is almost certainly ";
+			phrase = " is almost certainly your partner";
 		} else if (combinedLikelihood >= 0.85) {
-			phrase = "Your partner is very likely ";
+			phrase = " is very likely your partner";
 		} else if (combinedLikelihood >= 0.65) {
-			phrase = "Your partner is likely ";
+			phrase = " is likely your partner";
 		} else if (combinedLikelihood >= 0.5) {
-			phrase = "Your partner is possibly ";
+			phrase = " is possibly your partner";
 		} else {
 			phrase = "Your partner is unclear, but could be " +
 				entries
@@ -3515,7 +3826,7 @@
 			return phrase + aloneWarning;
 		}
 
-		return phrase + joinNames(likelyPartners) + "." + aloneWarning;
+		return joinNames(likelyPartners) + phrase + "." + aloneWarning;
 	}
 
 	function normalize(selfIndex = 1, returnValues = false) {
@@ -3616,7 +3927,7 @@
 		const others = [1, 2, 3, 4].filter(i => i !== selfIndex);
 
 		const vals = others.map(i =>
-			1-(Math.abs(partner[selfIndex] - visiblepartner[i]))
+			1 - (Math.abs(partner[selfIndex] - visiblepartner[i]))
 		);
 
 		let result = baseNormalize(vals);
@@ -3684,7 +3995,7 @@
 			Math.round((v + Number.EPSILON) * 100)
 		);
 
-		
+
 
 		const debugText = roundedResult
 			.map((v, i) => playername[others[i]].charAt(0) + ": " + v + "%")
@@ -3698,7 +4009,7 @@
 			.map(e => e.name + ": " + Math.round(e.val * 100) + "%")
 			.join(", ");
 
-		return partnerText(result, selfIndex) ;
+		return partnerText(result, selfIndex);
 		//return debugText;
 		// return highestText;
 	}
@@ -3710,13 +4021,13 @@
 			visiblepartner[1], visiblepartner[2], visiblepartner[3], visiblepartner[4]
 		)
 		console.log("J: " +
-			normalize( 1)
+			normalize(1)
 		)
 		console.log("A: " +
-			normalize( 2)
+			normalize(2)
 		)
 		console.log("P: " +
-			normalize( 3)
+			normalize(3)
 		)
 		console.log("J: " +
 			normalize(4)
@@ -4028,21 +4339,14 @@
 
 	//COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI COMPUTER AI 
 
-	//2 Black Queens and 2 trump, save high cards to force
 
 	//LOW FAIL/HIGH FAIL RANDOM IF SUIT BROKEN BUT SOME LEFT
 
-	//DONT PLAY ACE IF ITS GOING TO GET AGGRESUIVELY TRUMPED
-
-	//ADD TRUST FACTOR TO SUIT COUNT SCHMIER DECISION
-
 	//CONSIDER PLAYING UNBROKEN SUIT RATHER THAN VOIDING BROKEN SUIT DEPENDING
 
-	//IMPROVE OFFENSE/DEFENSE FOR SOLO PLAY
+	//IMPROVE OFFENSE/DEFENSE FOR Q or QQ PLAY
 
 	//LEAD UNBROKEN SUIT
-
-	//FAIL SCHMIER AFFECTS PARTNER TRUST (DOESN'T TRUMP)
 
 	//ADD MORE PRESUMPTIVE ACTIONS WHEN YOU ARE 3 AND PARTNER IS 4
 
@@ -4060,7 +4364,7 @@
 			//ABNORMAL LEADS
 			if (trickcount == 1 && Math.random() < trust[number] && partner[number] == 1) {//OFFENSE				
 				console.log(trickcount, "Abnormal Lead")
-				leadace(Chand, Cplay, Csuit, number, 1)										//LEAD ACE
+				leadace(Chand, Cplay, Csuit, number, 1)										//LEAD SINGLETON ACE
 			}
 			if (trickcount == 1 && Math.random() < trust[number] * .2 && partner[number] == 0) {	//DEFENSE 
 				console.log(trickcount, "Abnormal Lead")
@@ -4069,7 +4373,7 @@
 
 
 			if (partner[number] == 1) {									//ON OFFENSE
-				if (Chand[temphand[1]].charAt(2) == "T") {							//TRUMP
+				if (Chand[temphand[1]].charAt(2) == "T" && (alone != number || (visiblepartner[number] == 1 || Csuit[2] + Csuit[3] + Csuit[4] == 0 || alonerandom > 2 * trust[number]))) {							//TRUMP
 					if (tempplay == 0 && soloplayer != number && ((deckvalue[1] == "QCT" && Chand[temphand[1]] != "QCT") ||
 						(deckvalue[1] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")) ||
 						(deckvalue[2] == "QST" && (Chand[temphand[1]] != "QST" && Chand[temphand[2]] != "QST")))) {																//PARTNER HAS NOT PLAYED QUEEN
@@ -4185,10 +4489,23 @@
 						}
 					}
 				}
-				else {													//DEFENSE								
+				else {													//DEFENSE		
+
+					if (soloplayer != 0 && alone != 0 && (((soloplayer - leader + 4) % 4) + 1) < turn) {//Q OR QQ
+						if (soloplayer == trickleader) {
+							bettertrump(Chand, Cplay, Csuit, number)						//BETTER TRUMP
+						}
+						else {
+							trumpschmier(Chand, Cplay, Csuit, number)						//TRUMP SCHMIER
+						}
+						console.log(soloplayer + " has played")
+					}
+
 					if ((deckvalue[1] == "QCT" || deckvalue[1] == "QST")) {		//QUEENS NOT PLAYED
 
-						besttrump(Chand, Cplay, Csuit, number)								//PLAY HIGHEST TRUMP
+						if (tempplay == 0) {
+							besttrump(Chand, Cplay, Csuit, number)							//PLAY HIGHEST TRUMP
+						}
 
 						if (tempplay == 0 && turn == 3) {
 							forcequeen(Chand, Cplay, Csuit, number)							//FORCE QUEEN
@@ -4444,7 +4761,7 @@
 	//PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE PLAY ACE 
 	function playace(Chand, Cplay, Csuit, number) {
 
-		if ((handvalue > 14 && visiblesuit[getPosition(trick[0], suits)] + Csuit[getPosition(trick[0], suits)] < 2 + turn) || Chand[temphand[1]] == solochoice || (handvalue < 15 && visiblepartnercheck(number, trickleader) <= 1.3*trust[number])) {
+		if ((handvalue > 14 && visiblesuit[getPosition(trick[0], suits)] + Csuit[getPosition(trick[0], suits)] < 2 + turn) || Chand[temphand[1]] == solochoice || (handvalue < 15 && visiblepartnercheck(number, trickleader) <= 1.3 * trust[number])) {
 			for (j = 1; j <= temphand.length - 1; j++) {
 				if (Chand[temphand[j]] == "ASS" || Chand[temphand[j]] == "AHH" || Chand[temphand[j]] == "ACC") {
 					tempplay = temphand[j]
@@ -4545,8 +4862,8 @@
 	//HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL HIGH FAIL 
 	function highfail(Chand, Cplay, Csuit, number) {
 		if (handvalue > 14 && (visiblesuit[1] + Csuit[1] == 14
-			|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]))
-			|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3*trust[number])) == 1))) {
+			|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]))
+			|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3 * trust[number])) == 1))) {
 			for (j = 1; j <= temphand.length - 1; j++) {
 				for (i = 15; i <= 32; i++) {
 					if (deckvalue[i].charAt(2) == Chand[temphand[j]].charAt(2)) {
@@ -4584,10 +4901,10 @@
 	//SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER SCHMIER  
 	function schmier(Chand, Cplay, Csuit, number) {
 		//normal schmier
-		if ((visiblepartnercheck(number, trickleader) <= 1.3*trust[number] && ((turn == 4) ||
+		if ((visiblepartnercheck(number, trickleader) <= 1.3 * trust[number] && ((turn == 4) ||
 			(trick[0] != "T" && handvalue <= 17) || (trick[0] == "T" && handvalue == 1) ||
 			(partner[number] == 1 && (handvalue == 1 || (handvalue == 2 && deckvalue[2] == "QST") || (handvalue == 2 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))))))
-			|| (turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number] && handvalue > 17 && visiblesuit[getPosition(trick[0], suits)] < 2)
+			|| (turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number] && handvalue > 17 && visiblesuit[getPosition(trick[0], suits)] < 1 + 5 * trust[number])
 			|| (trick[0] == "T" && partner[number] == 1 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST"))
 			|| (soloplay == 0 && soloplayer == number && trick[0] == solochoice.charAt(2) && handvalue > 17)) {
 			console.log(number + ": I want to schmier")
@@ -4615,7 +4932,7 @@
 				}
 			}
 			//PRESUMPTIVE SCHMIERS
-			if (turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number] && handvalue > 17 && visiblesuit[getPosition(trick[0], suits)] < 2) {
+			if (turn == 3 && visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number] && handvalue > 17 && visiblesuit[getPosition(trick[0], suits)] < 2) {
 				temphint = "Schmier to " + playername[number % 4 + 1] + "."
 			}
 			if (trick[0] == "T" && partner[number] == 1 && (deckvalue[1] == "QCT" || deckvalue[1] == "QST") && handvalue > 1) {
@@ -4642,12 +4959,12 @@
 	function trump(Chand, Cplay, Csuit, number) {
 
 
-		if (tempscore > 9 || (visiblesuit[getPosition(trick[0], suits)] < 2 && turn != 4)) {			//I DEFINITELY WANT TO TRUMP
+		if (tempscore > 9 || (visiblesuit[getPosition(trick[0], suits)] < 1 + 5 * trust[number] && turn != 4)) {	//I DEFINITELY WANT TO TRUMP
 			console.log(number + ": I want to trump")
-			if (turn == 4
-				|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]))
-				|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3*trust[number])) == 1)
-				|| (visiblesuit[getPosition(trick[0], suits)] < 2)) {								//SAFE
+			if (turn == 4 || visiblesuit[1] + Csuit[1] == 14
+				|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]))
+				|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3 * trust[number])) == 1)
+				|| (visiblesuit[getPosition(trick[0], suits)] < 1 + 5 * trust[number])) {								//SAFE
 				trumpschmier(Chand, Cplay, Csuit, number)												//TRUMP WITH POINTS
 				temphint = "Trump! (Get points.)"
 
@@ -4687,15 +5004,20 @@
 		else {
 			if (tempscore > 3 || turn == 2 || (visiblesuit[getPosition(trick[0], suits)] < 4 && turn != 4)) {	//I MAY WANT TO TRUMP		
 				console.log(number + ": I may want to trump")
-				if (turn == 4
-					|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]))
-					|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3*trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3*trust[number])) == 1)) {														//SAFE
+				if (turn == 4 || visiblesuit[1] + Csuit[1] == 14
+					|| (turn == 3 && (visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]))
+					|| (turn == 2 && ((visiblevoid[number % 4 + 1] == 1 || visiblepartnercheck(number, number % 4 + 1) <= 1.3 * trust[number]) && (visiblevoid[(number + 1) % 4 + 1] == 1 || visiblepartnercheck(number, (number + 1) % 4 + 1) <= 1.3 * trust[number])) == 1)) {														//SAFE
 					trumpschmier(Chand, Cplay, Csuit, number)										//TRUMP WITH POINTS
 					temphint = "Trump! (Get points.)"
 					if (tempplay == 0 || getPosition(Chand[tempplay], deckvalue) > handvalue) {
 						tempplay = 0
-						bettertrump(Chand, Cplay, Csuit, number)								//LOWEST WINNING TRUMP
-						temphint = "Trump! (Go low.)"
+						if (Math.random() < .5) {
+							bettertrump(Chand, Cplay, Csuit, number)								//LOWEST WINNING TRUMP
+							temphint = "Trump! (Go low.)"
+						}
+						else {
+							slough(Chand, Cplay, Csuit, number, 12)				//SLOUGH BUT DONT SCHMIER
+						}
 					}
 
 				}
@@ -4789,11 +5111,22 @@
 
 		}
 
+		if (deckvalue[2] == "QST" && Csuit[1] == 2) {
+			tempplay = temphand[k]
+			if (turn == 1) {
+				temphint = "Lead a low trump."
+			}
+			else {
+				temphint = "Follow suit. Play a low trump."
+			}
+
+		}
+
 
 		search:
 		for (i = 1; i <= 12; i++) {
 			for (j = 1; j <= temphand.length - 1; j++) {
-				if (Chand[temphand[temphand.length - j]] == deckvalue[13 - i + Csuit[1]] &&
+				if (tempplay == 0 && Chand[temphand[temphand.length - j]] == deckvalue[13 - i + Csuit[1]] &&
 					(Chand[temphand[temphand.length - j]].charAt(0) != "A" && Chand[temphand[temphand.length - j]].charAt(0) != "1" && Chand[temphand[temphand.length - j]].charAt(0) != "K")) {
 					tempplay = temphand[temphand.length - j]
 					if (turn == 1) {
@@ -4867,13 +5200,24 @@
 	//FORCE QUEEN
 	function forcequeen(Chand, Cplay, Csuit, number) {
 
-		if (getPosition(Chand[temphand[1]], deckvalue) <= 14 &&
-			((getPosition(Chand[temphand[1]], deckvalue) < handvalue - 1) || (getPosition(Chand[temphand[1]], deckvalue) < handvalue && visiblepartnercheck(number, trickleader) == 1)) &&
-			Chand[temphand[1]] != "ADT" && Chand[temphand[1]] != "1DT" && Chand[temphand[1]] != "KDT") {
-			tempplay = temphand[1]
-			temphint = "Follow suit. Play a high trump (force the black queen)."
-		}
+		tempplay = temphand[1]
 
+		for (i = 1; i <= temphand.length - 1; i++) {
+			if (getPosition(Chand[temphand[i + 1]], deckvalue) == 1 + (getPosition(Chand[temphand[i]], deckvalue))) {
+				tempplay = temphand[i + 1]
+			}
+			else {
+				if (getPosition(Chand[tempplay], deckvalue) <= 14 &&
+					((getPosition(Chand[tempplay], deckvalue) < handvalue - 1) || (getPosition(Chand[tempplay], deckvalue) < handvalue && visiblepartnercheck(number, trickleader) == 1)) &&
+					Chand[temphand[1]] != "ADT" && Chand[temphand[1]] != "1DT" && Chand[temphand[1]] != "KDT") {
+					temphint = "Follow suit. Play a high trump (force the black queen)."
+				}
+				else {
+					tempplay = 0
+				}
+				break
+			}
+		}
 	}
 
 
@@ -4894,7 +5238,7 @@
 			}
 		}
 		else {
-			if ((getPosition(Chand[temphand[1]], deckvalue) == 1 || (Chand[temphand[1]].charAt(0) + Chand[temphand[1]].charAt(1) == "QS" && partner[number] == 1))) {
+			if ((getPosition(Chand[temphand[1]], deckvalue) == 1 || (Chand[temphand[1]].charAt(0) + Chand[temphand[1]].charAt(1) == "QS" && partner[number] == 1 && soloplayer == 0))) {
 				tempplay = temphand[1]
 				if (turn == 1) {
 					temphint = "Lead a winning trump."
@@ -4943,33 +5287,33 @@
 
 
 	//VISIBLE PARTNER CHECK
-function visiblepartnercheck(number, trickleader) {
+	function visiblepartnercheck(number, trickleader) {
 
-    const result = normalize(number, true);
+		const result = normalize(number, true);
 
-    const others = [1, 2, 3, 4].filter(i => i !== number);
+		const others = [1, 2, 3, 4].filter(i => i !== number);
 
-    const index = others.indexOf(trickleader);
+		const index = others.indexOf(trickleader);
 
-    // invalid / self
-    if (index === -1) {
-        return 1;
-    }
+		// invalid / self
+		if (index === -1) {
+			return 1;
+		}
 
-    const highest = Math.max(...result);
+		const highest = Math.max(...result);
 
-    const isClose = (x, y) => Math.abs(x - y) < 0.0001;
+		const isClose = (x, y) => Math.abs(x - y) < 0.0001;
 
-    // only highest or tied-highest counts
-    if (isClose(result[index], highest)) {
+		// only highest or tied-highest counts
+		if (isClose(result[index], highest)) {
 
-        // reversed relationship:
-        // stronger match => smaller output
-        return 1 - result[index];
-    }
+			// reversed relationship:
+			// stronger match => smaller output
+			return 1 - result[index];
+		}
 
-    return 1;
-}
+		return 1;
+	}
 
 
 
@@ -5181,7 +5525,9 @@ function visiblepartnercheck(number, trickleader) {
 
 		transcript = transcript + "Trick " + trickcount + ": " + trick + " (winner: " + playername[scorer] + ")\n"
 		trickcount++
-
+		if (replay == 0) {
+			addStat(STATS.TRICKS_WON, scorer);
+		}
 
 
 		//PARTNER GUESS
@@ -5292,6 +5638,7 @@ function visiblepartnercheck(number, trickleader) {
 				hand = 0
 
 				for (i = 1; i <= 4; i++) {
+
 					if (partner[i] == 1) {
 						offense = offense + scores[i]
 						offensename = offensename.concat(playername[i])
@@ -5303,7 +5650,7 @@ function visiblepartnercheck(number, trickleader) {
 				}
 				//alert("Offense: "+offense + " Defense: "+defense)
 				//alert(defense)
-				if (partner[1] + partner[2] + partner[3] + partner[4] == 1) {									//PLAYING ALONE
+				if (partner[1] + partner[2] + partner[3] + partner[4] == 1) {						//PLAYING ALONE
 
 
 
@@ -5319,6 +5666,8 @@ function visiblepartnercheck(number, trickleader) {
 								awardchips(9, "blue", i)
 								chips[i] = chips[i] + 9
 								chipstack[i] = chipstack[i] + "bbbbbbbbb"
+								addStat(STATS.NINE_BLUE, i);
+								addStat(STATS.HANDS_WON, i);
 							}
 						}
 					}
@@ -5335,6 +5684,8 @@ function visiblepartnercheck(number, trickleader) {
 									awardchips(6, "blue", i)
 									chips[i] = chips[i] + 6
 									chipstack[i] = chipstack[i] + "bbbbbb"
+									addStat(STATS.SIX_BLUE, i);
+									addStat(STATS.HANDS_WON, i);
 								}
 							}
 						}
@@ -5351,6 +5702,8 @@ function visiblepartnercheck(number, trickleader) {
 										awardchips(3, "blue", i)
 										chips[i] = chips[i] + 3
 										chipstack[i] = chipstack[i] + "bbb"
+										addStat(STATS.THREE_BLUE, i);
+										addStat(STATS.HANDS_WON, i);
 									}
 								}
 							}
@@ -5367,6 +5720,8 @@ function visiblepartnercheck(number, trickleader) {
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
+											addStat(STATS.TWO_RED, i);
+											addStat(STATS.HANDS_WON, i);
 										}
 									}
 								}
@@ -5381,6 +5736,8 @@ function visiblepartnercheck(number, trickleader) {
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
+											addStat(STATS.THREE_RED, i);
+											addStat(STATS.HANDS_WON, i);
 										}
 									}
 								}
@@ -5403,6 +5760,8 @@ function visiblepartnercheck(number, trickleader) {
 								awardchips(3, "white", i)
 								chips[i] = chips[i] + 3
 								chipstack[i] = chipstack[i] + "www"
+								addStat(STATS.THREE_WHITE, i);
+								addStat(STATS.HANDS_WON, i);
 							}
 						}
 					}
@@ -5419,6 +5778,8 @@ function visiblepartnercheck(number, trickleader) {
 									awardchips(2, "white", i)
 									chips[i] = chips[i] + 2
 									chipstack[i] = chipstack[i] + "ww"
+									addStat(STATS.TWO_WHITE, i);
+									addStat(STATS.HANDS_WON, i);
 								}
 							}
 						}
@@ -5435,6 +5796,8 @@ function visiblepartnercheck(number, trickleader) {
 										awardchips(1, "white", i)
 										chips[i] = chips[i] + 1
 										chipstack[i] = chipstack[i] + "w"
+										addStat(STATS.ONE_WHITE, i);
+										addStat(STATS.HANDS_WON, i);
 									}
 								}
 							}
@@ -5451,6 +5814,8 @@ function visiblepartnercheck(number, trickleader) {
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
+											addStat(STATS.TWO_RED, i);
+											addStat(STATS.HANDS_WON, i);
 										}
 									}
 								}
@@ -5465,6 +5830,8 @@ function visiblepartnercheck(number, trickleader) {
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
+											addStat(STATS.THREE_RED, i);
+											addStat(STATS.HANDS_WON, i);
 										}
 									}
 								}
@@ -5479,7 +5846,7 @@ function visiblepartnercheck(number, trickleader) {
 				document.getElementById('continue').style.display = 'inherit'
 				document.getElementById('transcript').style.display = 'inherit'
 				document.getElementById('cheatsheet').style.display = 'none'
-				document.getElementById("cheatmodal").style.display = "none";
+				//document.getElementById("cheatmodal").style.display = "none";
 				return
 			}
 		}
@@ -5492,6 +5859,54 @@ function visiblepartnercheck(number, trickleader) {
 
 
 	function endhand() {
+
+		for (i = 1; i <= 4; i++) {
+			addStat(STATS.HANDS_PLAYED, i);
+			if (partner[i] == 1) {
+				if (alone == i) {
+					addStat(STATS.ALONE, i);
+				}
+				else {
+					addStat(STATS.OFFENSE, i);
+				}
+			}
+			if (partner[i] == 0) {
+				addStat(STATS.DEFENSE, i);
+			}
+			if ((soloplayer == i && alone != i) || (soloplayer != i && alone == i)) {
+				addStat(STATS.BOTH_QUEENS, i);
+			}
+			if (soloplayer == i && alone != i) {
+				addStat(STATS.CALLED_PARTNER, i);
+				if (offense > 60) {
+					addStat(STATS.CALLED_PARTNER_WON, i);
+				}
+			}
+			if (soloplayer != i && alone == i) {
+				addStat(STATS.PLAYED_ALONE, i);
+				if (offense > 60) {
+					addStat(STATS.PLAYED_ALONE_WON, i);
+				}
+			}
+			if (soloplayer == i && alone == i) {
+				addStat(STATS.CALLED_OFF, i);
+				if (solochoice == "Q") {
+					addStat(STATS.ONE_QUEEN, i);
+					if (offense > 60) {
+						addStat(STATS.ONE_QUEEN_WON, i);
+					}
+				}
+				if (solochoice == "QQ") {
+					addStat(STATS.TWO_QUEEN, i);
+					if (offense > 60) {
+						addStat(STATS.TWO_QUEEN_WON, i);
+					}
+				}
+			}
+		}
+		drawStatsTable();
+
+
 
 
 		delaytime = oldDelayTime
@@ -5529,6 +5944,10 @@ function visiblepartnercheck(number, trickleader) {
 		if (chips[1] >= 12 && chips[1] > chips[2] && chips[1] > chips[3] && chips[1] > chips[4]) {
 			//alert("Game Over! " + playername[1] + " won with " + chips[1] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[1] + " won with " + chips[1] + " chips!"
+			addStat(STATS.GAMES_WON, 1);
+			for (let p = 1; p <= 4; p++) {
+				addStat(STATS.GAMES_PLAYED, p);
+			}
 			gameover = 1
 			dealer = 4
 			openGameOver(playername[1], chipstack[1], visible = 7, chipWidth = 100)
@@ -5536,6 +5955,10 @@ function visiblepartnercheck(number, trickleader) {
 		if (chips[2] >= 12 && chips[2] > chips[1] && chips[2] > chips[3] && chips[2] > chips[4]) {
 			//alert("Game Over! " + playername[2] + " won with " + chips[2] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[2] + " won with " + chips[2] + " chips!"
+			addStat(STATS.GAMES_WON, 2);
+			for (let p = 1; p <= 4; p++) {
+				addStat(STATS.GAMES_PLAYED, p);
+			}
 			gameover = 1
 			dealer = 1
 			openGameOver(playername[2], chipstack[2], visible = 7, chipWidth = 100)
@@ -5543,6 +5966,10 @@ function visiblepartnercheck(number, trickleader) {
 		if (chips[3] >= 12 && chips[3] > chips[2] && chips[3] > chips[1] && chips[3] > chips[4]) {
 			//alert("Game Over! " + playername[3] + " won with " + chips[3] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[3] + " won with " + chips[3] + " chips!"
+			addStat(STATS.GAMES_WON, 3);
+			for (let p = 1; p <= 4; p++) {
+				addStat(STATS.GAMES_PLAYED, p);
+			}
 			gameover = 1
 			dealer = 2
 			openGameOver(playername[3], chipstack[3], visible = 7, chipWidth = 100)
@@ -5550,6 +5977,10 @@ function visiblepartnercheck(number, trickleader) {
 		if (chips[4] >= 12 && chips[4] > chips[2] && chips[4] > chips[3] && chips[4] > chips[1]) {
 			//alert("Game Over! " + playername[4] + " won with " + chips[4] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[4] + " won with " + chips[4] + " chips!"
+			addStat(STATS.GAMES_WON, 4);
+			for (let p = 1; p <= 4; p++) {
+				addStat(STATS.GAMES_PLAYED, p);
+			}
 			gameover = 1
 			dealer = 3
 			openGameOver(playername[4], chipstack[4], visible = 7, chipWidth = 100)
@@ -5564,9 +5995,9 @@ function visiblepartnercheck(number, trickleader) {
 
 		document.getElementById('continue').style.display = 'none'
 		document.getElementById('deal').style.display = 'inherit'
-		document.getElementById('options').style.display = 'inherit'
+		//document.getElementById('options').style.display = 'inherit'
 		document.getElementById('transcript').style.display = 'none'
-
+		document.getElementById('cheatsheet').style.display = 'inherit'
 
 
 
@@ -5612,7 +6043,8 @@ function visiblepartnercheck(number, trickleader) {
 		pasttrick = new Array(0, 0, 0, 0, 0)
 
 
-
+		saveSettings();
+		drawStatsTable();
 
 	}
 
@@ -6002,7 +6434,7 @@ function visiblepartnercheck(number, trickleader) {
 	// index 0 is unused; defaults to "Medium" for all players
 
 	const TRUST_VALUES = [0, .125, 0.25, .375, 0.5];
-	const TRUST_LABELS = ['Safest', 'Safer','Steady','Bolder', 'Boldest'];
+	const TRUST_LABELS = ['Safest', 'Safer', 'Steady', 'Bolder', 'Boldest'];
 
 	function wireTrustSlider(sliderId, displayId, trustIndex, defaultStop = 1) {
 		const slider = document.getElementById(sliderId);
@@ -6078,6 +6510,8 @@ function visiblepartnercheck(number, trickleader) {
 					remaining: !!document.getElementById('RemovePlays')?.checked,
 				},
 				sortChoice: sortEl ? String(sortEl.value) : '0',
+				stats: stats,
+				trustStats: trustStats,
 			};
 
 			localStorage.setItem(LS_KEYS.settings, JSON.stringify(data));
@@ -6096,6 +6530,14 @@ function visiblepartnercheck(number, trickleader) {
 		try { s = JSON.parse(raw); } catch { return; }
 
 		const $ = id => document.getElementById(id);
+
+		//STATS
+		if (s.stats) {
+			stats = s.stats;
+		}
+		if (s.trustStats) {
+			trustStats = s.trustStats;
+		}
 
 		// Names
 		if (s.names) {
@@ -6178,6 +6620,7 @@ function visiblepartnercheck(number, trickleader) {
 	document.addEventListener('DOMContentLoaded', () => {
 		if (!window.LS_KEYS) window.LS_KEYS = { settings: 'settings-v1' };
 		loadSettings();            // restore first
+		drawStatsTable();
 		wireSettingsAutosave();    // then start listening
 	});
 </script>
