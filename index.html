@@ -550,6 +550,54 @@
 			/* iOS zoom threshold */
 		}
 
+
+
+		.toggleSwitch {
+			position: relative;
+			display: inline-block;
+			width: 50px;
+			height: 24px;
+		}
+
+		.toggleSwitch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			inset: 0;
+			background: #ccc;
+			border-radius: 24px;
+			cursor: pointer;
+		}
+
+		.slider:before {
+			content: "";
+			position: absolute;
+			height: 18px;
+			width: 18px;
+			left: 3px;
+			top: 3px;
+			background: white;
+			border-radius: 50%;
+			transition: .2s;
+		}
+
+
+
+		input:checked+.slider:before {
+			transform: translateX(26px);
+		}
+
+
+		.slider {
+			background: #BFD9F0;
+		}
+
+
+
 		/*
 		TEST BORDERS 
 
@@ -1705,28 +1753,28 @@
 	<div class="modal-content">
 		<div style="padding:6px; font-size:14px; line-height:1.35;">
 			<h1 style="text-align:center;">Game Statistics</h1>
-			<div style="text-align:center; margin-bottom:8px;">
-				<button id="computerViewBtn" onclick="showComputerStats()" style="
-            background-color:#fff;
-            border:1px solid #000;
-            border-radius:50px;
-            color:#000;
-            font-size:14px;
-            padding:0px 12px;
-        ">
-					Opponents
-				</button>
+			<div style="display:flex; align-items:center; gap:15px; margin-bottom:4px;">
+				<div style="width:120px;"></div>
 
-				<button id="trustViewBtn" onclick="showTrustStats()" style="
-            background-color:#fff;
-            border:1px solid #000;
-            border-radius:50px;
-            color:#000;
-            font-size:14px;
-            padding:0px 12px;
-        ">
-					Personalities
-				</button>
+				<div style="width:66px;"></div>
+
+				<div style="width:400px; text-align:center;">
+					Opponent
+					<label class="toggleSwitch">
+						<input type="checkbox" id="opponentViewToggle" onchange="toggleOpponentView()">
+						<span class="slider"></span>
+					</label>
+					Personality
+				</div>
+
+				<div style="width:100px; text-align:center;">
+					#
+					<label class="toggleSwitch">
+						<input type="checkbox" id="statsDisplayToggle" onchange="toggleStatsDisplay()">
+						<span class="slider"></span>
+					</label>
+					%
+				</div>
 			</div>
 
 			<div style="display:flex; align-items:flex-start;">
@@ -2053,53 +2101,50 @@
 
 
 	const STAT_LABELS = [
-		{ key: "GAMES_PLAYED", label: "Games Played", groupStart: true },
-		{ key: "GAMES_WON", label: "Games Won" },
-		{ key: "GAMES_WON_PCT", label: "Win %", subRow: true },
+		{ key: "GAMES_PLAYED", label: "Games Played", groupStart: true, noPct: true, noTotal: true },
+		{ key: "GAMES_WON", label: "Games Won", pctOf: "GAMES_PLAYED" },
+		{ key: "GAMES_WON_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "GAMES_PLAYED", hidden: true },
 
-		{ key: "HANDS_PLAYED", label: "Hands Played", groupStart: true },
-		{ key: "HANDS_WON", label: "Hands Won" },
-		{ key: "HANDS_WON_PCT", label: "Win %", subRow: true },
+		{ key: "HANDS_PLAYED", label: "Hands Played", groupStart: true, noPct: true, noTotal: true },
+		{ key: "HANDS_WON", label: "Hands Won", pctOf: "HANDS_PLAYED" },
+		{ key: "HANDS_WON_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "HANDS_PLAYED", hidden: true },
 
-		{ key: "OFFENSE", label: "Offense", groupStart: true },
-		{ key: "ONE_WHITE", label: "Normal (1)", subRow: true },
-		{ key: "TWO_WHITE", label: "Schneider (2)", subRow: true },
-		{ key: "THREE_WHITE", label: "Schwartz (3)", subRow: true },
-		{ key: "OFFENSE_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "OFFENSE", label: "Offense", groupStart: true, pctOf: "HANDS_PLAYED" },
+		{ key: "ONE_WHITE", label: "Normal (1)", subRow: true, pctOf: "OFFENSE" },
+		{ key: "TWO_WHITE", label: "Schneider (2)", subRow: true, pctOf: "OFFENSE" },
+		{ key: "THREE_WHITE", label: "Schwartz (3)", subRow: true, pctOf: "OFFENSE" },
+		{ key: "OFFENSE_WIN_PCT", label: "Win %", subRow: true, numOf: ["ONE_WHITE", "TWO_WHITE", "THREE_WHITE"], pctOf: "OFFENSE" },
 
-		{ key: "DEFENSE", label: "Defense", groupStart: true },
-		{ key: "TWO_RED", label: "Normal (2)", subRow: true },
-		{ key: "THREE_RED", label: "Schneider (3)", subRow: true },
-		{ key: "DEFENSE_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "DEFENSE", label: "Defense", groupStart: true, pctOf: "HANDS_PLAYED" },
+		{ key: "TWO_RED", label: "Normal (2)", subRow: true, pctOf: "DEFENSE" },
+		{ key: "THREE_RED", label: "Schneider (3)", subRow: true, pctOf: "DEFENSE" },
+		{ key: "DEFENSE_WIN_PCT", label: "Win %", subRow: true, numOf: ["TWO_RED", "THREE_RED"], pctOf: "DEFENSE" },
 
-		{ key: "ALONE", label: "Alone", groupStart: true },
-		{ key: "THREE_BLUE", label: "Normal (3)", subRow: true },
-		{ key: "SIX_BLUE", label: "Schnieder (6)", subRow: true },
-		{ key: "NINE_BLUE", label: "Schwartz (9)", subRow: true },
-		{ key: "ALONE_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "ALONE", label: "Alone", groupStart: true, pctOf: "HANDS_PLAYED" },
+		{ key: "THREE_BLUE", label: "Normal (3)", subRow: true, pctOf: "ALONE" },
+		{ key: "SIX_BLUE", label: "Schnieder (6)", subRow: true, pctOf: "ALONE" },
+		{ key: "NINE_BLUE", label: "Schwartz (9)", subRow: true, pctOf: "ALONE" },
+		{ key: "ALONE_WIN_PCT", label: "Win %", subRow: true, numOf: ["THREE_BLUE", "SIX_BLUE", "NINE_BLUE"], pctOf: "ALONE" },
 
-		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true },
-		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true },
-		{ key: "CALLED_PARTNER_WON", label: "Called Partner Won", hidden: true },
-		{ key: "CALLED_PARTNER_WIN_PCT", label: "Win %", subRow: true },
-		{ key: "PLAYED_ALONE", label: "Played Alone", subRow: true },
-		{ key: "PLAYED_ALONE_WON", label: "Played Alone Won", hidden: true },
-		{ key: "PLAYED_ALONE_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
+		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true, pctOf: "BOTH_QUEENS" },
+		{ key: "CALLED_PARTNER_WON", label: "Win", pctOf: "CALLED_PARTNER", subRow: true },
+		{ key: "CALLED_PARTNER_WIN_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "CALLED_PARTNER", hidden: true },
+		{ key: "PLAYED_ALONE", label: "Played Alone", subRow: true, pctOf: "BOTH_QUEENS" },
+		{ key: "PLAYED_ALONE_WON", label: "Win", pctOf: "PLAYED_ALONE", subRow: true },
+		{ key: "PLAYED_ALONE_WIN_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "PLAYED_ALONE", hidden: true },
 
-		{ key: "CALLED_OFF", label: "Called Off", groupStart: true },
-		{ key: "ONE_QUEEN", label: "One Queen", subRow: true },
-		{ key: "ONE_QUEEN_WON", label: "Played Alone Won", hidden: true },
-		{ key: "ONE_QUEEN_WIN_PCT", label: "Win %", subRow: true },
-		{ key: "TWO_QUEEN", label: "Both Queens", subRow: true },
-		{ key: "TWO_QUEEN_WON", label: "Played Alone Won", hidden: true },
-		{ key: "TWO_QUEEN_WIN_PCT", label: "Win %", subRow: true },
+		{ key: "CALLED_OFF", label: "Called Off", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
+		{ key: "ONE_QUEEN", label: "One Old One", subRow: true, pctOf: "CALLED_OFF" },
+		{ key: "ONE_QUEEN_WON", label: "Win", subRow: true, pctOf: "ONE_QUEEN" },
+		{ key: "ONE_QUEEN_WIN_PCT", label: "Win %", subRow: true, pctOf: "ONE_QUEEN", hidden: true },
+		{ key: "TWO_QUEEN", label: "Both Old Ones", subRow: true, pctOf: "CALLED_OFF" },
+		{ key: "TWO_QUEEN_WON", label: "Win", subRow: true, pctOf: "TWO_QUEEN" },
+		{ key: "TWO_QUEEN_WIN_PCT", label: "Win %", subRow: true, pctOf: "TWO_QUEEN", hidden: true },
 
-		{ key: "TRICKS_WON", label: "Tricks Won", groupStart: true },
-
-
-
-		{ key: "RESERVED_3", hidden: true },
-		{ key: "RESERVED_4", hidden: true },
+		{ key: "TRICKS_WON", label: "Tricks Won", groupStart: true, rateOf: "HANDS_PLAYED" },
+		{ key: "POINTS_WON", label: "Points Won", rateOf: "HANDS_PLAYED" },
+		{ key: "CHIPS_WON", label: "Chips Won", rateOf: "GAMES_PLAYED" },
 		{ key: "RESERVED_5", hidden: true }
 	];
 
@@ -2125,29 +2170,25 @@
 	);
 
 
-	function addStat(stat, player) {
-		stats[stat][player]++;
+	function addStat(stat, player, amount = 1) {
+		stats[stat][player] += amount;
 
 		if (player >= 2 && player <= 4) {
-			const trustLevel = Number(document.getElementById(`trustSlider${player}`).value);
-			trustStats[stat][trustLevel]++;
+			const trustLevel = Number(
+				document.getElementById(`trustSlider${player}`).value
+			);
+
+			trustStats[stat][trustLevel] += amount;
 		}
 	}
 
 	let statsMode = "computer";
-	updateStatsButtons()
+	let statsDisplayMode = "raw";
+	drawStatsTable();
 
-	function showComputerStats() {
-		statsMode = "computer";
-		drawStatsTable();
-		updateStatsButtons();
-	}
 
-	function showTrustStats() {
-		statsMode = "trust";
-		drawStatsTable();
-		updateStatsButtons();
-	}
+
+
 
 
 
@@ -2255,7 +2296,7 @@
 			humanHtml += `
     <tr>
         <td style="width:${humanColWidth}px;">
-            ${statValue(stat, 1, stats)}
+            ${displayStatValue(stat, 1, stats)}
         </td>
     </tr>
 `;
@@ -2263,13 +2304,13 @@
 			computerHtml += `
 <tr>
     <td style="width:${COMPUTER_COL_WIDTH}px;">
-        ${statValue(stat, 2, stats)}
+        ${displayStatValue(stat, 2, stats)}
     </td>
     <td style="width:${COMPUTER_COL_WIDTH}px;">
-        ${statValue(stat, 3, stats)}
+        ${displayStatValue(stat, 3, stats)}
     </td>
     <td style="width:${COMPUTER_COL_WIDTH}px;">
-        ${statValue(stat, 4, stats)}
+        ${displayStatValue(stat, 4, stats)}
     </td>
 </tr>
 `;
@@ -2279,7 +2320,7 @@
 			totalHtml += `
     <tr>
         <td style="${totalStyle}">
-            ${totalStatValue(stat)}
+            ${displayTotalValue(stat)}
         </td>
     </tr>
 `;
@@ -2289,7 +2330,7 @@
 			for (let trust = 0; trust < TRUST_STAT_LABELS.length; trust++) {
 				trustHtml += `
         <td style="width:${TRUST_COL_WIDTH}px;">
-            ${statValue(stat, trust, trustStats)}
+            ${displayStatValue(stat, trust, trustStats)}
         </td>
     `;
 			}
@@ -2312,202 +2353,102 @@
 		}
 	}
 
-
-
-
-	function statValue(stat, index, source) {
-
-		switch (STAT_LABELS[stat].key) {
-
-			case "GAMES_WON_PCT": {
-				const played = source[STATS.GAMES_PLAYED][index];
-				const won = source[STATS.GAMES_WON][index];
-				return played ? Math.round(100 * won / played) + "%" : "-";
-			}
-
-			case "HANDS_WON_PCT": {
-				const played = source[STATS.HANDS_PLAYED][index];
-				const won = source[STATS.HANDS_WON][index];
-				return played ? Math.round(100 * won / played) + "%" : "-";
-			}
-
-			case "OFFENSE_WIN_PCT": {
-				const offense = source[STATS.OFFENSE][index];
-
-				const wins =
-					source[STATS.ONE_WHITE][index] +
-					source[STATS.TWO_WHITE][index] +
-					source[STATS.THREE_WHITE][index];
-
-				return offense
-					? Math.round(100 * wins / offense) + "%"
-					: "-";
-			}
-
-			case "DEFENSE_WIN_PCT": {
-				const defense = source[STATS.DEFENSE][index];
-
-				const wins =
-					source[STATS.TWO_RED][index] +
-					source[STATS.THREE_RED][index];
-
-				return defense
-					? Math.round(100 * wins / defense) + "%"
-					: "-";
-			}
-
-			case "ALONE_WIN_PCT": {
-				const alone = source[STATS.ALONE][index];
-
-				const wins =
-					source[STATS.THREE_BLUE][index] +
-					source[STATS.SIX_BLUE][index] +
-					source[STATS.NINE_BLUE][index];
-
-				return alone
-					? Math.round(100 * wins / alone) + "%"
-					: "-";
-			}
-
-			case "CALLED_PARTNER_WIN_PCT": {
-				const total = source[STATS.CALLED_PARTNER][index];
-				const won = source[STATS.CALLED_PARTNER_WON][index];
-
-				return total ? Math.round(100 * won / total) + "%" : "-";
-			}
-
-			case "PLAYED_ALONE_WIN_PCT": {
-				const total = source[STATS.PLAYED_ALONE][index];
-				const won = source[STATS.PLAYED_ALONE_WON][index];
-
-				return total ? Math.round(100 * won / total) + "%" : "-";
-			}
-
-
-			case "ONE_QUEEN_WIN_PCT": {
-				const total = source[STATS.ONE_QUEEN][index];
-				const won = source[STATS.ONE_QUEEN_WON][index];
-
-				return total ? Math.round(100 * won / total) + "%" : "-";
-			}
-
-			case "TWO_QUEEN_WIN_PCT": {
-				const total = source[STATS.TWO_QUEEN][index];
-				const won = source[STATS.TWO_QUEEN_WON][index];
-
-				return total ? Math.round(100 * won / total) + "%" : "-";
-			}
-			default:
-				return source[stat][index];
-		}
+	function sumStat(statKey) {
+		const row = stats[STATS[statKey]];
+		if (!row) return 0;
+		return (row[1] || 0) + (row[2] || 0) + (row[3] || 0) + (row[4] || 0);
 	}
 
-	function totalStatValue(stat) {
-		const key = STAT_LABELS[stat].key;
-
-		function sum(statKey) {
-			const row = stats[STATS[statKey]];
-			if (!row) return 0;
-
-			return (row[1] || 0) + (row[2] || 0) + (row[3] || 0) + (row[4] || 0);
-		}
-
-		function pct(numeratorKey, denominatorKey,multiple=1) {
-			const numerator = multiple*sum(numeratorKey);
-			const denominator = sum(denominatorKey);
-
-			return denominator
-				? Math.round(100 * numerator / denominator) + "%"
-				: "-";
-		}
-
-		switch (key) {
-			case "GAMES_PLAYED":
-				return "&nbsp;";
-			case "GAMES_WON":
-				return "&nbsp;";
-			case "HANDS_PLAYED":
-				return "&nbsp;";
-			case "HANDS_WON":
-				return "&nbsp;";
-
-			case "GAMES_WON_PCT":
-				return pct("GAMES_WON", "GAMES_PLAYED");
-
-			case "HANDS_WON_PCT":
-				return pct("HANDS_WON", "HANDS_PLAYED");
-
-			case "OFFENSE":
-				return pct("OFFENSE", "HANDS_PLAYED");
-
-			case "ONE_WHITE":
-			case "TWO_WHITE":
-			case "THREE_WHITE":
-				return pct(key, "OFFENSE");
-
-			case "OFFENSE_WIN_PCT": {
-				const wins = sum("ONE_WHITE") + sum("TWO_WHITE") + sum("THREE_WHITE");
-				const offense = sum("OFFENSE");
-				return offense ? Math.round(100 * wins / offense) + "%" : "-";
-			}
-
-			case "DEFENSE":
-				return pct("DEFENSE", "HANDS_PLAYED");
-
-			case "TWO_RED":
-			case "THREE_RED":
-				return pct(key, "DEFENSE");
-
-			case "DEFENSE_WIN_PCT": {
-				const wins = sum("TWO_RED") + sum("THREE_RED");
-				const defense = sum("DEFENSE");
-				return defense ? Math.round(100 * wins / defense) + "%" : "-";
-			}
-
-			case "ALONE":
-				return pct("ALONE", "HANDS_PLAYED");
-
-			case "THREE_BLUE":
-			case "SIX_BLUE":
-			case "NINE_BLUE":
-				return pct(key, "ALONE");
-
-			case "ALONE_WIN_PCT": {
-				const wins = sum("THREE_BLUE") + sum("SIX_BLUE") + sum("NINE_BLUE");
-				const alone = sum("ALONE");
-				return alone ? Math.round(100 * wins / alone) + "%" : "-";
-			}
-
-			case "BOTH_QUEENS":
-				return pct("BOTH_QUEENS", "HANDS_PLAYED",4);
-
-			case "CALLED_PARTNER":
-			case "PLAYED_ALONE":
-				return pct(key, "BOTH_QUEENS");
-
-			case "CALLED_PARTNER_WIN_PCT":
-				return pct("CALLED_PARTNER_WON", "CALLED_PARTNER");
-
-			case "PLAYED_ALONE_WIN_PCT":
-				return pct("PLAYED_ALONE_WON", "PLAYED_ALONE");
-
-			case "CALLED_OFF":
-				return pct("CALLED_OFF", "HANDS_PLAYED",4);
-
-			case "ONE_QUEEN":
-			case "TWO_QUEEN":
-				return pct(key, "CALLED_OFF");
-
-			case "ONE_QUEEN_WIN_PCT":
-				return pct("ONE_QUEEN_WON", "ONE_QUEEN");
-
-			case "TWO_QUEEN_WIN_PCT":
-				return pct("TWO_QUEEN_WON", "TWO_QUEEN");
-
-			default:
-				return sum(key);
-		}
+	function pctDisplay(num, denom) {
+		return denom ? Math.round(100 * num / denom) + "%" : "-";
 	}
+
+	function getNumerator(row, source, index) {
+		if (Array.isArray(row.numOf)) {
+			return row.numOf.reduce(
+				(sum, key) => sum + (source[STATS[key]]?.[index] || 0),
+				0
+			);
+		}
+
+		return source[STATS[row.numOf || row.key]]?.[index] || 0;
+	}
+
+	function displayStatValue(stat, index, source) {
+		const row = STAT_LABELS[stat];
+		const numerator = getNumerator(row, source, index);
+
+		if (statsDisplayMode === "pct") {
+
+			if (row.pctOf && !row.noPct) {
+				const denom = source[STATS[row.pctOf]]?.[index] || 0;
+				return pctDisplay(numerator, denom);
+			}
+
+			if (row.rateOf) {
+				const denom = source[STATS[row.rateOf]]?.[index] || 0;
+				return denom
+					? (numerator / denom).toFixed(2)
+					: "-";
+			}
+		}
+
+		return numerator;
+	}
+
+	function displayTotalValue(stat) {
+		const row = STAT_LABELS[stat];
+
+		if (row.noTotal) return "&nbsp;";
+
+		function totalOf(key) {
+			const r = stats[STATS[key]];
+			if (!r) return 0;
+
+			return (r[1] || 0) + (r[2] || 0) + (r[3] || 0) + (r[4] || 0);
+		}
+
+		function totalNumerator() {
+			if (Array.isArray(row.numOf)) {
+				return row.numOf.reduce(
+					(sum, key) => sum + totalOf(key),
+					0
+				);
+			}
+
+			return totalOf(row.numOf || row.key);
+		}
+
+		const numerator = totalNumerator();
+
+		if (statsDisplayMode === "pct") {
+
+			if (row.pctOf && !row.noPct) {
+				let adjustedNumerator = numerator;
+
+				if (row.handLevel) {
+					adjustedNumerator *= 4;
+				}
+
+				const denominator = totalOf(row.pctOf);
+
+				return denominator
+					? Math.round(100 * adjustedNumerator / denominator) + "%"
+					: "-";
+			}
+
+			if (row.rateOf) {
+				const denominator = totalOf(row.rateOf);
+
+				return denominator
+					? (numerator / denominator).toFixed(2)
+					: "-";
+			}
+		}
+
+		return numerator;
+	}
+
 
 
 
@@ -6134,6 +6075,7 @@
 
 		for (i = 1; i <= 4; i++) {
 			addStat(STATS.HANDS_PLAYED, i);
+			addStat(STATS.POINTS_WON, i, scores[i]);
 			if (partner[i] == 1) {
 				if (alone == i) {
 					addStat(STATS.ALONE, i);
@@ -6217,8 +6159,10 @@
 			//alert("Game Over! " + playername[1] + " won with " + chips[1] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[1] + " won with " + chips[1] + " chips!"
 			addStat(STATS.GAMES_WON, 1);
-			for (let p = 1; p <= 4; p++) {
-				addStat(STATS.GAMES_PLAYED, p);
+			for (let i = 1; i <= 4; i++) {
+				addStat(STATS.GAMES_PLAYED, i);
+				addStat(STATS.CHIPS_WON, i, chips[i]);
+
 			}
 			gameover = 1
 			dealer = 4
@@ -6228,8 +6172,9 @@
 			//alert("Game Over! " + playername[2] + " won with " + chips[2] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[2] + " won with " + chips[2] + " chips!"
 			addStat(STATS.GAMES_WON, 2);
-			for (let p = 1; p <= 4; p++) {
-				addStat(STATS.GAMES_PLAYED, p);
+			for (let i = 1; i <= 4; i++) {
+				addStat(STATS.GAMES_PLAYED, i);
+				addStat(STATS.CHIPS_WON, i, chips[i]);
 			}
 			gameover = 1
 			dealer = 1
@@ -6239,8 +6184,10 @@
 			//alert("Game Over! " + playername[3] + " won with " + chips[3] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[3] + " won with " + chips[3] + " chips!"
 			addStat(STATS.GAMES_WON, 3);
-			for (let p = 1; p <= 4; p++) {
-				addStat(STATS.GAMES_PLAYED, p);
+			for (let i = 1; i <= 4; i++) {
+				addStat(STATS.GAMES_PLAYED, i);
+				addStat(STATS.CHIPS_WON, i, chips[i]);
+
 			}
 			gameover = 1
 			dealer = 2
@@ -6250,8 +6197,10 @@
 			//alert("Game Over! " + playername[4] + " won with " + chips[4] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[4] + " won with " + chips[4] + " chips!"
 			addStat(STATS.GAMES_WON, 4);
-			for (let p = 1; p <= 4; p++) {
-				addStat(STATS.GAMES_PLAYED, p);
+			for (let i = 1; i <= 4; i++) {
+				addStat(STATS.GAMES_PLAYED, i);
+				addStat(STATS.CHIPS_WON, i, chips[i]);
+
 			}
 			gameover = 1
 			dealer = 3
@@ -6569,23 +6518,21 @@
 		}
 	}
 
-	function updateStatsButtons() {
+	function toggleOpponentView() {
+		const toggle = document.getElementById("opponentViewToggle");
 
-		const comp = document.getElementById("computerViewBtn");
-		const trust = document.getElementById("trustViewBtn");
+		statsMode = toggle.checked ? "trust" : "computer";
 
-	
-
-		comp.style.backgroundColor =
-			statsMode === "computer" ? "#84B5E1" : "#fff";
-
-		trust.style.backgroundColor =
-			statsMode === "trust" ? "#84B5E1" : "#fff";
-
-	
+		drawStatsTable();
 	}
 
+	function toggleStatsDisplay() {
+		const toggle = document.getElementById("statsDisplayToggle");
 
+		statsDisplayMode = toggle.checked ? "pct" : "raw";
+
+		drawStatsTable();
+	}
 
 
 	function cheatsheet() {
@@ -6615,17 +6562,17 @@
 	}
 
 
-function lockGameSettings(locked) {
-    for (let i = 2; i <= 4; i++) {
-        const slider = document.getElementById(`trustSlider${i}`);
-        if (slider) slider.disabled = locked;
-    }
+	function lockGameSettings(locked) {
+		for (let i = 2; i <= 4; i++) {
+			const slider = document.getElementById(`trustSlider${i}`);
+			if (slider) slider.disabled = locked;
+		}
 
-    ["Ninput","Einput", "Sinput", "Winput"].forEach(id => {
-        const input = document.getElementById(id);
-        if (input) input.disabled = locked;
-    });
-}
+		["Ninput", "Einput", "Sinput", "Winput"].forEach(id => {
+			const input = document.getElementById(id);
+			if (input) input.disabled = locked;
+		});
+	}
 
 
 	function move(x, k) {
