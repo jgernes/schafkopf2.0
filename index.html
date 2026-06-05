@@ -2113,18 +2113,18 @@
 		{ key: "ONE_WHITE", label: "Normal (1)", subRow: true, pctOf: "OFFENSE" },
 		{ key: "TWO_WHITE", label: "Schneider (2)", subRow: true, pctOf: "OFFENSE" },
 		{ key: "THREE_WHITE", label: "Schwartz (3)", subRow: true, pctOf: "OFFENSE" },
-		{ key: "OFFENSE_WIN_PCT", label: "Win %", subRow: true, numOf: ["ONE_WHITE", "TWO_WHITE", "THREE_WHITE"], pctOf: "OFFENSE" },
+		{ key: "OFFENSE_WIN_PCT", label: "Win %", numOf: ["ONE_WHITE", "TWO_WHITE", "THREE_WHITE"], pctOf: "OFFENSE" },
 
 		{ key: "DEFENSE", label: "Defense", groupStart: true, pctOf: "HANDS_PLAYED" },
 		{ key: "TWO_RED", label: "Normal (2)", subRow: true, pctOf: "DEFENSE" },
 		{ key: "THREE_RED", label: "Schneider (3)", subRow: true, pctOf: "DEFENSE" },
-		{ key: "DEFENSE_WIN_PCT", label: "Win %", subRow: true, numOf: ["TWO_RED", "THREE_RED"], pctOf: "DEFENSE" },
+		{ key: "DEFENSE_WIN_PCT", label: "Win %", numOf: ["TWO_RED", "THREE_RED"], pctOf: "DEFENSE" },
 
 		{ key: "ALONE", label: "Alone", groupStart: true, pctOf: "HANDS_PLAYED" },
 		{ key: "THREE_BLUE", label: "Normal (3)", subRow: true, pctOf: "ALONE" },
 		{ key: "SIX_BLUE", label: "Schnieder (6)", subRow: true, pctOf: "ALONE" },
 		{ key: "NINE_BLUE", label: "Schwartz (9)", subRow: true, pctOf: "ALONE" },
-		{ key: "ALONE_WIN_PCT", label: "Win %", subRow: true, numOf: ["THREE_BLUE", "SIX_BLUE", "NINE_BLUE"], pctOf: "ALONE" },
+		{ key: "ALONE_WIN_PCT", label: "Win %", numOf: ["THREE_BLUE", "SIX_BLUE", "NINE_BLUE"], pctOf: "ALONE" },
 
 		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
 		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true, pctOf: "BOTH_QUEENS" },
@@ -2279,10 +2279,15 @@
 			}
 
 			const labelStyle = row.subRow
-				? "width:90px; min-width:90px; text-align:right; font-weight:bold; padding-right:10px;"
+				? "width:90px; min-width:90px; text-align:left; font-weight:bold; padding-left:20px;"
 				: "width:90px; min-width:90px; text-align:left; font-weight:bold;";
+
+			const dataStyle = row.subRow
+				? "padding-left:20px;"
+				: "";
+
 			const totalStyle = row.subRow
-				? "text-align:right; padding-right:10px;"
+				? "text-align:left; padding-left:20px;"
 				: "text-align:left;";
 
 			statHtml += `
@@ -2295,7 +2300,7 @@
 
 			humanHtml += `
     <tr>
-        <td style="width:${humanColWidth}px;">
+       <td style="width:${humanColWidth}px; ${dataStyle}">
             ${displayStatValue(stat, 1, stats)}
         </td>
     </tr>
@@ -2303,13 +2308,13 @@
 
 			computerHtml += `
 <tr>
-    <td style="width:${COMPUTER_COL_WIDTH}px;">
+    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
         ${displayStatValue(stat, 2, stats)}
     </td>
-    <td style="width:${COMPUTER_COL_WIDTH}px;">
+    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
         ${displayStatValue(stat, 3, stats)}
     </td>
-    <td style="width:${COMPUTER_COL_WIDTH}px;">
+    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
         ${displayStatValue(stat, 4, stats)}
     </td>
 </tr>
@@ -2319,7 +2324,7 @@
 
 			totalHtml += `
     <tr>
-        <td style="${totalStyle}">
+        <td style="width:${TRUST_COL_WIDTH}px; ${dataStyle};font-weight:bold;">
             ${displayTotalValue(stat)}
         </td>
     </tr>
@@ -2329,10 +2334,10 @@
 
 			for (let trust = 0; trust < TRUST_STAT_LABELS.length; trust++) {
 				trustHtml += `
-        <td style="width:${TRUST_COL_WIDTH}px;">
-            ${displayStatValue(stat, trust, trustStats)}
-        </td>
-    `;
+    <td style="width:${TRUST_COL_WIDTH}px; ${dataStyle}">
+        ${displayStatValue(stat, trust, trustStats)}
+    </td>
+`;
 			}
 
 			trustHtml += `</tr>`;
@@ -2388,7 +2393,7 @@
 			if (row.rateOf) {
 				const denom = source[STATS[row.rateOf]]?.[index] || 0;
 				return denom
-					? (numerator / denom).toFixed(2)
+					? (numerator / denom).toFixed(1)
 					: "-";
 			}
 		}
@@ -2441,7 +2446,7 @@
 				const denominator = totalOf(row.rateOf);
 
 				return denominator
-					? (numerator / denominator).toFixed(2)
+					? (numerator / denominator).toFixed(1)
 					: "-";
 			}
 		}
