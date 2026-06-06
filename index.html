@@ -1910,6 +1910,10 @@
 	}
 
 	function openGameOver(winner, chipString, visible = 7, chipWidth = 100) {
+
+
+
+
 		// normalize and split characters
 		const chars = (chipString || "").toLowerCase().split("").filter(c => "wrb".includes(c));
 
@@ -1953,6 +1957,8 @@
 		document.getElementById("gameovermodal").style.display = "block";
 
 		localStorage.removeItem(LS_KEYS.game);
+		chips = [0, 0, 0, 0, 0];
+		chipstack = [0, 0, 0, 0, 0];
 	}
 
 
@@ -2576,7 +2582,7 @@
 			});
 			// loaded existing chips/chipstack/dealer
 		} else {
-			// normal new game setup
+
 
 		}
 
@@ -6094,6 +6100,9 @@
 
 	function endhand() {
 
+
+saveGameState();
+
 		for (i = 1; i <= 4; i++) {
 			addStat(STATS.HANDS_PLAYED, i);
 			addStat(STATS.POINTS_WON, i, scores[i]);
@@ -6284,7 +6293,7 @@
 
 		pasttrick = new Array(0, 0, 0, 0, 0)
 
-		saveGameState();
+		
 		saveSettings();
 		drawStatsTable();
 
@@ -6912,6 +6921,9 @@
 	}
 
 	function loadGameState() {
+
+	
+
 		const raw = localStorage.getItem(LS_KEYS.game);
 		if (!raw) return false;
 
