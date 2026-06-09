@@ -597,19 +597,23 @@
 		}
 
 
-/*
-		
-		TEST BORDERS 
-
-		table {
-			outline: 2px dashed red;
+		.selectedTab {
+			background-color: #84B5E1 !important;
 		}
 
-		td {
-			outline: 1px dotted blue;
-		}
-			*/
-		
+
+		/*
+
+	TEST BORDERS
+
+	table {
+	outline: 2px dashed red;
+	}
+
+	td {
+	outline: 1px dotted blue;
+	}
+	*/
 	</style>
 </head>
 
@@ -1731,10 +1735,6 @@
 				reveal the cards in the trick. You may only view the last trick which was taken. </p>
 
 			<h2>General Strategies</h2>
-			<p>If a player from the Offense is leading, they generally lead a low, high-value trump card (A&diams;,
-				10&diams;, K&diams;). Their partner is expected to play the Old One (Q&clubs; or Q&spades;) to take the
-				trick and then make a similar lead back to their partner. If a player on Defense is leading, they
-				generally lead a non-trump ace (A&clubs;, A&hearts;, A&spades;) or a low fail card.</p>
 			<p>Since there are only 6 cards in each fail suit, the suit will go around (not be trumped) at most once. If
 				you hold a singleton ace, it will go around ~60% of the time; if you have a doubleton ace, it will go
 				around ~45% of the time; if you have 3 in a suit, it will go around ~20% of the time. However, remember
@@ -1742,7 +1742,35 @@
 				the trump have been played, even a low fail card can take tricks.</p>
 			<p>The probability that one player will have both black queens is ~22%, so this will occur roughly 1 in 5
 				hands.</p>
-
+			<p>The probability that a player will have a certain number of trump is represented in the table below. The
+				expected number of trump in any hand is 3.5. Having eight trump occurs roughly once every 3500 hands.
+			</p>
+			<table style="border-collapse:collapse; margin:auto; font-size:14px;">
+				<tr>
+					<th style="padding:4px 8px;">Trump</th>
+					<td style="padding:4px 8px;">8</td>
+					<td style="padding:4px 8px;">7</td>
+					<td style="padding:4px 8px;">6</td>
+					<td style="padding:4px 8px;">5</td>
+					<td style="padding:4px 8px;">4</td>
+					<td style="padding:4px 8px;">3</td>
+					<td style="padding:4px 8px;">2</td>
+					<td style="padding:4px 8px;">1</td>
+					<td style="padding:4px 8px;">0</td>
+				</tr>
+				<tr>
+					<th style="padding:4px 8px;">Prob.</th>
+					<td style="padding:4px 8px;">0.03%</td>
+					<td style="padding:4px 8px;">0.58%</td>
+					<td style="padding:4px 8px;">4.34%</td>
+					<td style="padding:4px 8px;">15.48%</td>
+					<td style="padding:4px 8px;">29.04%</td>
+					<td style="padding:4px 8px;">29.71%</td>
+					<td style="padding:4px 8px;">16.16%</td>
+					<td style="padding:4px 8px;">4.27%</td>
+					<td style="padding:4px 8px;">0.40%</td>
+				</tr>
+			</table>
 
 		</div>
 
@@ -2141,22 +2169,23 @@
 
 		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
 		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true, pctOf: "BOTH_QUEENS" },
-		{ key: "CALLED_PARTNER_WON", label: "Wins", pctOf: "CALLED_PARTNER", subRow: true },
+		{ key: "CALLED_PARTNER_WON", label: "Won", pctOf: "CALLED_PARTNER", subSubRow: true },
 		{ key: "PLAYED_ALONE", label: "Played Alone", subRow: true, pctOf: "BOTH_QUEENS" },
-		{ key: "PLAYED_ALONE_WON", label: "Wins", pctOf: "PLAYED_ALONE", subRow: true },
+		{ key: "PLAYED_ALONE_WON", label: "Won", pctOf: "PLAYED_ALONE", subSubRow: true },
 
 		{ key: "CALLED_OFF", label: "Called Off", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
 		{ key: "ONE_QUEEN", label: "One Old One", subRow: true, pctOf: "CALLED_OFF" },
-		{ key: "ONE_QUEEN_WON", label: "Wins", subRow: true, pctOf: "ONE_QUEEN" },
+		{ key: "ONE_QUEEN_WON", label: "Won", subSubRow: true, pctOf: "ONE_QUEEN" },
 		{ key: "TWO_QUEEN", label: "Both Old Ones", subRow: true, pctOf: "CALLED_OFF" },
-		{ key: "TWO_QUEEN_WON", label: "Wins", subRow: true, pctOf: "TWO_QUEEN" },
+		{ key: "TWO_QUEEN_WON", label: "Won", subSubRow: true, pctOf: "TWO_QUEEN" },
 
 
 
-		{ key: "RECORDS_HEADER", label: "Records", groupStart: true, noTotal: true, headerOnly: true },
-		{ key: "MOST_POINTS", label: "Most Points", noPct: true, noTotal: true, subRow: true },
-		{ key: "MOST_TRICKS", label: "Most Tricks", noPct: true, noTotal: true, subRow: true },
-		{ key: "MOST_CHIPS", label: "Most Chips", noPct: true, noTotal: true, subRow: true },
+		{ key: "RECORDS_HEADER", label: "Records", groupStart: true,  headerOnly: true, record: true },
+		{ key: "MOST_POINTS", label: "Most Points", noPct: true, subRow: true , record: true},
+		{ key: "MOST_TRICKS", label: "Most Tricks", noPct: true,  subRow: true, record: true },
+		{ key: "MOST_CHIPS_HAND", label: "Most Chips (H)", noPct: true, subRow: true, record: true },
+		{ key: "MOST_CHIPS", label: "Most Chips (G)", noPct: true, subRow: true, record: true },
 
 		{ key: "EXTRA_6", label: "Win %", subRow: true, pctOf: "TWO_QUEEN", hidden: true },
 
@@ -2363,7 +2392,7 @@
 
 
 			const INDENT_1 = 15;
-			const INDENT_2 = 30;
+			const INDENT_2 = 25;
 
 			const indent = row.subSubRow
 				? INDENT_2
@@ -2493,6 +2522,18 @@
 
 		if (row.noTotal) return "&nbsp;";
 
+		if (row.record) {
+			const r = stats[row.key];
+			if (!r) return 0;
+
+			return Math.max(
+				r[1] || 0,
+				r[2] || 0,
+				r[3] || 0,
+				r[4] || 0
+			);
+		}
+
 		function totalOf(key) {
 			const r = stats[key];
 			if (!r) return 0;
@@ -2618,6 +2659,7 @@
 
 		if (loadGameState()) {
 			document.getElementById('messages').innerHTML = "Welcome to Schafkopf 2.0 \n Your incomplete game will resume."
+			lockGameSettings(true);
 		}
 	}
 
@@ -6037,6 +6079,7 @@
 								addStat("NINE_BLUE", i);
 								addStat("HANDS_WON", i);
 								addStat("CHIPS_WON_HAND", i, 9)
+								setMaxStat("MOST_CHIPS_HAND", i, 9);
 							}
 						}
 					}
@@ -6056,6 +6099,7 @@
 									addStat("SIX_BLUE", i);
 									addStat("HANDS_WON", i);
 									addStat("CHIPS_WON_HAND", i, 6)
+									setMaxStat("MOST_CHIPS_HAND", i, 6);
 								}
 							}
 						}
@@ -6075,6 +6119,7 @@
 										addStat("THREE_BLUE", i);
 										addStat("HANDS_WON", i);
 										addStat("CHIPS_WON_HAND", i, 3)
+										setMaxStat("MOST_CHIPS_HAND", i, 3);
 									}
 								}
 							}
@@ -6094,6 +6139,7 @@
 											addStat("TWO_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 2)
+											setMaxStat("MOST_CHIPS_HAND", i, 2);
 										}
 									}
 								}
@@ -6111,6 +6157,7 @@
 											addStat("THREE_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 3)
+											setMaxStat("MOST_CHIPS_HAND", i, 3);
 										}
 									}
 								}
@@ -6136,6 +6183,7 @@
 								addStat("THREE_WHITE", i);
 								addStat("HANDS_WON", i);
 								addStat("CHIPS_WON_HAND", i, 3)
+								setMaxStat("MOST_CHIPS_HAND", i, 3);
 							}
 						}
 					}
@@ -6155,6 +6203,7 @@
 									addStat("TWO_WHITE", i);
 									addStat("HANDS_WON", i);
 									addStat("CHIPS_WON_HAND", i, 2)
+									setMaxStat("MOST_CHIPS_HAND", i, 2);
 								}
 							}
 						}
@@ -6174,6 +6223,7 @@
 										addStat("ONE_WHITE", i);
 										addStat("HANDS_WON", i);
 										addStat("CHIPS_WON_HAND", i, 1)
+										setMaxStat("MOST_CHIPS_HAND", i, 1);
 									}
 								}
 							}
@@ -6193,6 +6243,7 @@
 											addStat("TWO_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 2)
+											setMaxStat("MOST_CHIPS_HAND", i, 2);
 										}
 									}
 								}
@@ -6210,6 +6261,7 @@
 											addStat("THREE_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 3)
+											setMaxStat("MOST_CHIPS_HAND", i, 3);
 										}
 									}
 								}
@@ -6626,10 +6678,16 @@
 		const modal = document.getElementById("instructionmodal");
 		if (modal.style.display === "block") {
 			modal.style.display = "none";   // hide
+			document.getElementById("instructionsBtn").classList.remove("selectedTab");
 		} else {
 			modal.style.display = "block";  // show
 			document.getElementById("statsmodal").style.display = "none"
+			document.getElementById("instructionsBtn").classList.add("selectedTab");
 		}
+
+
+		document.getElementById("statsBtn")
+			.classList.remove("selectedTab");
 	}
 
 
@@ -6637,10 +6695,15 @@
 		const modal = document.getElementById("statsmodal");
 		if (modal.style.display === "block") {
 			modal.style.display = "none";   // hide
+			document.getElementById("statsBtn").classList.remove("selectedTab");
 		} else {
 			modal.style.display = "block";  // show
 			document.getElementById("instructionmodal").style.display = "none"
+			document.getElementById("statsBtn").classList.add("selectedTab");
 		}
+
+
+		document.getElementById("instructionsBtn").classList.remove("selectedTab");
 	}
 
 	function toggleOpponentView() {
