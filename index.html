@@ -597,8 +597,8 @@
 		}
 
 
-
-		/*
+/*
+		
 		TEST BORDERS 
 
 		table {
@@ -608,8 +608,8 @@
 		td {
 			outline: 1px dotted blue;
 		}
-			
-		*/
+			*/
+		
 	</style>
 </head>
 
@@ -1768,12 +1768,12 @@
 				</div>
 
 				<div style="width:100px; text-align:center;">
-					#
+					%
 					<label class="toggleSwitch">
 						<input type="checkbox" id="statsDisplayToggle" onchange="toggleStatsDisplay()">
 						<span class="slider"></span>
 					</label>
-					%
+					#
 				</div>
 			</div>
 
@@ -2110,51 +2110,101 @@
 
 	const STAT_LABELS = [
 		{ key: "GAMES_PLAYED", label: "Games Played", groupStart: true, noPct: true, noTotal: true },
-		{ key: "GAMES_WON", label: "Games Won", pctOf: "GAMES_PLAYED" },
-		{ key: "GAMES_WON_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "GAMES_PLAYED", hidden: true },
+		{ key: "GAMES_WON", label: "Games Won", pctOf: "GAMES_PLAYED", subRow: true, noTotal: true },
+		{ key: "CHIPS_WON", label: "Chips Won", rateOf: "GAMES_PLAYED", subRow: true },
 
 		{ key: "HANDS_PLAYED", label: "Hands Played", groupStart: true, noPct: true, noTotal: true },
-		{ key: "HANDS_WON", label: "Hands Won", pctOf: "HANDS_PLAYED" },
-		{ key: "HANDS_WON_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "HANDS_PLAYED", hidden: true },
+		{ key: "HANDS_WON", label: "Hands Won", pctOf: "HANDS_PLAYED", subRow: true },
+		{ key: "CHIPS_WON_HAND", label: "Chips Won", numOf: "CHIPS_WON_HAND", rateOf: "HANDS_PLAYED", subRow: true },
+		{ key: "TRICKS_WON", label: "Tricks Won", rateOf: "HANDS_PLAYED", subRow: true, noTotal: true },
+		{ key: "POINTS_WON", label: "Points Won", rateOf: "HANDS_PLAYED", subRow: true, noTotal: true },
+
 
 		{ key: "OFFENSE", label: "Offense", groupStart: true, pctOf: "HANDS_PLAYED" },
-		{ key: "ONE_WHITE", label: "Normal (1)", subRow: true, pctOf: "OFFENSE" },
-		{ key: "TWO_WHITE", label: "Schneider (2)", subRow: true, pctOf: "OFFENSE" },
-		{ key: "THREE_WHITE", label: "Schwartz (3)", subRow: true, pctOf: "OFFENSE" },
-		{ key: "OFFENSE_WIN_PCT", label: "Win %", numOf: ["ONE_WHITE", "TWO_WHITE", "THREE_WHITE"], pctOf: "OFFENSE" },
+		{ key: "OFFENSE_WINS", label: "Won", numOf: ["ONE_WHITE", "TWO_WHITE", "THREE_WHITE"], pctOf: "OFFENSE", subRow: true },
+		{ key: "ONE_WHITE", label: "Normal", subSubRow: true, pctOf: "OFFENSE" },
+		{ key: "TWO_WHITE", label: "Schneider", subSubRow: true, pctOf: "OFFENSE" },
+		{ key: "THREE_WHITE", label: "Schwartz", subSubRow: true, pctOf: "OFFENSE" },
+
 
 		{ key: "DEFENSE", label: "Defense", groupStart: true, pctOf: "HANDS_PLAYED" },
-		{ key: "TWO_RED", label: "Normal (2)", subRow: true, pctOf: "DEFENSE" },
-		{ key: "THREE_RED", label: "Schneider (3)", subRow: true, pctOf: "DEFENSE" },
-		{ key: "DEFENSE_WIN_PCT", label: "Win %", numOf: ["TWO_RED", "THREE_RED"], pctOf: "DEFENSE" },
+		{ key: "DEFENSE_WINS", label: "Won", numOf: ["TWO_RED", "THREE_RED"], pctOf: "DEFENSE", subRow: true },
+		{ key: "TWO_RED", label: "Normal", subSubRow: true, pctOf: "DEFENSE" },
+		{ key: "THREE_RED", label: "Schneider", subSubRow: true, pctOf: "DEFENSE" },
 
 		{ key: "ALONE", label: "Alone", groupStart: true, pctOf: "HANDS_PLAYED" },
-		{ key: "THREE_BLUE", label: "Normal (3)", subRow: true, pctOf: "ALONE" },
-		{ key: "SIX_BLUE", label: "Schnieder (6)", subRow: true, pctOf: "ALONE" },
-		{ key: "NINE_BLUE", label: "Schwartz (9)", subRow: true, pctOf: "ALONE" },
-		{ key: "ALONE_WIN_PCT", label: "Win %", numOf: ["THREE_BLUE", "SIX_BLUE", "NINE_BLUE"], pctOf: "ALONE" },
+		{ key: "ALONE_WINS", label: "Won", numOf: ["THREE_BLUE", "SIX_BLUE", "NINE_BLUE"], pctOf: "ALONE", subRow: true },
+		{ key: "THREE_BLUE", label: "Normal", subSubRow: true, pctOf: "ALONE" },
+		{ key: "SIX_BLUE", label: "Schnieder", subSubRow: true, pctOf: "ALONE" },
+		{ key: "NINE_BLUE", label: "Schwartz", subSubRow: true, pctOf: "ALONE" },
+
 
 		{ key: "BOTH_QUEENS", label: "Both Queens", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
 		{ key: "CALLED_PARTNER", label: "Called Ace", subRow: true, pctOf: "BOTH_QUEENS" },
-		{ key: "CALLED_PARTNER_WON", label: "Win", pctOf: "CALLED_PARTNER", subRow: true },
-		{ key: "CALLED_PARTNER_WIN_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "CALLED_PARTNER", hidden: true },
+		{ key: "CALLED_PARTNER_WON", label: "Wins", pctOf: "CALLED_PARTNER", subRow: true },
 		{ key: "PLAYED_ALONE", label: "Played Alone", subRow: true, pctOf: "BOTH_QUEENS" },
-		{ key: "PLAYED_ALONE_WON", label: "Win", pctOf: "PLAYED_ALONE", subRow: true },
-		{ key: "PLAYED_ALONE_WIN_PCT", label: "Win %", subRow: true, alwaysPct: true, pctOf: "PLAYED_ALONE", hidden: true },
+		{ key: "PLAYED_ALONE_WON", label: "Wins", pctOf: "PLAYED_ALONE", subRow: true },
 
 		{ key: "CALLED_OFF", label: "Called Off", groupStart: true, pctOf: "HANDS_PLAYED", handLevel: true },
 		{ key: "ONE_QUEEN", label: "One Old One", subRow: true, pctOf: "CALLED_OFF" },
-		{ key: "ONE_QUEEN_WON", label: "Win", subRow: true, pctOf: "ONE_QUEEN" },
-		{ key: "ONE_QUEEN_WIN_PCT", label: "Win %", subRow: true, pctOf: "ONE_QUEEN", hidden: true },
+		{ key: "ONE_QUEEN_WON", label: "Wins", subRow: true, pctOf: "ONE_QUEEN" },
 		{ key: "TWO_QUEEN", label: "Both Old Ones", subRow: true, pctOf: "CALLED_OFF" },
-		{ key: "TWO_QUEEN_WON", label: "Win", subRow: true, pctOf: "TWO_QUEEN" },
-		{ key: "TWO_QUEEN_WIN_PCT", label: "Win %", subRow: true, pctOf: "TWO_QUEEN", hidden: true },
+		{ key: "TWO_QUEEN_WON", label: "Wins", subRow: true, pctOf: "TWO_QUEEN" },
 
-		{ key: "TRICKS_WON", label: "Tricks Won", groupStart: true, rateOf: "HANDS_PLAYED" },
-		{ key: "POINTS_WON", label: "Points Won", rateOf: "HANDS_PLAYED" },
-		{ key: "CHIPS_WON", label: "Chips Won", rateOf: "GAMES_PLAYED" },
-		{ key: "RESERVED_5", hidden: true }
+
+
+		{ key: "RECORDS_HEADER", label: "Records", groupStart: true, noTotal: true, headerOnly: true },
+		{ key: "MOST_POINTS", label: "Most Points", noPct: true, noTotal: true, subRow: true },
+		{ key: "MOST_TRICKS", label: "Most Tricks", noPct: true, noTotal: true, subRow: true },
+		{ key: "MOST_CHIPS", label: "Most Chips", noPct: true, noTotal: true, subRow: true },
+
+		{ key: "EXTRA_6", label: "Win %", subRow: true, pctOf: "TWO_QUEEN", hidden: true },
+
 	];
+
+	function blankPlayerArray() {
+		return [0, 0, 0, 0, 0];
+	}
+
+	function ensureStat(key) {
+		if (!stats[key]) {
+			stats[key] = blankPlayerArray();
+		}
+		return stats[key];
+	}
+
+	function ensureTrustStat(key) {
+		if (!trustStats[key]) {
+			trustStats[key] = blankPlayerArray();
+		}
+		return trustStats[key];
+	}
+
+
+	function migrateStatsArrayToObject() {
+		if (!Array.isArray(stats)) return;
+
+		const newStats = {};
+		const newTrustStats = {};
+
+		STAT_LABELS.forEach((row, index) => {
+			if (!row.key) return;
+
+			newStats[row.key] = stats[index] || [0, 0, 0, 0, 0];
+
+			if (Array.isArray(trustStats)) {
+				newTrustStats[row.key] = trustStats[index] || [0, 0, 0, 0, 0];
+			}
+		});
+
+		stats = newStats;
+		trustStats = newTrustStats;
+
+		saveSettings();
+	}
+
+
+
 
 	const TRUST_STAT_LABELS = ['Safest', 'Safer', 'Steady', 'Bolder', 'Boldest'];
 
@@ -2165,33 +2215,34 @@
 	});
 
 
-	var stats = Array.from(
-		{ length: STAT_LABELS.length },
-		() => [0, 0, 0, 0, 0]
-	);
+	var stats = {};
+	var trustStats = {};
 
 
-
-	var trustStats = Array.from(
-		{ length: STAT_LABELS.length },
-		() => [0, 0, 0, 0, 0]
-	);
-
-
-	function addStat(stat, player, amount = 1) {
-		stats[stat][player] += amount;
+	function addStat(statKey, player, amount = 1) {
+		ensureStat(statKey)[player] += amount;
 
 		if (player >= 2 && player <= 4) {
-			const trustLevel = Number(
-				document.getElementById(`trustSlider${player}`).value
-			);
-
-			trustStats[stat][trustLevel] += amount;
+			const trustLevel = Number(document.getElementById(`trustSlider${player}`).value);
+			ensureTrustStat(statKey)[trustLevel] += amount;
 		}
 	}
 
+	function setMaxStat(statKey, player, value) {
+		ensureStat(statKey)[player] = Math.max(ensureStat(statKey)[player], value);
+
+		if (player >= 2 && player <= 4) {
+			const trustLevel = Number(document.getElementById(`trustSlider${player}`).value);
+			ensureTrustStat(statKey)[trustLevel] =
+				Math.max(ensureTrustStat(statKey)[trustLevel], value);
+		}
+	}
+
+
+
+
 	let statsMode = "computer";
-	let statsDisplayMode = "raw";
+	let statsDisplayMode = "pct";
 	drawStatsTable();
 
 
@@ -2278,6 +2329,8 @@
 			const row = STAT_LABELS[stat];
 			if (row.hidden) continue;
 
+
+
 			if (row.groupStart && stat !== 0) {
 				statHtml += `<tr><td style="height:8px; border:none;"></td></tr>`;
 				humanHtml += `<tr><td style="height:8px; border:none;"></td></tr>`;
@@ -2286,17 +2339,46 @@
 				trustHtml += `<tr><td colspan="${TRUST_STAT_LABELS.length}" style="height:8px; border:none;"></td></tr>`;
 			}
 
-			const labelStyle = row.subRow
-				? "width:90px; min-width:90px; text-align:left; font-weight:bold; padding-left:20px;"
-				: "width:90px; min-width:90px; text-align:left; font-weight:bold;";
+			if (row.headerOnly) {
+				statHtml += `
+        <tr>
+            <td style="width:90px; min-width:90px; text-align:left; font-weight:bold;">
+                ${row.label}
+            </td>
+        </tr>
+    `;
 
-			const dataStyle = row.subRow
-				? "padding-left:20px;"
-				: "";
+				humanHtml += `<tr><td>&nbsp;</td></tr>`;
+				computerHtml += `<tr><td colspan="3">&nbsp;</td></tr>`;
+				totalHtml += `<tr><td>&nbsp;</td></tr>`;
 
-			const totalStyle = row.subRow
-				? "text-align:left; padding-left:20px;"
-				: "text-align:left;";
+				trustHtml += `<tr>`;
+				for (let trust = 0; trust < TRUST_STAT_LABELS.length; trust++) {
+					trustHtml += `<td>&nbsp;</td>`;
+				}
+				trustHtml += `</tr>`;
+
+				continue;
+			}
+
+
+			const INDENT_1 = 15;
+			const INDENT_2 = 30;
+
+			const indent = row.subSubRow
+				? INDENT_2
+				: row.subRow
+					? INDENT_1
+					: 0;
+
+			const labelStyle =
+				`width:90px; min-width:90px; text-align:left; font-weight:bold; padding-left:${indent}px;`;
+
+			const dataStyle =
+				`padding-left:${indent}px;`;
+
+			const totalStyle =
+				`padding-left:${indent}px; font-weight:bold;`;
 
 			statHtml += `
             <tr>
@@ -2367,7 +2449,7 @@
 	}
 
 	function sumStat(statKey) {
-		const row = stats[STATS[statKey]];
+		const row = stats[statKey];
 		if (!row) return 0;
 		return (row[1] || 0) + (row[2] || 0) + (row[3] || 0) + (row[4] || 0);
 	}
@@ -2379,12 +2461,12 @@
 	function getNumerator(row, source, index) {
 		if (Array.isArray(row.numOf)) {
 			return row.numOf.reduce(
-				(sum, key) => sum + (source[STATS[key]]?.[index] || 0),
+				(sum, key) => sum + (source[key]?.[index] || 0),
 				0
 			);
 		}
 
-		return source[STATS[row.numOf || row.key]]?.[index] || 0;
+		return source[row.numOf || row.key]?.[index] || 0;
 	}
 
 	function displayStatValue(stat, index, source) {
@@ -2392,17 +2474,14 @@
 		const numerator = getNumerator(row, source, index);
 
 		if (statsDisplayMode === "pct") {
-
 			if (row.pctOf && !row.noPct) {
-				const denom = source[STATS[row.pctOf]]?.[index] || 0;
+				const denom = source[row.pctOf]?.[index] || 0;
 				return pctDisplay(numerator, denom);
 			}
 
 			if (row.rateOf) {
-				const denom = source[STATS[row.rateOf]]?.[index] || 0;
-				return denom
-					? (numerator / denom).toFixed(1)
-					: "-";
+				const denom = source[row.rateOf]?.[index] || 0;
+				return denom ? (numerator / denom).toFixed(2) : "-";
 			}
 		}
 
@@ -2415,7 +2494,7 @@
 		if (row.noTotal) return "&nbsp;";
 
 		function totalOf(key) {
-			const r = stats[STATS[key]];
+			const r = stats[key];
 			if (!r) return 0;
 
 			return (r[1] || 0) + (r[2] || 0) + (r[3] || 0) + (r[4] || 0);
@@ -2435,7 +2514,6 @@
 		const numerator = totalNumerator();
 
 		if (statsDisplayMode === "pct") {
-
 			if (row.pctOf && !row.noPct) {
 				let adjustedNumerator = numerator;
 
@@ -2452,10 +2530,7 @@
 
 			if (row.rateOf) {
 				const denominator = totalOf(row.rateOf);
-
-				return denominator
-					? (numerator / denominator).toFixed(1)
-					: "-";
+				return denominator ? (numerator / denominator).toFixed(2) : "-";
 			}
 		}
 
@@ -2541,10 +2616,10 @@
 		});
 
 
-
-
+		if (loadGameState()) {
+			document.getElementById('messages').innerHTML = "Welcome to Schafkopf 2.0 \n Your incomplete game will resume."
+		}
 	}
-
 
 
 	function getPosition(arrayItem, arrayName) {
@@ -2581,6 +2656,7 @@
 			drawChipStack('WStackL', 'WStackM', 'WStackR', chipstack[4], {
 			});
 			// loaded existing chips/chipstack/dealer
+			document.getElementById('messages').innerHTML = "Incomplete game will resume."
 		} else {
 
 
@@ -2720,6 +2796,7 @@
 		alone = 0
 		alonerandom = undefined
 		visiblevoid = new Array(0, 0, 0, 0, 0)
+		tricks = new Array(0, 0, 0, 0, 0)
 
 
 		Nplay = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -5765,9 +5842,8 @@
 
 		transcript = transcript + "Trick " + trickcount + ": " + trick + " (winner: " + playername[scorer] + ")\n"
 		trickcount++
-		if (replay == 0) {
-			addStat(STATS.TRICKS_WON, scorer);
-		}
+		tricks[scorer] = tricks[scorer] + 1
+
 
 
 		//PARTNER GUESS
@@ -5891,46 +5967,49 @@
 
 				if (replay == 0) {
 					for (i = 1; i <= 4; i++) {
-						addStat(STATS.POINTS_WON, i, scores[i]);
-						addStat(STATS.HANDS_PLAYED, i);
+						addStat("POINTS_WON", i, scores[i]);
+						addStat("TRICKS_WON", i, tricks[i]);
+						addStat("HANDS_PLAYED", i);
+						setMaxStat("MOST_POINTS", i, scores[i]);
+						setMaxStat("MOST_TRICKS", i, tricks[i]);
 						if (partner[i] == 1) {
 							if (alone == i) {
-								addStat(STATS.ALONE, i);
+								addStat("ALONE", i);
 							}
 							else {
-								addStat(STATS.OFFENSE, i);
+								addStat("OFFENSE", i);
 							}
 						}
 						if (partner[i] == 0) {
-							addStat(STATS.DEFENSE, i);
+							addStat("DEFENSE", i);
 						}
 						if ((soloplayer == i && alone != i) || (soloplayer != i && alone == i)) {
-							addStat(STATS.BOTH_QUEENS, i);
+							addStat("BOTH_QUEENS", i);
 						}
 						if (soloplayer == i && alone != i) {
-							addStat(STATS.CALLED_PARTNER, i);
+							addStat("CALLED_PARTNER", i);
 							if (offense > 60) {
-								addStat(STATS.CALLED_PARTNER_WON, i);
+								addStat("CALLED_PARTNER_WON", i);
 							}
 						}
 						if (soloplayer != i && alone == i) {
-							addStat(STATS.PLAYED_ALONE, i);
+							addStat("PLAYED_ALONE", i);
 							if (offense > 60) {
-								addStat(STATS.PLAYED_ALONE_WON, i);
+								addStat("PLAYED_ALONE_WON", i);
 							}
 						}
 						if (soloplayer == i && alone == i) {
-							addStat(STATS.CALLED_OFF, i);
+							addStat("CALLED_OFF", i);
 							if (solochoice == "Q") {
-								addStat(STATS.ONE_QUEEN, i);
+								addStat("ONE_QUEEN", i);
 								if (offense > 60) {
-									addStat(STATS.ONE_QUEEN_WON, i);
+									addStat("ONE_QUEEN_WON", i);
 								}
 							}
 							if (solochoice == "QQ") {
-								addStat(STATS.TWO_QUEEN, i);
+								addStat("TWO_QUEEN", i);
 								if (offense > 60) {
-									addStat(STATS.TWO_QUEEN_WON, i);
+									addStat("TWO_QUEEN_WON", i);
 								}
 							}
 						}
@@ -5955,8 +6034,9 @@
 								awardchips(9, "blue", i)
 								chips[i] = chips[i] + 9
 								chipstack[i] = chipstack[i] + "bbbbbbbbb"
-								addStat(STATS.NINE_BLUE, i);
-								addStat(STATS.HANDS_WON, i);
+								addStat("NINE_BLUE", i);
+								addStat("HANDS_WON", i);
+								addStat("CHIPS_WON_HAND", i, 9)
 							}
 						}
 					}
@@ -5973,8 +6053,9 @@
 									awardchips(6, "blue", i)
 									chips[i] = chips[i] + 6
 									chipstack[i] = chipstack[i] + "bbbbbb"
-									addStat(STATS.SIX_BLUE, i);
-									addStat(STATS.HANDS_WON, i);
+									addStat("SIX_BLUE", i);
+									addStat("HANDS_WON", i);
+									addStat("CHIPS_WON_HAND", i, 6)
 								}
 							}
 						}
@@ -5991,8 +6072,9 @@
 										awardchips(3, "blue", i)
 										chips[i] = chips[i] + 3
 										chipstack[i] = chipstack[i] + "bbb"
-										addStat(STATS.THREE_BLUE, i);
-										addStat(STATS.HANDS_WON, i);
+										addStat("THREE_BLUE", i);
+										addStat("HANDS_WON", i);
+										addStat("CHIPS_WON_HAND", i, 3)
 									}
 								}
 							}
@@ -6009,8 +6091,9 @@
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
-											addStat(STATS.TWO_RED, i);
-											addStat(STATS.HANDS_WON, i);
+											addStat("TWO_RED", i);
+											addStat("HANDS_WON", i);
+											addStat("CHIPS_WON_HAND", i, 2)
 										}
 									}
 								}
@@ -6025,8 +6108,9 @@
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
-											addStat(STATS.THREE_RED, i);
-											addStat(STATS.HANDS_WON, i);
+											addStat("THREE_RED", i);
+											addStat("HANDS_WON", i);
+											addStat("CHIPS_WON_HAND", i, 3)
 										}
 									}
 								}
@@ -6049,8 +6133,9 @@
 								awardchips(3, "white", i)
 								chips[i] = chips[i] + 3
 								chipstack[i] = chipstack[i] + "www"
-								addStat(STATS.THREE_WHITE, i);
-								addStat(STATS.HANDS_WON, i);
+								addStat("THREE_WHITE", i);
+								addStat("HANDS_WON", i);
+								addStat("CHIPS_WON_HAND", i, 3)
 							}
 						}
 					}
@@ -6067,8 +6152,9 @@
 									awardchips(2, "white", i)
 									chips[i] = chips[i] + 2
 									chipstack[i] = chipstack[i] + "ww"
-									addStat(STATS.TWO_WHITE, i);
-									addStat(STATS.HANDS_WON, i);
+									addStat("TWO_WHITE", i);
+									addStat("HANDS_WON", i);
+									addStat("CHIPS_WON_HAND", i, 2)
 								}
 							}
 						}
@@ -6085,8 +6171,9 @@
 										awardchips(1, "white", i)
 										chips[i] = chips[i] + 1
 										chipstack[i] = chipstack[i] + "w"
-										addStat(STATS.ONE_WHITE, i);
-										addStat(STATS.HANDS_WON, i);
+										addStat("ONE_WHITE", i);
+										addStat("HANDS_WON", i);
+										addStat("CHIPS_WON_HAND", i, 1)
 									}
 								}
 							}
@@ -6103,8 +6190,9 @@
 											awardchips(2, "red", i)
 											chips[i] = chips[i] + 2
 											chipstack[i] = chipstack[i] + "rr"
-											addStat(STATS.TWO_RED, i);
-											addStat(STATS.HANDS_WON, i);
+											addStat("TWO_RED", i);
+											addStat("HANDS_WON", i);
+											addStat("CHIPS_WON_HAND", i, 2)
 										}
 									}
 								}
@@ -6119,8 +6207,9 @@
 											awardchips(3, "red", i)
 											chips[i] = chips[i] + 3
 											chipstack[i] = chipstack[i] + "rrr"
-											addStat(STATS.THREE_RED, i);
-											addStat(STATS.HANDS_WON, i);
+											addStat("THREE_RED", i);
+											addStat("HANDS_WON", i);
+											addStat("CHIPS_WON_HAND", i, 3)
 										}
 									}
 								}
@@ -6193,11 +6282,11 @@
 		if (chips[1] >= 12 && chips[1] > chips[2] && chips[1] > chips[3] && chips[1] > chips[4]) {
 			//alert("Game Over! " + playername[1] + " won with " + chips[1] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[1] + " won with " + chips[1] + " chips!"
-			addStat(STATS.GAMES_WON, 1);
+			addStat("GAMES_WON", 1);
 			for (let i = 1; i <= 4; i++) {
-				addStat(STATS.GAMES_PLAYED, i);
-				addStat(STATS.CHIPS_WON, i, chips[i]);
-
+				addStat("GAMES_PLAYED", i);
+				addStat("CHIPS_WON", i, chips[i]);
+				setMaxStat("MOST_CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 4
@@ -6206,10 +6295,11 @@
 		if (chips[2] >= 12 && chips[2] > chips[1] && chips[2] > chips[3] && chips[2] > chips[4]) {
 			//alert("Game Over! " + playername[2] + " won with " + chips[2] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[2] + " won with " + chips[2] + " chips!"
-			addStat(STATS.GAMES_WON, 2);
+			addStat("GAMES_WON", 2);
 			for (let i = 1; i <= 4; i++) {
-				addStat(STATS.GAMES_PLAYED, i);
-				addStat(STATS.CHIPS_WON, i, chips[i]);
+				addStat("GAMES_PLAYED", i);
+				addStat("CHIPS_WON", i, chips[i]);
+				setMaxStat("MOST_CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 1
@@ -6218,11 +6308,11 @@
 		if (chips[3] >= 12 && chips[3] > chips[2] && chips[3] > chips[1] && chips[3] > chips[4]) {
 			//alert("Game Over! " + playername[3] + " won with " + chips[3] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[3] + " won with " + chips[3] + " chips!"
-			addStat(STATS.GAMES_WON, 3);
+			addStat("GAMES_WON", 3);
 			for (let i = 1; i <= 4; i++) {
-				addStat(STATS.GAMES_PLAYED, i);
-				addStat(STATS.CHIPS_WON, i, chips[i]);
-
+				addStat("GAMES_PLAYED", i);
+				addStat("CHIPS_WON", i, chips[i]);
+				setMaxStat("MOST_CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 2
@@ -6231,11 +6321,11 @@
 		if (chips[4] >= 12 && chips[4] > chips[2] && chips[4] > chips[3] && chips[4] > chips[1]) {
 			//alert("Game Over! " + playername[4] + " won with " + chips[4] + " chips!")
 			document.getElementById('messages').innerHTML = "Game Over! " + playername[4] + " won with " + chips[4] + " chips!"
-			addStat(STATS.GAMES_WON, 4);
+			addStat("GAMES_WON", 4);
 			for (let i = 1; i <= 4; i++) {
-				addStat(STATS.GAMES_PLAYED, i);
-				addStat(STATS.CHIPS_WON, i, chips[i]);
-
+				addStat("GAMES_PLAYED", i);
+				addStat("CHIPS_WON", i, chips[i]);
+				setMaxStat("MOST_CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 3
@@ -6564,7 +6654,7 @@
 	function toggleStatsDisplay() {
 		const toggle = document.getElementById("statsDisplayToggle");
 
-		statsDisplayMode = toggle.checked ? "pct" : "raw";
+		statsDisplayMode = toggle.checked ? "raw" : "pct";
 
 		drawStatsTable();
 	}
@@ -6908,10 +6998,17 @@
 
 
 	document.addEventListener('DOMContentLoaded', () => {
-		if (!window.LS_KEYS) window.LS_KEYS = { settings: 'settings-v1' };
-		loadSettings();            // restore first
+		if (!window.LS_KEYS) {
+			window.LS_KEYS = { settings: 'settings-v1' };
+		}
+
+		loadSettings();
+
+		migrateStatsArrayToObject();
+
 		drawStatsTable();
-		wireSettingsAutosave();    // then start listening
+
+		wireSettingsAutosave();
 	});
 
 
