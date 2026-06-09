@@ -51,7 +51,7 @@
 		#game-inner {
 			width: 800px;
 			/* base */
-			height: 564px;
+			height: 575;
 			/* base */
 			position: absolute;
 			/* left/top set in JS */
@@ -602,17 +602,16 @@
 		}
 
 
-		/*
 
-	TEST BORDERS
+/*
+		TEST BORDERS table {
+			outline: 2px dashed red;
+		}
 
-	table {
-	outline: 2px dashed red;
-	}
+		td {
+			outline: 1px dotted blue;
+		}
 
-	td {
-	outline: 1px dotted blue;
-	}
 	*/
 	</style>
 </head>
@@ -863,14 +862,10 @@
 
 
 						<!-- Message box -->
-						<form action="#">
-							<p style="margin:8px 0 0 0;">
-							<div id="messages"
-								style="width: 200px;height: 76px;background-color: beige;font-size: 14px;font-family: Arial, sans-serif;padding: 4px;border: 1px solid #aaa;box-sizing: border-box;overflow: hidden;white-space: pre-line;border-radius: 8px;">
-								Welcome to Schafkopf 2.0
-							</div>
-							</p>
-						</form>
+						<div id="messages"
+							style="width:200px; height:76px; background-color:beige; font-size:14px; font-family:Arial, sans-serif; padding:4px; border:1px solid #aaa; box-sizing:border-box; overflow:hidden; white-space:pre-line; border-radius:8px; margin-top:8px;">
+							Welcome to Schafkopf 2.0
+						</div>
 					</td>
 
 					<!-- ========== MIDDLE COLUMN (400px) ========== -->
@@ -950,7 +945,7 @@
 					<td style="width:200px; vertical-align:top;">
 
 						<!-- Make this column a vertical flex stack -->
-						<div style="display:flex; flex-direction:column; height:402px;">
+						<div style="display:flex; flex-direction:column; height:399px;">
 							<!-- match your game height -->
 
 							<!-- Top: Lead box -->
@@ -1012,6 +1007,7 @@
                      width:120px; color:black;">
 												Options
 											</button>
+										</td>
 									</tr>
 									<!-- Speed Slider -->
 									<tr>
@@ -1026,13 +1022,19 @@
 							</div>
 
 						</div>
-					</td>
+
 
 
 
 
 					</td>
 				</tr>
+
+				<tr>
+				<tr>
+					<td colspan="8" style="height:15px;"></td>
+				</tr>
+
 			</table>
 
 			<!-- MASTERTABLE ENDS-->
@@ -2070,7 +2072,7 @@
 
 
 	function setScaleAuto() {
-		const baseW = 800, baseH = 564;
+		const baseW = 800, baseH = 575;
 		const el = document.getElementById('game-inner');
 		if (!el) return; // guard
 
@@ -2142,10 +2144,10 @@
 		{ key: "CHIPS_WON", label: "Chips Won", rateOf: "GAMES_PLAYED", subRow: true },
 
 		{ key: "HANDS_PLAYED", label: "Hands Played", groupStart: true, noPct: true, noTotal: true },
-		{ key: "HANDS_WON", label: "Hands Won", pctOf: "HANDS_PLAYED", subRow: true },
-		{ key: "CHIPS_WON_HAND", label: "Chips Won", numOf: "CHIPS_WON_HAND", rateOf: "HANDS_PLAYED", subRow: true },
+		{ key: "HANDS_WON", label: "Hands Won", pctOf: "HANDS_PLAYED", subRow: true, noTotal: true },
 		{ key: "TRICKS_WON", label: "Tricks Won", rateOf: "HANDS_PLAYED", subRow: true, noTotal: true },
 		{ key: "POINTS_WON", label: "Points Won", rateOf: "HANDS_PLAYED", subRow: true, noTotal: true },
+		{ key: "CHIPS_WON_HAND", label: "Chips Won", numOf: "CHIPS_WON_HAND", rateOf: "HANDS_PLAYED", subRow: true },
 
 
 		{ key: "OFFENSE", label: "Offense", groupStart: true, pctOf: "HANDS_PLAYED" },
@@ -2181,11 +2183,11 @@
 
 
 
-		{ key: "RECORDS_HEADER", label: "Records", groupStart: true,  headerOnly: true, record: true },
-		{ key: "MOST_POINTS", label: "Most Points", noPct: true, subRow: true , record: true},
-		{ key: "MOST_TRICKS", label: "Most Tricks", noPct: true,  subRow: true, record: true },
-		{ key: "MOST_CHIPS_HAND", label: "Most Chips (H)", noPct: true, subRow: true, record: true },
-		{ key: "MOST_CHIPS", label: "Most Chips (G)", noPct: true, subRow: true, record: true },
+		{ key: "RECORDS_HEADER", label: "Records", groupStart: true, headerOnly: true, record: true },
+		{ key: "MOST_POINTS", label: "Most Points", noPct: true, subRow: true, record: true },
+		{ key: "MOST_TRICKS", label: "Most Tricks", noPct: true, subRow: true, record: true },
+		{ key: "MOST_CHIPS_HAND", label: "Most Chips (Hand)", noPct: true, subRow: true, record: true },
+		{ key: "MOST_CHIPS", label: "Most Chips (Game)", noPct: true, subRow: true, record: true },
 
 		{ key: "EXTRA_6", label: "Win %", subRow: true, pctOf: "TWO_QUEEN", hidden: true },
 
@@ -2291,22 +2293,21 @@
 		const trustTable = document.getElementById("trustStatsTable");
 
 
-		const VARIABLE_STATS_WIDTH = 400
-		const HUMAN_COMPUTER_COL_WIDTH = VARIABLE_STATS_WIDTH / 4; // human + 3 computers
-		const HUMAN_TRUST_COL_WIDTH = VARIABLE_STATS_WIDTH / 6;    // human + 5 trust levels
+		const VARIABLE_STATS_WIDTH = 350
+		const HUMAN_COMPUTER_COL_WIDTH = VARIABLE_STATS_WIDTH / 5; // human + 3 computers
+		const HUMAN_TRUST_COL_WIDTH = VARIABLE_STATS_WIDTH / 7;    // human + 5 trust levels
 		const humanColWidth =
 			statsMode === "computer"
 				? HUMAN_COMPUTER_COL_WIDTH
 				: HUMAN_TRUST_COL_WIDTH;
 
-		const COMPUTER_COL_WIDTH = HUMAN_COMPUTER_COL_WIDTH;
-		const TRUST_COL_WIDTH = HUMAN_TRUST_COL_WIDTH;
+
 
 		if (!statTable || !humanTable || !computerTable || !totalTable || !trustTable) return;
 
 		let statHtml = `
         <tr>
-            <th style="width:120px; min-width:120px;">
+            <th style="width:130px; min-width:130px;">
                 &nbsp;
             </th>
         </tr>
@@ -2322,13 +2323,13 @@
 
 		let computerHtml = `
 <tr>
-    <th style="width:${COMPUTER_COL_WIDTH}px;">
+    <th style="width:${humanColWidth}px;">
         ${document.getElementById('Einput').value}
     </th>
-    <th style="width:${COMPUTER_COL_WIDTH}px;">
+    <th style="width:${humanColWidth}px;">
         ${document.getElementById('Sinput').value}
     </th>
-    <th style="width:${COMPUTER_COL_WIDTH}px;">
+    <th style="width:${humanColWidth}px;">
         ${document.getElementById('Winput').value}
     </th>
 </tr>
@@ -2345,7 +2346,7 @@
 
 		for (let i = 0; i < TRUST_STAT_LABELS.length; i++) {
 			trustHtml += `
-        <th style="width:${TRUST_COL_WIDTH}px;">
+        <th style="width:${humanColWidth}px;">
             ${TRUST_STAT_LABELS[i]}
         </th>
     `;
@@ -2427,13 +2428,13 @@
 
 			computerHtml += `
 <tr>
-    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
+    <td style="width:${humanColWidth}px; ${dataStyle}">
         ${displayStatValue(stat, 2, stats)}
     </td>
-    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
+    <td style="width:${humanColWidth}px; ${dataStyle}">
         ${displayStatValue(stat, 3, stats)}
     </td>
-    <td style="width:${COMPUTER_COL_WIDTH}px; ${dataStyle}">
+    <td style="width:${humanColWidth}px; ${dataStyle}">
         ${displayStatValue(stat, 4, stats)}
     </td>
 </tr>
@@ -2443,7 +2444,7 @@
 
 			totalHtml += `
     <tr>
-        <td style="width:${TRUST_COL_WIDTH}px; ${dataStyle};font-weight:bold;">
+        <td style="width:${humanColWidth}px; ${dataStyle};font-weight:bold;">
             ${displayTotalValue(stat)}
         </td>
     </tr>
@@ -2453,7 +2454,7 @@
 
 			for (let trust = 0; trust < TRUST_STAT_LABELS.length; trust++) {
 				trustHtml += `
-    <td style="width:${TRUST_COL_WIDTH}px; ${dataStyle}">
+    <td style="width:${humanColWidth}px; ${dataStyle}">
         ${displayStatValue(stat, trust, trustStats)}
     </td>
 `;
@@ -2510,7 +2511,7 @@
 
 			if (row.rateOf) {
 				const denom = source[row.rateOf]?.[index] || 0;
-				return denom ? (numerator / denom).toFixed(2) : "-";
+				return denom ? (numerator / denom).toFixed(1) : "-";
 			}
 		}
 
