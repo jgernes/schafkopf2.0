@@ -2485,6 +2485,11 @@
 
 	function setMaxStat(statKey, player, value) {
 
+		if (!gameMaxStats) {
+			gameMaxStats = {};
+		}
+
+
 		// Lifetime player max
 		ensureStat(statKey)[player] = Math.max(
 			ensureStat(statKey)[player],
