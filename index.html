@@ -106,7 +106,7 @@
 			display: none;
 			position: absolute;
 			left: 0px;
-			top: 0px;
+			bottom: 15px;
 			z-index: 1000;
 			width: 600px;
 			box-sizing: border-box;
@@ -133,7 +133,7 @@
 			display: none;
 			position: absolute;
 			left: 0px;
-			top: 0px;
+			bottom: 15px;
 			z-index: 1000;
 			width: 600px;
 			box-sizing: border-box;
@@ -183,7 +183,7 @@
 			display: none;
 			position: absolute;
 			left: 200px;
-			bottom: 0px;
+			bottom: 15px;
 			z-index: 1000;
 			width: 400px;
 			box-sizing: border-box
@@ -595,7 +595,7 @@
 
 
 		.slider {
-			background: #BFD9F0;
+			background: #84B5E1;
 		}
 
 
@@ -605,7 +605,7 @@
 
 
 
-		/*
+
 		TEST BORDERS table {
 			outline: 2px dashed red;
 		}
@@ -613,8 +613,6 @@
 		td {
 			outline: 1px dotted blue;
 		}
-
-	*/
 	</style>
 </head>
 
@@ -709,6 +707,8 @@
 
 					<!-- ========== LEFT COLUMN (200px) ========== -->
 					<td id="col-left" style="width:200px; vertical-align:top;">
+
+						<div style="display:flex; flex-direction:column; height:399px;">
 
 
 						<!-- Names & scores grid -->
@@ -807,166 +807,187 @@
 
 
 						<!-- Solo/Call form -->
-						<form name="solo" method="post"
-							style="font-family:Arial,sans-serif; font-size:11pt; color:black; margin:0;">
-							<table border="0" cellpadding="6" cellspacing="0" align="center"
-								style="margin:0; border-collapse:collapse;">
-								<tr>
-									<td valign="top" width="100">
-										<b>Call Partner</b><br>
-										<input name="choice" value="ACC" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px;">A&clubs;</span><br>
-										<input name="choice" value="AHH" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
-										<input name="choice" value="ASS" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px;">A&spades;</span>
-									</td>
-									<td valign="top" width="100">
-										<b>Call Off</b><br>
-										<input name="choice" value="QQ" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px;">Q&clubs; Q&spades;</span><br>
-										<input name="choice" value="Q" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px;">Q&clubs;</span><br>
-										<input name="choice" value="Q" type="radio"
-											onmousedown="this.__chk=this.checked"
-											onclick="if(this.__chk)this.checked=false">
-										<span style="font-size:18px;">Q&spades;</span>
-									</td>
-								</tr>
+<form name="solo" method="post"
+    style="font-family:Arial,sans-serif; font-size:11pt; color:black; margin:0;">
+    <table border="0" cellpadding="0" cellspacing="0" align="center"
+        style="margin:0; border-collapse:collapse;">
+        <tr>
+            <td valign="top" width="100" style="padding:6px;">
+                <b>Call Partner</b><br>
+                <input name="choice" value="ACC" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px;">A&clubs;</span><br>
 
-								<tr>
-									<td colspan="2" align="center" style="padding-top:6px;">
-										<button type="button" id="callpartner" name="callpartner" class="btn-pill"
-											onclick="partnerchoice()">
-											Call
-										</button>
+                <input name="choice" value="AHH" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
 
-										<div id="calledAceSlot" style="font:bold 12pt Arial; color:black; background-color:#84B5E1;
-                          border:2px solid transparent; width:110px; height:30px;
-                          text-align:center; line-height:30px;
-                          display:inline-block; vertical-align:middle; margin-left:10px;border-radius: 8px;">
-										</div>
-									</td>
-								</tr>
-							</table>
-						</form>
+                <input name="choice" value="ASS" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px;">A&spades;</span>
+            </td>
 
+            <td valign="top" width="100" style="padding:6px;">
+                <b>Call Off</b><br>
+                <input name="choice" value="QQ" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px;">Q&clubs; Q&spades;</span><br>
 
+                <input name="choice" value="Q" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px;">Q&clubs;</span><br>
 
-						<!-- Message box -->
-						<div id="messages"
-							style="width:200px; height:76px; background-color:beige; font-size:14px; font-family:Arial, sans-serif; padding:4px; border:1px solid #aaa; box-sizing:border-box; overflow:hidden; white-space:pre-line; border-radius:8px; margin-top:8px;">
-							Welcome to Schafkopf 2.0
+                <input name="choice" value="Q" type="radio"
+                    onmousedown="this.__chk=this.checked"
+                    onclick="if(this.__chk)this.checked=false">
+                <span style="font-size:18px;">Q&spades;</span>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<!-- Called ace slot table -->
+<table width="200" border="0" cellpadding="0" cellspacing="0"
+    style="border-collapse:collapse; margin:0;">
+    <tr>
+        <td align="center" style="padding:4px;">
+    <div id="calledAceSlot" style="
+        font:bold 12pt Arial;
+        color:black;
+        background-color:#84B5E1;
+        border:2px solid transparent;
+        width:140px;
+        height:25px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:8px;">
+    </div>
+</td>
+    </tr>
+</table>
+
+<!-- Flexible space -->
+<div style="flex:1;"></div>
+
+<!-- Message box table -->
+<table width="200" border="0" cellpadding="0" cellspacing="0"
+    style="border-collapse:collapse; margin:0;">
+    <tr>
+        <td>
+            <div id="messages"
+                style="width:200px; height:92px; background-color:beige;
+                font-size:14px; font-family:Arial, sans-serif; padding:4px;
+                border:1px solid #aaa; box-sizing:border-box; overflow:hidden;
+                white-space:pre-line; border-radius:8px;">
+                Welcome to Schafkopf 2.0
+            </div>
+        </td>
+    </tr>
+</table>
+
+		</div>
+
+		</td>
+
+		<!-- ========== MIDDLE COLUMN (400px) ========== -->
+		<td style="width:400px; vertical-align:top;">
+			<table width="400" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; background-color:#8b602b;
+    border-radius:8px; overflow:hidden;">
+				<tr>
+					<td width="133" align="center">
+						<img src="image2/Card01.gif" name="card12" width="133" height="133" onclick="opentrick(1)">
+					</td>
+					<td width="133" align="center">
+						<div
+							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+							<img src="image2/cardBK.gif" name="card11"
+								style="max-width:100%; max-height:100%; object-fit:contain;">
+						</div>
+					</td>
+					<td width="133" align="center">
+						<img src="image2/Card01.gif" name="card22" width="133" height="133" onclick="opentrick(2)">
+					</td>
+				</tr>
+
+				<tr>
+					<td width="133" align="center">
+						<div
+							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+							<img src="image2/cardBK.gif" name="card41"
+								style="max-width:100%; max-height:100%; object-fit:contain;">
 						</div>
 					</td>
 
-					<!-- ========== MIDDLE COLUMN (400px) ========== -->
-					<td style="width:400px; vertical-align:top;">
-						<table width="400" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; background-color:#8b602b;
-    border-radius:8px; overflow:hidden;">
-							<tr>
-								<td width="133" align="center">
-									<img src="image2/Card01.gif" name="card12" width="133" height="133"
-										onclick="opentrick(1)">
-								</td>
-								<td width="133" align="center">
-									<div
-										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-										<img src="image2/cardBK.gif" name="card11"
-											style="max-width:100%; max-height:100%; object-fit:contain;">
-									</div>
-								</td>
-								<td width="133" align="center">
-									<img src="image2/Card01.gif" name="card22" width="133" height="133"
-										onclick="opentrick(2)">
-								</td>
-							</tr>
-
-							<tr>
-								<td width="133" align="center">
-									<div
-										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-										<img src="image2/cardBK.gif" name="card41"
-											style="max-width:100%; max-height:100%; object-fit:contain;">
-									</div>
-								</td>
-
-								<td width="133" align="center">
-									<button id="deal" type="button" name="deal" onclick="deal()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+					<td width="133" align="center">
+						<button id="deal" type="button" name="deal" onclick="deal()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
                            font-size:24px; border-radius:50px; color:black;">
-										Deal
-									</button>
+							Deal
+						</button>
 
-									<button id="continue" type="button" name="deal" onclick="beginhand()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+						<button id="continue" type="button" name="deal" onclick="beginhand()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
                            font-size:24px; border-radius:50px; padding:0; display:none;
                            align-items:center; justify-content:center; color:black;">
-										Continue
-									</button>
-								</td>
-
-								<td width="133" align="center">
-									<div
-										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-										<img src="image2/cardBK.gif" name="card21"
-											style="max-width:100%; max-height:100%; object-fit:contain;">
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td width="133" align="center">
-									<img src="image2/Card01.gif" name="card42" width="133" height="133"
-										onclick="opentrick(4)">
-								</td>
-								<td width="133" align="center">
-									<div
-										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-										<img src="image2/cardBK.gif" name="card31"
-											style="max-width:100%; max-height:100%; object-fit:contain;">
-									</div>
-								</td>
-								<td width="133" align="center">
-									<img src="image2/Card01.gif" name="card32" width="133" height="133"
-										onclick="opentrick(3)">
-								</td>
-							</tr>
-						</table>
+							Continue
+						</button>
 					</td>
 
-					<!-- ========== RIGHT COLUMN (200px) ========== -->
-					<td style="width:200px; vertical-align:top;">
+					<td width="133" align="center">
+						<div
+							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+							<img src="image2/cardBK.gif" name="card21"
+								style="max-width:100%; max-height:100%; object-fit:contain;">
+						</div>
+					</td>
+				</tr>
 
-						<!-- Make this column a vertical flex stack -->
-						<div style="display:flex; flex-direction:column; height:399px;">
-							<!-- match your game height -->
+				<tr>
+					<td width="133" align="center">
+						<img src="image2/Card01.gif" name="card42" width="133" height="133" onclick="opentrick(4)">
+					</td>
+					<td width="133" align="center">
+						<div
+							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+							<img src="image2/cardBK.gif" name="card31"
+								style="max-width:100%; max-height:100%; object-fit:contain;">
+						</div>
+					</td>
+					<td width="133" align="center">
+						<img src="image2/Card01.gif" name="card32" width="133" height="133" onclick="opentrick(3)">
+					</td>
+				</tr>
+			</table>
+		</td>
 
-							<!-- Top: Lead box -->
-							<div>
-								<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
-									style="border-collapse:collapse;">
-									<tr>
-										<td width="100" valign="middle">
-											<form name="player" action="#" style="margin:0;font-family:'Arial'">
-												<b>Lead</b><br>
-												<input type="text" name="player" size="8" readonly
-													style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;border-radius: 8px;">
-											</form>
-										</td>
-									</tr>
-								</table>
-							</div>
+		<!-- ========== RIGHT COLUMN (200px) ========== -->
+		<td style="width:200px; vertical-align:top;">
 
-							<!-- OPTIONAL LEAD BOX
+			<!-- Make this column a vertical flex stack -->
+			<div style="display:flex; flex-direction:column; height:399px;">
+				<!-- match your game height -->
+
+				<!-- Top: Lead box -->
+				<div>
+					<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
+						style="border-collapse:collapse;">
+						<tr>
+							<td width="100" valign="middle">
+								<form name="player" action="#" style="margin:0;font-family:'Arial'">
+									<b>Lead</b><br>
+									<input type="text" name="player" size="8" readonly
+										style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;border-radius: 8px;">
+								</form>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<!-- OPTIONAL LEAD BOX
 <div>
   <table width="200" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
     <tr>
@@ -983,341 +1004,341 @@
 </div>
 -->
 
-							<!-- Middle: open space grows -->
-							<div style="flex:1;"></div>
+				<!-- Middle: open space grows -->
+				<div style="flex:1;"></div>
 
-							<!-- Bottom: controls -->
-							<div>
-								<!-- Button area (shared space) -->
-								<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
-									style="border-collapse:collapse; margin-top:8px;">
-									<tr>
-										<td width="200" align="center">
-											<!-- Transcript button -->
-											<button id="transcript" type="button" onclick="showtranscript()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+				<!-- Bottom: controls -->
+				<div>
+					<!-- Button area (shared space) -->
+					<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
+						style="border-collapse:collapse; margin-top:8px;">
+						<tr>
+							<td width="200" align="center">
+								<!-- Transcript button -->
+								<button id="transcript" type="button" onclick="showtranscript()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black; display:none;">
-												Transcript
-											</button>
-											<!-- Cheat Sheet button -->
-											<button id="cheatsheet" type="button" onclick="cheatsheet()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+									Transcript
+								</button>
+								<!-- Cheat Sheet button -->
+								<button id="cheatsheet" type="button" onclick="cheatsheet()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black; display:none;">
-												Cheat Sheet
-											</button>
+									Cheat Sheet
+								</button>
 
-											<!-- Options stays below -->
-											<button id="options" type="button" onclick="options()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+								<!-- Options stays below -->
+								<button id="options" type="button" onclick="options()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black;">
-												Options
-											</button>
-										</td>
-									</tr>
-									<!-- Speed Slider -->
-									<tr>
-										<td width="200" valign="top" align="left" style="font-family:'Arial'">
+									Options
+								</button>
+							</td>
+						</tr>
+						<!-- Speed Slider -->
+						<tr>
+							<td width="200" valign="top" align="left" style="font-family:'Arial'">
 
-											<input type="range" id="speedSlider" min="0" max="2000" step="100"
-												value="1000" style="width:120px;">
-											<span id="speedWord" style="font-weight:bold; margin-left:4px;"></span>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-						</div>
-
-
-
-
-
-					</td>
-				</tr>
-
-				<tr>
-				<tr>
-					<td colspan="8" style="height:15px;"></td>
-				</tr>
-
-			</table>
-
-			<!-- MASTERTABLE ENDS-->
-
-
-
-
-			<!-- ===== MODALS ===== -->
-
-			<script>
-				// Map letters to colors
-				const CHIP_COLOR = { w: '#ffffff', r: '#D11818', b: '#2B6CB0' };
-
-				/**
-				 * Draws a fixed-height chip stack table (bottom-aligned).
-				 * Only chip rows get a border; empty rows are invisible.
-				 */
-				function drawChipStackTable(targetId, chipList, {
-					rows = 6,
-					width = '21px',
-					rowHeight = '6px'
-				} = {}) {
-					const container = document.getElementById(targetId);
-					if (!container) return;
-
-					// If no chips → hide container and bail
-					if (!chipList || chipList.length === 0) {
-						container.style.display = 'none';
-						container.innerHTML = '';
-						return;
-					} else {
-						// ensure visible if it was hidden previously
-						container.style.display = 'block';
-					}
-
-					const table = document.createElement('table');
-					table.style.borderCollapse = 'collapse';
-					table.style.width = width;
-
-					const body = document.createElement('tbody');
-
-					// Build empty rows (invisible)
-					for (let i = 0; i < rows; i++) {
-						const tr = document.createElement('tr');
-						const td = document.createElement('td');
-						td.style.padding = '0';
-						td.style.height = rowHeight;
-						td.style.background = 'transparent'; // empty rows are invisible
-						td.style.border = '0';               // no outline on empties
-						tr.appendChild(td);
-						body.appendChild(tr);
-					}
-
-					// Fill chips from bottom up; chip rows get color + border
-					const tds = Array.from(body.querySelectorAll('td'));
-					let cursor = rows - 1; // bottom row index
-					for (let i = 0; i < chipList.length && cursor >= 0; i++, cursor--) {
-						const c = chipList[i];
-						const color = CHIP_COLOR[c];
-						if (color) {
-							const td = tds[cursor];
-							td.style.background = color;
-							td.style.border = '1px solid #000';
-							td.title = c === 'w' ? 'white' : c === 'r' ? 'red' : 'blue';
-						}
-					}
-
-					table.appendChild(body);
-					container.innerHTML = '';
-					container.appendChild(table);
-				}
-
-				/**
-				 * Split a chip string into three stacks:
-				 *  - first 6 → left
-				 *  - next 6  → middle
-				 *  - rest    → right
-				 * Empty stacks are hidden (no space taken).
-				 */
-				function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
-					const chips = (chipStr || '')
-						.toLowerCase()
-						.split('')
-						.filter(c => c === 'w' || c === 'r' || c === 'b');
-
-					const left = chips.slice(0, 6);
-					const mid = chips.slice(6, 12);
-					const right = chips.slice(12);
-
-					drawChipStackTable(leftId, left, opts);
-					drawChipStackTable(midId, mid, opts);
-					drawChipStackTable(rightId, right, opts);
-				}
-			</script>
-
-
-
-
-
-
-
-
-
-
-
-
-			<div id="transcriptmodal">
-				<div class="modal-content">
-					<div id="transcriptBody"></div>
-					<div style="text-align:center; margin-top:10px;">
-						<button id="replayBtn" onclick="replayHand()" style="background-color:white; border-color:black; border-radius:50px;
-                     width:120px; color:black;">
-							Replay Hand
-						</button>
-					</div>
+								<input type="range" id="speedSlider" min="0" max="2000" step="100" value="1000"
+									style="width:120px;">
+								<span id="speedWord" style="font-weight:bold; margin-left:4px;"></span>
+							</td>
+						</tr>
+					</table>
 				</div>
+
 			</div>
 
-			<style>
-				/* compact horizontal chips (no conflict with game card styles) */
-				.tchip {
-					display: inline-block;
-					width: 28px;
-					/* fixed width so all chips match */
-					text-align: center;
-					/* center the rank + suit */
-					padding: 2px 0;
-					/* only vertical padding */
-					margin: 0 1px;
-					/* small horizontal gap */
-					border: 1px solid #bbb;
-					border-radius: 4px;
-					background: #f7f7f7;
-					line-height: 1.2;
-					font-weight: 600;
-					font-size: 12px;
+
+
+
+
+		</td>
+		</tr>
+
+		<tr>
+		<tr>
+			<td colspan="8" style="height:15px;"></td>
+		</tr>
+
+		</table>
+
+		<!-- MASTERTABLE ENDS-->
+
+
+
+
+		<!-- ===== MODALS ===== -->
+
+		<script>
+			// Map letters to colors
+			const CHIP_COLOR = { w: '#ffffff', r: '#D11818', b: '#2B6CB0' };
+
+			/**
+			 * Draws a fixed-height chip stack table (bottom-aligned).
+			 * Only chip rows get a border; empty rows are invisible.
+			 */
+			function drawChipStackTable(targetId, chipList, {
+				rows = 6,
+				width = '21px',
+				rowHeight = '6px'
+			} = {}) {
+				const container = document.getElementById(targetId);
+				if (!container) return;
+
+				// If no chips → hide container and bail
+				if (!chipList || chipList.length === 0) {
+					container.style.display = 'none';
+					container.innerHTML = '';
+					return;
+				} else {
+					// ensure visible if it was hidden previously
+					container.style.display = 'block';
 				}
 
-				.tchip.red {
-					color: #c01919;
+				const table = document.createElement('table');
+				table.style.borderCollapse = 'collapse';
+				table.style.width = width;
+
+				const body = document.createElement('tbody');
+
+				// Build empty rows (invisible)
+				for (let i = 0; i < rows; i++) {
+					const tr = document.createElement('tr');
+					const td = document.createElement('td');
+					td.style.padding = '0';
+					td.style.height = rowHeight;
+					td.style.background = 'transparent'; // empty rows are invisible
+					td.style.border = '0';               // no outline on empties
+					tr.appendChild(td);
+					body.appendChild(tr);
 				}
 
-				.tchip.black {
-					color: #000;
-				}
-
-				.tchip.trump {
-					box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
-				}
-
-				.tchip.winner {
-					box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
-				}
-
-				/* table styles */
-				.transHead {
-					margin: 0 0 8px;
-					text-align: center;
-				}
-
-				.transTable {
-					width: 100%;
-					border-collapse: collapse;
-				}
-
-				.transTable th,
-				.transTable td {
-					padding: 6px;
-					border-bottom: 1px solid #ddd;
-					text-align: center;
-					vertical-align: center;
-				}
-			</style>
-
-			<script>
-				/* ----------- helpers ----------- */
-				function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-
-				// Normalize token for matching (keep lead markers H/S/C/T as-is; map T->1 for 10)
-				function canon(tok) {
-					tok = tok.trim().toUpperCase();
-					if (!tok) return '';
-					if (/^[A-Z]$/.test(tok)) return tok; // a single-letter lead marker
-					const suit = tok.slice(-2);
-					let rank = tok.slice(0, tok.length - 2);
-					if (rank === 'T') rank = '1'; // treat 'T' same as '1' (10)
-					return rank + suit;
-				}
-
-				// Render one horizontal chip from token like "ACC", "QHT", "9SS", "KDT"
-				function renderCard(token, { highlightTrump = true, highlightWin = false } = {}) {
-					token = (token || '').trim();
-					if (!token || /^[A-Z]$/.test(token)) return '';
-
-					const suit2 = token.slice(-2).toUpperCase();
-					let rankRaw = token.slice(0, token.length - 2).toUpperCase();
-					const rank = (rankRaw === '1' || rankRaw === 'T') ? '10' : rankRaw;
-
-					const suits = {
-						CC: { sym: '♣', color: 'black', trump: false },
-						SS: { sym: '♠', color: 'black', trump: false },
-						HH: { sym: '♥', color: 'red', trump: false },
-						DT: { sym: '♦', color: 'red', trump: true },
-						CT: { sym: '♣', color: 'black', trump: true },
-						ST: { sym: '♠', color: 'black', trump: true },
-						HT: { sym: '♥', color: 'red', trump: true }
-					};
-					const s = suits[suit2] || { sym: '?', color: 'black', trump: false };
-
-					const classes = ['tchip', s.color];
-					if (highlightTrump && s.trump) classes.push('trump');
-					if (highlightWin) classes.push('winner');
-
-					return `<span class="${classes.join(' ')}">${rank}${s.sym}</span>`;
-				}
-
-				// helper: H/S/C/T -> label
-				function leadLabel(ch) {
-					ch = (ch || '').toUpperCase();
-					if (ch === 'H') return '&hearts;';
-					if (ch === 'S') return '♠';
-					if (ch === 'C') return '♣';
-					if (ch === 'T') return '<b>T</b>';
-					return ch || '';
-				}
-
-				/* ----------- parser ----------- */
-				// Input example lines:
-				// Jeffrey: 0,8CC,KCC,1HH,9SS,KSS,1SS,JHT,QHT
-				// Trick 1: T,JHT,7DT,KDT,QCT (winner: Jessica)
-				function parseTranscript(text) {
-					const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-					const hands = [];
-					const tricks = [];
-					for (const line of lines) {
-						if (/^Trick\s*\d+/i.test(line)) {
-							const m = line.match(/^Trick\s*(\d+)\s*:\s*(.+?)(?:\s*\(winner:\s*([^)]+)\))?$/i);
-							if (m) {
-								const n = parseInt(m[1], 10);
-								const parts = m[2].split(',').map(t => t.trim()).filter(Boolean);
-								let lead = '';
-								if (parts.length && /^[A-Z]$/.test(parts[0])) {
-									lead = parts.shift(); // H/S/C/T at the start of the line
-								}
-								tricks.push({ n, lead, cards: parts, winner: (m[3] || '').trim() });
-							}
-						} else if (line.includes(':')) {
-							// Only split on the first ":" in case names had ":" (rare, but safe)
-							const idx = line.indexOf(':');
-							const name = line.slice(0, idx).trim();
-							const rest = line.slice(idx + 1).trim();
-							const raw = rest.split(',').map(t => t.trim()).filter(Boolean);
-							const cards = raw.filter(t => t !== '0'); // drop leading 0 token
-							hands.push({ name, cards });
-						}
+				// Fill chips from bottom up; chip rows get color + border
+				const tds = Array.from(body.querySelectorAll('td'));
+				let cursor = rows - 1; // bottom row index
+				for (let i = 0; i < chipList.length && cursor >= 0; i++, cursor--) {
+					const c = chipList[i];
+					const color = CHIP_COLOR[c];
+					if (color) {
+						const td = tds[cursor];
+						td.style.background = color;
+						td.style.border = '1px solid #000';
+						td.title = c === 'w' ? 'white' : c === 'r' ? 'red' : 'blue';
 					}
-					return { hands, tricks };
 				}
 
-				/* ----------- renderer ----------- */
-				function renderTranscriptInto(container, data) {
-					let html = `<h3 class="transHead">Game Transcript</h3>`;
+				table.appendChild(body);
+				container.innerHTML = '';
+				container.appendChild(table);
+			}
 
-					// Hands (8 cards, leading 0 ignored)
-					if (data.hands.length) {
-						html += `<div style="margin-top:10px">
+			/**
+			 * Split a chip string into three stacks:
+			 *  - first 6 → left
+			 *  - next 6  → middle
+			 *  - rest    → right
+			 * Empty stacks are hidden (no space taken).
+			 */
+			function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
+				const chips = (chipStr || '')
+					.toLowerCase()
+					.split('')
+					.filter(c => c === 'w' || c === 'r' || c === 'b');
+
+				const left = chips.slice(0, 6);
+				const mid = chips.slice(6, 12);
+				const right = chips.slice(12);
+
+				drawChipStackTable(leftId, left, opts);
+				drawChipStackTable(midId, mid, opts);
+				drawChipStackTable(rightId, right, opts);
+			}
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+		<div id="transcriptmodal">
+			<div class="modal-content">
+				<div id="transcriptBody"></div>
+				<div style="text-align:center; margin-top:10px;">
+					<button id="replayBtn" onclick="replayHand()" style="background-color:white; border-color:black; border-radius:50px;
+                     width:120px; color:black;">
+						Replay Hand
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<style>
+			/* compact horizontal chips (no conflict with game card styles) */
+			.tchip {
+				display: inline-block;
+				width: 28px;
+				/* fixed width so all chips match */
+				text-align: center;
+				/* center the rank + suit */
+				padding: 2px 0;
+				/* only vertical padding */
+				margin: 0 1px;
+				/* small horizontal gap */
+				border: 1px solid #bbb;
+				border-radius: 4px;
+				background: #f7f7f7;
+				line-height: 1.2;
+				font-weight: 600;
+				font-size: 12px;
+			}
+
+			.tchip.red {
+				color: #c01919;
+			}
+
+			.tchip.black {
+				color: #000;
+			}
+
+			.tchip.trump {
+				box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
+			}
+
+			.tchip.winner {
+				box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
+			}
+
+			/* table styles */
+			.transHead {
+				margin: 0 0 8px;
+				text-align: center;
+			}
+
+			.transTable {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.transTable th,
+			.transTable td {
+				padding: 6px;
+				border-bottom: 1px solid #ddd;
+				text-align: center;
+				vertical-align: center;
+			}
+		</style>
+
+		<script>
+			/* ----------- helpers ----------- */
+			function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+			// Normalize token for matching (keep lead markers H/S/C/T as-is; map T->1 for 10)
+			function canon(tok) {
+				tok = tok.trim().toUpperCase();
+				if (!tok) return '';
+				if (/^[A-Z]$/.test(tok)) return tok; // a single-letter lead marker
+				const suit = tok.slice(-2);
+				let rank = tok.slice(0, tok.length - 2);
+				if (rank === 'T') rank = '1'; // treat 'T' same as '1' (10)
+				return rank + suit;
+			}
+
+			// Render one horizontal chip from token like "ACC", "QHT", "9SS", "KDT"
+			function renderCard(token, { highlightTrump = true, highlightWin = false } = {}) {
+				token = (token || '').trim();
+				if (!token || /^[A-Z]$/.test(token)) return '';
+
+				const suit2 = token.slice(-2).toUpperCase();
+				let rankRaw = token.slice(0, token.length - 2).toUpperCase();
+				const rank = (rankRaw === '1' || rankRaw === 'T') ? '10' : rankRaw;
+
+				const suits = {
+					CC: { sym: '♣', color: 'black', trump: false },
+					SS: { sym: '♠', color: 'black', trump: false },
+					HH: { sym: '♥', color: 'red', trump: false },
+					DT: { sym: '♦', color: 'red', trump: true },
+					CT: { sym: '♣', color: 'black', trump: true },
+					ST: { sym: '♠', color: 'black', trump: true },
+					HT: { sym: '♥', color: 'red', trump: true }
+				};
+				const s = suits[suit2] || { sym: '?', color: 'black', trump: false };
+
+				const classes = ['tchip', s.color];
+				if (highlightTrump && s.trump) classes.push('trump');
+				if (highlightWin) classes.push('winner');
+
+				return `<span class="${classes.join(' ')}">${rank}${s.sym}</span>`;
+			}
+
+			// helper: H/S/C/T -> label
+			function leadLabel(ch) {
+				ch = (ch || '').toUpperCase();
+				if (ch === 'H') return '&hearts;';
+				if (ch === 'S') return '♠';
+				if (ch === 'C') return '♣';
+				if (ch === 'T') return '<b>T</b>';
+				return ch || '';
+			}
+
+			/* ----------- parser ----------- */
+			// Input example lines:
+			// Jeffrey: 0,8CC,KCC,1HH,9SS,KSS,1SS,JHT,QHT
+			// Trick 1: T,JHT,7DT,KDT,QCT (winner: Jessica)
+			function parseTranscript(text) {
+				const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+				const hands = [];
+				const tricks = [];
+				for (const line of lines) {
+					if (/^Trick\s*\d+/i.test(line)) {
+						const m = line.match(/^Trick\s*(\d+)\s*:\s*(.+?)(?:\s*\(winner:\s*([^)]+)\))?$/i);
+						if (m) {
+							const n = parseInt(m[1], 10);
+							const parts = m[2].split(',').map(t => t.trim()).filter(Boolean);
+							let lead = '';
+							if (parts.length && /^[A-Z]$/.test(parts[0])) {
+								lead = parts.shift(); // H/S/C/T at the start of the line
+							}
+							tricks.push({ n, lead, cards: parts, winner: (m[3] || '').trim() });
+						}
+					} else if (line.includes(':')) {
+						// Only split on the first ":" in case names had ":" (rare, but safe)
+						const idx = line.indexOf(':');
+						const name = line.slice(0, idx).trim();
+						const rest = line.slice(idx + 1).trim();
+						const raw = rest.split(',').map(t => t.trim()).filter(Boolean);
+						const cards = raw.filter(t => t !== '0'); // drop leading 0 token
+						hands.push({ name, cards });
+					}
+				}
+				return { hands, tricks };
+			}
+
+			/* ----------- renderer ----------- */
+			function renderTranscriptInto(container, data) {
+				let html = `<h3 class="transHead">Game Transcript</h3>`;
+
+				// Hands (8 cards, leading 0 ignored)
+				if (data.hands.length) {
+					html += `<div style="margin-top:10px">
       <table class="transTable">
         <thead><tr>
           <th style="min-width:60px">Player</th><th>Hand</th>
         </tr></thead><tbody>`;
-						data.hands.forEach(h => {
-							const cardsHtml = h.cards.map(renderCard).join(' ');
-							html += `<tr><td><b>${esc(h.name)}</b></td><td>${cardsHtml}</td></tr>`;
-						});
-						html += `</tbody></table></div>`;
-					}
+					data.hands.forEach(h => {
+						const cardsHtml = h.cards.map(renderCard).join(' ');
+						html += `<tr><td><b>${esc(h.name)}</b></td><td>${cardsHtml}</td></tr>`;
+					});
+					html += `</tbody></table></div>`;
+				}
 
-					// Tricks: player names as column headers (once), one row per trick
-					if (data.tricks.length) {
-						const players = data.hands.map(h => h.name);
-						html += `<div style="margin-top:10px">
+				// Tricks: player names as column headers (once), one row per trick
+				if (data.tricks.length) {
+					const players = data.hands.map(h => h.name);
+					html += `<div style="margin-top:10px">
     <table class="transTable">
       <thead>
         <tr>
@@ -1328,70 +1349,70 @@
       </thead>
       <tbody>`;
 
-						data.tricks.sort((a, b) => a.n - b.n).forEach(t => {
-							const winnerIdx = players.findIndex(
-								p => p.trim().toUpperCase() === (t.winner || '').trim().toUpperCase()
-							);
+					data.tricks.sort((a, b) => a.n - b.n).forEach(t => {
+						const winnerIdx = players.findIndex(
+							p => p.trim().toUpperCase() === (t.winner || '').trim().toUpperCase()
+						);
 
-							html += `<tr>
+						html += `<tr>
       <td>#${t.n}</td>
       <td>${leadLabel(t.lead)}</td>`;
 
-							// Render each player's card
-							for (let idx = 0; idx < players.length; idx++) {
-								const played = t.cards[idx] || '';
-								const highlightWin = (idx === winnerIdx);
-								html += `<td>${played ? renderCard(played, { highlightTrump: false, highlightWin }) : ''}</td>`;
-							}
+						// Render each player's card
+						for (let idx = 0; idx < players.length; idx++) {
+							const played = t.cards[idx] || '';
+							const highlightWin = (idx === winnerIdx);
+							html += `<td>${played ? renderCard(played, { highlightTrump: false, highlightWin }) : ''}</td>`;
+						}
 
-							html += `<td>${esc(t.winner || '')}</td></tr>`;
-						});
+						html += `<td>${esc(t.winner || '')}</td></tr>`;
+					});
 
-						html += `</tbody></table></div>`;
-					}
-
-					container.innerHTML = html;
+					html += `</tbody></table></div>`;
 				}
 
-				/* ----------- public API ----------- */
-				function openTranscriptModule(plainText) {
-					const modal = document.getElementById('transcriptmodal');
-					const body = document.getElementById('transcriptBody');
-					const data = parseTranscript(plainText);
-					renderTranscriptInto(body, data);
-					modal.style.display = 'block';
-				}
-				function closeTranscript() {
-					document.getElementById('transcriptmodal').style.display = 'none';
-				}
+				container.innerHTML = html;
+			}
 
-				function replayHand() {
-					// Set the replay flag
-					autoPlay = false;
-					delaytime = oldDelayTime
-					replay = 1;
-					dealer = (dealer + 3) % 4
-					document.getElementById('continue').style.display = 'none'
-					document.Nscore.Nscore.style.color = "black"
-					document.Escore.Escore.style.color = "black"
-					document.Sscore.Sscore.style.color = "black"
-					document.Wscore.Wscore.style.color = "black"
-					document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
-					document.Escore.Escore.style.backgroundColor = "#84B5E1"
-					document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
-					document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
+			/* ----------- public API ----------- */
+			function openTranscriptModule(plainText) {
+				const modal = document.getElementById('transcriptmodal');
+				const body = document.getElementById('transcriptBody');
+				const data = parseTranscript(plainText);
+				renderTranscriptInto(body, data);
+				modal.style.display = 'block';
+			}
+			function closeTranscript() {
+				document.getElementById('transcriptmodal').style.display = 'none';
+			}
 
-					// Optional: close the transcript modal
-					document.getElementById('transcriptmodal').style.display = 'none';
+			function replayHand() {
+				// Set the replay flag
+				autoPlay = false;
+				delaytime = oldDelayTime
+				replay = 1;
+				dealer = (dealer + 3) % 4
+				document.getElementById('continue').style.display = 'none'
+				document.Nscore.Nscore.style.color = "black"
+				document.Escore.Escore.style.color = "black"
+				document.Sscore.Sscore.style.color = "black"
+				document.Wscore.Wscore.style.color = "black"
+				document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
+				document.Escore.Escore.style.backgroundColor = "#84B5E1"
+				document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
+				document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
 
-					// Start a new deal
-					if (typeof deal === 'function') {
-						deal();
-					} else {
-						console.warn("deal() function not found");
-					}
+				// Optional: close the transcript modal
+				document.getElementById('transcriptmodal').style.display = 'none';
+
+				// Start a new deal
+				if (typeof deal === 'function') {
+					deal();
+				} else {
+					console.warn("deal() function not found");
 				}
-			</script>
+			}
+		</script>
 
 
 
@@ -1609,7 +1630,7 @@
 	<div class="modal-content">
 
 		<div id="instructionmodalScrollArea" style="
-    max-height:514px;
+    max-height:500px;
     overflow-y:auto;
     margin-bottom:10px;
 ">
@@ -1730,7 +1751,8 @@
 					rapidly autoplay the rest of the hand, from the highest card down. If you are not actually able to
 					take
 					all of
-					the tricks, the autoplay will stop and normal play will resume.</p>
+					the tricks, the autoplay will stop and normal play will resume.
+				</p>
 				<h4>Score Box</h4>
 				<p>Before the cards are dealt each hand, this will display each player's chip total for the game. During
 					the
@@ -1805,16 +1827,19 @@
 					will
 					reveal the cards in the trick. You may only view the last trick which was taken. </p>
 
-				<h2>General Statistics</h2>
-				<p>Since there are only 6 cards in each fail suit, the suit will go around (not be trumped) at most
+				<h2>General Strategy</h2>
+				<p>Since there are only 6 cards in each fail suit, an Ace of the suit will Go Around (meaning each
+					player holds a card of the suit) at most
 					once. If
-					you hold a singleton ace, it will go around ~60% of the time; if you have a doubleton ace, it will
-					go
-					around ~45% of the time; if you have 3 in a suit, it will go around ~20% of the time. However,
+					you have a singleton ace, it will Go Around ~60% of the time; if you have a doubleton ace, it will
+					Go
+					Around ~45% of the time; if you have 3 in a suit, the Ace will Go Around only ~20% of the time.
+					However,
 					remember
 					that once all
 					the trump have been played, even a low fail card can take tricks.</p>
-				<p>The probability that one player will have both black queens is ~22%, so this will occur roughly 1 in
+				<p>The probability that one player will be dealt both black queens is ~22%, so this will occur roughly 1
+					in
 					5
 					hands.</p>
 				<p>The probability that a player will have a certain number of trump is represented in the table below.
@@ -1873,7 +1898,7 @@
 	<div class="modal-content">
 
 		<div id="statsmodalScrollArea" style="
-    max-height:514px;
+    max-height:500px;
     overflow-y:auto;
     margin-bottom:10px;
 ">
@@ -1881,9 +1906,20 @@
 			<div style="padding:6px; font-size:14px; line-height:1.35;">
 				<h1 style="text-align:center;">Lifetime Statistics</h1>
 				<div style="display:flex; align-items:center; gap:15px; margin-bottom:4px;">
-					<div style="width:120px;"></div>
+					<div style="width:200px; display:flex; justify-content:center;">
+						<button id="resetStatsBtn" type="button" onclick="resetstats()" style="
+        background-color:#84B5E1; 
+        border:1px solid #000;
+        border-radius:50px;
+        color:#000;
+        font-size:14px;
+        padding:0px 12px;
+    ">
+							Reset Stats
+						</button>
+					</div>
 
-					<div style="width:66px;"></div>
+
 
 					<div style="width:400px; text-align:center;">
 						Opponent
@@ -1914,18 +1950,7 @@
 
 			</div>
 
-			<div style="text-align:center; margin-top:10px;">
-				<button id="resetStatsBtn" type="button" onclick="resetstats()" style="
-            background-color:#fff;
-            border:1px solid #000;
-            border-radius:50px;
-            color:#000;
-            font-size:14px;
-            padding:0px 12px;
-        ">
-					Reset All Statistics
-				</button>
-			</div>
+
 
 		</div>
 		<div style="
@@ -2144,6 +2169,11 @@
 
 		const totalBothQueens = getGameStat("BOTH_QUEENS", 1) + getGameStat("BOTH_QUEENS", 2) + getGameStat("BOTH_QUEENS", 3) + getGameStat("BOTH_QUEENS", 4);
 
+		const mostTrump = gameMaxStats["MOST_TRUMP"]?.[1] || 0;
+		const fewestTrump = gameMaxStats["FEWEST_TRUMP"]?.[1] || 0;
+
+
+
 		const recordLines = [];
 
 		const records = [
@@ -2198,6 +2228,14 @@
         </td>
         <td style="width:50%; text-align:left;">
             <b>Called Off: ${calledOff}</b>
+        </td>
+    </tr>
+	  <tr>
+        <td style="width:50%; text-align:left;">
+            <b>Most Trump: ${mostTrump}</b>
+        </td>
+        <td style="width:50%; text-align:left;">
+            <b>Fewest Trump: ${fewestTrump}</b>
         </td>
     </tr>
 </table>
@@ -2460,7 +2498,7 @@
 
 			setTimeout(() => {
 				resetConfirm = false;
-				btn.textContent = "Reset All Statistics";
+				btn.textContent = "Reset Stats";
 			}, 3000);
 
 			return;
@@ -2543,20 +2581,20 @@
 
 	];
 
-	function blankPlayerArray() {
-		return [0, 0, 0, 0, 0];
+	function blankPlayerArray(fill = 0) {
+		return [fill, fill, fill, fill, fill];
 	}
 
-	function ensureStat(key) {
+	function ensureStat(key, fill = 0) {
 		if (!stats[key]) {
-			stats[key] = blankPlayerArray();
+			stats[key] = blankPlayerArray(fill);
 		}
 		return stats[key];
 	}
 
-	function ensureTrustStat(key) {
+	function ensureTrustStat(key, fill = 0) {
 		if (!trustStats[key]) {
-			trustStats[key] = blankPlayerArray();
+			trustStats[key] = blankPlayerArray(fill);
 		}
 		return trustStats[key];
 	}
@@ -2642,6 +2680,67 @@
 			);
 		}
 	}
+
+
+	function setExtremeStat(baseKey, player, value) {
+		const mostKey = `MOST_${baseKey}`;
+		const fewestKey = `FEWEST_${baseKey}`;
+
+		// Lifetime max
+		const mostRow = ensureStat(mostKey);
+		mostRow[player] = Math.max(mostRow[player] || 0, value);
+
+		// Lifetime min
+		const fewestRow = ensureStat(fewestKey, 1000);
+		fewestRow[player] = Math.min(fewestRow[player], value);
+
+
+		// Current-game max/min
+		if (!gameMaxStats) {
+			gameMaxStats = {};
+		}
+
+		if (!gameMaxStats[mostKey]) {
+			gameMaxStats[mostKey] = [0, 0, 0, 0, 0];
+		}
+
+		if (!gameMaxStats[fewestKey]) {
+			gameMaxStats[fewestKey] = blankPlayerArray(1000);
+		}
+
+		gameMaxStats[mostKey][player] = Math.max(
+			gameMaxStats[mostKey][player] || 0,
+			value
+		);
+
+
+		gameMaxStats[fewestKey][player] = Math.min(
+			gameMaxStats[fewestKey][player],
+			value
+		);
+
+
+		// Trust max/min
+		if (player >= 2 && player <= 4) {
+			const trustLevel = Number(document.getElementById(`trustSlider${player}`).value);
+
+			const trustMostRow = ensureTrustStat(mostKey);
+			trustMostRow[trustLevel] = Math.max(
+				trustMostRow[trustLevel] || 0,
+				value
+			);
+
+			const trustFewestRow = ensureTrustStat(fewestKey, 1000);
+			trustFewestRow[trustLevel] = Math.min(
+				trustFewestRow[trustLevel],
+				value
+			);
+
+		}
+	}
+
+
+
 
 
 
@@ -3626,337 +3725,349 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			return
 		}
 
-
-		for (index = 0; index < document.solo.choice.length; index++) {
-			if (document.solo.choice[index].checked) {
-				solochoice = document.solo.choice[index].value
-			}
-		}
+		if (partners == 0) {
 
 
-		if (solochoice == "QQ") {
-			if (Nhand[8] != "QCT" && Nhand[8] != "QST" && Nhand[1] != "QCT" && Nhand[1] != "QST") {
-				//alert("I call off both Old Ones!")
-				document.getElementById('messages').innerHTML = "I call off both Old Ones!"
-				calledace = "Old Ones"
-				partner = new Array(0, 1, 0, 0, 0)
-				visiblepartner = new Array(0, 1, 0, 0, 0)
-				document.Nscore.Nscore.style.color = "red"
-				document.Nscore.Nscore.style.backgroundColor = "yellow"
-				document.getElementById("calledAceSlot").innerHTML = calledace
-				partners = 1
-				partnerdelay = 1
-				soloplayer = 1
-				alone = 1
-				return
-			}
-			else {
-				//alert("You have a black queen!")
-				document.getElementById('messages').innerHTML = "You have a black queen!"
-				return
-			}
-		}
-
-
-
-		if (solochoice == "Q") {
-			if (Nhand[8] == "QST" || (Nhand[8] == "QCT" && Nhand[7] != "QST") || Nhand[1] == "QST" || (Nhand[1] == "QCT" && Nhand[2] != "QST")) {
-				//alert("I call off the Old One!")
-				document.getElementById('messages').innerHTML = "I call off the Old One!"
-				partner = new Array(0, 1, 0, 0, 0)
-				visiblepartner = new Array(0, 1, 0, 0, 0)
-				calledace = "Old One"
-				document.Nscore.Nscore.style.color = "red"
-				document.Nscore.Nscore.style.backgroundColor = "yellow"
-				document.getElementById("calledAceSlot").innerHTML = calledace
-				partners = 1
-				partnerdelay = 1
-				soloplayer = 1
-				alone = 1
-				return
-			}
-			else {
-				//alert("You don't have one black queen!")
-				document.getElementById('messages').innerHTML = "You don't have one black queen!"
-				return
-			}
-		}
-
-
-		if (secretcall[1] == 1 && secretcall[2] == 1 && secretcall[3] == 1) {
-			for (i = 1; i <= 8; i++) {
-				if (Ehand[i] == "ADT") {
-					solopartner = 2
-					partner = new Array(0, 1, 1, 0, 0)
+			for (index = 0; index < document.solo.choice.length; index++) {
+				if (document.solo.choice[index].checked) {
+					solochoice = document.solo.choice[index].value
+					break;
 				}
-				if (Shand[i] == "ADT") {
-					solopartner = 3
-					partner = new Array(0, 1, 0, 1, 0)
+				solochoice = "000"
+			}
+
+
+			if (solochoice == "QQ") {
+				if (Nhand[8] != "QCT" && Nhand[8] != "QST" && Nhand[1] != "QCT" && Nhand[1] != "QST") {
+					//alert("I call off both Old Ones!")
+					document.getElementById('messages').innerHTML = "I call off both Old Ones!"
+					calledace = "Both Old Ones"
+					partner = new Array(0, 1, 0, 0, 0)
+					visiblepartner = new Array(0, 1, 0, 0, 0)
+					document.Nscore.Nscore.style.color = "red"
+					document.Nscore.Nscore.style.backgroundColor = "yellow"
+					document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+					document.getElementById("calledAceSlot").innerHTML = calledace
+					partners = 1
+					partnerdelay = 1
+					soloplayer = 1
+					alone = 1
+					return true
 				}
-				if (Whand[i] == "ADT") {
-					solopartner = 4
-					partner = new Array(0, 1, 0, 0, 1)
-				}
-				if (Nhand[i] == "ADT") {
-					//alert("You have the Ace of Diamonds!")
-					document.getElementById('messages').innerHTML = "You have the Ace of Diamonds!"
-					return
+				else {
+					//alert("You have a black queen!")
+					document.getElementById('messages').innerHTML = "You have a black queen!"
+					return false
 				}
 			}
-			//alert("I need a partner...Ace of Diamonds...Known!")
-			document.getElementById('messages').innerHTML = "I need a partner...Ace of Diamonds!"
-			solochoicetext = "Ace of Diamonds"
-			solochoice = "ADT"
-			calledace = '<span style="color:red;">A&diams; Known</span>'
-			visiblepartner = new Array(0, 1, .5, .5, .5)
-			document.Nscore.Nscore.style.color = "red"
-			document.Nscore.Nscore.style.backgroundColor = "yellow"
-			document.getElementById("calledAceSlot").innerHTML = calledace
-			partnercount = 1
-			partners = 1
-			partnerdelay = 1
-			soloplayer = 1
-			return
-		}
-		else {
-			if (solochoice == "ACC") {
-				if ((Nhand[8] == "QCT" && Nhand[7] == "QST") || (Nhand[1] == "QCT" && Nhand[2] == "QST")) {
-					if (Nhand[1].charAt(2) == "C" || Nhand[2].charAt(2) == "C" || Nhand[3].charAt(2) == "C" || Nhand[4].charAt(2) == "C" ||
-						Nhand[5].charAt(2) == "C" || Nhand[6].charAt(2) == "C" || Nhand[7].charAt(2) == "C" || Nhand[8].charAt(2) == "C") {
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "ACC") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
-							}
-							if (Shand[i] == "ACC") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-							}
-							if (Whand[i] == "ACC") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-							}
-							if (Nhand[i] == "ACC") {
-								//alert("You have the Ace of Clubs!")
-								secretcall[1] = 1
-								document.getElementById('messages').innerHTML = "You have the Ace of Clubs!"
-								return
-							}
-						}
-						//alert("I need a partner...Ace of Clubs...Known!")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Clubs...Known!"
-						solochoicetext = "Ace of Clubs"
-						calledace = '<span style="color:black;">A&clubs; Known</span>'
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
+
+
+
+			if (solochoice == "Q") {
+				if (Nhand[8] == "QST" || (Nhand[8] == "QCT" && Nhand[7] != "QST") || Nhand[1] == "QST" || (Nhand[1] == "QCT" && Nhand[2] != "QST")) {
+					//alert("I call off the Old One!")
+					document.getElementById('messages').innerHTML = "I call off the Old One!"
+					partner = new Array(0, 1, 0, 0, 0)
+					visiblepartner = new Array(0, 1, 0, 0, 0)
+					calledace = "One Old One"
+					document.Nscore.Nscore.style.color = "red"
+					document.Nscore.Nscore.style.backgroundColor = "yellow"
+					document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+					document.getElementById("calledAceSlot").innerHTML = calledace
+					partners = 1
+					partnerdelay = 1
+					soloplayer = 1
+					alone = 1
+					return true
+				}
+				else {
+					//alert("You don't have one black queen!")
+					document.getElementById('messages').innerHTML = "You don't have one black queen!"
+					return false
+				}
+			}
+
+
+			if (secretcall[1] == 1 && secretcall[2] == 1 && secretcall[3] == 1) {
+				for (i = 1; i <= 8; i++) {
+					if (Ehand[i] == "ADT") {
+						solopartner = 2
+						partner = new Array(0, 1, 1, 0, 0)
 					}
-					else {
-						//alert("I need a partner...Ace of Clubs...Unknown!")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Clubs...Unknown!"
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "ACC") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
+					if (Shand[i] == "ADT") {
+						solopartner = 3
+						partner = new Array(0, 1, 0, 1, 0)
+					}
+					if (Whand[i] == "ADT") {
+						solopartner = 4
+						partner = new Array(0, 1, 0, 0, 1)
+					}
+					if (Nhand[i] == "ADT") {
+						//alert("You have the Ace of Diamonds!")
+						document.getElementById('messages').innerHTML = "You have the Ace of Diamonds!"
+						return false
+					}
+				}
+				//alert("I need a partner...Ace of Diamonds...Known!")
+				document.getElementById('messages').innerHTML = "I need a partner...Ace of Diamonds!"
+				solochoicetext = "Ace of Diamonds"
+				solochoice = "ADT"
+				calledace = '<span style="color:red;">A&diams; Known</span>'
+				visiblepartner = new Array(0, 1, .5, .5, .5)
+				document.Nscore.Nscore.style.color = "red"
+				document.Nscore.Nscore.style.backgroundColor = "yellow"
+				document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+				document.getElementById("calledAceSlot").innerHTML = calledace
+				partnercount = 1
+				partners = 1
+				partnerdelay = 1
+				soloplayer = 1
+				return true
+			}
+			else {
+				if (solochoice == "ACC") {
+					if ((Nhand[8] == "QCT" && Nhand[7] == "QST") || (Nhand[1] == "QCT" && Nhand[2] == "QST")) {
+						if (Nhand[1].charAt(2) == "C" || Nhand[2].charAt(2) == "C" || Nhand[3].charAt(2) == "C" || Nhand[4].charAt(2) == "C" ||
+							Nhand[5].charAt(2) == "C" || Nhand[6].charAt(2) == "C" || Nhand[7].charAt(2) == "C" || Nhand[8].charAt(2) == "C") {
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "ACC") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+								}
+								if (Shand[i] == "ACC") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+								}
+								if (Whand[i] == "ACC") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+								}
+								if (Nhand[i] == "ACC") {
+									//alert("You have the Ace of Clubs!")
+									secretcall[1] = 1
+									document.getElementById('messages').innerHTML = "You have the Ace of Clubs!"
+									return false
+								}
 							}
-							if (Shand[i] == "ACC") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-							}
-							if (Whand[i] == "ACC") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-							}
+							//alert("I need a partner...Ace of Clubs...Known!")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Clubs...Known!"
 							solochoicetext = "Ace of Clubs"
-							calledace = '<span style="color:black;">A&clubs; Unknown</span>'
+							calledace = '<span style="color:black;">A&clubs; Known</span>'
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
 						}
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
-					}
-				}
-				else {
-					//alert("You don't have both black queens!")
-					document.getElementById('messages').innerHTML = "You don't have both black queens!"
-					return
-				}
-			}
-
-			if (solochoice == "AHH") {
-				if (Nhand[8] == "QCT" && Nhand[7] == "QST" || Nhand[1] == "QCT" && Nhand[2] == "QST") {
-					if (Nhand[1].charAt(2) == "H" || Nhand[2].charAt(2) == "H" || Nhand[3].charAt(2) == "H" || Nhand[4].charAt(2) == "H" ||
-						Nhand[5].charAt(2) == "H" || Nhand[6].charAt(2) == "H" || Nhand[7].charAt(2) == "H" || Nhand[8].charAt(2) == "H") {
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "AHH") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
+						else {
+							//alert("I need a partner...Ace of Clubs...Unknown!")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Clubs...Unknown!"
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "ACC") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+								}
+								if (Shand[i] == "ACC") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+								}
+								if (Whand[i] == "ACC") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+								}
+								solochoicetext = "Ace of Clubs"
+								calledace = '<span style="color:black;">A&clubs; Unknown</span>'
 							}
-							if (Shand[i] == "AHH") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-							}
-							if (Whand[i] == "AHH") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-							}
-							if (Nhand[i] == "AHH") {
-								//alert("You have the Ace of Hearts!")
-								secretcall[2] = 1
-								document.getElementById('messages').innerHTML = "You have the Ace of Hearts!"
-								return
-							}
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
 						}
-						//alert("I need a partner...Ace of Hearts!...Known")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Known"
-						solochoicetext = "Ace of Hearts"
-						calledace = '<span style="color:black;">A&hearts; Known</span>'
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
 					}
 					else {
-						//alert("I need a partner...Ace of Hearts!...Unknown")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Unknown"
-						solochoicetext = "Ace of Hearts"
-						calledace = '<span style="color:black;">A&hearts; Unknown</span>'
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "AHH") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
-							}
-							if (Shand[i] == "AHH") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-							}
-							if (Whand[i] == "AHH") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-							}
-						}
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
+						//alert("You don't have both black queens!")
+						document.getElementById('messages').innerHTML = "You don't have both black queens!"
+						return false
 					}
 				}
-				else {
-					//alert("You don't have both black queens!")
-					document.getElementById('messages').innerHTML = "You don't have both black queens!"
-					return
-				}
-			}
 
-			if (solochoice == "ASS") {
-				if (Nhand[8] == "QCT" && Nhand[7] == "QST" || Nhand[1] == "QCT" && Nhand[2] == "QST") {
-					if (Nhand[1].charAt(2) == "S" || Nhand[2].charAt(2) == "S" || Nhand[3].charAt(2) == "S" || Nhand[4].charAt(2) == "S" ||
-						Nhand[5].charAt(2) == "S" || Nhand[6].charAt(2) == "S" || Nhand[7].charAt(2) == "S" || Nhand[8].charAt(2) == "S") {
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "ASS") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
-								break
+				if (solochoice == "AHH") {
+					if (Nhand[8] == "QCT" && Nhand[7] == "QST" || Nhand[1] == "QCT" && Nhand[2] == "QST") {
+						if (Nhand[1].charAt(2) == "H" || Nhand[2].charAt(2) == "H" || Nhand[3].charAt(2) == "H" || Nhand[4].charAt(2) == "H" ||
+							Nhand[5].charAt(2) == "H" || Nhand[6].charAt(2) == "H" || Nhand[7].charAt(2) == "H" || Nhand[8].charAt(2) == "H") {
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "AHH") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+								}
+								if (Shand[i] == "AHH") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+								}
+								if (Whand[i] == "AHH") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+								}
+								if (Nhand[i] == "AHH") {
+									//alert("You have the Ace of Hearts!")
+									secretcall[2] = 1
+									document.getElementById('messages').innerHTML = "You have the Ace of Hearts!"
+									return false
+								}
 							}
-							if (Shand[i] == "ASS") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-								break
-							}
-							if (Whand[i] == "ASS") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-								break
-							}
-							if (Nhand[i] == "ASS") {
-								//alert("You have the Ace of Spades!")
-								secretcall[3] = 1
-								document.getElementById('messages').innerHTML = "You have the Ace of Spades!"
-								return
-							}
+							//alert("I need a partner...Ace of Hearts!...Known")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Known"
+							solochoicetext = "Ace of Hearts"
+							calledace = '<span style="color:black;">A&hearts; Known</span>'
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
 						}
-						//alert("I need a partner...Ace of Spades...Known!")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Spades...Known!"
-						solochoicetext = "Ace of Spades"
-						calledace = '<span style="color:black;">A&spades; Known</span>'
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
+						else {
+							//alert("I need a partner...Ace of Hearts!...Unknown")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Unknown"
+							solochoicetext = "Ace of Hearts"
+							calledace = '<span style="color:black;">A&hearts; Unknown</span>'
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "AHH") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+								}
+								if (Shand[i] == "AHH") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+								}
+								if (Whand[i] == "AHH") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+								}
+							}
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
+						}
 					}
 					else {
-						//alert("I need a partner...Ace of Spades...Unknown!")
-						document.getElementById('messages').innerHTML = "I need a partner...Ace of Spades...Unknown!"
-						for (i = 1; i <= 8; i++) {
-							if (Ehand[i] == "ASS") {
-								solopartner = 2
-								partner = new Array(0, 1, 1, 0, 0)
-								break
+						//alert("You don't have both black queens!")
+						document.getElementById('messages').innerHTML = "You don't have both black queens!"
+						return false
+					}
+				}
+
+				if (solochoice == "ASS") {
+					if (Nhand[8] == "QCT" && Nhand[7] == "QST" || Nhand[1] == "QCT" && Nhand[2] == "QST") {
+						if (Nhand[1].charAt(2) == "S" || Nhand[2].charAt(2) == "S" || Nhand[3].charAt(2) == "S" || Nhand[4].charAt(2) == "S" ||
+							Nhand[5].charAt(2) == "S" || Nhand[6].charAt(2) == "S" || Nhand[7].charAt(2) == "S" || Nhand[8].charAt(2) == "S") {
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "ASS") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+									break
+								}
+								if (Shand[i] == "ASS") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+									break
+								}
+								if (Whand[i] == "ASS") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+									break
+								}
+								if (Nhand[i] == "ASS") {
+									//alert("You have the Ace of Spades!")
+									secretcall[3] = 1
+									document.getElementById('messages').innerHTML = "You have the Ace of Spades!"
+									return false
+								}
 							}
-							if (Shand[i] == "ASS") {
-								solopartner = 3
-								partner = new Array(0, 1, 0, 1, 0)
-								break
-							}
-							if (Whand[i] == "ASS") {
-								solopartner = 4
-								partner = new Array(0, 1, 0, 0, 1)
-								break
-							}
+							//alert("I need a partner...Ace of Spades...Known!")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Spades...Known!"
 							solochoicetext = "Ace of Spades"
-							calledace = '<span style="color:black;">A&spades; Unknown</span>'
+							calledace = '<span style="color:black;">A&spades; Known</span>'
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
 						}
-						visiblepartner = new Array(0, 1, .5, .5, .5)
-						document.Nscore.Nscore.style.color = "red"
-						document.Nscore.Nscore.style.backgroundColor = "yellow"
-						document.getElementById("calledAceSlot").innerHTML = calledace
-						partnercount = 1
-						partners = 1
-						partnerdelay = 1
-						soloplayer = 1
-						return
+						else {
+							//alert("I need a partner...Ace of Spades...Unknown!")
+							document.getElementById('messages').innerHTML = "I need a partner...Ace of Spades...Unknown!"
+							for (i = 1; i <= 8; i++) {
+								if (Ehand[i] == "ASS") {
+									solopartner = 2
+									partner = new Array(0, 1, 1, 0, 0)
+									break
+								}
+								if (Shand[i] == "ASS") {
+									solopartner = 3
+									partner = new Array(0, 1, 0, 1, 0)
+									break
+								}
+								if (Whand[i] == "ASS") {
+									solopartner = 4
+									partner = new Array(0, 1, 0, 0, 1)
+									break
+								}
+								solochoicetext = "Ace of Spades"
+								calledace = '<span style="color:black;">A&spades; Unknown</span>'
+							}
+							visiblepartner = new Array(0, 1, .5, .5, .5)
+							document.Nscore.Nscore.style.color = "red"
+							document.Nscore.Nscore.style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
+							document.getElementById("calledAceSlot").innerHTML = calledace
+							partnercount = 1
+							partners = 1
+							partnerdelay = 1
+							soloplayer = 1
+							return true
 
+						}
+					}
+					else {
+						//alert("You don't have both black queens!")
+						document.getElementById('messages').innerHTML = "You don't have both black queens!"
+						return false
 					}
 				}
-				else {
-					//alert("You don't have both black queens!")
-					document.getElementById('messages').innerHTML = "You don't have both black queens!"
-					return
-				}
+
+
+
 			}
-
-
 
 		}
-
-
-
+		return true
 	}
 
 
@@ -4032,7 +4143,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											visiblepartner = new Array(0, .5, 1, .5, .5)
 											document.Escore.Escore.style.color = "red"
 											document.Escore.Escore.style.backgroundColor = "yellow"
-
+											document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
 											partners = 1
@@ -4062,7 +4173,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											visiblepartner = new Array(0, .5, .5, 1, .5)
 											document.Sscore.Sscore.style.color = "red"
 											document.Sscore.Sscore.style.backgroundColor = "yellow"
-
+											document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
 											partners = 1
@@ -4092,7 +4203,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											visiblepartner = new Array(0, .5, .5, .5, 1)
 											document.Wscore.Wscore.style.color = "red"
 											document.Wscore.Wscore.style.backgroundColor = "yellow"
-
+											document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 											document.getElementById("calledAceSlot").innerHTML = calledace;
 											partnercount = 1
 											partners = 1
@@ -4119,7 +4230,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 				//alert(playername[number]+" calls off both Old Ones!")
 				document.getElementById('messages').innerHTML = playername[number] + " calls off both Old Ones!"
 				solochoice = "QQ"
-				calledace = "Old Ones"
+				calledace = "Both Old Ones"
 				soloplayer = number
 				alone = number
 
@@ -4130,6 +4241,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 1, 0, 0)
 						document.Escore.Escore.style.color = "red"
 						document.Escore.Escore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4139,6 +4251,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 0, 1, 0)
 						document.Sscore.Sscore.style.color = "red"
 						document.Sscore.Sscore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4148,6 +4261,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 0, 0, 1)
 						document.Wscore.Wscore.style.color = "red"
 						document.Wscore.Wscore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4158,7 +4272,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			if ((Chand[8] == "QCT" && Chand[7] != "QST" && Csuit[1] > 6 - (trust[number] - .25) * 4) || (Chand[8] == "QST" && Csuit[1] > 7 - (trust[number] - .25) * 2)) {
 				//alert(playername[number]+" calls off the Old One!")
 				document.getElementById('messages').innerHTML = playername[number] + " calls off the Old One!"
-				calledace = "Old One"
+				calledace = "One Old One"
 				solochoice = "Q"
 
 				soloplayer = number
@@ -4171,6 +4285,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 1, 0, 0)
 						document.Escore.Escore.style.color = "red"
 						document.Escore.Escore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4180,6 +4295,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 0, 1, 0)
 						document.Sscore.Sscore.style.color = "red"
 						document.Sscore.Sscore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4189,6 +4305,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						visiblepartner = new Array(0, 0, 0, 0, 1)
 						document.Wscore.Wscore.style.color = "red"
 						document.Wscore.Wscore.style.backgroundColor = "yellow"
+						document.getElementById("calledAceSlot").style.backgroundColor = "yellow"
 						document.getElementById("calledAceSlot").innerHTML = calledace
 						partners = 1
 						break
@@ -4229,16 +4346,20 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			}
 
 
+			document.getElementById('continue').style.display = 'none'
 
 
-
+			if (!partnerchoice()) {
+				document.getElementById('continue').style.display = 'inherit';
+				return;
+			}
 
 			const radios = document.forms["solo"].elements["choice"];
 			for (let i = 0; i < radios.length; i++) {
 				radios[i].checked = false;
 			}
 
-			document.getElementById('continue').style.display = 'none'
+
 
 
 			computerpartner(Ehand, Esuit, 2)
@@ -6422,9 +6543,9 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 						addStat("POINTS_WON", i, scores[i]);
 						addStat("TRICKS_WON", i, tricks[i]);
 						addStat("HANDS_PLAYED", i);
-						setMaxStat("MOST_POINTS", i, scores[i]);
-						setMaxStat("MOST_TRICKS", i, tricks[i]);
-						setMaxStat("MOST_TRUMP", i, totaltrump[i]);
+						setExtremeStat("POINTS", i, scores[i]);
+						setExtremeStat("TRICKS", i, tricks[i]);
+						setExtremeStat("TRUMP", i, totaltrump[i]);
 						if (partner[i] == 1) {
 							if (alone == i) {
 								addStat("ALONE", i);
@@ -6490,7 +6611,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 								addStat("NINE_BLUE", i);
 								addStat("HANDS_WON", i);
 								addStat("CHIPS_WON_HAND", i, 9)
-								setMaxStat("MOST_CHIPS_HAND", i, 9);
+								setExtremeStat("CHIPS_HAND", i, 9);
 							}
 						}
 					}
@@ -6510,7 +6631,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 									addStat("SIX_BLUE", i);
 									addStat("HANDS_WON", i);
 									addStat("CHIPS_WON_HAND", i, 6)
-									setMaxStat("MOST_CHIPS_HAND", i, 6);
+									setExtremeStat("CHIPS_HAND", i, 6);
 								}
 							}
 						}
@@ -6530,7 +6651,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 										addStat("THREE_BLUE", i);
 										addStat("HANDS_WON", i);
 										addStat("CHIPS_WON_HAND", i, 3)
-										setMaxStat("MOST_CHIPS_HAND", i, 3);
+										setExtremeStat("CHIPS_HAND", i, 3);
 									}
 								}
 							}
@@ -6550,7 +6671,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											addStat("TWO_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 2)
-											setMaxStat("MOST_CHIPS_HAND", i, 2);
+											setExtremeStat("CHIPS_HAND", i, 2);
 										}
 									}
 								}
@@ -6568,7 +6689,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											addStat("THREE_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 3)
-											setMaxStat("MOST_CHIPS_HAND", i, 3);
+											setExtremeStat("CHIPS_HAND", i, 3);
 										}
 									}
 								}
@@ -6594,7 +6715,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 								addStat("THREE_WHITE", i);
 								addStat("HANDS_WON", i);
 								addStat("CHIPS_WON_HAND", i, 3)
-								setMaxStat("MOST_CHIPS_HAND", i, 3);
+								setExtremeStat("CHIPS_HAND", i, 3);
 							}
 						}
 					}
@@ -6614,7 +6735,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 									addStat("TWO_WHITE", i);
 									addStat("HANDS_WON", i);
 									addStat("CHIPS_WON_HAND", i, 2)
-									setMaxStat("MOST_CHIPS_HAND", i, 2);
+									setExtremeStat("CHIPS_HAND", i, 2);
 								}
 							}
 						}
@@ -6634,7 +6755,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 										addStat("ONE_WHITE", i);
 										addStat("HANDS_WON", i);
 										addStat("CHIPS_WON_HAND", i, 1)
-										setMaxStat("MOST_CHIPS_HAND", i, 1);
+										setExtremeStat("CHIPS_HAND", i, 1);
 									}
 								}
 							}
@@ -6654,7 +6775,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											addStat("TWO_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 2)
-											setMaxStat("MOST_CHIPS_HAND", i, 2);
+											setExtremeStat("CHIPS_HAND", i, 2);
 										}
 									}
 								}
@@ -6672,7 +6793,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 											addStat("THREE_RED", i);
 											addStat("HANDS_WON", i);
 											addStat("CHIPS_WON_HAND", i, 3)
-											setMaxStat("MOST_CHIPS_HAND", i, 3);
+											setExtremeStat("CHIPS_HAND", i, 3);
 										}
 									}
 								}
@@ -6749,7 +6870,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			for (let i = 1; i <= 4; i++) {
 				addStat("GAMES_PLAYED", i);
 				addStat("CHIPS_WON", i, chips[i]);
-				setMaxStat("MOST_CHIPS", i, chips[i]);
+				setExtremeStat("CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 4
@@ -6762,7 +6883,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			for (let i = 1; i <= 4; i++) {
 				addStat("GAMES_PLAYED", i);
 				addStat("CHIPS_WON", i, chips[i]);
-				setMaxStat("MOST_CHIPS", i, chips[i]);
+				setExtremeStat("CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 1
@@ -6775,7 +6896,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			for (let i = 1; i <= 4; i++) {
 				addStat("GAMES_PLAYED", i);
 				addStat("CHIPS_WON", i, chips[i]);
-				setMaxStat("MOST_CHIPS", i, chips[i]);
+				setExtremeStat("CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 2
@@ -6788,7 +6909,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 			for (let i = 1; i <= 4; i++) {
 				addStat("GAMES_PLAYED", i);
 				addStat("CHIPS_WON", i, chips[i]);
-				setMaxStat("MOST_CHIPS", i, chips[i]);
+				setExtremeStat("CHIPS", i, chips[i]);
 			}
 			gameover = 1
 			dealer = 3
