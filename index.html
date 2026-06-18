@@ -604,7 +604,7 @@
 		}
 
 
-
+/*
 
 		TEST BORDERS table {
 			outline: 2px dashed red;
@@ -613,6 +613,9 @@
 		td {
 			outline: 1px dotted blue;
 		}
+*/
+
+
 	</style>
 </head>
 
@@ -855,7 +858,7 @@
 <table width="200" border="0" cellpadding="0" cellspacing="0"
     style="border-collapse:collapse; margin:0;">
     <tr>
-        <td align="center" style="padding:4px;">
+        <td align="center" style="padding:0px;">
     <div id="calledAceSlot" style="
         font:bold 12pt Arial;
         color:black;
@@ -3852,7 +3855,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 							//alert("I need a partner...Ace of Clubs...Known!")
 							document.getElementById('messages').innerHTML = "I need a partner...Ace of Clubs...Known!"
 							solochoicetext = "Ace of Clubs"
-							calledace = '<span style="color:black;">A&clubs; Known</span>'
+							calledace = '<span style="color:black;">A&clubs; &nbsp; Known</span>'
 							visiblepartner = new Array(0, 1, .5, .5, .5)
 							document.Nscore.Nscore.style.color = "red"
 							document.Nscore.Nscore.style.backgroundColor = "yellow"
@@ -3880,7 +3883,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 									partner = new Array(0, 1, 0, 0, 1)
 								}
 								solochoicetext = "Ace of Clubs"
-								calledace = '<span style="color:black;">A&clubs; Unknown</span>'
+								calledace = '<span style="color:black;">A&clubs;&nbsp; Unknown</span>'
 							}
 							visiblepartner = new Array(0, 1, .5, .5, .5)
 							document.Nscore.Nscore.style.color = "red"
@@ -3928,7 +3931,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 							//alert("I need a partner...Ace of Hearts!...Known")
 							document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Known"
 							solochoicetext = "Ace of Hearts"
-							calledace = '<span style="color:black;">A&hearts; Known</span>'
+							calledace = '<span style="color:black;">A&hearts;&nbsp; Known</span>'
 							visiblepartner = new Array(0, 1, .5, .5, .5)
 							document.Nscore.Nscore.style.color = "red"
 							document.Nscore.Nscore.style.backgroundColor = "yellow"
@@ -3944,7 +3947,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 							//alert("I need a partner...Ace of Hearts!...Unknown")
 							document.getElementById('messages').innerHTML = "I need a partner...Ace of Hearts!...Unknown"
 							solochoicetext = "Ace of Hearts"
-							calledace = '<span style="color:black;">A&hearts; Unknown</span>'
+							calledace = '<span style="color:black;">A&hearts;&nbsp; Unknown</span>'
 							for (i = 1; i <= 8; i++) {
 								if (Ehand[i] == "AHH") {
 									solopartner = 2
@@ -4008,7 +4011,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 							//alert("I need a partner...Ace of Spades...Known!")
 							document.getElementById('messages').innerHTML = "I need a partner...Ace of Spades...Known!"
 							solochoicetext = "Ace of Spades"
-							calledace = '<span style="color:black;">A&spades; Known</span>'
+							calledace = '<span style="color:black;">A&spades;&nbsp; Known</span>'
 							visiblepartner = new Array(0, 1, .5, .5, .5)
 							document.Nscore.Nscore.style.color = "red"
 							document.Nscore.Nscore.style.backgroundColor = "yellow"
@@ -4040,7 +4043,7 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 									break
 								}
 								solochoicetext = "Ace of Spades"
-								calledace = '<span style="color:black;">A&spades; Unknown</span>'
+								calledace = '<span style="color:black;">A&spades; &nbsp;Unknown</span>'
 							}
 							visiblepartner = new Array(0, 1, .5, .5, .5)
 							document.Nscore.Nscore.style.color = "red"
@@ -4105,13 +4108,13 @@ Whandimage = new Array(0, "image2/card7CC.gif", "image2/card1CC.gif", "image2/ca
 										//alert(playername[number]+" needs a partner..." + calledacetext + "...Unknown!")
 										document.getElementById('messages').innerHTML = playername[number] + " needs a partner..." + solochoicetext + "...Unknown!"
 										//solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"U"
-										calledace = calledace + " Unknown"
+										calledace = calledace + "&nbsp; Unknown"
 									}
 									else {
 										//alert(playername[number]+" needs a partner..." + calledacetext + "...Known!")
 										document.getElementById('messages').innerHTML = playername[number] + " needs a partner..." + solochoicetext + "...Known!"
 										//solochoicetext = deckvalue[i].charAt(0)+deckvalue[i].charAt(1)+"K"
-										calledace = calledace + " Known"
+										calledace = calledace + "&nbsp; Known"
 									}
 
 									solochoice = deckvalue[i]
