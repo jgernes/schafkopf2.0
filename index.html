@@ -121,6 +121,7 @@
 			font-size: 13.5px;
 			text-align: justify;
 			width: 600px;
+			height: 545px;
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
@@ -148,6 +149,7 @@
 			font-size: 13.5px;
 			text-align: justify;
 			width: 600px;
+			height: 545px;
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
@@ -604,7 +606,7 @@
 		}
 
 
-/*
+
 
 		TEST BORDERS table {
 			outline: 2px dashed red;
@@ -613,9 +615,6 @@
 		td {
 			outline: 1px dotted blue;
 		}
-*/
-
-
 	</style>
 </head>
 
@@ -714,152 +713,152 @@
 						<div style="display:flex; flex-direction:column; height:399px;">
 
 
-						<!-- Names & scores grid -->
-						<table width="100%" border="0" cellpadding="0" cellspacing="0"
-							style="border-collapse:collapse; table-layout:fixed;">
-							<tr>
-								<td width="66" style="vertical-align:top;">
-									<div
-										style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
-										<div id="NStackL"></div>
-										<div id="NStackM"></div>
-										<div id="NStackR"></div>
-									</div>
-								</td>
-								<td width="66" align="center" valign="middle" style="padding:2px 0;">
-									<form name="Nname" style="margin:0;">
-										<input type="text" name="Nname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+							<!-- Names & scores grid -->
+							<table width="100%" border="0" cellpadding="0" cellspacing="0"
+								style="border-collapse:collapse; table-layout:fixed;">
+								<tr>
+									<td width="66" style="vertical-align:top;">
+										<div
+											style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
+											<div id="NStackL"></div>
+											<div id="NStackM"></div>
+											<div id="NStackR"></div>
+										</div>
+									</td>
+									<td width="66" align="center" valign="middle" style="padding:2px 0;">
+										<form name="Nname" style="margin:0;">
+											<input type="text" name="Nname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
 										                      text-align:center; width:60px; margin:0;">
-									</form>
-									<form name="Nscore" class="score" style="margin:2px 0 0;">
-										<input type="text" name="Nscore" readonly
-											style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+										</form>
+										<form name="Nscore" class="score" style="margin:2px 0 0;">
+											<input type="text" name="Nscore" readonly
+												style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
 										                      width:50px; height:30px; text-align:center; line-height:30px; margin:0;border-radius: 8px;">
-									</form>
-								</td>
-								<td width="66" style="vertical-align:bottom;">
-									<div
-										style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
-										<div id="EStackL"></div>
-										<div id="EStackM"></div>
-										<div id="EStackR"></div>
-									</div>
-								</td>
-							</tr>
+										</form>
+									</td>
+									<td width="66" style="vertical-align:bottom;">
+										<div
+											style="display:flex; justify-content:flex-end; align-items:flex-end; gap:1px; width:100%; height:100%;">
+											<div id="EStackL"></div>
+											<div id="EStackM"></div>
+											<div id="EStackR"></div>
+										</div>
+									</td>
+								</tr>
 
-							<tr>
-								<td width="66" align="center" valign="middle" style="padding:2px 0;">
-									<form name="Wname" style="margin:0;">
-										<input type="text" name="Wname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+								<tr>
+									<td width="66" align="center" valign="middle" style="padding:2px 0;">
+										<form name="Wname" style="margin:0;">
+											<input type="text" name="Wname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       					text-align:center; width:60px; margin:0;">
-									</form>
-									<form name="Wscore" class="score" style="margin:2px 0 0;">
-										<input type="text" name="Wscore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+										</form>
+										<form name="Wscore" class="score" style="margin:2px 0 0;">
+											<input type="text" name="Wscore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       					width:50px; height:30px; text-align:center; line-height:30px; margin:0;border-radius: 8px;">
-									</form>
-								</td>
+										</form>
+									</td>
 
-								<td width="66" align="center" valign="middle">
-									<button id="backdoor" type="button" onclick="openbackdoor()" style="background-color:green; border:0px; 
+									<td width="66" align="center" valign="middle">
+										<button id="backdoor" type="button" onclick="openbackdoor()" style="background-color:green; border:0px; 
                      				width:40px; height:40px; display:block;">
 
-									</button>
-								</td>
+										</button>
+									</td>
 
-								<td width="66" align="center" valign="middle" style="padding:2px 0;">
-									<form name="Ename" style="margin:0;">
-										<input type="text" name="Ename" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+									<td width="66" align="center" valign="middle" style="padding:2px 0;">
+										<form name="Ename" style="margin:0;">
+											<input type="text" name="Ename" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       					text-align:center; width:60px; margin:0;">
-									</form>
-									<form name="Escore" class="score" style="margin:2px 0 0;">
-										<input type="text" name="Escore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+										</form>
+										<form name="Escore" class="score" style="margin:2px 0 0;">
+											<input type="text" name="Escore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       					width:50px; height:30px; text-align:center; line-height:30px; margin:0;border-radius: 8px;">
-									</form>
-								</td>
-							</tr>
+										</form>
+									</td>
+								</tr>
 
-							<tr>
-								<td width="66" style="vertical-align:top;">
-									<div
-										style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
-										<div id="WStackL"></div>
-										<div id="WStackM"></div>
-										<div id="WStackR"></div>
-									</div>
-								</td>
-								<td width="66" align="center" valign="middle" style="padding:2px 0;">
-									<form name="Sname" style="margin:0;">
-										<input type="text" name="Sname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
+								<tr>
+									<td width="66" style="vertical-align:top;">
+										<div
+											style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
+											<div id="WStackL"></div>
+											<div id="WStackM"></div>
+											<div id="WStackR"></div>
+										</div>
+									</td>
+									<td width="66" align="center" valign="middle" style="padding:2px 0;">
+										<form name="Sname" style="margin:0;">
+											<input type="text" name="Sname" size="6" readonly style="font:bold 12pt Arial; color:black; background-color:green; border:transparent;
                       text-align:center; width:60px; margin:0;">
-									</form>
-									<form name="Sscore" class="score" style="margin:2px 0 0;">
-										<input type="text" name="Sscore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
+										</form>
+										<form name="Sscore" class="score" style="margin:2px 0 0;">
+											<input type="text" name="Sscore" readonly style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:2px solid transparent;
                       width:50px; height:30px; text-align:center; line-height:30px; margin:0;border-radius: 8px;">
-									</form>
-								</td>
-								<td width="66" style="vertical-align:bottom;">
-									<div
-										style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
-										<div id="SStackL"></div>
-										<div id="SStackM"></div>
-										<div id="SStackR"></div>
-									</div>
-								</td>
-							</tr>
-						</table>
+										</form>
+									</td>
+									<td width="66" style="vertical-align:bottom;">
+										<div
+											style="display:flex; justify-content:flex-start; align-items:flex-start; gap:1px; width:100%; height:100%;">
+											<div id="SStackL"></div>
+											<div id="SStackM"></div>
+											<div id="SStackR"></div>
+										</div>
+									</td>
+								</tr>
+							</table>
 
 
-						<!-- Solo/Call form -->
-<form name="solo" method="post"
-    style="font-family:Arial,sans-serif; font-size:11pt; color:black; margin:0;">
-    <table border="0" cellpadding="0" cellspacing="0" align="center"
-        style="margin:0; border-collapse:collapse;">
-        <tr>
-            <td valign="top" width="100" style="padding:6px;">
-                <b>Call Partner</b><br>
-                <input name="choice" value="ACC" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px;">A&clubs;</span><br>
+							<!-- Solo/Call form -->
+							<form name="solo" method="post"
+								style="font-family:Arial,sans-serif; font-size:11pt; color:black; margin:0;">
+								<table border="0" cellpadding="0" cellspacing="0" align="center"
+									style="margin:0; border-collapse:collapse;">
+									<tr>
+										<td valign="top" width="100" style="padding:6px;">
+											<b>Call Partner</b><br>
+											<input name="choice" value="ACC" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px;">A&clubs;</span><br>
 
-                <input name="choice" value="AHH" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
+											<input name="choice" value="AHH" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px; color:#D11818;">A&hearts;</span><br>
 
-                <input name="choice" value="ASS" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px;">A&spades;</span>
-            </td>
+											<input name="choice" value="ASS" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px;">A&spades;</span>
+										</td>
 
-            <td valign="top" width="100" style="padding:6px;">
-                <b>Call Off</b><br>
-                <input name="choice" value="QQ" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px;">Q&clubs; Q&spades;</span><br>
+										<td valign="top" width="100" style="padding:6px;">
+											<b>Call Off</b><br>
+											<input name="choice" value="QQ" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px;">Q&clubs; Q&spades;</span><br>
 
-                <input name="choice" value="Q" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px;">Q&clubs;</span><br>
+											<input name="choice" value="Q" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px;">Q&clubs;</span><br>
 
-                <input name="choice" value="Q" type="radio"
-                    onmousedown="this.__chk=this.checked"
-                    onclick="if(this.__chk)this.checked=false">
-                <span style="font-size:18px;">Q&spades;</span>
-            </td>
-        </tr>
-    </table>
-</form>
+											<input name="choice" value="Q" type="radio"
+												onmousedown="this.__chk=this.checked"
+												onclick="if(this.__chk)this.checked=false">
+											<span style="font-size:18px;">Q&spades;</span>
+										</td>
+									</tr>
+								</table>
+							</form>
 
-<!-- Called ace slot table -->
-<table width="200" border="0" cellpadding="0" cellspacing="0"
-    style="border-collapse:collapse; margin:0;">
-    <tr>
-        <td align="center" style="padding:0px;">
-    <div id="calledAceSlot" style="
+							<!-- Called ace slot table -->
+							<table width="200" border="0" cellpadding="0" cellspacing="0"
+								style="border-collapse:collapse; margin:0;">
+								<tr>
+									<td align="center" style="padding:0px;">
+										<div id="calledAceSlot" style="
         font:bold 12pt Arial;
         color:black;
         background-color:#84B5E1;
@@ -870,127 +869,130 @@
         align-items:center;
         justify-content:center;
         border-radius:8px;">
-    </div>
-</td>
-    </tr>
-</table>
+										</div>
+									</td>
+								</tr>
+							</table>
 
-<!-- Flexible space -->
-<div style="flex:1;"></div>
+							<!-- Flexible space -->
+							<div style="flex:1;"></div>
 
-<!-- Message box table -->
-<table width="200" border="0" cellpadding="0" cellspacing="0"
-    style="border-collapse:collapse; margin:0;">
-    <tr>
-        <td>
-            <div id="messages"
-                style="width:200px; height:92px; background-color:beige;
+							<!-- Message box table -->
+							<table width="200" border="0" cellpadding="0" cellspacing="0"
+								style="border-collapse:collapse; margin:0;">
+								<tr>
+									<td>
+										<div id="messages" style="width:200px; height:92px; background-color:beige;
                 font-size:14px; font-family:Arial, sans-serif; padding:4px;
                 border:1px solid #aaa; box-sizing:border-box; overflow:hidden;
                 white-space:pre-line; border-radius:8px;">
-                Welcome to Schafkopf 2.0
-            </div>
-        </td>
-    </tr>
-</table>
+											Welcome to Schafkopf 2.0
+										</div>
+									</td>
+								</tr>
+							</table>
 
-		</div>
+						</div>
 
-		</td>
+					</td>
 
-		<!-- ========== MIDDLE COLUMN (400px) ========== -->
-		<td style="width:400px; vertical-align:top;">
-			<table width="400" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; background-color:#8b602b;
+					<!-- ========== MIDDLE COLUMN (400px) ========== -->
+					<td style="width:400px; vertical-align:top;">
+						<table width="400" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse; background-color:#8b602b;
     border-radius:8px; overflow:hidden;">
-				<tr>
-					<td width="133" align="center">
-						<img src="image2/Card01.gif" name="card12" width="133" height="133" onclick="opentrick(1)">
-					</td>
-					<td width="133" align="center">
-						<div
-							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-							<img src="image2/cardBK.gif" name="card11"
-								style="max-width:100%; max-height:100%; object-fit:contain;">
-						</div>
-					</td>
-					<td width="133" align="center">
-						<img src="image2/Card01.gif" name="card22" width="133" height="133" onclick="opentrick(2)">
-					</td>
-				</tr>
+							<tr>
+								<td width="133" align="center">
+									<img src="image2/Card01.gif" name="card12" width="133" height="133"
+										onclick="opentrick(1)">
+								</td>
+								<td width="133" align="center">
+									<div
+										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+										<img src="image2/cardBK.gif" name="card11"
+											style="max-width:100%; max-height:100%; object-fit:contain;">
+									</div>
+								</td>
+								<td width="133" align="center">
+									<img src="image2/Card01.gif" name="card22" width="133" height="133"
+										onclick="opentrick(2)">
+								</td>
+							</tr>
 
-				<tr>
-					<td width="133" align="center">
-						<div
-							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-							<img src="image2/cardBK.gif" name="card41"
-								style="max-width:100%; max-height:100%; object-fit:contain;">
-						</div>
-					</td>
+							<tr>
+								<td width="133" align="center">
+									<div
+										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+										<img src="image2/cardBK.gif" name="card41"
+											style="max-width:100%; max-height:100%; object-fit:contain;">
+									</div>
+								</td>
 
-					<td width="133" align="center">
-						<button id="deal" type="button" name="deal" onclick="deal()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+								<td width="133" align="center">
+									<button id="deal" type="button" name="deal" onclick="deal()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
                            font-size:24px; border-radius:50px; color:black;">
-							Deal
-						</button>
+										Deal
+									</button>
 
-						<button id="continue" type="button" name="deal" onclick="beginhand()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
+									<button id="continue" type="button" name="deal" onclick="beginhand()" style="background-color:#84B5E1; border:2px solid black; width:133px; height:60px;
                            font-size:24px; border-radius:50px; padding:0; display:none;
                            align-items:center; justify-content:center; color:black;">
-							Continue
-						</button>
+										Continue
+									</button>
+								</td>
+
+								<td width="133" align="center">
+									<div
+										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+										<img src="image2/cardBK.gif" name="card21"
+											style="max-width:100%; max-height:100%; object-fit:contain;">
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td width="133" align="center">
+									<img src="image2/Card01.gif" name="card42" width="133" height="133"
+										onclick="opentrick(4)">
+								</td>
+								<td width="133" align="center">
+									<div
+										style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
+										<img src="image2/cardBK.gif" name="card31"
+											style="max-width:100%; max-height:100%; object-fit:contain;">
+									</div>
+								</td>
+								<td width="133" align="center">
+									<img src="image2/Card01.gif" name="card32" width="133" height="133"
+										onclick="opentrick(3)">
+								</td>
+							</tr>
+						</table>
 					</td>
 
-					<td width="133" align="center">
-						<div
-							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-							<img src="image2/cardBK.gif" name="card21"
-								style="max-width:100%; max-height:100%; object-fit:contain;">
-						</div>
-					</td>
-				</tr>
+					<!-- ========== RIGHT COLUMN (200px) ========== -->
+					<td style="width:200px; vertical-align:top;">
 
-				<tr>
-					<td width="133" align="center">
-						<img src="image2/Card01.gif" name="card42" width="133" height="133" onclick="opentrick(4)">
-					</td>
-					<td width="133" align="center">
-						<div
-							style="width:80px; height:126px; display:flex; align-items:center; justify-content:center;">
-							<img src="image2/cardBK.gif" name="card31"
-								style="max-width:100%; max-height:100%; object-fit:contain;">
-						</div>
-					</td>
-					<td width="133" align="center">
-						<img src="image2/Card01.gif" name="card32" width="133" height="133" onclick="opentrick(3)">
-					</td>
-				</tr>
-			</table>
-		</td>
+						<!-- Make this column a vertical flex stack -->
+						<div style="display:flex; flex-direction:column; height:399px;">
+							<!-- match your game height -->
 
-		<!-- ========== RIGHT COLUMN (200px) ========== -->
-		<td style="width:200px; vertical-align:top;">
+							<!-- Top: Lead box -->
+							<div>
+								<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
+									style="border-collapse:collapse;">
+									<tr>
+										<td width="100" valign="middle">
+											<form name="player" action="#" style="margin:0;font-family:'Arial'">
+												<b>Lead</b><br>
+												<input type="text" name="player" size="8" readonly
+													style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;border-radius: 8px;">
+											</form>
+										</td>
+									</tr>
+								</table>
+							</div>
 
-			<!-- Make this column a vertical flex stack -->
-			<div style="display:flex; flex-direction:column; height:399px;">
-				<!-- match your game height -->
-
-				<!-- Top: Lead box -->
-				<div>
-					<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
-						style="border-collapse:collapse;">
-						<tr>
-							<td width="100" valign="middle">
-								<form name="player" action="#" style="margin:0;font-family:'Arial'">
-									<b>Lead</b><br>
-									<input type="text" name="player" size="8" readonly
-										style="font:bold 18pt Arial; color:black; background-color:#84B5E1; border:transparent;border-radius: 8px;">
-								</form>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<!-- OPTIONAL LEAD BOX
+							<!-- OPTIONAL LEAD BOX
 <div>
   <table width="200" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
     <tr>
@@ -1007,341 +1009,341 @@
 </div>
 -->
 
-				<!-- Middle: open space grows -->
-				<div style="flex:1;"></div>
+							<!-- Middle: open space grows -->
+							<div style="flex:1;"></div>
 
-				<!-- Bottom: controls -->
-				<div>
-					<!-- Button area (shared space) -->
-					<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
-						style="border-collapse:collapse; margin-top:8px;">
-						<tr>
-							<td width="200" align="center">
-								<!-- Transcript button -->
-								<button id="transcript" type="button" onclick="showtranscript()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+							<!-- Bottom: controls -->
+							<div>
+								<!-- Button area (shared space) -->
+								<table width="200" border="0" cellpadding="0" cellspacing="0" align="center"
+									style="border-collapse:collapse; margin-top:8px;">
+									<tr>
+										<td width="200" align="center">
+											<!-- Transcript button -->
+											<button id="transcript" type="button" onclick="showtranscript()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black; display:none;">
-									Transcript
-								</button>
-								<!-- Cheat Sheet button -->
-								<button id="cheatsheet" type="button" onclick="cheatsheet()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+												Transcript
+											</button>
+											<!-- Cheat Sheet button -->
+											<button id="cheatsheet" type="button" onclick="cheatsheet()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black; display:none;">
-									Cheat Sheet
-								</button>
+												Cheat Sheet
+											</button>
 
-								<!-- Options stays below -->
-								<button id="options" type="button" onclick="options()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
+											<!-- Options stays below -->
+											<button id="options" type="button" onclick="options()" style="background-color:#84B5E1; border-color:black; border-radius:50px;
                      width:120px; color:black;">
-									Options
-								</button>
-							</td>
-						</tr>
-						<!-- Speed Slider -->
-						<tr>
-							<td width="200" valign="top" align="left" style="font-family:'Arial'">
+												Options
+											</button>
+										</td>
+									</tr>
+									<!-- Speed Slider -->
+									<tr>
+										<td width="200" valign="top" align="left" style="font-family:'Arial'">
 
-								<input type="range" id="speedSlider" min="0" max="2000" step="100" value="1000"
-									style="width:120px;">
-								<span id="speedWord" style="font-weight:bold; margin-left:4px;"></span>
-							</td>
-						</tr>
-					</table>
-				</div>
+											<input type="range" id="speedSlider" min="0" max="2000" step="100"
+												value="1000" style="width:120px;">
+											<span id="speedWord" style="font-weight:bold; margin-left:4px;"></span>
+										</td>
+									</tr>
+								</table>
+							</div>
 
-			</div>
-
-
-
-
-
-		</td>
-		</tr>
-
-		<tr>
-		<tr>
-			<td colspan="8" style="height:15px;"></td>
-		</tr>
-
-		</table>
-
-		<!-- MASTERTABLE ENDS-->
+						</div>
 
 
 
 
-		<!-- ===== MODALS ===== -->
 
-		<script>
-			// Map letters to colors
-			const CHIP_COLOR = { w: '#ffffff', r: '#D11818', b: '#2B6CB0' };
+					</td>
+				</tr>
 
-			/**
-			 * Draws a fixed-height chip stack table (bottom-aligned).
-			 * Only chip rows get a border; empty rows are invisible.
-			 */
-			function drawChipStackTable(targetId, chipList, {
-				rows = 6,
-				width = '21px',
-				rowHeight = '6px'
-			} = {}) {
-				const container = document.getElementById(targetId);
-				if (!container) return;
+				<tr>
+				<tr>
+					<td colspan="8" style="height:15px;"></td>
+				</tr>
 
-				// If no chips → hide container and bail
-				if (!chipList || chipList.length === 0) {
-					container.style.display = 'none';
-					container.innerHTML = '';
-					return;
-				} else {
-					// ensure visible if it was hidden previously
-					container.style.display = 'block';
-				}
+			</table>
 
-				const table = document.createElement('table');
-				table.style.borderCollapse = 'collapse';
-				table.style.width = width;
+			<!-- MASTERTABLE ENDS-->
 
-				const body = document.createElement('tbody');
 
-				// Build empty rows (invisible)
-				for (let i = 0; i < rows; i++) {
-					const tr = document.createElement('tr');
-					const td = document.createElement('td');
-					td.style.padding = '0';
-					td.style.height = rowHeight;
-					td.style.background = 'transparent'; // empty rows are invisible
-					td.style.border = '0';               // no outline on empties
-					tr.appendChild(td);
-					body.appendChild(tr);
-				}
 
-				// Fill chips from bottom up; chip rows get color + border
-				const tds = Array.from(body.querySelectorAll('td'));
-				let cursor = rows - 1; // bottom row index
-				for (let i = 0; i < chipList.length && cursor >= 0; i++, cursor--) {
-					const c = chipList[i];
-					const color = CHIP_COLOR[c];
-					if (color) {
-						const td = tds[cursor];
-						td.style.background = color;
-						td.style.border = '1px solid #000';
-						td.title = c === 'w' ? 'white' : c === 'r' ? 'red' : 'blue';
+
+			<!-- ===== MODALS ===== -->
+
+			<script>
+				// Map letters to colors
+				const CHIP_COLOR = { w: '#ffffff', r: '#D11818', b: '#2B6CB0' };
+
+				/**
+				 * Draws a fixed-height chip stack table (bottom-aligned).
+				 * Only chip rows get a border; empty rows are invisible.
+				 */
+				function drawChipStackTable(targetId, chipList, {
+					rows = 6,
+					width = '21px',
+					rowHeight = '6px'
+				} = {}) {
+					const container = document.getElementById(targetId);
+					if (!container) return;
+
+					// If no chips → hide container and bail
+					if (!chipList || chipList.length === 0) {
+						container.style.display = 'none';
+						container.innerHTML = '';
+						return;
+					} else {
+						// ensure visible if it was hidden previously
+						container.style.display = 'block';
 					}
-				}
 
-				table.appendChild(body);
-				container.innerHTML = '';
-				container.appendChild(table);
-			}
+					const table = document.createElement('table');
+					table.style.borderCollapse = 'collapse';
+					table.style.width = width;
 
-			/**
-			 * Split a chip string into three stacks:
-			 *  - first 6 → left
-			 *  - next 6  → middle
-			 *  - rest    → right
-			 * Empty stacks are hidden (no space taken).
-			 */
-			function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
-				const chips = (chipStr || '')
-					.toLowerCase()
-					.split('')
-					.filter(c => c === 'w' || c === 'r' || c === 'b');
+					const body = document.createElement('tbody');
 
-				const left = chips.slice(0, 6);
-				const mid = chips.slice(6, 12);
-				const right = chips.slice(12);
+					// Build empty rows (invisible)
+					for (let i = 0; i < rows; i++) {
+						const tr = document.createElement('tr');
+						const td = document.createElement('td');
+						td.style.padding = '0';
+						td.style.height = rowHeight;
+						td.style.background = 'transparent'; // empty rows are invisible
+						td.style.border = '0';               // no outline on empties
+						tr.appendChild(td);
+						body.appendChild(tr);
+					}
 
-				drawChipStackTable(leftId, left, opts);
-				drawChipStackTable(midId, mid, opts);
-				drawChipStackTable(rightId, right, opts);
-			}
-		</script>
-
-
-
-
-
-
-
-
-
-
-
-
-		<div id="transcriptmodal">
-			<div class="modal-content">
-				<div id="transcriptBody"></div>
-				<div style="text-align:center; margin-top:10px;">
-					<button id="replayBtn" onclick="replayHand()" style="background-color:white; border-color:black; border-radius:50px;
-                     width:120px; color:black;">
-						Replay Hand
-					</button>
-				</div>
-			</div>
-		</div>
-
-		<style>
-			/* compact horizontal chips (no conflict with game card styles) */
-			.tchip {
-				display: inline-block;
-				width: 28px;
-				/* fixed width so all chips match */
-				text-align: center;
-				/* center the rank + suit */
-				padding: 2px 0;
-				/* only vertical padding */
-				margin: 0 1px;
-				/* small horizontal gap */
-				border: 1px solid #bbb;
-				border-radius: 4px;
-				background: #f7f7f7;
-				line-height: 1.2;
-				font-weight: 600;
-				font-size: 12px;
-			}
-
-			.tchip.red {
-				color: #c01919;
-			}
-
-			.tchip.black {
-				color: #000;
-			}
-
-			.tchip.trump {
-				box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
-			}
-
-			.tchip.winner {
-				box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
-			}
-
-			/* table styles */
-			.transHead {
-				margin: 0 0 8px;
-				text-align: center;
-			}
-
-			.transTable {
-				width: 100%;
-				border-collapse: collapse;
-			}
-
-			.transTable th,
-			.transTable td {
-				padding: 6px;
-				border-bottom: 1px solid #ddd;
-				text-align: center;
-				vertical-align: center;
-			}
-		</style>
-
-		<script>
-			/* ----------- helpers ----------- */
-			function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-
-			// Normalize token for matching (keep lead markers H/S/C/T as-is; map T->1 for 10)
-			function canon(tok) {
-				tok = tok.trim().toUpperCase();
-				if (!tok) return '';
-				if (/^[A-Z]$/.test(tok)) return tok; // a single-letter lead marker
-				const suit = tok.slice(-2);
-				let rank = tok.slice(0, tok.length - 2);
-				if (rank === 'T') rank = '1'; // treat 'T' same as '1' (10)
-				return rank + suit;
-			}
-
-			// Render one horizontal chip from token like "ACC", "QHT", "9SS", "KDT"
-			function renderCard(token, { highlightTrump = true, highlightWin = false } = {}) {
-				token = (token || '').trim();
-				if (!token || /^[A-Z]$/.test(token)) return '';
-
-				const suit2 = token.slice(-2).toUpperCase();
-				let rankRaw = token.slice(0, token.length - 2).toUpperCase();
-				const rank = (rankRaw === '1' || rankRaw === 'T') ? '10' : rankRaw;
-
-				const suits = {
-					CC: { sym: '♣', color: 'black', trump: false },
-					SS: { sym: '♠', color: 'black', trump: false },
-					HH: { sym: '♥', color: 'red', trump: false },
-					DT: { sym: '♦', color: 'red', trump: true },
-					CT: { sym: '♣', color: 'black', trump: true },
-					ST: { sym: '♠', color: 'black', trump: true },
-					HT: { sym: '♥', color: 'red', trump: true }
-				};
-				const s = suits[suit2] || { sym: '?', color: 'black', trump: false };
-
-				const classes = ['tchip', s.color];
-				if (highlightTrump && s.trump) classes.push('trump');
-				if (highlightWin) classes.push('winner');
-
-				return `<span class="${classes.join(' ')}">${rank}${s.sym}</span>`;
-			}
-
-			// helper: H/S/C/T -> label
-			function leadLabel(ch) {
-				ch = (ch || '').toUpperCase();
-				if (ch === 'H') return '&hearts;';
-				if (ch === 'S') return '♠';
-				if (ch === 'C') return '♣';
-				if (ch === 'T') return '<b>T</b>';
-				return ch || '';
-			}
-
-			/* ----------- parser ----------- */
-			// Input example lines:
-			// Jeffrey: 0,8CC,KCC,1HH,9SS,KSS,1SS,JHT,QHT
-			// Trick 1: T,JHT,7DT,KDT,QCT (winner: Jessica)
-			function parseTranscript(text) {
-				const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-				const hands = [];
-				const tricks = [];
-				for (const line of lines) {
-					if (/^Trick\s*\d+/i.test(line)) {
-						const m = line.match(/^Trick\s*(\d+)\s*:\s*(.+?)(?:\s*\(winner:\s*([^)]+)\))?$/i);
-						if (m) {
-							const n = parseInt(m[1], 10);
-							const parts = m[2].split(',').map(t => t.trim()).filter(Boolean);
-							let lead = '';
-							if (parts.length && /^[A-Z]$/.test(parts[0])) {
-								lead = parts.shift(); // H/S/C/T at the start of the line
-							}
-							tricks.push({ n, lead, cards: parts, winner: (m[3] || '').trim() });
+					// Fill chips from bottom up; chip rows get color + border
+					const tds = Array.from(body.querySelectorAll('td'));
+					let cursor = rows - 1; // bottom row index
+					for (let i = 0; i < chipList.length && cursor >= 0; i++, cursor--) {
+						const c = chipList[i];
+						const color = CHIP_COLOR[c];
+						if (color) {
+							const td = tds[cursor];
+							td.style.background = color;
+							td.style.border = '1px solid #000';
+							td.title = c === 'w' ? 'white' : c === 'r' ? 'red' : 'blue';
 						}
-					} else if (line.includes(':')) {
-						// Only split on the first ":" in case names had ":" (rare, but safe)
-						const idx = line.indexOf(':');
-						const name = line.slice(0, idx).trim();
-						const rest = line.slice(idx + 1).trim();
-						const raw = rest.split(',').map(t => t.trim()).filter(Boolean);
-						const cards = raw.filter(t => t !== '0'); // drop leading 0 token
-						hands.push({ name, cards });
 					}
+
+					table.appendChild(body);
+					container.innerHTML = '';
+					container.appendChild(table);
 				}
-				return { hands, tricks };
-			}
 
-			/* ----------- renderer ----------- */
-			function renderTranscriptInto(container, data) {
-				let html = `<h3 class="transHead">Game Transcript</h3>`;
+				/**
+				 * Split a chip string into three stacks:
+				 *  - first 6 → left
+				 *  - next 6  → middle
+				 *  - rest    → right
+				 * Empty stacks are hidden (no space taken).
+				 */
+				function drawChipStack(leftId, midId, rightId, chipStr, opts = {}) {
+					const chips = (chipStr || '')
+						.toLowerCase()
+						.split('')
+						.filter(c => c === 'w' || c === 'r' || c === 'b');
 
-				// Hands (8 cards, leading 0 ignored)
-				if (data.hands.length) {
-					html += `<div style="margin-top:10px">
+					const left = chips.slice(0, 6);
+					const mid = chips.slice(6, 12);
+					const right = chips.slice(12);
+
+					drawChipStackTable(leftId, left, opts);
+					drawChipStackTable(midId, mid, opts);
+					drawChipStackTable(rightId, right, opts);
+				}
+			</script>
+
+
+
+
+
+
+
+
+
+
+
+
+			<div id="transcriptmodal">
+				<div class="modal-content">
+					<div id="transcriptBody"></div>
+					<div style="text-align:center; margin-top:10px;">
+						<button id="replayBtn" onclick="replayHand()" style="background-color:white; border-color:black; border-radius:50px;
+                     width:120px; color:black;">
+							Replay Hand
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<style>
+				/* compact horizontal chips (no conflict with game card styles) */
+				.tchip {
+					display: inline-block;
+					width: 28px;
+					/* fixed width so all chips match */
+					text-align: center;
+					/* center the rank + suit */
+					padding: 2px 0;
+					/* only vertical padding */
+					margin: 0 1px;
+					/* small horizontal gap */
+					border: 1px solid #bbb;
+					border-radius: 4px;
+					background: #f7f7f7;
+					line-height: 1.2;
+					font-weight: 600;
+					font-size: 12px;
+				}
+
+				.tchip.red {
+					color: #c01919;
+				}
+
+				.tchip.black {
+					color: #000;
+				}
+
+				.tchip.trump {
+					box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
+				}
+
+				.tchip.winner {
+					box-shadow: 0 0 0 2px #ffd54f, 0 0 8px rgba(255, 213, 79, .55);
+				}
+
+				/* table styles */
+				.transHead {
+					margin: 0 0 8px;
+					text-align: center;
+				}
+
+				.transTable {
+					width: 100%;
+					border-collapse: collapse;
+				}
+
+				.transTable th,
+				.transTable td {
+					padding: 6px;
+					border-bottom: 1px solid #ddd;
+					text-align: center;
+					vertical-align: center;
+				}
+			</style>
+
+			<script>
+				/* ----------- helpers ----------- */
+				function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+				// Normalize token for matching (keep lead markers H/S/C/T as-is; map T->1 for 10)
+				function canon(tok) {
+					tok = tok.trim().toUpperCase();
+					if (!tok) return '';
+					if (/^[A-Z]$/.test(tok)) return tok; // a single-letter lead marker
+					const suit = tok.slice(-2);
+					let rank = tok.slice(0, tok.length - 2);
+					if (rank === 'T') rank = '1'; // treat 'T' same as '1' (10)
+					return rank + suit;
+				}
+
+				// Render one horizontal chip from token like "ACC", "QHT", "9SS", "KDT"
+				function renderCard(token, { highlightTrump = true, highlightWin = false } = {}) {
+					token = (token || '').trim();
+					if (!token || /^[A-Z]$/.test(token)) return '';
+
+					const suit2 = token.slice(-2).toUpperCase();
+					let rankRaw = token.slice(0, token.length - 2).toUpperCase();
+					const rank = (rankRaw === '1' || rankRaw === 'T') ? '10' : rankRaw;
+
+					const suits = {
+						CC: { sym: '♣', color: 'black', trump: false },
+						SS: { sym: '♠', color: 'black', trump: false },
+						HH: { sym: '♥', color: 'red', trump: false },
+						DT: { sym: '♦', color: 'red', trump: true },
+						CT: { sym: '♣', color: 'black', trump: true },
+						ST: { sym: '♠', color: 'black', trump: true },
+						HT: { sym: '♥', color: 'red', trump: true }
+					};
+					const s = suits[suit2] || { sym: '?', color: 'black', trump: false };
+
+					const classes = ['tchip', s.color];
+					if (highlightTrump && s.trump) classes.push('trump');
+					if (highlightWin) classes.push('winner');
+
+					return `<span class="${classes.join(' ')}">${rank}${s.sym}</span>`;
+				}
+
+				// helper: H/S/C/T -> label
+				function leadLabel(ch) {
+					ch = (ch || '').toUpperCase();
+					if (ch === 'H') return '&hearts;';
+					if (ch === 'S') return '♠';
+					if (ch === 'C') return '♣';
+					if (ch === 'T') return '<b>T</b>';
+					return ch || '';
+				}
+
+				/* ----------- parser ----------- */
+				// Input example lines:
+				// Jeffrey: 0,8CC,KCC,1HH,9SS,KSS,1SS,JHT,QHT
+				// Trick 1: T,JHT,7DT,KDT,QCT (winner: Jessica)
+				function parseTranscript(text) {
+					const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+					const hands = [];
+					const tricks = [];
+					for (const line of lines) {
+						if (/^Trick\s*\d+/i.test(line)) {
+							const m = line.match(/^Trick\s*(\d+)\s*:\s*(.+?)(?:\s*\(winner:\s*([^)]+)\))?$/i);
+							if (m) {
+								const n = parseInt(m[1], 10);
+								const parts = m[2].split(',').map(t => t.trim()).filter(Boolean);
+								let lead = '';
+								if (parts.length && /^[A-Z]$/.test(parts[0])) {
+									lead = parts.shift(); // H/S/C/T at the start of the line
+								}
+								tricks.push({ n, lead, cards: parts, winner: (m[3] || '').trim() });
+							}
+						} else if (line.includes(':')) {
+							// Only split on the first ":" in case names had ":" (rare, but safe)
+							const idx = line.indexOf(':');
+							const name = line.slice(0, idx).trim();
+							const rest = line.slice(idx + 1).trim();
+							const raw = rest.split(',').map(t => t.trim()).filter(Boolean);
+							const cards = raw.filter(t => t !== '0'); // drop leading 0 token
+							hands.push({ name, cards });
+						}
+					}
+					return { hands, tricks };
+				}
+
+				/* ----------- renderer ----------- */
+				function renderTranscriptInto(container, data) {
+					let html = `<h3 class="transHead">Game Transcript</h3>`;
+
+					// Hands (8 cards, leading 0 ignored)
+					if (data.hands.length) {
+						html += `<div style="margin-top:10px">
       <table class="transTable">
         <thead><tr>
           <th style="min-width:60px">Player</th><th>Hand</th>
         </tr></thead><tbody>`;
-					data.hands.forEach(h => {
-						const cardsHtml = h.cards.map(renderCard).join(' ');
-						html += `<tr><td><b>${esc(h.name)}</b></td><td>${cardsHtml}</td></tr>`;
-					});
-					html += `</tbody></table></div>`;
-				}
+						data.hands.forEach(h => {
+							const cardsHtml = h.cards.map(renderCard).join(' ');
+							html += `<tr><td><b>${esc(h.name)}</b></td><td>${cardsHtml}</td></tr>`;
+						});
+						html += `</tbody></table></div>`;
+					}
 
-				// Tricks: player names as column headers (once), one row per trick
-				if (data.tricks.length) {
-					const players = data.hands.map(h => h.name);
-					html += `<div style="margin-top:10px">
+					// Tricks: player names as column headers (once), one row per trick
+					if (data.tricks.length) {
+						const players = data.hands.map(h => h.name);
+						html += `<div style="margin-top:10px">
     <table class="transTable">
       <thead>
         <tr>
@@ -1352,72 +1354,72 @@
       </thead>
       <tbody>`;
 
-					data.tricks.sort((a, b) => a.n - b.n).forEach(t => {
-						const winnerIdx = players.findIndex(
-							p => p.trim().toUpperCase() === (t.winner || '').trim().toUpperCase()
-						);
+						data.tricks.sort((a, b) => a.n - b.n).forEach(t => {
+							const winnerIdx = players.findIndex(
+								p => p.trim().toUpperCase() === (t.winner || '').trim().toUpperCase()
+							);
 
-						html += `<tr>
+							html += `<tr>
       <td>#${t.n}</td>
       <td>${leadLabel(t.lead)}</td>`;
 
-						// Render each player's card
-						for (let idx = 0; idx < players.length; idx++) {
-							const played = t.cards[idx] || '';
-							const highlightWin = (idx === winnerIdx);
-							html += `<td>${played ? renderCard(played, { highlightTrump: false, highlightWin }) : ''}</td>`;
-						}
+							// Render each player's card
+							for (let idx = 0; idx < players.length; idx++) {
+								const played = t.cards[idx] || '';
+								const highlightWin = (idx === winnerIdx);
+								html += `<td>${played ? renderCard(played, { highlightTrump: false, highlightWin }) : ''}</td>`;
+							}
 
-						html += `<td>${esc(t.winner || '')}</td></tr>`;
-					});
+							html += `<td>${esc(t.winner || '')}</td></tr>`;
+						});
 
-					html += `</tbody></table></div>`;
+						html += `</tbody></table></div>`;
+					}
+
+					container.innerHTML = html;
 				}
 
-				container.innerHTML = html;
-			}
+				/* ----------- public API ----------- */
+				function openTranscriptModule(plainText) {
+					const modal = document.getElementById('transcriptmodal');
+					const body = document.getElementById('transcriptBody');
+					const data = parseTranscript(plainText);
+					renderTranscriptInto(body, data);
+					modal.style.display = 'block';
+				}
+				function closeTranscript() {
+					document.getElementById('transcriptmodal').style.display = 'none';
+				}
 
-			/* ----------- public API ----------- */
-			function openTranscriptModule(plainText) {
-				const modal = document.getElementById('transcriptmodal');
-				const body = document.getElementById('transcriptBody');
-				const data = parseTranscript(plainText);
-				renderTranscriptInto(body, data);
-				modal.style.display = 'block';
-			}
-			function closeTranscript() {
-				document.getElementById('transcriptmodal').style.display = 'none';
-			}
-
-			function replayHand() {
-				// Set the replay flag
-				autoPlay = false;
-				delaytime = oldDelayTime
-				replay = 1;
-				dealer = (dealer + 3) % 4
-				document.getElementById('continue').style.display = 'none'
-				document.Nscore.Nscore.style.color = "black"
-				document.Escore.Escore.style.color = "black"
-				document.Sscore.Sscore.style.color = "black"
-				document.Wscore.Wscore.style.color = "black"
-				document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
-				document.Escore.Escore.style.backgroundColor = "#84B5E1"
-				document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
-				document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
+				function replayHand() {
+					// Set the replay flag
+					autoPlay = false;
+					delaytime = oldDelayTime
+					replay = 1;
+					dealer = (dealer + 3) % 4
+					document.getElementById('continue').style.display = 'none'
+					document.Nscore.Nscore.style.color = "black"
+					document.Escore.Escore.style.color = "black"
+					document.Sscore.Sscore.style.color = "black"
+					document.Wscore.Wscore.style.color = "black"
+					document.Nscore.Nscore.style.backgroundColor = "#84B5E1"
+					document.Escore.Escore.style.backgroundColor = "#84B5E1"
+					document.Sscore.Sscore.style.backgroundColor = "#84B5E1"
+					document.Wscore.Wscore.style.backgroundColor = "#84B5E1"
 					document.getElementById("calledAceSlot").style.backgroundColor = "#84B5E1"
 
 
-				// Optional: close the transcript modal
-				document.getElementById('transcriptmodal').style.display = 'none';
+					// Optional: close the transcript modal
+					document.getElementById('transcriptmodal').style.display = 'none';
 
-				// Start a new deal
-				if (typeof deal === 'function') {
-					deal();
-				} else {
-					console.warn("deal() function not found");
+					// Start a new deal
+					if (typeof deal === 'function') {
+						deal();
+					} else {
+						console.warn("deal() function not found");
+					}
 				}
-			}
-		</script>
+			</script>
 
 
 
@@ -1635,7 +1637,7 @@
 	<div class="modal-content">
 
 		<div id="instructionmodalScrollArea" style="
-    max-height:500px;
+    flex:1;
     overflow-y:auto;
     margin-bottom:10px;
 ">
@@ -1903,7 +1905,7 @@
 	<div class="modal-content">
 
 		<div id="statsmodalScrollArea" style="
-    max-height:500px;
+    flex:1;
     overflow-y:auto;
     margin-bottom:10px;
 ">
